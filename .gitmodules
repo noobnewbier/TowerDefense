@@ -1,0 +1,12 @@
+[submodule "Assets/Editor/EditorCommon"]
+	path = Assets/Editor/EditorCommon
+	url = https://github.com/noobnewbier/EditorCommon.git
+[submodule "Assets/Scripts/EventManagement"]
+	path = Assets/Scripts/EventManagement
+	url = https://github.com/noobnewbier/EventManagement.git
+[submodule "Assets/Scripts/ShaderCommon"]
+	path = Assets/Scripts/ShaderCommon
+	url = https://github.com/noobnewbier/ShaderCommon.git
+[submodule "Assets/Scripts/UnityUtils"]
+	path = Assets/Scripts/UnityUtils
+	url = https://github.com/noobnewbier/UnityUtils.git

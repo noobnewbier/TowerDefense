@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Editor/EditorCommon" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Scripts/EventAggregator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Scripts/EventManagement" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Scripts/ShaderCommon" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Scripts/UnityUtils" vcs="Git" />
+  </component>
+</project>
