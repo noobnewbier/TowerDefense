@@ -1,26 +1,10 @@
-using System;
-using Common;
+using UnityEngine;
 
 namespace Movement
 {
-    public abstract class MovementInputSource
+    public abstract class MovementInputSource : MonoBehaviour
     {
         public abstract float Vertical();
         public abstract float Horizontal();
-
-        public static MovementInputSource Of(Identity identity)
-        {
-            switch (identity)
-            {
-                case Identity.Player:
-                    return new PlayerMovementInputSource();
-                    break;
-                case Identity.Ai:
-                    return new AiMovementInputSource();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(identity), identity, null);
-            }
-        }
     }
 }
