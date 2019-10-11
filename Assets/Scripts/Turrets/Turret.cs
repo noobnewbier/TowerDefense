@@ -1,33 +1,49 @@
 using System;
 using System.Collections.Generic;
-using Bullets;
+using System.Linq;
 using Common;
 using Enemies;
 using UnityEngine;
+using UnityUtils;
 
 namespace Turrets
 {
     public class Turret : MonoBehaviour
     {
-        [SerializeField] private TurretData data;
-        [SerializeField] private Transform bulletSpawnPoint;
-        [SerializeField] private Transform turretRotatable;
-        [SerializeField] private SphereCollider rangeCollider;
-
+        private const float UpdateTargetInterval = 0.5f;
+        
         private IList<IEnemy> _enemiesInRange;
+        [SerializeField] private Transform bulletSpawnPoint;
+        [SerializeField] private TurretData data;
+        [SerializeField] private SphereCollider rangeCollider;
+        [SerializeField] private Transform turretRotatable;
 
+        private IEnemy _currentTarget;
+        private float _targetRefreshTimer;
+        private PooledMonoBehaviour _pooledBullet;
+        
         private void Awake()
         {
+            _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
             _enemiesInRange = new List<IEnemy>();
-
             rangeCollider.radius = data.DetectionRange;
             rangeCollider.isTrigger = true;
         }
 
         private void FixedUpdate()
         {
-            var targetPosition = data.TargetingStrategy.ChooseTarget(transform, _enemiesInRange);
+            if (_targetRefreshTimer > UpdateTargetInterval)
+            {
+                _currentTarget = data.TargetingStrategy.ChooseTarget(transform, _enemiesInRange);
+                _targetRefreshTimer = 0f;
+            }
 
+            if (_enemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
+            {
+                _targetRefreshTimer += Time.fixedDeltaTime;
+            }
+            
+            var targetPosition = _currentTarget?.Transform.position;
             if (targetPosition.HasValue)
             {
                 Aim(targetPosition.Value);
@@ -37,23 +53,26 @@ namespace Turrets
 
         private void Aim(Vector3 targetPosition)
         {
-            var targetDir = targetPosition - turretRotatable.position;
-            Vector3.RotateTowards(turretRotatable.forward, targetDir, data.RotateSpeed * Time.fixedDeltaTime, 0f);
+            var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
+
+            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedTime);
         }
-        
+
         private void Shoot()
         {
-            Instantiate(data.Bullet, bulletSpawnPoint);
+            var newBullet = _pooledBullet.GetPooledInstance();
+            newBullet.transform.position = bulletSpawnPoint.position;
+            newBullet.transform.rotation = bulletSpawnPoint.rotation;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(ObjectTags.Enemy))
             {
-                _enemiesInRange.Add(other.gameObject.GetComponent<IEnemy>());  
+                _enemiesInRange.Add(other.gameObject.GetComponent<IEnemy>());
             }
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             _enemiesInRange.Remove(other.GetComponent<IEnemy>());

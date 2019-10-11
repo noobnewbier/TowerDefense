@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DummyBulletData
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 5
+  speed: 1
   range: 10

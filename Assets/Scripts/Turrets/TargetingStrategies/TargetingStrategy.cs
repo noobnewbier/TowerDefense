@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Enemies;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Turrets.TargetingStrategies
@@ -7,6 +8,7 @@ namespace Turrets.TargetingStrategies
     public abstract class TargetingStrategy : ScriptableObject
     {
         //return null if list is empty?
-        public abstract Vector3? ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies);
+        [CanBeNull]
+        public abstract IEnemy ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies);
     }
 }

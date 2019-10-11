@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37237626ab94a98b919cdc5ef3e95da, type: 3}
   m_Name: DummyTurretData
   m_EditorClassIdentifier: 
-  rotateSpeed: 5
+  rotateSpeed: 1
   bullet: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
   detectionRange: 10
   targetingStrategy: {fileID: 11400000, guid: 41bc4887f69a14143883f8bd425e45b1, type: 2}

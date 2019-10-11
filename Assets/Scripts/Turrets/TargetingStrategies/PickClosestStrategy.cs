@@ -7,7 +7,7 @@ namespace Turrets.TargetingStrategies
     [CreateAssetMenu(menuName = "TurretStrategy/PickClosest")]
     public class PickClosestStrategy : TargetingStrategy
     {
-        public override Vector3? ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies)
+        public override IEnemy ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies)
         {
             var minDistance = float.MaxValue;
             IEnemy currentClosest = null;
@@ -20,7 +20,7 @@ namespace Turrets.TargetingStrategies
                 minDistance = distance;
             }
 
-            return currentClosest?.Transform.position;
+            return currentClosest;
         }
     }
 }
