@@ -9,7 +9,7 @@ namespace Bullets
         private void FixedUpdate()
         {
             var selfTransform = transform;
-            selfTransform.position += selfTransform.forward * data.Speed;
+            selfTransform.position += Time.fixedDeltaTime * data.Speed * selfTransform.forward;
         }
     }
 }
