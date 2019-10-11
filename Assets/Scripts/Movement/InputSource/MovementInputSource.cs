@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Movement
+namespace Movement.InputSource
 {
     public abstract class MovementInputSource : MonoBehaviour
     {
