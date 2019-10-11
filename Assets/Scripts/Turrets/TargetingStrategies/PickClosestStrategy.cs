@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 using Enemies;
 using UnityEngine;
 
 namespace Turrets.TargetingStrategies
 {
     [CreateAssetMenu(menuName = "TurretStrategy/PickClosest")]
-    public class PickClosestStrategy : ScriptableObject, ITargetingStrategy
+    public class PickClosestStrategy : TargetingStrategy
     {
-        public Vector3? ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies)
+        public override Vector3? ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies)
         {
             var minDistance = float.MaxValue;
             IEnemy currentClosest = null;

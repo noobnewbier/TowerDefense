@@ -10,5 +10,8 @@ namespace Bullets
 
         [SerializeField] private float speed;
         public float Speed => speed;
+
+        [SerializeField] private float range;
+        public float Range => range;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Bullets;
 using Common;
 using Enemies;
 using UnityEngine;
@@ -11,13 +12,16 @@ namespace Turrets
         [SerializeField] private TurretData data;
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private Transform turretRotatable;
-        [SerializeField] private Collider rangeCollider;
+        [SerializeField] private SphereCollider rangeCollider;
 
         private IList<IEnemy> _enemiesInRange;
 
         private void Awake()
         {
             _enemiesInRange = new List<IEnemy>();
+
+            rangeCollider.radius = data.DetectionRange;
+            rangeCollider.isTrigger = true;
         }
 
         private void FixedUpdate()
@@ -33,9 +37,8 @@ namespace Turrets
 
         private void Aim(Vector3 targetPosition)
         {
-            var selfTransform = transform;
-            var targetDir = targetPosition - selfTransform.position;
-            Vector3.RotateTowards(selfTransform.forward, targetDir, data.RotateSpeed * Time.fixedDeltaTime, 0f);
+            var targetDir = targetPosition - turretRotatable.position;
+            Vector3.RotateTowards(turretRotatable.forward, targetDir, data.RotateSpeed * Time.fixedDeltaTime, 0f);
         }
         
         private void Shoot()
@@ -43,12 +46,17 @@ namespace Turrets
             Instantiate(data.Bullet, bulletSpawnPoint);
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.collider.CompareTag(ObjectTags.Enemy))
+            if (other.CompareTag(ObjectTags.Enemy))
             {
                 _enemiesInRange.Add(other.gameObject.GetComponent<IEnemy>());  
             }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            _enemiesInRange.Remove(other.GetComponent<IEnemy>());
         }
     }
 }

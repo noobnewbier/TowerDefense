@@ -11,10 +11,13 @@ namespace Turrets
         [SerializeField] private float rotateSpeed;
         public float RotateSpeed => rotateSpeed;
         
-        [SerializeField] private Bullet bullet;
-        public Bullet Bullet => bullet;
+        [SerializeField] private GameObject bullet;
+        public GameObject Bullet => bullet;
 
-        [SerializeField] private ITargetingStrategy targetingStrategy;
-        public ITargetingStrategy TargetingStrategy => targetingStrategy;
+        [SerializeField] private float detectionRange;
+        public float DetectionRange => detectionRange;
+
+        [SerializeField] private TargetingStrategy targetingStrategy;
+        public TargetingStrategy TargetingStrategy => targetingStrategy;
     }
 }
