@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Enemies;
+using Units.UnitCommon;
 using UnityEngine;
 
 namespace Turrets.TargetingStrategies
@@ -7,10 +7,10 @@ namespace Turrets.TargetingStrategies
     [CreateAssetMenu(menuName = "TurretStrategy/PickClosest")]
     public class PickClosestStrategy : TargetingStrategy
     {
-        public override IEnemy ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies)
+        public override Unit ChooseTarget(Transform turretTransform, IEnumerable<Unit> enemies)
         {
             var minDistance = float.MaxValue;
-            IEnemy currentClosest = null;
+            Unit currentClosest = null;
             foreach (var enemy in enemies)
             {
                 var distance = Vector3.Distance(enemy.Transform.position, turretTransform.position);

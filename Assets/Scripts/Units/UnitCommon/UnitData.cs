@@ -2,12 +2,14 @@ using UnityEngine;
 
 // ReSharper disable ConvertToAutoProperty
 
-namespace Health
+namespace Units.UnitCommon
 {
-    [CreateAssetMenu(menuName = "Data/HealthData")]
-    public class HealthData : ScriptableObject
+    [CreateAssetMenu(menuName = "Data/UnitData")]
+    public class UnitData : ScriptableObject
     {
         [SerializeField] private int health;
+
+        [SerializeField] private int maxHealth;
 
         public int Health
         {
@@ -15,7 +17,6 @@ namespace Health
             set => health = value;
         }
 
-        [SerializeField] private int maxHealth;
         public int MaxHealth => maxHealth;
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Enemies;
 using JetBrains.Annotations;
+using Units.UnitCommon;
 using UnityEngine;
 
 namespace Turrets.TargetingStrategies
@@ -9,6 +9,6 @@ namespace Turrets.TargetingStrategies
     {
         //return null if list is empty?
         [CanBeNull]
-        public abstract IEnemy ChooseTarget(Transform turretTransform, IEnumerable<IEnemy> enemies);
+        public abstract Unit ChooseTarget(Transform turretTransform, IEnumerable<Unit> enemies);
     }
 }

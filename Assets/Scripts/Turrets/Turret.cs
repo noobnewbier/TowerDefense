@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common;
-using Enemies;
+using Units.UnitCommon;
 using UnityEngine;
 using UnityUtils;
 
@@ -12,20 +12,20 @@ namespace Turrets
     {
         private const float UpdateTargetInterval = 0.5f;
         
-        private IList<IEnemy> _enemiesInRange;
+        private IList<Unit> _enemiesInRange;
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private TurretData data;
         [SerializeField] private SphereCollider rangeCollider;
         [SerializeField] private Transform turretRotatable;
 
-        private IEnemy _currentTarget;
+        private Unit _currentTarget;
         private float _targetRefreshTimer;
         private PooledMonoBehaviour _pooledBullet;
         
         private void Awake()
         {
             _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
-            _enemiesInRange = new List<IEnemy>();
+            _enemiesInRange = new List<Unit>();
             rangeCollider.radius = data.DetectionRange;
             rangeCollider.isTrigger = true;
         }
@@ -69,13 +69,13 @@ namespace Turrets
         {
             if (other.CompareTag(ObjectTags.Enemy))
             {
-                _enemiesInRange.Add(other.gameObject.GetComponent<IEnemy>());
+                _enemiesInRange.Add(other.gameObject.GetComponent<Unit>());
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            _enemiesInRange.Remove(other.GetComponent<IEnemy>());
+            _enemiesInRange.Remove(other.GetComponent<Unit>());
         }
     }
 }
