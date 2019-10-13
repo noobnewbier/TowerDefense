@@ -1,3 +1,4 @@
+using Common;
 using UnityEngine;
 using UnityUtils;
 
@@ -6,7 +7,7 @@ namespace Bullets
     public class Bullet : PooledMonoBehaviour
     {
         public int Damage => data.Damage;
-        
+
         [SerializeField] private BulletData data;
         private Vector3 _originPosition;
         private Rigidbody _rigidbody;
@@ -24,7 +25,7 @@ namespace Bullets
 
             if (Vector3.Distance(_originPosition, selfTransform.position) > data.Range)
             {
-                SelfDestroy();                
+                SelfDestroy();
             }
         }
 
@@ -34,8 +35,23 @@ namespace Bullets
         }
 
         private void OnTriggerEnter(Collider other)
-        { 
-            SelfDestroy();   
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("DamageTaker") || !IsBulletTarget(other.tag))
+            {
+                SelfDestroy();
+            }
+        }
+
+        private bool IsBulletTarget(string contactTag)
+        {
+            switch (contactTag)
+            {
+                case ObjectTags.Ai when CompareTag(ObjectTags.DamageAi):
+                case ObjectTags.Player when CompareTag(ObjectTags.DamagePlayer):
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7012780251841959828}
   - component: {fileID: 8803083318307884884}
   - component: {fileID: 54076435673565544}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DamagePlayerBullet
   m_TagString: DaamgePlayer
   m_Icon: {fileID: 0}
