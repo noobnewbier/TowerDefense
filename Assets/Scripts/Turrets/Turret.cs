@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common;
@@ -11,17 +10,17 @@ namespace Turrets
     public class Turret : MonoBehaviour
     {
         private const float UpdateTargetInterval = 0.5f;
-        
+
+        private Unit _currentTarget;
+
         private IList<Unit> _enemiesInRange;
+        private PooledMonoBehaviour _pooledBullet;
+        private float _targetRefreshTimer;
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private TurretData data;
         [SerializeField] private SphereCollider rangeCollider;
         [SerializeField] private Transform turretRotatable;
 
-        private Unit _currentTarget;
-        private float _targetRefreshTimer;
-        private PooledMonoBehaviour _pooledBullet;
-        
         private void Awake()
         {
             _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
@@ -42,8 +41,8 @@ namespace Turrets
             {
                 _targetRefreshTimer += Time.fixedDeltaTime;
             }
-            
-            var targetPosition = _currentTarget?.Transform.position;
+
+            var targetPosition = _currentTarget != null ? _currentTarget.Transform.position : (Vector3?) null;
             if (targetPosition.HasValue)
             {
                 Aim(targetPosition.Value);
@@ -75,7 +74,10 @@ namespace Turrets
 
         private void OnTriggerExit(Collider other)
         {
-            _enemiesInRange.Remove(other.GetComponent<Unit>());
+            if (other.CompareTag(ObjectTags.Enemy))
+            {
+                _enemiesInRange.Remove(other.GetComponent<Unit>());
+            }
         }
     }
 }
