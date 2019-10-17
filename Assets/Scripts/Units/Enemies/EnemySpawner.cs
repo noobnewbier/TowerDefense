@@ -7,29 +7,32 @@ namespace Units.Enemies
 {
     public class EnemySpawner : MonoBehaviour, IHandle<AttackBegins>
     {
-        [SerializeField] private Transform spawnPoint;
-
-        //Spawn within radius
-        [SerializeField] private float radius;
-        [SerializeField] private EnemySpawnPointData enemySpawnPointData;
+        private int _spawnedEnemiesCount;
 
         private bool _startedAttack;
         private float _timer;
-        private int _spawnedEnemiesCount;
+        [SerializeField] private EnemySpawnPointData enemySpawnPointData;
 
-        private void Awake()
-        {
-            EventAggregatorHolder.Instance.Subscribe(this);
-        }
+        //Spawn within radius
+        [SerializeField] private float radius;
+        [SerializeField] private Transform spawnPoint;
 
         public void Handle(AttackBegins @event)
         {
             _startedAttack = true;
         }
 
+        private void Awake()
+        {
+            EventAggregatorHolder.Instance.Subscribe(this);
+        }
+
         private void Update()
         {
-            if (!_startedAttack || _spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) return;
+            if (!_startedAttack || _spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies)
+            {
+                return;
+            }
 
             _timer += Time.deltaTime;
             if (_timer >= enemySpawnPointData.SpawnInterval)
@@ -41,6 +44,11 @@ namespace Units.Enemies
                     spawnPoint.position
                 );
                 _spawnedEnemiesCount++;
+
+                if (_spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) // only publish this once
+                {
+                    EventAggregatorHolder.Instance.Publish(new FinishedSpawningEvent());
+                }
             }
         }
 

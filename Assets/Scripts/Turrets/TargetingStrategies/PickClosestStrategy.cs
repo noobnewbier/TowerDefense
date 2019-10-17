@@ -14,8 +14,11 @@ namespace Turrets.TargetingStrategies
             foreach (var enemy in enemies)
             {
                 var distance = Vector3.Distance(enemy.Transform.position, turretTransform.position);
-                if (!(distance < minDistance)) continue;
-                
+                if (!(distance < minDistance))
+                {
+                    continue;
+                }
+
                 currentClosest = enemy;
                 minDistance = distance;
             }

@@ -4,7 +4,7 @@ namespace Units.UnitCommon
 {
     public abstract class Unit : MonoBehaviour
     {
-        [SerializeField] private UnitData unitData;
+        [SerializeField] protected UnitData unitData;
         public Transform Transform => transform;
 
         protected void Awake()
@@ -12,7 +12,7 @@ namespace Units.UnitCommon
             unitData = Instantiate(unitData);
         }
 
-        protected void TakeDamage(int damage)
+        protected virtual void TakeDamage(int damage)
         {
             unitData.Health -= damage;
             Debug.Log(unitData.Health);

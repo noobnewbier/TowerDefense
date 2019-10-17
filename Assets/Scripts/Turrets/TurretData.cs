@@ -1,5 +1,6 @@
 using Turrets.TargetingStrategies;
 using UnityEngine;
+
 // ReSharper disable ConvertToAutoProperty
 
 namespace Turrets
@@ -7,16 +8,15 @@ namespace Turrets
     [CreateAssetMenu(menuName = "Data/TurretData")]
     public class TurretData : ScriptableObject
     {
-        [SerializeField] private float rotateSpeed;
-        public float RotateSpeed => rotateSpeed;
-        
         [SerializeField] private GameObject bullet;
-        public GameObject Bullet => bullet;
 
         [SerializeField] private float detectionRange;
-        public float DetectionRange => detectionRange;
+        [SerializeField] private float rotateSpeed;
 
         [SerializeField] private TargetingStrategy targetingStrategy;
+        public float RotateSpeed => rotateSpeed;
+        public GameObject Bullet => bullet;
+        public float DetectionRange => detectionRange;
         public TargetingStrategy TargetingStrategy => targetingStrategy;
     }
 }

@@ -4,6 +4,5 @@ namespace StateMachine
 {
     public class WinState : StateMachineBehaviour
     {
-        
     }
 }

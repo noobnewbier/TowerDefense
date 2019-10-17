@@ -6,12 +6,12 @@ namespace Bullets
     public class BulletData : ScriptableObject
     {
         [SerializeField] private int damage;
-        public int Damage => damage;
-
-        [SerializeField] private float speed;
-        public float Speed => speed;
 
         [SerializeField] private float range;
+
+        [SerializeField] private float speed;
+        public int Damage => damage;
+        public float Speed => speed;
         public float Range => range;
     }
 }

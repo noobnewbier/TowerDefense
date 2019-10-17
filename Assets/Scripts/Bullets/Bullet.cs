@@ -6,11 +6,11 @@ namespace Bullets
 {
     public class Bullet : PooledMonoBehaviour
     {
-        public int Damage => data.Damage;
-
-        [SerializeField] private BulletData data;
         private Vector3 _originPosition;
         private Rigidbody _rigidbody;
+
+        [SerializeField] private BulletData data;
+        public int Damage => data.Damage;
 
         private void Start()
         {
