@@ -5,12 +5,18 @@ namespace Movement.Handler
     //serve as proof of concept
     public class TransformBasedMovementHandler : MovementHandler
     {
-        protected override void MoveVertical(float value)
+        private void FixedUpdate()
+        {
+            MoveVertical(inputSource.Vertical());
+            MoveHorizontal(inputSource.Horizontal());
+        }
+
+        private void MoveVertical(float value)
         {
             transform.Translate(transform.forward * value);
         }
 
-        protected override void MoveHorizontal(float value)
+        private void MoveHorizontal(float value)
         {
             transform.Rotate(Vector3.up * value);
         }

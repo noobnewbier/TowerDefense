@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy
   - DamageAi
-  - DaamgePlayer
+  - DamagePlayer
   layers:
   - Default
   - TransparentFX
