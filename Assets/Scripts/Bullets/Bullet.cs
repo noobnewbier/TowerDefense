@@ -34,7 +34,7 @@ namespace Bullets
                     throw new NotImplementedException("dude, wth am I supposed to do? What should I hit? I am confused as a bullet");
             }
             
-            _layerMask = ~LayerMask.NameToLayer(layerToIgnore);
+            _layerMask = ~(1 << LayerMask.NameToLayer(layerToIgnore));
 
             #endregion
         }
