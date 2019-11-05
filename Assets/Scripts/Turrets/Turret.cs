@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Bullets;
 using Common;
 using Units.UnitCommon;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace Turrets
         private void Awake()
         {
             _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
+
             _enemiesInRange = new List<Unit>();
             rangeCollider.radius = data.DetectionRange;
             rangeCollider.isTrigger = true;
@@ -60,6 +62,7 @@ namespace Turrets
         private void Shoot()
         {
             var newBullet = _pooledBullet.GetPooledInstance();
+
             newBullet.transform.position = bulletSpawnPoint.position;
             newBullet.transform.rotation = bulletSpawnPoint.rotation;
         }

@@ -1,3 +1,4 @@
+using System;
 using Common;
 using Common.Events;
 using EventManagement;
@@ -14,7 +15,8 @@ namespace StateMachine
         private Animator _animator;
         private int _finishedSpawningCount;
         private int _totalSpawnerCount;
-
+        private IEventAggregator _eventAggregator;
+        
         public void Handle(EnemyDeadEvent @event)
         {
             if (_finishedSpawningCount >= _totalSpawnerCount)
@@ -36,11 +38,12 @@ namespace StateMachine
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateEnter(animator, stateInfo, layerIndex);
+            _eventAggregator = EventAggregatorHolder.Instance;
             _animator = animator;
             _totalSpawnerCount = FindObjectsOfType<EnemySpawner>().Length;
             _finishedSpawningCount = 0;
 
-            EventAggregatorHolder.Instance.Publish(new AttackBegins());
+            _eventAggregator.Publish(new AttackBegins());
         }
     }
 }

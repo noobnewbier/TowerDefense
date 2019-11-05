@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fae11b705d449338900039930ad9777, type: 3}
   m_Name: DummyBulletData
   m_EditorClassIdentifier: 
+  afterEffect: {fileID: 6914795473069714702, guid: 21f3a76adbfdd764b840e8b361843a46,
+    type: 3}
   damage: 1
-  speed: 1
   range: 10
+  speed: 1

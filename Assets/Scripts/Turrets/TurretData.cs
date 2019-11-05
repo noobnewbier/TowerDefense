@@ -9,10 +9,8 @@ namespace Turrets
     public class TurretData : ScriptableObject
     {
         [SerializeField] private GameObject bullet;
-
         [SerializeField] private float detectionRange;
         [SerializeField] private float rotateSpeed;
-
         [SerializeField] private TargetingStrategy targetingStrategy;
         public float RotateSpeed => rotateSpeed;
         public GameObject Bullet => bullet;

@@ -7,12 +7,12 @@ namespace Units.Enemies
 {
     public class EnemySpawner : MonoBehaviour, IHandle<AttackBegins>
     {
+        private IEventAggregator _eventAggregator;
         private int _spawnedEnemiesCount;
-
         private bool _startedAttack;
         private float _timer;
+        
         [SerializeField] private EnemySpawnPointData enemySpawnPointData;
-
         //Spawn within radius
         [SerializeField] private float radius;
         [SerializeField] private Transform spawnPoint;
@@ -22,9 +22,10 @@ namespace Units.Enemies
             _startedAttack = true;
         }
 
-        private void Awake()
+        private void OnEnable()
         {
-            EventAggregatorHolder.Instance.Subscribe(this);
+            _eventAggregator = EventAggregatorHolder.Instance;
+            _eventAggregator.Subscribe(this);
         }
 
         private void Update()
@@ -38,7 +39,7 @@ namespace Units.Enemies
             if (_timer >= enemySpawnPointData.SpawnInterval)
             {
                 _timer = 0f;
-                ObjectSpawner.Spawn(
+                ObjectSpawner.SpawnInCircle(
                     enemySpawnPointData.EnemiesPrefabs[Random.Range(0, enemySpawnPointData.EnemiesPrefabs.Length)],
                     radius,
                     spawnPoint.position
@@ -47,14 +48,14 @@ namespace Units.Enemies
 
                 if (_spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) // only publish this once
                 {
-                    EventAggregatorHolder.Instance.Publish(new FinishedSpawningEvent());
+                    _eventAggregator.Publish(new FinishedSpawningEvent());
                 }
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            EventAggregatorHolder.Instance.Unsubscribe(this);
+            _eventAggregator.Unsubscribe(this);
         }
     }
 }
