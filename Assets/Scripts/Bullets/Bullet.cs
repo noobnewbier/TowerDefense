@@ -42,6 +42,7 @@ namespace Bullets
         private void OnEnable()
         {
             _eventAggregator = EventAggregatorHolder.Instance;
+            _cumulatedTraveledDistance = 0f;
         }
 
         private void FixedUpdate()
@@ -84,8 +85,6 @@ namespace Bullets
             }
 
             AfterEffect(hit.point);
-
-            SelfDestroy();
         }
         
         private void DoDamage(IDamageTaker damageTaker)
