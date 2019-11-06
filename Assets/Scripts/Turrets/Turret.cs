@@ -1,14 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bullets;
 using Common;
+using Common.Events;
+using EventManagement;
 using Units.UnitCommon;
 using UnityEngine;
 using UnityUtils;
 
 namespace Turrets
 {
-    public class Turret : MonoBehaviour
+    public class Turret : MonoBehaviour, IHandle<EnemyDeadEvent>
     {
         private const float UpdateTargetInterval = 0.5f;
 
@@ -17,6 +20,7 @@ namespace Turrets
         private IList<Unit> _enemiesInRange;
         private PooledMonoBehaviour _pooledBullet;
         private float _targetRefreshTimer;
+        private IEventAggregator _eventAggregator;
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private TurretData data;
         [SerializeField] private SphereCollider rangeCollider;
@@ -29,6 +33,17 @@ namespace Turrets
             _enemiesInRange = new List<Unit>();
             rangeCollider.radius = data.DetectionRange;
             rangeCollider.isTrigger = true;
+        }
+
+        private void OnEnable()
+        {
+            _eventAggregator = EventAggregatorHolder.Instance;
+            _eventAggregator.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            _eventAggregator.Unsubscribe(this);
         }
 
         private void FixedUpdate()
@@ -81,6 +96,11 @@ namespace Turrets
             {
                 _enemiesInRange.Remove(other.GetComponent<Unit>());
             }
+        }
+
+        public void Handle(EnemyDeadEvent @event)
+        {
+            _enemiesInRange.Remove(@event.Unit);
         }
     }
 }

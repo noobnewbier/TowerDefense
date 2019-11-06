@@ -4,6 +4,13 @@ using Common.Events;
 using EventManagement;
 using UnityEngine;
 
+/*
+ * Pooling is not done here, simply because we are just not going to have that many enemies:
+ *     1. Its against our design aim - not abusing player with a horrific amount of enemies
+ *     2. Pooling it makes the training thing even more complicated
+ *
+ * So no, no pooling
+ */
 namespace Units.UnitCommon
 {
     public abstract class Unit : MonoBehaviour, IDamageTaker
@@ -40,10 +47,7 @@ namespace Units.UnitCommon
             }
         }
 
-        protected virtual void Dies()
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void Dies();
 
         private void OnDisable()
         {

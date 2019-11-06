@@ -1,11 +1,14 @@
-using Bullets;
-using Common;
+using Common.Events;
 using Units.UnitCommon;
-using UnityEngine;
 
 namespace Units.Enemies
 {
     public class DummyUnit : Unit
     {
+        protected override void Dies()
+        {
+            EventAggregator.Publish(new EnemyDeadEvent(this));
+            Destroy(gameObject);
+        }
     }
 }
