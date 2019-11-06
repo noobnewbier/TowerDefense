@@ -1,7 +1,5 @@
-using Bullets;
-using Common;
+using Common.Events;
 using Units.UnitCommon;
-using UnityEngine;
 
 namespace Units.Enemies
 {
@@ -9,6 +7,7 @@ namespace Units.Enemies
     {
         protected override void Dies()
         {
+            EventAggregator.Publish(new EnemyDeadEvent(this));
             Destroy(gameObject);
         }
     }
