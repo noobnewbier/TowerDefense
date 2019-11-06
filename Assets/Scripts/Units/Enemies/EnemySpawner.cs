@@ -43,7 +43,9 @@ namespace Units.Enemies
                     enemySpawnPointData.EnemiesPrefabs[Random.Range(0, enemySpawnPointData.EnemiesPrefabs.Length)],
                     radius,
                     spawnPoint.position
-                );
+                ).transform.parent = transform;
+                
+                
                 _spawnedEnemiesCount++;
 
                 if (_spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) // only publish this once
