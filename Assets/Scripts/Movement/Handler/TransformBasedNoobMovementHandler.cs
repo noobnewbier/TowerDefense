@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Movement.Handler
 {
     //serve as proof of concept
-    public class TransformBasedMovementHandler : MovementHandler
+    public class TransformBasedNoobMovementHandler : MovementHandler
     {
         private void FixedUpdate()
         {

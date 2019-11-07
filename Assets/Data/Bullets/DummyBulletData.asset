@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   afterEffect: {fileID: 6914795473069714702, guid: 21f3a76adbfdd764b840e8b361843a46,
     type: 3}
-  damage: 0
+  damage: 10
   range: 10
   speed: 2

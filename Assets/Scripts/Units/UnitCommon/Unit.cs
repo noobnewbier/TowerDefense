@@ -1,4 +1,3 @@
-using System;
 using Common;
 using Common.Events;
 using EventManagement;
@@ -16,7 +15,7 @@ namespace Units.UnitCommon
     public abstract class Unit : MonoBehaviour, IDamageTaker
     {
         protected IEventAggregator EventAggregator;
-        [SerializeField] protected UnitData unitData;
+        protected abstract UnitData UnitData { get; set; }
         public Transform Transform => transform;
 
         public void Handle(DamageEvent @event)
@@ -29,7 +28,7 @@ namespace Units.UnitCommon
 
         protected void Awake()
         {
-            unitData = Instantiate(unitData);
+            UnitData = Instantiate(UnitData);
         }
 
         private void OnEnable()
@@ -40,8 +39,8 @@ namespace Units.UnitCommon
 
         protected virtual void TakeDamage(int damage)
         {
-            unitData.Health -= damage;
-            if (unitData.Health <= 0)
+            UnitData.Health -= damage;
+            if (UnitData.Health <= 0)
             {
                 Dies();
             }
