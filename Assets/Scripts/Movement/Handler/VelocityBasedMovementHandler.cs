@@ -8,7 +8,8 @@ namespace Movement.Handler
     {
         private float _rotationSpeed;
         private float _acceleration;
-        
+        [SerializeField] private Rigidbody rb;
+
         private void OnEnable()
         {
             _rotationSpeed = ((IHasRotation) unit).RotationSpeed;
@@ -23,12 +24,12 @@ namespace Movement.Handler
 
         private void MoveVertical(float inputValue, float forwardSpeed)
         {
-            transform.Translate(transform.forward * inputValue);
+            rb.velocity += inputValue * forwardSpeed * transform.forward;
         }
 
         private void MoveHorizontal(float inputValue, float rotationSpeed)
         {
-            transform.Rotate(rotationSpeed * inputValue * Vector3.up);
+            rb.transform.Rotate(rotationSpeed * inputValue * Vector3.up);
         }
     }
 }

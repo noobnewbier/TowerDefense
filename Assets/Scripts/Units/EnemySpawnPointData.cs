@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Units
 {
-    [CreateAssetMenu(menuName = "EnemySpawnPointData")]
+    [CreateAssetMenu(menuName = "Data/EnemySpawnPointData")]
     public class EnemySpawnPointData : ScriptableObject
     {
         [SerializeField] private GameObject[] enemiesPrefabs;
