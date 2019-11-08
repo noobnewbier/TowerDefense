@@ -1,3 +1,4 @@
+using Common.Events;
 using Units.Enemies.Data;
 using Units.UnitCommon;
 using UnityEngine;
@@ -16,7 +17,8 @@ namespace Units.Enemies
 
         protected override void Dies()
         {
-            throw new System.NotImplementedException();
+            EventAggregator.Publish(new EnemyDeadEvent(this));
+            Destroy(gameObject);
         }
 
         public float RotationSpeed => data.RotationSpeed;

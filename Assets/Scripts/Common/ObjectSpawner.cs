@@ -10,7 +10,7 @@ namespace Common
             var randomXz = Random.insideUnitCircle * radius;
             return Object.Instantiate(
                 prefab,
-                spawnPoint + new Vector3(randomXz.x, randomXz.y, 0f),
+                spawnPoint + new Vector3(randomXz.x, 0f,  randomXz.y),
                 Quaternion.identity
             );
         }

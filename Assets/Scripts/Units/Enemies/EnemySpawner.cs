@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace Units.Enemies
 {
-    public class EnemySpawner : MonoBehaviour, IHandle<AttackBegins>
+    public class EnemySpawner : MonoBehaviour, IHandle<WaveStartEvent>
     {
+        public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
         private IEventAggregator _eventAggregator;
         private int _spawnedEnemiesCount;
         private bool _startedAttack;
@@ -17,9 +18,11 @@ namespace Units.Enemies
         [SerializeField] private float radius;
         [SerializeField] private Transform spawnPoint;
 
-        public void Handle(AttackBegins @event)
+        public void Handle(WaveStartEvent @event)
         {
             _startedAttack = true;
+
+            _spawnedEnemiesCount = 0;//reset this crap so it will do it again
         }
 
         private void OnEnable()
@@ -47,11 +50,6 @@ namespace Units.Enemies
                 
                 
                 _spawnedEnemiesCount++;
-
-                if (_spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) // only publish this once
-                {
-                    _eventAggregator.Publish(new FinishedSpawningEvent());
-                }
             }
         }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TurnManager
 {
-    public class TurnManager : MonoBehaviour
+    public class TurnManager : MonoBehaviour, IHandle<PreparationBeginsEvent>
     {
         [SerializeField] private float prepareTime;
         private float _timer;
@@ -16,6 +16,7 @@ namespace TurnManager
         private void OnEnable()
         {
             _eventAggregator = EventAggregatorHolder.Instance;
+            _eventAggregator.Subscribe(this);
         }
 
         private void Update()
@@ -31,6 +32,17 @@ namespace TurnManager
                     _eventAggregator.Publish(new SetupTimesUpEvent());
                 }
             }
+        }
+
+        public void Handle(PreparationBeginsEvent @event)
+        {
+            _timer = 0f;
+            _finishedPreparation = false;
+        }
+
+        private void OnDisable()
+        {
+            _eventAggregator.Unsubscribe(this);
         }
     }
 }

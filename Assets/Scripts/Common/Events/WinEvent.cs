@@ -1,6 +1,6 @@
 namespace Common.Events
 {
-    public struct AttackBegins
+    public struct WinEvent
     {
     }
 }

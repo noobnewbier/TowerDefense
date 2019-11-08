@@ -19,6 +19,8 @@ namespace StateMachine
             _eventAggregator = EventAggregatorHolder.Instance;
             _stateMachine = animator;
             _eventAggregator.Subscribe(this);
+            
+            _eventAggregator.Publish(new PreparationBeginsEvent());
         }
         
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
