@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,20 +15,22 @@ namespace Editor
     {
         private const string MenuName = "Mode/Training";
 
-        public static bool IsEnabled
+        private static bool IsEnabled
         {
             get => EditorPrefs.GetBool(MenuName, true);
             set => EditorPrefs.SetBool(MenuName, value);
         }
-
-        /// <summary>
-        ///     Symbols that will be added to the editor
-        /// </summary>
-        private static readonly string[] Symbols =
+        
+        private static readonly string[] TrainingSymbols =
         {
-            "TRAINING"
+            GameConfig.TrainingMode
         };
-
+        
+        private static readonly string[] GameplaySymbols =
+        {
+            GameConfig.GameplayMode
+        };
+        
         [MenuItem(MenuName)]
         private static void ToggleAction()
         {
@@ -54,7 +57,7 @@ namespace Editor
         private static void OnToggleOn()
         {
             var allDefines = GetDefinedSymbols();
-            allDefines = allDefines.Union(Symbols);
+            allDefines = allDefines.Union(TrainingSymbols).Except(GameplaySymbols);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(
                 EditorUserBuildSettings.selectedBuildTargetGroup,
                 string.Join(";", allDefines.ToArray())
@@ -64,7 +67,7 @@ namespace Editor
         private static void OnToggleOff()
         {
             var allDefines = GetDefinedSymbols();
-            allDefines = allDefines.Except(Symbols);
+            allDefines = allDefines.Except(TrainingSymbols).Union(GameplaySymbols);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(
                 EditorUserBuildSettings.selectedBuildTargetGroup,
                 string.Join(";", allDefines.ToArray())
