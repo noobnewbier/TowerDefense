@@ -8,8 +8,6 @@ namespace UnityChan
 {
 // 必要なコンポーネントの列記
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(Rigidbody))]
     public class UnityChanMovementHandler : MovementHandler
     {
         // アニメーター各ステートへの参照
@@ -26,7 +24,7 @@ namespace UnityChan
         private GameObject _cameraObject; // メインカメラへの参照
 
         // キャラクターコントローラ（カプセルコライダ）の参照
-        private CapsuleCollider _col;
+        [SerializeField] private CapsuleCollider col;
         private AnimatorStateInfo _currentBaseState; // base layerで使われる、アニメーターの現在の状態の参照
 
         // 以下キャラクターコントローラ用パラメタ
@@ -39,7 +37,7 @@ namespace UnityChan
         private float _orgColHeight;
         private Vector3 _originalColliderCenter;
 
-        private Rigidbody _rb;
+        [SerializeField] private Rigidbody rb;
 
         // 旋回速度
         public float rotateSpeed = 2.0f;
@@ -61,13 +59,11 @@ namespace UnityChan
             // Animatorコンポーネントを取得する
             _anim = GetComponent<Animator>();
             // CapsuleColliderコンポーネントを取得する（カプセル型コリジョン）
-            _col = GetComponent<CapsuleCollider>();
-            _rb = GetComponent<Rigidbody>();
             //メインカメラを取得する
             _cameraObject = GameObject.FindWithTag("MainCamera");
             // CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
-            _orgColHeight = _col.height;
-            _originalColliderCenter = _col.center;
+            _orgColHeight = col.height;
+            _originalColliderCenter = col.center;
         }
 
 
@@ -80,7 +76,7 @@ namespace UnityChan
             _anim.SetFloat(Direction, h); // Animator側で設定している"Direction"パラメタにhを渡す
             _anim.speed = animSpeed; // Animatorのモーション再生速度に animSpeedを設定する
             _currentBaseState = _anim.GetCurrentAnimatorStateInfo(0); // 参照用のステート変数にBase Layer (0)の現在のステートを設定する
-            _rb.useGravity = true; //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
+            rb.useGravity = true; //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
 
 
             // 以下、キャラクターの移動処理
@@ -142,8 +138,8 @@ namespace UnityChan
         private void ResetCollider()
         {
             // コンポーネントのHeight、Centerの初期値を戻す
-            _col.height = _orgColHeight;
-            _col.center = _originalColliderCenter;
+            col.height = _orgColHeight;
+            col.center = _originalColliderCenter;
         }
     }
 }

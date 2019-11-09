@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using Common;
 using Common.Events;
 using Units.UnitCommon;
 using UnityEngine;
@@ -17,6 +19,14 @@ namespace Units.Players
         protected override void Dies()
         {
             EventAggregator.Publish(new PlayerDeadEvent());
+            DeathEffect();
+            Destroy(gameObject);
+        }
+
+        [Conditional(GameConfig.GameplayMode)]
+        protected void DeathEffect()
+        {
+            //not implemented
         }
     }
 }

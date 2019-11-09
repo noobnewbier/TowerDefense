@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Common;
 using Common.Events;
 using EventManagement;
@@ -59,6 +60,7 @@ namespace Bullets
             if (_cumulatedTraveledDistance > data.Range)
             {
                 AfterEffect(hit.point);
+                SelfDestroy();
             }
             else
             {
@@ -66,13 +68,12 @@ namespace Bullets
                 selfTransform.position += selfTransform.forward * traveledDistance;
             }
         }
-        
+
+        [Conditional(GameConfig.GameplayMode)]
         private void AfterEffect(Vector3 effectPos)
         {
             var afterEffect = Instantiate(data.AfterEffect);
             afterEffect.transform.position = effectPos;
-            
-            SelfDestroy();
         }
         
         private void OnCollide(RaycastHit hit)
@@ -85,6 +86,7 @@ namespace Bullets
             }
 
             AfterEffect(hit.point);
+            SelfDestroy();
         }
         
         private void DoDamage(IDamageTaker damageTaker)
