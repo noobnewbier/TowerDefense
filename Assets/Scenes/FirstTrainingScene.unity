@@ -2232,6 +2232,10 @@ PrefabInstance:
       propertyPath: unit
       value: 
       objectReference: {fileID: 1867325620}
+    - target: {fileID: 1952923683, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1867325622}
     m_RemovedComponents:
     - {fileID: 1473358978, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
     - {fileID: 1464618050, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}

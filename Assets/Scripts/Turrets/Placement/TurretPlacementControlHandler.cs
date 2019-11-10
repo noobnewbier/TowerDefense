@@ -1,3 +1,4 @@
+using System;
 using Shop;
 using Turrets.Placement.InputSource;
 using UnityEngine;
@@ -6,22 +7,27 @@ namespace Turrets.Placement
 {
     public class TurretPlacementControlHandler : MonoBehaviour
     {
-        [SerializeField] private MoneyManager moneyManager;
         [SerializeField] private TurretPlacementInputSource inputSource;
         [SerializeField] private TurretPlacementControlModel model;
         [SerializeField] private Transform turretSpawnPoint;
+        private MoneyManager _moneyManager;
+
+        private void OnEnable()
+        {
+            _moneyManager = FindObjectOfType<MoneyManager>();
+        }
 
         private void Update()
         {
             if (inputSource.ReceivedPlaceTurretInput())
             {
-                if (moneyManager.Money >= model.TurretPrice)
+                if (_moneyManager.Money >= model.TurretPrice)
                 {
                     PlaceTurret(model.CopyOfTurret);
                 }
                 else
                 {
-                    Debug.Log("you need error handling here");
+//                    Debug.Log("you need error handling here");
                 }
             }
         }
