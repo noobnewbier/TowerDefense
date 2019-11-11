@@ -14,6 +14,9 @@ namespace Turrets
     public class Turret : BulletsShooterInputSource, IHandle<EnemyDeadEvent>
     {
         private const float UpdateTargetInterval = 0.5f;
+
+        private Unit _currentTarget;
+
         private IList<Unit> _enemiesInRange;
         private IEventAggregator _eventAggregator;
         private PooledMonoBehaviour _pooledBullet;
@@ -48,10 +51,9 @@ namespace Turrets
 
         private void FixedUpdate()
         {
-            Unit currentTarget = null;
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
-                currentTarget = data.TargetingStrategy.ChooseTarget(transform, _enemiesInRange);
+                _currentTarget = data.TargetingStrategy.ChooseTarget(transform, _enemiesInRange);
                 _targetRefreshTimer = 0f;
             }
 
@@ -60,18 +62,22 @@ namespace Turrets
                 _targetRefreshTimer += Time.fixedDeltaTime;
             }
 
-            var targetPosition = currentTarget != null ? currentTarget.Transform.position : (Vector3?) null;
+            var targetPosition = _currentTarget != null ? _currentTarget.Transform.position : (Vector3?) null;
             if (targetPosition.HasValue)
             {
                 Aim(targetPosition.Value);
             }
         }
 
+        private float _lastAim = 0f;
+
         private void Aim(Vector3 targetPosition)
         {
+            Debug.Log(Time.fixedTime - _lastAim);
+            _lastAim = Time.fixedTime;
             var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
 
-            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedTime);
+            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedDeltaTime);
         }
 
         private void OnTriggerEnter(Collider other)

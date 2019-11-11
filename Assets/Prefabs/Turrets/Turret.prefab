@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 1552840796576611384}
   - component: {fileID: 3220006330832632566}
   - component: {fileID: 6977584255035843831}
+  - component: {fileID: 12473816}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -232,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8462197b81ba49fe8061ad4b06fabfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 1520384083734201723}
   data: {fileID: 11400000, guid: 2960eeec2a2c0e4468f17f837d3d633c, type: 2}
   rangeCollider: {fileID: 6977584255035843831}
   turretRotatable: {fileID: 2580605541360687346}
@@ -249,6 +249,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &12473816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2392737558376094949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121995a0692d4b80b3298a76706a35c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawnPoint: {fileID: 1520384083734201723}
+  data: {fileID: 11400000, guid: a626bc5ea7a99c040a92bc893bb83a37, type: 2}
+  inputSource: {fileID: 3220006330832632566}
 --- !u!1 &7903197149325542054
 GameObject:
   m_ObjectHideFlags: 0

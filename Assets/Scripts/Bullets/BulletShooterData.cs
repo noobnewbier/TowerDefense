@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Bullets
 {
-    [CreateAssetMenu(fileName = "Data/BulletShooterData")]
+    [CreateAssetMenu(menuName = "Data/BulletShooterData")]
     public class BulletShooterData : ScriptableObject
     {
         [SerializeField] private GameObject bullet;

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e37237626ab94a98b919cdc5ef3e95da, type: 3}
-  m_Name: DummyTurretData
+  m_Script: {fileID: 11500000, guid: a8b2e4dfa08b4cc686d7eca9d8a2a7f9, type: 3}
+  m_Name: DamageAiBulletShooterData
   m_EditorClassIdentifier: 
-  detectionRange: 10
-  rotateSpeed: 70
-  targetingStrategy: {fileID: 11400000, guid: 41bc4887f69a14143883f8bd425e45b1, type: 2}
+  bullet: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
+  shootFrequency: 0.25

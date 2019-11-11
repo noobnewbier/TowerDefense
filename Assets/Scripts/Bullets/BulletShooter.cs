@@ -28,11 +28,14 @@ namespace Bullets
 
         private void FixedUpdate()
         {
-            _timer += Time.deltaTime;
-
             if (inputSource.ReceivedShootBulletInput() && _timer >= data.ShootFrequency)
             {
+                _timer = 0f;
                 Shoot();
+            }
+            else
+            {
+                _timer += Time.deltaTime;
             }
         }
     }
