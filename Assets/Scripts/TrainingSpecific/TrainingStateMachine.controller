@@ -40,6 +40,18 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114192048997962814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb8187a2ebe43648ba657c481d25887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114203846379215050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,18 +86,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90c37d5249d24fdeb0fa058fe7ff36f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114929624114829254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd90da9c84c4417983c033fbc58911a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &1101362246092563480
@@ -214,13 +214,13 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Start
+  m_Name: SpawnPlayer
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101767221232115958}
   m_StateMachineBehaviours:
-  - {fileID: 114929624114829254}
+  - {fileID: 114192048997962814}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -338,7 +338,7 @@ AnimatorStateMachine:
     m_Position: {x: 324, y: -252, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102631703970666220}
-    m_Position: {x: -156, y: -348, z: 0}
+    m_Position: {x: -120, y: -348, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101623004054443284}
@@ -346,7 +346,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -132, y: -432, z: 0}
+  m_AnyStatePosition: {x: -96, y: -456, z: 0}
   m_EntryPosition: {x: 348, y: -420, z: 0}
   m_ExitPosition: {x: 156, y: -444, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

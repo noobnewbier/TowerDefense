@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bullets;
+using Bullets.InputSource;
 using Common;
 using Common.Events;
 using EventManagement;
@@ -11,25 +11,28 @@ using UnityUtils;
 
 namespace Turrets
 {
-    public class Turret : MonoBehaviour, IHandle<EnemyDeadEvent>
+    public class Turret : BulletsShooterInputSource, IHandle<EnemyDeadEvent>
     {
         private const float UpdateTargetInterval = 0.5f;
 
         private Unit _currentTarget;
 
         private IList<Unit> _enemiesInRange;
+        private IEventAggregator _eventAggregator;
         private PooledMonoBehaviour _pooledBullet;
         private float _targetRefreshTimer;
-        private IEventAggregator _eventAggregator;
-        [SerializeField] private Transform bulletSpawnPoint;
+
         [SerializeField] private TurretData data;
         [SerializeField] private SphereCollider rangeCollider;
         [SerializeField] private Transform turretRotatable;
 
+        public void Handle(EnemyDeadEvent @event)
+        {
+            _enemiesInRange.Remove(@event.Unit);
+        }
+
         private void Awake()
         {
-            _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
-
             _enemiesInRange = new List<Unit>();
             rangeCollider.radius = data.DetectionRange;
             rangeCollider.isTrigger = true;
@@ -63,23 +66,18 @@ namespace Turrets
             if (targetPosition.HasValue)
             {
                 Aim(targetPosition.Value);
-                Shoot();
             }
         }
 
+        private float _lastAim = 0f;
+
         private void Aim(Vector3 targetPosition)
         {
+            Debug.Log(Time.fixedTime - _lastAim);
+            _lastAim = Time.fixedTime;
             var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
 
-            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedTime);
-        }
-
-        private void Shoot()
-        {
-            var newBullet = _pooledBullet.GetPooledInstance();
-
-            newBullet.transform.position = bulletSpawnPoint.position;
-            newBullet.transform.rotation = bulletSpawnPoint.rotation;
+            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedDeltaTime);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -98,9 +96,10 @@ namespace Turrets
             }
         }
 
-        public void Handle(EnemyDeadEvent @event)
+        //Shoot as long as we have enemies - Kill On Sight Comrade
+        public override bool ReceivedShootBulletInput()
         {
-            _enemiesInRange.Remove(@event.Unit);
+            return _enemiesInRange.Any();
         }
     }
 }
