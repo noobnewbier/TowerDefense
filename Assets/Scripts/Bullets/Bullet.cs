@@ -13,6 +13,7 @@ namespace Bullets
         private float _cumulatedTraveledDistance;
         private IEventAggregator _eventAggregator;
         private LayerMask _layerMask;
+        private DamageSource _bulletDamageSource;
 
         [SerializeField] private BulletData data;
         public int Damage => data.Damage;
@@ -27,9 +28,11 @@ namespace Bullets
             {
                 case ObjectTags.DamageAi:
                     layerToIgnore = LayerNames.PlayerDamageTaker;
+                    _bulletDamageSource = DamageSource.Player;
                     break;
                 case ObjectTags.DamagePlayer:
                     layerToIgnore = LayerNames.AiDamageTaker;
+                    _bulletDamageSource = DamageSource.Ai;
                     break;
                 default:
                     throw new NotImplementedException("dude, wth am I supposed to do? What should I hit? I am confused as a bullet");
@@ -91,7 +94,7 @@ namespace Bullets
         
         private void DoDamage(IDamageTaker damageTaker)
         {
-            _eventAggregator.Publish(new DamageEvent(damageTaker, data.Damage));
+            _eventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, _bulletDamageSource));
         }
         
         private void SelfDestroy()

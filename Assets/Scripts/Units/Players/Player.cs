@@ -16,16 +16,16 @@ namespace Units.Players
             set => unitData = value;
         }
 
-        protected override void Dies()
+
+        protected override void DeathVisualEffect()
         {
-            EventAggregator.Publish(new PlayerDeadEvent());
-            DeathEffect();
-            Destroy(gameObject);
+            //not implemented
         }
 
-        [Conditional(GameConfig.GameplayMode)]
-        protected void DeathEffect()
+        protected override void DeathEffect()
         {
+            EventAggregator.Publish(new PlayerDeadEvent());
+            Destroy(gameObject);
             //not implemented
         }
     }

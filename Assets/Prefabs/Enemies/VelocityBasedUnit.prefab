@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1714430858}
   - component: {fileID: 1714430860}
-  - component: {fileID: 1783185476709104893}
+  - component: {fileID: 6168960639002132815}
   m_Layer: 11
   m_Name: MovementHandler
   m_TagString: Untagged
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531501f2fee94d58bff39593d7e33080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSource: {fileID: 1783185476709104893}
+  inputSource: {fileID: 6168960639002132815}
   unit: {fileID: 3254465578691183710}
   rb: {fileID: 7352862185661551323}
---- !u!114 &1783185476709104893
+--- !u!114 &6168960639002132815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

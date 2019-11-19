@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSource: {fileID: 1714430859}
   unit: {fileID: 3254465578691183710}
+  rb: {fileID: 7352862185661551323}
 --- !u!114 &1714430859
 MonoBehaviour:
   m_ObjectHideFlags: 0

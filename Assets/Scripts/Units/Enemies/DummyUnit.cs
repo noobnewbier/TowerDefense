@@ -14,7 +14,12 @@ namespace Units.Enemies
             set => unitData = value;
         }
 
-        protected override void Dies()
+        protected override void DeathVisualEffect()
+        {
+            // do nothing
+        }
+
+        protected override void DeathEffect()
         {
             EventAggregator.Publish(new EnemyDeadEvent(this));
             Destroy(gameObject);

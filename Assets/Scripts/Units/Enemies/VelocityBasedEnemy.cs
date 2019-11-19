@@ -20,19 +20,25 @@ namespace Units.Enemies
 
         public float RotationSpeed => data.RotationSpeed;
 
-        protected override void Dies()
+
+        protected override void DeathEffect()
         {
             EventAggregator.Publish(new EnemyDeadEvent(this));
             Destroy(gameObject);
         }
 
+        protected override void DeathVisualEffect()
+        {
+            // do nothing for now
+        }
+
         private void OnCollisionEnter(Collision other)
         {
             var damageTaker = other.gameObject.GetComponent<IDamageTaker>();
-            if (damageTaker != null)
+            if (damageTaker != null && other.collider.CompareTag(ObjectTags.Player))
             {
-                EventAggregator.Publish(new DamageEvent(damageTaker, data.Damage));
-                Dies();
+                EventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, DamageSource.Ai));
+                TakeDamage(data.MaxHealth, DamageSource.SelfDestruction);
             }
         }
     }
