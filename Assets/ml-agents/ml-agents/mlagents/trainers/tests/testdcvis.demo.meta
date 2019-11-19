@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: ae6c180baea86a34a8b07fb9ef74274e
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/ml-agents/ml-agents/mlagents/trainers/tests/testdcvis.demo
+  externalObjects: {}
+  userData: ' (MLAgents.Demonstration)'
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 7bd65ce151aaa4a41a45312543c56be1, type: 3}

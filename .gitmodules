@@ -10,6 +10,3 @@
 [submodule "Assets/Scripts/UnityUtils"]
 	path = Assets/Scripts/UnityUtils
 	url = https://github.com/noobnewbier/UnityUtils.git
-[submodule "Assets/Scripts/ml-agents"]
-	path = Assets/Scripts/ml-agents
-	url = https://github.com/Unity-Technologies/ml-agents.git
