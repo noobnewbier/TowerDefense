@@ -1,5 +1,6 @@
 using System;
 using Common;
+using Common.Class;
 using Common.Events;
 using EventManagement;
 using UnityEngine;

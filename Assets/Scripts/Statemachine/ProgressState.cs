@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Common;
+using Common.Class;
 using Common.Events;
 using EventManagement;
 using Units.Enemies;

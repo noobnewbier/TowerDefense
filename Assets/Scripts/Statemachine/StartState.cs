@@ -1,4 +1,5 @@
 using Common;
+using Common.Class;
 using Common.Events;
 using UnityEngine;
 

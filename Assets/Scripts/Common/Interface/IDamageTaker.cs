@@ -1,7 +1,7 @@
 using Common.Events;
 using EventManagement;
 
-namespace Common
+namespace Common.Interface
 {
     public interface IDamageTaker : IHandle<DamageEvent>
     {

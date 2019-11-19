@@ -1,3 +1,6 @@
+using Common.Enum;
+using Common.Interface;
+
 namespace Common.Events
 {
     public struct DamageEvent
