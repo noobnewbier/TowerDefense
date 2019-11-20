@@ -1,7 +1,7 @@
 using Common;
-using Common.Constants;
+using Common.Constant;
 using Common.Enum;
-using Common.Events;
+using Common.Event;
 using Common.Interface;
 using Units.Enemies.Data;
 using Units.UnitCommon;
@@ -29,6 +29,8 @@ namespace Units.Enemies
             EventAggregator.Publish(new EnemyDeadEvent(this));
             Destroy(gameObject);
         }
+
+        public override AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Enemy;
 
         protected override void DeathVisualEffect()
         {

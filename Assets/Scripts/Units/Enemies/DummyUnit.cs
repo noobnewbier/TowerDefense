@@ -1,4 +1,5 @@
-using Common.Events;
+using Common.Enum;
+using Common.Event;
 using Units.UnitCommon;
 using UnityEngine;
 
@@ -24,5 +25,7 @@ namespace Units.Enemies
             EventAggregator.Publish(new EnemyDeadEvent(this));
             Destroy(gameObject);
         }
+
+        public override AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Enemy;
     }
 }

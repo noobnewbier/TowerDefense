@@ -1,13 +1,11 @@
-using System;
 using System.Linq;
-using Common;
 using Common.Class;
-using Common.Events;
+using Common.Event;
 using EventManagement;
 using Units.Enemies;
 using UnityEngine;
 
-namespace StateMachine
+namespace Statemachine
 {
     public class ProgressState : StateMachineBehaviour, IHandle<PlayerDeadEvent>, IHandle<EnemyDeadEvent>
     {

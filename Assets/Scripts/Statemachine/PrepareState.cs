@@ -1,11 +1,10 @@
-using Common;
 using Common.Class;
-using Common.Events;
+using Common.Event;
 using EventManagement;
 using UnityEngine;
 using UnityEngine.Animations;
 
-namespace StateMachine
+namespace Statemachine
 {
     public class PrepareState : StateMachineBehaviour, IHandle<SetupTimesUpEvent>
     {

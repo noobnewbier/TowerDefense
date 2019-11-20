@@ -1,4 +1,4 @@
-using Common.Events;
+using Common.Event;
 using EventManagement;
 
 namespace Common.Interface

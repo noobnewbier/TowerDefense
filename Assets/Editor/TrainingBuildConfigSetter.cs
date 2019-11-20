@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common;
-using Common.Constants;
+using Common.Constant;
 using UnityEditor;
 
 /// <summary>

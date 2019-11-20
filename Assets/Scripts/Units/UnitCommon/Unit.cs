@@ -1,13 +1,10 @@
-using System;
 using System.Diagnostics;
-using Common;
 using Common.Class;
-using Common.Constants;
+using Common.Constant;
 using Common.Enum;
-using Common.Events;
+using Common.Event;
 using Common.Interface;
 using EventManagement;
-using JetBrains.Annotations;
 using UnityEngine;
 
 /*
@@ -20,8 +17,9 @@ using UnityEngine;
 namespace Units.UnitCommon
 {
     [DefaultExecutionOrder (20)]
-    public abstract class Unit : MonoBehaviour, IDamageTaker
+    public abstract class Unit : MonoBehaviour, IDamageTaker, IObjectOfInterest
     {
+        [SerializeField] private Collider unitCollider;
         protected IEventAggregator EventAggregator;
         protected abstract UnitData UnitData { get; set; }
         public Transform Transform => transform;
@@ -82,5 +80,8 @@ namespace Units.UnitCommon
         {
             EventAggregator.Unsubscribe(this);
         }
+
+        public abstract AiInterestedObjectType InterestedObjectType { get; }
+        public Bounds Bounds => unitCollider.bounds;
     }
 }

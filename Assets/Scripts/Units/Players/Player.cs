@@ -1,6 +1,5 @@
-using System.Diagnostics;
-using Common;
-using Common.Events;
+using Common.Enum;
+using Common.Event;
 using Units.UnitCommon;
 using UnityEngine;
 
@@ -28,5 +27,7 @@ namespace Units.Players
             Destroy(gameObject);
             //not implemented
         }
+
+        public override AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Player;
     }
 }

@@ -1,10 +1,8 @@
-using Common;
 using Common.Class;
-using Common.Events;
-using EventManagement;
+using Common.Event;
 using UnityEngine;
 
-namespace StateMachine
+namespace Statemachine
 {
     public class WinState : StateMachineBehaviour
     {
