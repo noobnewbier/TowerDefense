@@ -76,7 +76,7 @@ namespace Turret
             return unitDetector.EnemiesInRange.Any();
         }
 
-        public AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Turret;
+        public AiInterestCategory InterestCategory => AiInterestCategory.Turret;
         //it does not matter for a turret
         public Bounds Bounds => new Bounds(transform.position, Vector3.one);
     }

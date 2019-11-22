@@ -28,6 +28,6 @@ namespace Units.Players
             //not implemented
         }
 
-        public override AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Player;
+        public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
     }
 }

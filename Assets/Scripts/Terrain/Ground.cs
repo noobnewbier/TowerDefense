@@ -6,7 +6,7 @@ namespace Terrain
 {
     public class Ground : MonoBehaviour, IObjectOfInterest
     {
-        public AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Ground;
+        public AiInterestCategory InterestCategory => AiInterestCategory.Ground;
         public Bounds Bounds => GetComponent<Collider>().bounds;
     }
 }

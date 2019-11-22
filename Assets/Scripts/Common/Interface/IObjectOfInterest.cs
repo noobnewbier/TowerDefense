@@ -6,7 +6,7 @@ namespace Common.Interface
     //Anything that the AI cares
     public interface IObjectOfInterest
     {
-        AiInterestedObjectType InterestedObjectType { get; }
+        AiInterestCategory InterestCategory { get; }
         Bounds Bounds { get; }
     }
 }

@@ -6,7 +6,7 @@ namespace Terrain
 {
     public class Wall : MonoBehaviour, IObjectOfInterest
     {
-        public AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Obstacle;
+        public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
         public Bounds Bounds => GetComponent<Collider>().bounds;
     }
 }

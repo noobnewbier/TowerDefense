@@ -81,7 +81,7 @@ namespace Units.UnitCommon
             EventAggregator.Unsubscribe(this);
         }
 
-        public abstract AiInterestedObjectType InterestedObjectType { get; }
+        public abstract AiInterestCategory InterestCategory { get; }
         public Bounds Bounds => unitCollider.bounds;
     }
 }

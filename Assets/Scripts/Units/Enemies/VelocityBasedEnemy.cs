@@ -30,7 +30,7 @@ namespace Units.Enemies
             Destroy(gameObject);
         }
 
-        public override AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.Enemy;
+        public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
 
         protected override void DeathVisualEffect()
         {

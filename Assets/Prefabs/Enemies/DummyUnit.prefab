@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fe3cf398a49aab5e1d079481bff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitCollider: {fileID: 8293550211145048740}
   unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
 --- !u!54 &7352862185661551323
 Rigidbody:

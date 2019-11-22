@@ -55,7 +55,7 @@ namespace Turret
             }
         }
 
-        public AiInterestedObjectType InterestedObjectType => AiInterestedObjectType.TurretRange;
+        public AiInterestCategory InterestCategory => AiInterestCategory.TurretRange;
         public Bounds Bounds => rangeCollider.bounds;
     }
 }
