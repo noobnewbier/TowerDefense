@@ -9,4 +9,13 @@ namespace Common.Interface
         AiInterestCategory InterestCategory { get; }
         Bounds Bounds { get; }
     }
+
+    public interface IDynamicObjectOfInterest: IObjectOfInterest
+    {
+        
+    }
+    public interface IStaticObjectOfInterest: IObjectOfInterest
+    {
+        
+    }
 }

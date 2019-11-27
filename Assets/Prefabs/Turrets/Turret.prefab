@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 6977584255035843831}
   - component: {fileID: 12473816}
   - component: {fileID: 6347404220687763523}
+  - component: {fileID: 8884615131391382605}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -237,6 +238,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 2960eeec2a2c0e4468f17f837d3d633c, type: 2}
   turretRotatable: {fileID: 2580605541360687346}
   unitDetector: {fileID: 6347404220687763523}
+  genericShootService: {fileID: 8884615131391382605}
 --- !u!135 &6977584255035843831
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -264,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 1520384083734201723}
   data: {fileID: 11400000, guid: a626bc5ea7a99c040a92bc893bb83a37, type: 2}
-  inputSource: {fileID: 3220006330832632566}
+  inputSource: {fileID: 8884615131391382605}
 --- !u!114 &6347404220687763523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +280,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeCollider: {fileID: 6977584255035843831}
+--- !u!114 &8884615131391382605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2392737558376094949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b8552daed040ccbd48808d6ccb1efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7903197149325542054
 GameObject:
   m_ObjectHideFlags: 0

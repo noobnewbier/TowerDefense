@@ -2,8 +2,8 @@ using System;
 using AgentAi;
 using Common.Class;
 using Common.Event;
+using Elements.Units.Enemies;
 using EventManagement;
-using Units.Enemies;
 using UnityEngine;
 
 namespace ProjectSpecificUtils
@@ -37,13 +37,12 @@ namespace ProjectSpecificUtils
             _eventAggregator.Unsubscribe(this);
         }
 
-        //todo: fix this crap
         private void FixedUpdate()
         {
             if (_startedObserving)
             {
                 var sprite = _enemyAgentObservationCollector.ObserveEnvironment(dummyUnit);
-                _spriteRenderer.sprite = Sprite.Create(sprite,  new Rect(transform.position, new Vector2(60f, 60f)), new Vector2(0, 0));
+                _spriteRenderer.sprite = Sprite.Create(sprite,  new Rect(Vector2.zero, new Vector2(60f, 60f)), new Vector2(0.5f, 0.5f));
             }
         }
     }

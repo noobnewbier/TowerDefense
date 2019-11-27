@@ -4,13 +4,14 @@ namespace Common.Enum
 {
     public class AiInterestCategory
     {
+        public static readonly AiInterestCategory Observer = new AiInterestCategory(Color.white, 11);
         //assuming the player is the target
         public static readonly AiInterestCategory Player = new AiInterestCategory(Color.red,10);
         public static readonly AiInterestCategory Enemy = new AiInterestCategory(Color.green,9);
         public static readonly AiInterestCategory Turret = new AiInterestCategory(Color.blue,8);
-        //let's keep it blue for now
+        //let's keep it same as turret itself for now
         public static readonly AiInterestCategory TurretRange = new AiInterestCategory(Color.blue,7);
-        public static readonly AiInterestCategory Obstacle = new AiInterestCategory(new Color(0.65f, 0.16f, 0.16f),6);
+        public static readonly AiInterestCategory Obstacle = new AiInterestCategory(new Color(0.65f, .16f, 0.16f),6);
         public static readonly AiInterestCategory Ground = new AiInterestCategory(Color.grey,5);
         public static readonly AiInterestCategory NullArea = new AiInterestCategory(Color.black,0);
 

@@ -1,14 +1,16 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Common.Enum;
+using Common.Event;
+using Elements.Units.UnitCommon;
+using EventManagement;
 using MLAgents;
 using Movement.InputSource;
-using Units.UnitCommon;
 using UnityEngine;
 
 namespace AgentAi
 {
-    public class VelocityBasedEnemyAgent : Agent
+    public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>
     {
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private Unit unit;
@@ -19,17 +21,14 @@ namespace AgentAi
 
             inputService.UpdateVertical(vectorAction[0]);
             inputService.UpdateHorizontal(vectorAction[1]);
-            
-            RewardIsDead();
+
             EncourageApproachingPlayer();
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
-        private void RewardIsDead()
+        private void RewardIsDead(DamageSource deathCause)
         {
-            if (!unit.IsDead) return;
-            
-            switch (unit.DeathCause)
+            switch (deathCause)
             {
                 case DamageSource.Player:
                 case DamageSource.Environment:
@@ -39,7 +38,6 @@ namespace AgentAi
                     AddReward(1f);
                     break;
                 case DamageSource.Ai:
-                case null:
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -49,6 +47,15 @@ namespace AgentAi
         private void EncourageApproachingPlayer()
         {
             AddReward(-0.0001f);
+        }
+
+        public void Handle(EnemyDeadEvent @event)
+        {
+            if (@event.Unit != unit)
+            {
+                return;
+            }
+            RewardIsDead(@event.DeathCause);
         }
     }
 }

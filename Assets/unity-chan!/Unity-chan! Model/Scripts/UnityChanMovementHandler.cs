@@ -38,6 +38,7 @@ namespace UnityChan
         private Vector3 _originalColliderCenter;
 
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private Transform transformToMove;
 
         // 旋回速度
         public float rotateSpeed = 2.0f;
@@ -82,7 +83,7 @@ namespace UnityChan
             // 以下、キャラクターの移動処理
             _velocity = new Vector3(0, 0, v); // 上下のキー入力からZ軸方向の移動量を取得
             // キャラクターのローカル空間での方向に変換
-            _velocity = transform.TransformDirection(_velocity);
+            _velocity = transformToMove.TransformDirection(_velocity);
             //以下のvの閾値は、Mecanim側のトランジションと一緒に調整する
             if (v > 0.1)
             {
@@ -94,10 +95,10 @@ namespace UnityChan
             }
 
             // 上下のキー入力でキャラクターを移動させる
-            transform.localPosition += _velocity * Time.fixedDeltaTime;
+            transformToMove.localPosition += _velocity * Time.fixedDeltaTime;
 
             // 左右のキー入力でキャラクタをY軸で旋回させる
-            transform.Rotate(0, h * rotateSpeed, 0);
+            transformToMove.Rotate(0, h * rotateSpeed, 0);
 
 
             // 以下、Animatorの各ステート中での処理

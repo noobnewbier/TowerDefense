@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Terrain
 {
-    public class Wall : MonoBehaviour, IObjectOfInterest
+    public class Wall : MonoBehaviour, IStaticObjectOfInterest
     {
         public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
         public Bounds Bounds => GetComponent<Collider>().bounds;
