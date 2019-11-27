@@ -34,7 +34,10 @@ namespace Elements.Units.Enemies
 
         private void Update()
         {
-            if (!_startedAttack || _spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies) return;
+            if (!_startedAttack || _spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies)
+            {
+                return;
+            }
 
             _timer += Time.deltaTime;
             if (_timer >= enemySpawnPointData.SpawnInterval)

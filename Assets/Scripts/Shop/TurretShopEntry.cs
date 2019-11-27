@@ -5,8 +5,11 @@ namespace Shop
     [CreateAssetMenu(menuName = "Data/TurretShopEntry")]
     public class TurretShopEntry : ScriptableObject
     {
-        [field: SerializeField] public GameObject TurretPrefab { get; }
+        [SerializeField] private GameObject turretPrefab;
+        [SerializeField] private int price;
 
-        [field: SerializeField] public int Price { get; }
+        public GameObject TurretPrefab => turretPrefab;
+
+        public int Price => price;
     }
 }

@@ -6,6 +6,7 @@ using Common.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using MLAgents.Sensor;
 using UnityEngine;
 using UnityUtils;
 
@@ -23,12 +24,21 @@ namespace AgentAi
 
         private Texture2D _terrainTexture;
         [SerializeField] private int textureHeight;
+
+        public int TextureHeight => textureHeight;
+
+        public int TextureWidth => textureWidth;
+
         [SerializeField] private int textureWidth;
 
+        
+        
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
         }
+        
+        public int[] Shape => new int[3]{textureWidth, textureHeight, 3};
 
         public void Handle(IDynamicObjectDestroyedEvent @event)
         {
@@ -78,7 +88,7 @@ namespace AgentAi
 
             DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
 
-            return _observedTexture;
+            return Instantiate(_observedTexture);
         }
 
         private void DrawObjectsOnTexture(Texture2D texture2D, IEnumerable<IObjectOfInterest> interestedObjects, bool shouldWritePriority)
@@ -89,8 +99,14 @@ namespace AgentAi
             {
                 var rescaledBounds = RescaleBoundsToTexture(objectOfInterest.Bounds);
 
-                objectOfInterest.InterestCategory.Drawer.DrawObjectWithPriority(texture2D, rescaledBounds, objectOfInterest.InterestCategory.Color,
-                    _coordinatesWithPriority, objectOfInterest.InterestCategory.Priority, shouldWritePriority);
+                objectOfInterest.InterestCategory.Drawer.DrawObjectWithPriority(
+                    texture2D,
+                    rescaledBounds,
+                    objectOfInterest.InterestCategory.Color,
+                    _coordinatesWithPriority,
+                    objectOfInterest.InterestCategory.Priority,
+                    shouldWritePriority
+                );
             }
 
             //not very sure if we need this or not
@@ -106,10 +122,7 @@ namespace AgentAi
             return bounds;
         }
 
-        private static IDynamicObjectOfInterest GetObserverRepresentation(IObjectOfInterest dynamicObjectOfInterest)
-        {
-            return new Observer(dynamicObjectOfInterest);
-        }
+        private static IDynamicObjectOfInterest GetObserverRepresentation(IObjectOfInterest dynamicObjectOfInterest) => new Observer(dynamicObjectOfInterest);
 
         private class Observer : IDynamicObjectOfInterest
         {

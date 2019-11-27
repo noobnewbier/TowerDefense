@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b2d40a59f478049a90098361f1a65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitCollider: {fileID: 1867325621}
   unitData: {fileID: 11400000, guid: 5a8d33a35468f8340826353691520cbf, type: 2}
 --- !u!54 &1867325622
 Rigidbody:
@@ -248,6 +249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6048740561362155733}
     m_Modifications:
+    - target: {fileID: 100338, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
+      propertyPath: m_Name
+      value: unitychan
+      objectReference: {fileID: 0}
     - target: {fileID: 400100, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -291,10 +296,6 @@ PrefabInstance:
     - target: {fileID: 400100, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100338, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-      propertyPath: m_Name
-      value: unitychan
       objectReference: {fileID: 0}
     - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
       propertyPath: inputSource

@@ -4,13 +4,14 @@ namespace Shop
 {
     public class MoneyManager : MonoBehaviour
     {
+        [SerializeField] private float money = 100;
         [SerializeField] private float moneyGainPerTick = 0.0005f;
 
-        [field: SerializeField] public float Money { get; private set; } = 100;
+        public float Money => money;
 
         private void FixedUpdate()
         {
-            Money += moneyGainPerTick;
+            money += moneyGainPerTick;
         }
     }
 }

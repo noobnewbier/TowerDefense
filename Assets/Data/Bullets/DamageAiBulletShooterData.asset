@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DamageAiBulletShooterData
   m_EditorClassIdentifier: 
   bullet: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
-  shootFrequency: 0.25
+  shootFrequency: 1

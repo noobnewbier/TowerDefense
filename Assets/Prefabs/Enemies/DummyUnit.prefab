@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 8293550211145048740}
-  unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
+  unitData: {fileID: 11400000, guid: 5323e5ea77dda0b4db76d39e52d69b1f, type: 2}
 --- !u!54 &7352862185661551323
 Rigidbody:
   m_ObjectHideFlags: 0

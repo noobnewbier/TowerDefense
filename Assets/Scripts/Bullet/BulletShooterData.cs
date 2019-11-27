@@ -5,8 +5,10 @@ namespace Bullet
     [CreateAssetMenu(menuName = "Data/BulletShooterData")]
     public class BulletShooterData : ScriptableObject
     {
-        [field: SerializeField] public GameObject Bullet { get; }
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private float shootFrequency;
 
-        [field: SerializeField] public float ShootFrequency { get; }
+        public GameObject Bullet => bullet;
+        public float ShootFrequency => shootFrequency;
     }
 }

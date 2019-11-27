@@ -5,12 +5,14 @@ namespace Bullet
     [CreateAssetMenu(menuName = "Data/BulletData")]
     public class BulletData : ScriptableObject
     {
-        [field: SerializeField] public GameObject AfterEffect { get; }
+        [SerializeField] private GameObject afterEffect;
+        [SerializeField] private int damage;
+        [SerializeField] private float range;
+        [SerializeField] private float speed;
 
-        [field: SerializeField] public int Damage { get; }
-
-        [field: SerializeField] public float Speed { get; }
-
-        [field: SerializeField] public float Range { get; }
+        public GameObject AfterEffect => afterEffect;
+        public int Damage => damage;
+        public float Speed => speed;
+        public float Range => range;
     }
 }

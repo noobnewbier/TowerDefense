@@ -1,4 +1,3 @@
-using System;
 using Elements.Units.UnitCommon;
 using MLAgents;
 using MLAgents.InferenceBrain;
@@ -11,22 +10,27 @@ namespace AgentAi
     public class Texture2DSensor : ISensor
     {
         private const string ScopedName = "Texture2DSensor.GetCompressedObservation";
-        private readonly IHasObservationTexture _hasObservationTexture;
-        private readonly bool _grayscale;
+
+        private readonly EnemyAgentObservationCollector _collector;
+        private readonly bool _grayScale;
         private readonly string _name;
         private readonly int[] _shape;
+        private readonly Unit _unit;
 
-        public Texture2DSensor(string name)
+        public Texture2DSensor
+        (
+            bool grayScale,
+            string name,
+            int[] shape,
+            Unit unit,
+            EnemyAgentObservationCollector collector
+        )
         {
-            _name = name;
-        }
-
-        public Texture2DSensor(IHasObservationTexture hasObservationTexture, bool grayscale, string name, int[] shape)
-        {
-            _hasObservationTexture = hasObservationTexture;
-            _grayscale = grayscale;
+            _grayScale = grayScale;
             _name = name;
             _shape = shape;
+            _unit = unit;
+            _collector = collector;
         }
 
         public int[] GetFloatObservationShape() => _shape;
@@ -35,20 +39,20 @@ namespace AgentAi
         {
             using (TimerStack.Instance.Scoped(ScopedName))
             {
-                var texture = _hasObservationTexture.GetCloneOfObservationTexture();
-                Utilities.TextureToTensorProxy(texture, tensorProxy, _grayscale, agentIndex);
-                UnityEngine.Object.Destroy(texture);
+                var texture = _collector.ObserveEnvironment(_unit);
+                Utilities.TextureToTensorProxy(texture, tensorProxy, _grayScale, agentIndex);
+                Object.Destroy(texture);
             }
         }
 
         public byte[] GetCompressedObservation()
         {
-            using(TimerStack.Instance.Scoped(ScopedName))
+            using (TimerStack.Instance.Scoped(ScopedName))
             {
-                var texture = _hasObservationTexture.GetCloneOfObservationTexture();
+                var texture = _collector.ObserveEnvironment(_unit);
 
                 var compressed = texture.EncodeToPNG();
-                UnityEngine.Object.Destroy(texture);
+                Object.Destroy(texture);
                 return compressed;
             }
         }
@@ -56,10 +60,5 @@ namespace AgentAi
         public SensorCompressionType GetCompressionType() => SensorCompressionType.PNG;
 
         public string GetName() => _name;
-    }
-
-    public interface IHasObservationTexture
-    {
-        Texture2D GetCloneOfObservationTexture();
     }
 }

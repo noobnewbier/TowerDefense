@@ -7,7 +7,13 @@ namespace Elements.Units.Players
 {
     public class Player : Unit
     {
-        [field: SerializeField] protected override UnitData UnitData { get; set; }
+        [SerializeField] private UnitData unitData;
+
+        protected override UnitData UnitData
+        {
+            get => unitData;
+            set => unitData = value;
+        }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
 
