@@ -23,8 +23,6 @@ namespace AgentAi
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
-            base.AgentAction(vectorAction, textAction);
-
             inputService.UpdateVertical(vectorAction[0]);
             inputService.UpdateHorizontal(vectorAction[1]);
 
@@ -47,6 +45,8 @@ namespace AgentAi
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            Done();
         }
 
         //Don't walk around forever pls
