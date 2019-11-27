@@ -13,10 +13,10 @@ namespace Bullet
 {
     public class Bullet : PooledMonoBehaviour
     {
+        private DamageSource _bulletDamageSource;
         private float _cumulatedTraveledDistance;
         private IEventAggregator _eventAggregator;
         private LayerMask _layerMask;
-        private DamageSource _bulletDamageSource;
 
         [SerializeField] private BulletData data;
         public int Damage => data.Damage;
@@ -40,12 +40,12 @@ namespace Bullet
                 default:
                     throw new NotImplementedException("dude, wth am I supposed to do? What should I hit? I am confused as a bullet");
             }
-            
+
             _layerMask = ~(1 << LayerMask.NameToLayer(layerToIgnore));
 
             #endregion
         }
-        
+
         private void OnEnable()
         {
             _eventAggregator = EventAggregatorHolder.Instance;
@@ -58,10 +58,7 @@ namespace Bullet
             var traveledDistance = data.Speed * Time.fixedDeltaTime;
             _cumulatedTraveledDistance += traveledDistance;
 
-            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask))
-            {
-                OnCollide(hit);
-            }
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask)) OnCollide(hit);
 
             if (_cumulatedTraveledDistance > data.Range)
             {
@@ -81,25 +78,22 @@ namespace Bullet
             var afterEffect = Instantiate(data.AfterEffect);
             afterEffect.transform.position = effectPos;
         }
-        
+
         private void OnCollide(RaycastHit hit)
         {
             var damageTaker = hit.transform.GetComponent<IDamageTaker>();
 
-            if (damageTaker != null)
-            {
-                DoDamage(damageTaker);
-            }
+            if (damageTaker != null) DoDamage(damageTaker);
 
             AfterEffect(hit.point);
             SelfDestroy();
         }
-        
+
         private void DoDamage(IDamageTaker damageTaker)
         {
             _eventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, _bulletDamageSource));
         }
-        
+
         private void SelfDestroy()
         {
             ReturnToPool();

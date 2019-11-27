@@ -1,4 +1,3 @@
-using System;
 using Elements.Units;
 using UnityEngine;
 
@@ -6,8 +5,8 @@ namespace Movement.Handler
 {
     public class VelocityBasedMovementHandler : MovementHandler
     {
-        private float _rotationSpeed;
         private float _acceleration;
+        private float _rotationSpeed;
         [SerializeField] private Rigidbody rb;
 
         private void OnEnable()

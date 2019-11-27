@@ -18,9 +18,9 @@ namespace Elements.Turret
         private float _targetRefreshTimer;
 
         [SerializeField] private TurretData data;
+        [SerializeField] private GenericShootService genericShootService;
         [SerializeField] private Transform turretRotatable;
         [SerializeField] private UnitDetector unitDetector;
-        [SerializeField] private GenericShootService genericShootService;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Turret;
 
@@ -40,16 +40,10 @@ namespace Elements.Turret
                 _targetRefreshTimer = 0f;
             }
 
-            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
-            {
-                _targetRefreshTimer += Time.fixedDeltaTime;
-            }
+            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f)) _targetRefreshTimer += Time.fixedDeltaTime;
 
             var targetPosition = _currentTarget != null ? _currentTarget.Transform.position : (Vector3?) null;
-            if (targetPosition.HasValue)
-            {
-                Aim(targetPosition.Value);
-            }
+            if (targetPosition.HasValue) Aim(targetPosition.Value);
 
             genericShootService.IsShooting = ShouldShoot();
         }
@@ -67,6 +61,4 @@ namespace Elements.Turret
             return unitDetector.EnemiesInRange.Any();
         }
     }
-    
-    
 }

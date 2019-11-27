@@ -13,17 +13,14 @@ namespace Statemachine
         private static readonly int TurnFinishes = Animator.StringToHash("TurnFinishes");
 
         private Animator _animator;
+        private IEventAggregator _eventAggregator;
         private int _killedCount;
         private int _totalSpawnerCount;
-        private IEventAggregator _eventAggregator;
-        
+
         public void Handle(EnemyDeadEvent @event)
         {
             _killedCount++;
-            if (_killedCount >= _totalSpawnerCount)
-            {
-                _animator.SetTrigger(TurnFinishes);
-            }
+            if (_killedCount >= _totalSpawnerCount) _animator.SetTrigger(TurnFinishes);
         }
 
         public void Handle(PlayerDeadEvent @event)

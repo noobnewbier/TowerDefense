@@ -15,6 +15,12 @@ namespace AgentAi
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private Unit unit;
 
+        public void Handle(EnemyDeadEvent @event)
+        {
+            if (@event.Unit != unit) return;
+            RewardIsDead(@event.DeathCause);
+        }
+
         public override void AgentAction(float[] vectorAction, string textAction)
         {
             base.AgentAction(vectorAction, textAction);
@@ -47,15 +53,6 @@ namespace AgentAi
         private void EncourageApproachingPlayer()
         {
             AddReward(-0.0001f);
-        }
-
-        public void Handle(EnemyDeadEvent @event)
-        {
-            if (@event.Unit != unit)
-            {
-                return;
-            }
-            RewardIsDead(@event.DeathCause);
         }
     }
 }

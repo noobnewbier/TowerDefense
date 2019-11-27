@@ -11,6 +11,7 @@ namespace Common.Event
     {
         IDynamicObjectOfInterest DynamicObject { get; }
     }
+
     public struct DynamicObjectSpawnedEvent : IDynamicObjectSpawnedEvent
     {
         public DynamicObjectSpawnedEvent(IDynamicObjectOfInterest element)

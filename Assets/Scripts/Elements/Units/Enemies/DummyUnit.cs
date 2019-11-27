@@ -7,13 +7,7 @@ namespace Elements.Units.Enemies
 {
     public class DummyUnit : Unit
     {
-        [SerializeField] private UnitData unitData;
-
-        protected override UnitData UnitData
-        {
-            get => unitData;
-            set => unitData = value;
-        }
+        [field: SerializeField] protected override UnitData UnitData { get; set; }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
 
@@ -24,7 +18,7 @@ namespace Elements.Units.Enemies
 
         protected override void DeathEffect(DamageSource damageSource)
         {
-            EventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
+            eventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
             Destroy(gameObject);
         }
     }

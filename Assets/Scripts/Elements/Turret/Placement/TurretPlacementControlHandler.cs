@@ -19,12 +19,8 @@ namespace Elements.Turret.Placement
         private void Update()
         {
             if (inputSource.ReceivedPlaceTurretInput())
-            {
                 if (_moneyManager.Money >= model.TurretPrice)
-                {
                     PlaceTurret(model.CopyOfTurret);
-                }
-            }
         }
 
         private void PlaceTurret(GameObject turretGameObject)

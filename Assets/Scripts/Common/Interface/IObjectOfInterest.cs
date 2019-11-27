@@ -10,12 +10,11 @@ namespace Common.Interface
         Bounds Bounds { get; }
     }
 
-    public interface IDynamicObjectOfInterest: IObjectOfInterest
+    public interface IDynamicObjectOfInterest : IObjectOfInterest
     {
-        
     }
-    public interface IStaticObjectOfInterest: IObjectOfInterest
+
+    public interface IStaticObjectOfInterest : IObjectOfInterest
     {
-        
     }
 }

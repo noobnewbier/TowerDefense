@@ -9,21 +9,22 @@ namespace Elements
 {
     public abstract class Element : MonoBehaviour, IDynamicObjectOfInterest
     {
-        protected IEventAggregator EventAggregator;
-        protected virtual void OnEnable()
-        {
-            EventAggregator = EventAggregatorHolder.Instance;
-            EventAggregator.Subscribe(this);
-            
-            EventAggregator.Publish(new DynamicObjectSpawnedEvent(this));
-        }
-        
-        protected void OnDisable()
-        {
-            EventAggregator.Unsubscribe(this);
-        }
+        protected IEventAggregator eventAggregator;
 
         public abstract AiInterestCategory InterestCategory { get; }
         public abstract Bounds Bounds { get; }
+
+        protected virtual void OnEnable()
+        {
+            eventAggregator = EventAggregatorHolder.Instance;
+            eventAggregator.Subscribe(this);
+
+            eventAggregator.Publish(new DynamicObjectSpawnedEvent(this));
+        }
+
+        protected void OnDisable()
+        {
+            eventAggregator.Unsubscribe(this);
+        }
     }
 }

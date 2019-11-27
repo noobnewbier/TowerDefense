@@ -5,13 +5,10 @@ namespace Elements.Units
     [CreateAssetMenu(menuName = "Data/EnemySpawnPointData")]
     public class EnemySpawnPointData : ScriptableObject
     {
-        [SerializeField] private GameObject[] enemiesPrefabs;
-        [SerializeField] private float spawnInterval;
-        [SerializeField] private int totalNumberOfEnemies;
-        public GameObject[] EnemiesPrefabs => enemiesPrefabs;
+        [field: SerializeField] public GameObject[] EnemiesPrefabs { get; }
 
-        public float SpawnInterval => spawnInterval;
+        [field: SerializeField] public float SpawnInterval { get; }
 
-        public int TotalNumberOfEnemies => totalNumberOfEnemies;
+        [field: SerializeField] public int TotalNumberOfEnemies { get; }
     }
 }

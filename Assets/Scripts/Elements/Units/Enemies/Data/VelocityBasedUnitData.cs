@@ -6,14 +6,10 @@ namespace Elements.Units.Enemies.Data
     [CreateAssetMenu(menuName = "Data/VelocityBasedUnitData")]
     public class VelocityBasedUnitData : UnitData
     {
-        [SerializeField] private float acceleration;
-        [SerializeField] private int damage;
-        [SerializeField] private float rotationSpeed;
+        [field: SerializeField] public int Damage { get; }
 
-        public int Damage => damage;
+        [field: SerializeField] public float Acceleration { get; }
 
-        public float Acceleration => acceleration;
-
-        public float RotationSpeed => rotationSpeed;
+        [field: SerializeField] public float RotationSpeed { get; }
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using Common;
 using Common.Class;
 using Common.Event;
 using EventManagement;
@@ -9,10 +7,16 @@ namespace TurnManager
 {
     public class TurnManager : MonoBehaviour, IHandle<PreparationBeginsEvent>
     {
-        [SerializeField] private float prepareTime;
-        private float _timer;
-        private bool _finishedPreparation;
         private IEventAggregator _eventAggregator;
+        private bool _finishedPreparation;
+        private float _timer;
+        [SerializeField] private float prepareTime;
+
+        public void Handle(PreparationBeginsEvent @event)
+        {
+            _timer = 0f;
+            _finishedPreparation = false;
+        }
 
         private void OnEnable()
         {
@@ -29,16 +33,10 @@ namespace TurnManager
                 if (_timer >= prepareTime)
                 {
                     _finishedPreparation = true;
-                    
+
                     _eventAggregator.Publish(new SetupTimesUpEvent());
                 }
             }
-        }
-
-        public void Handle(PreparationBeginsEvent @event)
-        {
-            _timer = 0f;
-            _finishedPreparation = false;
         }
 
         private void OnDisable()

@@ -7,13 +7,7 @@ namespace Elements.Units.Players
 {
     public class Player : Unit
     {
-        [SerializeField] private UnitData unitData;
-
-        protected override UnitData UnitData
-        {
-            get => unitData;
-            set => unitData = value;
-        }
+        [field: SerializeField] protected override UnitData UnitData { get; set; }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
 
@@ -25,7 +19,7 @@ namespace Elements.Units.Players
 
         protected override void DeathEffect(DamageSource damageSource)
         {
-            EventAggregator.Publish(new PlayerDeadEvent());
+            eventAggregator.Publish(new PlayerDeadEvent());
             Destroy(gameObject);
             //not implemented
         }

@@ -3,7 +3,6 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
-using EventManagement;
 using UnityEngine;
 
 /*
@@ -25,26 +24,20 @@ namespace Elements.Units.UnitCommon
 
         public void Handle(DamageEvent @event)
         {
-            if (ReferenceEquals(@event.DamageTaker, this))
-            {
-                TakeDamage(@event.Amount, @event.DamageSource);
-            }
+            if (ReferenceEquals(@event.DamageTaker, this)) TakeDamage(@event.Amount, @event.DamageSource);
         }
 
         protected void Awake()
         {
             UnitData = Instantiate(UnitData);
         }
-        
+
         protected void TakeDamage(int damage, DamageSource damageSource)
         {
             UnitData.Health -= damage;
-            if (UnitData.Health <= 0)
-            {
-                Dies(damageSource);
-            }
+            if (UnitData.Health <= 0) Dies(damageSource);
         }
-        
+
         //todo : make sure the death mechanism works with the agent as well...
         private void Dies(DamageSource damageSource)
         {
@@ -57,6 +50,5 @@ namespace Elements.Units.UnitCommon
         protected abstract void DeathVisualEffect();
 
         protected abstract void DeathEffect(DamageSource damageSource);
-
     }
 }
