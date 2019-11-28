@@ -531,7 +531,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
-    1: TRAINING
+    1: TRAINING;ENABLE_TENSORFLOW
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
