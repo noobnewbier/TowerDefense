@@ -11,7 +11,7 @@ namespace AgentAi
     {
         private const string ScopedName = "Texture2DSensor.GetCompressedObservation";
 
-        private readonly EnemyAgentObservationCollector _collector;
+        private readonly ICanObserveEnvironment _collector;
         private readonly bool _grayScale;
         private readonly string _name;
         private readonly int[] _shape;
@@ -23,7 +23,7 @@ namespace AgentAi
             string name,
             int[] shape,
             Unit unit,
-            EnemyAgentObservationCollector collector
+            ICanObserveEnvironment collector
         )
         {
             _grayScale = grayScale;

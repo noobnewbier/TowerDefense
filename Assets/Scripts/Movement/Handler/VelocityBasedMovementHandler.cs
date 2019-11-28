@@ -7,12 +7,14 @@ namespace Movement.Handler
     {
         private float _acceleration;
         private float _rotationSpeed;
+        private float _maxSpeed;
         [SerializeField] private Rigidbody rb;
 
         private void OnEnable()
         {
             _rotationSpeed = ((IHasRotation) unit).RotationSpeed;
-            _acceleration = ((IHasAcceleration) unit).Acceleration;
+            _acceleration = ((IMoveByVelocity) unit).Acceleration;
+            _maxSpeed = ((IMoveByVelocity) unit).MaxSpeed;
         }
 
         private void FixedUpdate()
@@ -23,7 +25,10 @@ namespace Movement.Handler
 
         private void MoveVertical(float inputValue, float forwardSpeed)
         {
-            rb.velocity += inputValue * forwardSpeed * transform.forward;
+            var velocity = rb.velocity;
+            velocity += inputValue * forwardSpeed * transform.forward;
+            
+            rb.velocity = Vector3.ClampMagnitude(velocity, _maxSpeed);
         }
 
         private void MoveHorizontal(float inputValue, float rotationSpeed)

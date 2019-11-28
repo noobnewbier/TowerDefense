@@ -9,6 +9,9 @@ namespace Elements.Units.Enemies.Data
         [SerializeField] private float acceleration;
         [SerializeField] private int damage;
         [SerializeField] private float rotationSpeed;
+        [SerializeField] private float maxSpeed;
+
+        public float MaxSpeed => maxSpeed;
 
         public int Damage => damage;
 

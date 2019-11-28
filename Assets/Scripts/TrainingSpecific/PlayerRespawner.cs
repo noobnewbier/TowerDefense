@@ -7,12 +7,19 @@ namespace TrainingSpecific
     public class PlayerRespawner : MonoBehaviour, IHandle<SpawnPlayerEvent>
     {
         private IEventAggregator _eventAggregator;
+        private GameObject _playerInstance;
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform spawnPoint;
 
         public void Handle(SpawnPlayerEvent @event)
         {
-            Instantiate(playerPrefab).transform.position = spawnPoint.transform.position;
+            if (_playerInstance != null)
+            {
+                Destroy(_playerInstance);
+            }
+
+            _playerInstance = Instantiate(playerPrefab);
+            _playerInstance.transform.position = spawnPoint.transform.position;
         }
 
         private void OnEnable()

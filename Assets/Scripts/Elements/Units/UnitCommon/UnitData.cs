@@ -10,7 +10,6 @@ namespace Elements.Units.UnitCommon
         [SerializeField] private int health;
 
         [SerializeField] private int maxHealth;
-
         public int Health
         {
             get => health;

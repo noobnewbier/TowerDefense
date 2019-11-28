@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 1867325622}
+    - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
+      propertyPath: transformToMove
+      value: 
+      objectReference: {fileID: 6048740561362155733}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
 --- !u!4 &1461203814 stripped

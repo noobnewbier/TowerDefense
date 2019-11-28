@@ -286,3 +286,21 @@ Basic:
         extrinsic:
             strength: 1.0
             gamma: 0.9
+
+VelocityBasedAgent:
+    time_horizon: 128
+    batch_size: 64
+    buffer_size: 2024
+    hidden_units: 256
+    num_layers: 1
+    beta: 1.0e-2
+    max_steps: 5.0e5
+    num_epoch: 3
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.01
+            gamma: 0.99
+            encoding_size: 256

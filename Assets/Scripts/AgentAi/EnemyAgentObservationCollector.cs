@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Class;
@@ -6,39 +7,53 @@ using Common.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
-using MLAgents.Sensor;
 using UnityEngine;
 using UnityUtils;
 
 namespace AgentAi
 {
+    public interface ICanObserveEnvironment
+    {
+        Texture2D ObserveEnvironment(Unit unit);
+        int TextureHeight { get; }
+        int TextureWidth { get; }
+    }
+
     // Perhaps the main bottleneck... be careful with this
     public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectDestroyedEvent>,
-        IHandle<IDynamicObjectSpawnedEvent>
+        IHandle<IDynamicObjectSpawnedEvent>, ICanObserveEnvironment
     {
+        public static ICanObserveEnvironment Instance;
+
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
         private IList<IDynamicObjectOfInterest> _dynamicObjects;
         private IEventAggregator _eventAggregator;
         private Texture2D _observedTexture;
-
         private Texture2D _terrainTexture;
+
         [SerializeField] private int textureHeight;
+        [SerializeField] private int textureWidth;
 
         public int TextureHeight => textureHeight;
 
         public int TextureWidth => textureWidth;
 
-        [SerializeField] private int textureWidth;
+        public int[] Shape => new int[3] {textureWidth, textureHeight, 3};
 
-        
-        
+        public Texture2D ObserveEnvironment(Unit unit)
+        {
+            Graphics.CopyTexture(_terrainTexture, _observedTexture);
+
+            DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
+
+            return Instantiate(_observedTexture);
+        }
+
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
         }
-        
-        public int[] Shape => new int[3]{textureWidth, textureHeight, 3};
 
         public void Handle(IDynamicObjectDestroyedEvent @event)
         {
@@ -52,9 +67,18 @@ namespace AgentAi
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+
             _centerOfTexture = new Vector3(textureWidth / 2f, 0, textureHeight / 2f);
-            _terrainTexture = new Texture2D(textureWidth, textureHeight);
-            _observedTexture = new Texture2D(textureWidth, textureHeight);
+            _terrainTexture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGB24, false);
+            _observedTexture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGB24, false);
             _dynamicObjects = new List<IDynamicObjectOfInterest>();
             _coordinatesWithPriority = new int[textureWidth, textureHeight];
         }
@@ -82,15 +106,6 @@ namespace AgentAi
             DrawObjectsOnTexture(_terrainTexture, interestedObjects, true);
         }
 
-        public Texture2D ObserveEnvironment(Unit unit)
-        {
-            Graphics.CopyTexture(_terrainTexture, _observedTexture);
-
-            DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
-
-            return Instantiate(_observedTexture);
-        }
-
         private void DrawObjectsOnTexture(Texture2D texture2D, IEnumerable<IObjectOfInterest> interestedObjects, bool shouldWritePriority)
         {
             interestedObjects = interestedObjects.ToList().OrderBy(i => i.InterestCategory.Priority);
@@ -98,15 +113,22 @@ namespace AgentAi
             foreach (var objectOfInterest in interestedObjects)
             {
                 var rescaledBounds = RescaleBoundsToTexture(objectOfInterest.Bounds);
-
-                objectOfInterest.InterestCategory.Drawer.DrawObjectWithPriority(
-                    texture2D,
-                    rescaledBounds,
-                    objectOfInterest.InterestCategory.Color,
-                    _coordinatesWithPriority,
-                    objectOfInterest.InterestCategory.Priority,
-                    shouldWritePriority
-                );
+                try
+                {
+                    objectOfInterest.InterestCategory.Drawer.DrawObjectWithPriority(
+                        texture2D,
+                        rescaledBounds,
+                        objectOfInterest.InterestCategory.Color,
+                        _coordinatesWithPriority,
+                        objectOfInterest.InterestCategory.Priority,
+                        shouldWritePriority
+                    );
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Debug.Log(e);
+                    Debug.Log($"{objectOfInterest} is going out of predefined area, Rescaled Bounds: {objectOfInterest.Bounds}");
+                }
             }
 
             //not very sure if we need this or not

@@ -6,21 +6,24 @@ namespace AgentAi
 {
     public class Texture2DSensorComponent : SensorComponent
     {
-        [SerializeField] private EnemyAgentObservationCollector enemyAgentObservationCollector;
         [SerializeField] private bool grayScale;
-        [SerializeField] private string sensorName = "RenderTextureSensor";
+        [SerializeField] private string sensorName = "Texture2DSensor";
         [SerializeField] private Unit unit;
 
         /// for "shape", please See reference for shape in
         /// <see cref="CompressedObservation" />
         /// class
-        public override ISensor CreateSensor() =>
-            new Texture2DSensor(
+        public override ISensor CreateSensor()
+        {
+            var enemyAgentObservationCollector = EnemyAgentObservationCollector.Instance;
+            
+            return new Texture2DSensor(
                 grayScale,
                 sensorName,
                 new int[3] {enemyAgentObservationCollector.TextureWidth, enemyAgentObservationCollector.TextureHeight, grayScale ? 1 : 3},
                 unit,
                 enemyAgentObservationCollector
             );
+        }
     }
 }

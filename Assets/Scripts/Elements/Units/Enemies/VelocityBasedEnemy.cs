@@ -8,9 +8,10 @@ using UnityEngine;
 
 namespace Elements.Units.Enemies
 {
-    public class VelocityBasedEnemy : Unit, IHasRotation, IHasAcceleration
+    public class VelocityBasedEnemy : Unit, IHasRotation, IMoveByVelocity
     {
         [SerializeField] private VelocityBasedUnitData data;
+        [SerializeField] private Rigidbody rb;
 
         protected override UnitData UnitData
         {
@@ -21,6 +22,8 @@ namespace Elements.Units.Enemies
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
 
         public float Acceleration => data.Acceleration;
+        public float MaxSpeed => data.MaxSpeed;
+        public Rigidbody Rigidbody => rb;
 
         public float RotationSpeed => data.RotationSpeed;
 
