@@ -15,12 +15,12 @@ namespace AgentAi
         /// class
         public override ISensor CreateSensor()
         {
-            var enemyAgentObservationCollector = EnemyAgentObservationCollector.Instance;
+            var enemyAgentObservationCollector = EnemyAgentObservationCollector.instance;
             
             return new Texture2DSensor(
                 grayScale,
                 sensorName,
-                new int[3] {enemyAgentObservationCollector.TextureWidth, enemyAgentObservationCollector.TextureHeight, grayScale ? 1 : 3},
+                enemyAgentObservationCollector.Shape,
                 unit,
                 enemyAgentObservationCollector
             );

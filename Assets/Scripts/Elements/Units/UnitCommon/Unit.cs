@@ -3,6 +3,8 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
+using EventManagement;
+using TrainingSpecific;
 using UnityEngine;
 
 /*
@@ -15,7 +17,7 @@ using UnityEngine;
 namespace Elements.Units.UnitCommon
 {
     [DefaultExecutionOrder(20)]
-    public abstract class Unit : Element, IDamageTaker
+    public abstract class Unit : Element, IDamageTaker, IHandle<ForceResetEvent>
     {
         [SerializeField] private Collider unitCollider;
         protected abstract UnitData UnitData { get; set; }
@@ -42,6 +44,11 @@ namespace Elements.Units.UnitCommon
             {
                 Dies(damageSource);
             }
+        }
+
+        public void Handle(ForceResetEvent @event)
+        {
+            TakeDamage(UnitData.MaxHealth, DamageSource.System);
         }
 
         //todo : make sure the death mechanism works with the agent as well...

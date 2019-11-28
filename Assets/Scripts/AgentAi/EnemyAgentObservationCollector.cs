@@ -15,15 +15,14 @@ namespace AgentAi
     public interface ICanObserveEnvironment
     {
         Texture2D ObserveEnvironment(Unit unit);
-        int TextureHeight { get; }
-        int TextureWidth { get; }
+        int[] Shape { get; }
     }
 
     // Perhaps the main bottleneck... be careful with this
     public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectDestroyedEvent>,
         IHandle<IDynamicObjectSpawnedEvent>, ICanObserveEnvironment
     {
-        public static ICanObserveEnvironment Instance;
+        public static ICanObserveEnvironment instance;
 
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
@@ -35,9 +34,6 @@ namespace AgentAi
         [SerializeField] private int textureHeight;
         [SerializeField] private int textureWidth;
 
-        public int TextureHeight => textureHeight;
-
-        public int TextureWidth => textureWidth;
 
         public int[] Shape => new int[3] {textureWidth, textureHeight, 3};
 
@@ -67,13 +63,13 @@ namespace AgentAi
 
         private void Awake()
         {
-            if (Instance != null)
+            if (instance != null)
             {
                 Destroy(this);
             }
             else
             {
-                Instance = this;
+                instance = this;
             }
 
             _centerOfTexture = new Vector3(textureWidth / 2f, 0, textureHeight / 2f);

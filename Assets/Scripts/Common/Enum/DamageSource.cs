@@ -5,6 +5,6 @@ namespace Common.Enum
         Ai,
         Player,
         SelfDestruction,
-        Environment
+        System
     }
 }

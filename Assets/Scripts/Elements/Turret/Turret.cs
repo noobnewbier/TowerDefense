@@ -2,13 +2,15 @@ using System.Linq;
 using Bullet.InputSource;
 using Common.Enum;
 using Elements.Units.UnitCommon;
+using EventManagement;
+using TrainingSpecific;
 using UnityEngine;
 using UnityUtils;
 
 namespace Elements.Turret
 {
     [RequireComponent(typeof(UnitDetector))]
-    public class Turret : Element
+    public class Turret : Element, IHandle<ForceResetEvent>
     {
         private const float UpdateTargetInterval = 0.5f;
 
@@ -26,6 +28,10 @@ namespace Elements.Turret
 
         //it does not matter for a turret
         public override Bounds Bounds => new Bounds(transform.position, Vector3.one);
+        public void Handle(ForceResetEvent @event)
+        {
+            Destroy(gameObject);
+        }
 
         private void Awake()
         {

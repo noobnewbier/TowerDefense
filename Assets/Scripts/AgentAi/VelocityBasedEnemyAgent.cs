@@ -44,7 +44,7 @@ namespace AgentAi
                 case DamageSource.Player:
                     AddReward(-0.15f);
                     break;
-                case DamageSource.Environment:
+                case DamageSource.System:
                     AddReward(-1f);
                     break;
                 case DamageSource.SelfDestruction:

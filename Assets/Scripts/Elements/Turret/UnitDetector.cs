@@ -4,10 +4,12 @@ using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using TrainingSpecific;
 using UnityEngine;
 
 namespace Elements.Turret
 {
+    /// As a child of <see cref="Turret"/>, when the parent get destroyed it's gone as well, so no need to handle <see cref="ForceResetEvent"/> 
     public class UnitDetector : Element, IHandle<EnemyDeadEvent>
     {
         [SerializeField] private SphereCollider rangeCollider;
