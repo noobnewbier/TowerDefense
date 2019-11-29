@@ -24,7 +24,7 @@ namespace Elements.Units.Players
 
         protected override void DeathEffect(DamageSource damageSource)
         {
-            eventAggregator.Publish(new PlayerDeadEvent());
+            EventAggregator.Publish(new PlayerDeadEvent());
             Destroy(gameObject);
         }
     }

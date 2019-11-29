@@ -30,7 +30,7 @@ namespace Elements.Units.Enemies
 
         protected override void DeathEffect(DamageSource damageSource)
         {
-            eventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
+            EventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
             Destroy(gameObject);
         }
 
@@ -44,7 +44,7 @@ namespace Elements.Units.Enemies
             var damageTaker = other.gameObject.GetComponent<IDamageTaker>();
             if (damageTaker != null && other.collider.CompareTag(ObjectTags.Player))
             {
-                eventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, DamageSource.Ai));
+                EventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, DamageSource.Ai));
                 TakeDamage(data.MaxHealth, DamageSource.SelfDestruction);
             }
         }

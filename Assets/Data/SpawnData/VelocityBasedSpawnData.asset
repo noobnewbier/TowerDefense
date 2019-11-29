@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: VelocityBasedSpawnData
   m_EditorClassIdentifier: 
   enemiesPrefabs:
-  - {fileID: 4284270883694188927, guid: db506fdb9f9b12e4b9de5c376d0303aa, type: 3}
+  - {fileID: 3610290461812041406, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
   spawnInterval: 1
   totalNumberOfEnemies: 5

@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 8293550211145048740}
   - component: {fileID: 7352862185661551323}
   - component: {fileID: 3254465578691183710}
+  - component: {fileID: 114311307622947684}
+  - component: {fileID: 114645794836903142}
   m_Layer: 11
   m_Name: VelocityBasedUnit
   m_TagString: Enemy
@@ -183,3 +185,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 8293550211145048740}
   data: {fileID: 11400000, guid: 5323e5ea77dda0b4db76d39e52d69b1f, type: 2}
+  rb: {fileID: 7352862185661551323}
+--- !u!114 &114311307622947684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 7
+    numStackedVectorObservations: 10
+    vectorActionSize: 02000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_UseHeuristic: 0
+  m_BehaviorName: VelocityBasedAgent
+--- !u!114 &114645794836903142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddaa5530e4498ed439f9d11ec8469987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 500
+    resetOnDone: 0
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
+  inputService: {fileID: 6168960639002132815}
+  unit: {fileID: 3254465578691183710}

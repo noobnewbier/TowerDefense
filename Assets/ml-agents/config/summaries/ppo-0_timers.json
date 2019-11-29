@@ -1,74 +1,97 @@
 {
   "name": "root",
-  "total": 268.62408369999997,
+  "gauges": [
+    {
+      "name": "VelocityBasedAgent.mean_reward",
+      "value": -0.050099998734367546,
+      "min": -0.050099998734367546,
+      "max": -0.050099998734367546,
+      "count": 11
+    }
+  ],
+  "total": 126.19664010000001,
   "count": 1,
-  "self": 7.455825999999945,
+  "self": 44.90521379999973,
   "children": [
     {
       "name": "TrainerController.advance",
-      "total": 261.1682577,
-      "count": 213,
-      "self": 0.366469400000085,
+      "total": 81.29142630000028,
+      "count": 11695,
+      "self": 17.788146900000342,
       "children": [
         {
           "name": "env_step",
-          "total": 260.80178829999994,
-          "count": 213,
-          "self": 260.63730639999994,
+          "total": 49.02624469999994,
+          "count": 11695,
+          "self": 34.235164800001456,
           "children": [
             {
               "name": "SubprocessEnvManager._take_step",
-              "total": 0.16262049999993433,
-              "count": 213,
-              "self": 0.0029851999999328527,
+              "total": 14.691391099998828,
+              "count": 11695,
+              "self": 0.15510499999854588,
               "children": [
                 {
                   "name": "PPOPolicy.evaluate",
-                  "total": 0.15963530000000148,
-                  "count": 213,
-                  "self": 0.15963530000000148
+                  "total": 14.536286100000282,
+                  "count": 11695,
+                  "self": 14.536286100000282
                 }
               ]
             },
             {
               "name": "workers",
-              "total": 0.0018614000000676256,
-              "count": 212,
+              "total": 0.09968879999965807,
+              "count": 11694,
               "self": 0.0,
               "children": [
                 {
                   "name": "worker_root",
-                  "total": 57.10185899999995,
-                  "count": 212,
+                  "total": 123.35804410000013,
+                  "count": 11694,
                   "is_parallel": true,
-                  "self": 6.219904099999916,
+                  "self": 95.36215110000023,
                   "children": [
                     {
                       "name": "UnityEnvironment.step",
-                      "total": 50.88195490000003,
-                      "count": 212,
+                      "total": 27.995892999999892,
+                      "count": 11694,
                       "is_parallel": true,
-                      "self": 0.062487299999993695,
+                      "self": 2.5859712999995565,
                       "children": [
                         {
                           "name": "UnityEnvironment._generate_step_input",
-                          "total": 0.014011900000076238,
-                          "count": 212,
+                          "total": 0.6316387000003196,
+                          "count": 11694,
                           "is_parallel": true,
-                          "self": 0.014011900000076238
+                          "self": 0.6316387000003196
                         },
                         {
                           "name": "communicator.exchange",
-                          "total": 50.80545569999996,
-                          "count": 212,
+                          "total": 24.778283000000016,
+                          "count": 11694,
                           "is_parallel": true,
-                          "self": 50.80545569999996
+                          "self": 24.778283000000016
                         }
                       ]
                     }
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "name": "update_policy",
+          "total": 14.477034699999995,
+          "count": 16,
+          "self": 2.3905567999998905,
+          "children": [
+            {
+              "name": "PPOPolicy.update",
+              "total": 12.086477900000105,
+              "count": 1572,
+              "self": 12.086477900000105
             }
           ]
         }

@@ -1,12 +1,13 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Common.Class;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.Enemies;
-using Elements.Units.UnitCommon;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
+using TrainingSpecific;
 using UnityEngine;
 
 namespace AgentAi
@@ -15,6 +16,8 @@ namespace AgentAi
     {
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private VelocityBasedEnemy unit;
+
+        private IEventAggregator _eventAggregator;
 
         public void Handle(EnemyDeadEvent @event)
         {
@@ -26,6 +29,13 @@ namespace AgentAi
         {
             AddQuaternions();
             AddVelocity();
+        }
+        
+        public override void InitializeAgent()
+        {
+            base.InitializeAgent();
+            
+            _eventAggregator.Publish(new AgentSpawnedEvent());
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)
@@ -56,6 +66,25 @@ namespace AgentAi
             }
             
             Done();
+        }
+
+        private void Awake()
+        {
+            _eventAggregator = EventAggregatorHolder.Instance;
+            _eventAggregator.Subscribe(this);
+        }
+
+        private void OnDestroy()
+        {
+            _eventAggregator.Unsubscribe(this);
+        }
+
+
+        public override void AgentOnDone()
+        {
+            base.AgentOnDone();
+            
+            _eventAggregator.Publish(new AgentDoneEvent());
         }
 
         private void AddQuaternions()
