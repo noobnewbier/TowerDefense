@@ -1,11 +1,12 @@
 using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
+using Interactable;
 using UnityEngine;
 
 namespace Elements.Units.Players
 {
-    public class Player : Unit
+    public class Player : Unit, ICanInteract
     {
         [SerializeField] private UnitData unitData;
 
@@ -26,7 +27,7 @@ namespace Elements.Units.Players
 
         protected override void DeathVisualEffect()
         {
-            //not implemented
+            //todo: not implemented
         }
 
         protected override void DeathEffect(DamageSource damageSource)
@@ -37,6 +38,11 @@ namespace Elements.Units.Players
         protected override void PublishDeathEvent(DamageSource deadCause)
         {
             EventAggregator.Publish(new PlayerDeadEvent(this));
+        }
+
+        public void Handle(ApplyEffectEvent @event)
+        {
+            @event.Effect.ApplyEffect(unitData);
         }
     }
 }

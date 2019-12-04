@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Effects
 {
-    public abstract class Bonus : ScriptableObject
+    public abstract class Bonus : Effect
     {
-        public abstract void ApplyEffect(UnitData data);
     }
 }
