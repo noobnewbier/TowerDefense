@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Barracuda;
@@ -336,7 +337,7 @@ namespace MLAgents
         /// will categorize the agent when training.
         /// </param>
         /// <param name="model"> The model to use for inference.</param>
-        /// <param name = "inferenceDevide"> Define on what device the model
+        /// <param name = "inferenceDevice"> Define on what device the model
         /// will be run.</param>
         public void GiveModel(
             string behaviorName,

@@ -14,13 +14,13 @@ namespace ProjectSpecificUtils
         private IEventAggregator _eventAggregator;
         private Image _image;
         private SpriteRenderer _spriteRenderer;
-        private bool _startedObserving;
+        [SerializeField] private bool startedObserving;
         [SerializeField] private EnemyAgentObservationCollector enemyAgentObservationCollector;
         [SerializeField] private Unit dummyUnit;
 
         public void Handle(GameStartEvent @event)
         {
-            _startedObserving = true;
+            startedObserving = true;
         }
 
         private void OnEnable()
@@ -42,7 +42,7 @@ namespace ProjectSpecificUtils
 
         private void FixedUpdate()
         {
-            if (_startedObserving)
+            if (startedObserving)
             {
                 var texture = enemyAgentObservationCollector.ObserveEnvironment(dummyUnit);
                 var sprite = Sprite.Create(texture, new Rect(Vector2.zero, new Vector2(60f, 60f)), new Vector2(0.5f, 0.5f));

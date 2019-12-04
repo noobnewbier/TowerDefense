@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1714430858}
   - component: {fileID: 1714430860}
-  - component: {fileID: 1714430859}
+  - component: {fileID: 6168960639002132815}
+  - component: {fileID: 2442574542708038854}
   m_Layer: 11
   m_Name: MovementHandler
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6048740561362155733}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1714430860
 MonoBehaviour:
@@ -44,10 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531501f2fee94d58bff39593d7e33080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSource: {fileID: 1714430859}
+  inputSource: {fileID: 6168960639002132815}
   unit: {fileID: 3254465578691183710}
   rb: {fileID: 7352862185661551323}
---- !u!114 &1714430859
+--- !u!114 &6168960639002132815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714430857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e15f8158cf842128dacb962effec6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2442574542708038854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,6 +86,8 @@ GameObject:
   - component: {fileID: 8293550211145048740}
   - component: {fileID: 7352862185661551323}
   - component: {fileID: 3254465578691183710}
+  - component: {fileID: 114311307622947684}
+  - component: {fileID: 114645794836903142}
   m_Layer: 11
   m_Name: VelocityBasedUnitAsPlayer
   m_TagString: Enemy
@@ -91,7 +106,6 @@ Transform:
   m_LocalPosition: {x: -3.11, y: -7.04, z: 7.5810723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5497617057899506974}
   - {fileID: 1714430858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -168,7 +182,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3254465578691183710
 MonoBehaviour:
@@ -184,33 +198,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 8293550211145048740}
   data: {fileID: 11400000, guid: 5323e5ea77dda0b4db76d39e52d69b1f, type: 2}
---- !u!1 &5340009725805176542
-GameObject:
+  rb: {fileID: 7352862185661551323}
+--- !u!114 &114311307622947684
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5497617057899506974}
-  m_Layer: 11
-  m_Name: CamPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5497617057899506974
-Transform:
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 7
+    numStackedVectorObservations: 10
+    vectorActionSize: 02000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 1
+  m_Model: {fileID: 11400000, guid: 0239d920a69d5804284b33a7228f193a, type: 3}
+  m_InferenceDevice: 0
+  m_UseHeuristic: 0
+  m_BehaviorName: VelocityBasedAgent
+--- !u!114 &114645794836903142
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5340009725805176542}
-  m_LocalRotation: {x: 0.06540314, y: 0, z: 0, w: 0.99785894}
-  m_LocalPosition: {x: 0, y: 1.25, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6048740561362155733}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddaa5530e4498ed439f9d11ec8469987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 20000
+    resetOnDone: 0
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
+  inputService: {fileID: 6168960639002132815}
+  unit: {fileID: 3254465578691183710}

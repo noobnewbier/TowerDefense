@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Elements
 {
+    //todo: we need to really rethink this whole inheritance hierarchy... It's giving me creeps in the back mate. Future me, good luck 
     public abstract class Element : MonoBehaviour, IDynamicObjectOfInterest
     {
         protected IEventAggregator EventAggregator { get; private set; }
@@ -18,11 +19,9 @@ namespace Elements
         {
             EventAggregator = EventAggregatorHolder.Instance;
             EventAggregator.Subscribe(this);
-
-            EventAggregator.Publish(new DynamicObjectSpawnedEvent(this));
         }
 
-        protected void OnDisable()
+        protected virtual void OnDisable()
         {
             EventAggregator.Unsubscribe(this);
         }

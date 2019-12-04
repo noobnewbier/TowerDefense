@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Elements.Units.Enemies
 {
-    public class DummyUnit : Unit
+    public class DummyUnit : Enemy
     {
         [SerializeField] private UnitData unitData;
 
@@ -20,12 +20,6 @@ namespace Elements.Units.Enemies
         protected override void DeathVisualEffect()
         {
             // do nothing
-        }
-
-        protected override void DeathEffect(DamageSource damageSource)
-        {
-            EventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
-            Destroy(gameObject);
         }
     }
 }

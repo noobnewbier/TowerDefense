@@ -1,6 +1,7 @@
 using System.Linq;
 using Bullet.InputSource;
 using Common.Enum;
+using Common.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using TrainingSpecific;
@@ -30,12 +31,30 @@ namespace Elements.Turret
         public override Bounds Bounds => new Bounds(transform.position, Vector3.one);
         public void Handle(ForceResetEvent @event)
         {
+            if (!ReferenceEquals(@event.DynamicObjectOfInterest, this))
+            {
+                return;
+            }
             Destroy(gameObject);
         }
 
         private void Awake()
         {
             unitDetector.Initialize(data);
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            
+            EventAggregator.Publish(new TurretSpawnedEvent(this));
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            
+            EventAggregator.Publish(new TurretDestroyedEvent(this));
         }
 
         private void FixedUpdate()

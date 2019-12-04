@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Elements.Units.Enemies
 {
-    public class VelocityBasedEnemy : Unit, IHasRotation, IMoveByVelocity
+    public class VelocityBasedEnemy : Enemy, IHasRotation, IMoveByVelocity
     {
         [SerializeField] private VelocityBasedUnitData data;
         [SerializeField] private Rigidbody rb;
@@ -24,15 +24,7 @@ namespace Elements.Units.Enemies
         public float Acceleration => data.Acceleration;
         public float MaxSpeed => data.MaxSpeed;
         public Rigidbody Rigidbody => rb;
-
         public float RotationSpeed => data.RotationSpeed;
-
-
-        protected override void DeathEffect(DamageSource damageSource)
-        {
-            EventAggregator.Publish(new EnemyDeadEvent(this, damageSource));
-            Destroy(gameObject);
-        }
 
         protected override void DeathVisualEffect()
         {

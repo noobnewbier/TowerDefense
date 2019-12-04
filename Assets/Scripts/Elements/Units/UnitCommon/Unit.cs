@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Common.Constant;
 using Common.Enum;
@@ -24,9 +25,12 @@ namespace Elements.Units.UnitCommon
         public Transform Transform => transform;
         public override Bounds Bounds => unitCollider.bounds;
 
+        private DamageSource _deadCause;
+        private bool _isDyingNextFrame;
+
         public void Handle(DamageEvent @event)
         {
-            if (ReferenceEquals(@event.DamageTaker, this))
+            if (ReferenceEquals(@event.DamageTaker, this) && !_isDyingNextFrame)
             {
                 TakeDamage(@event.Amount, @event.DamageSource);
             }
@@ -42,16 +46,35 @@ namespace Elements.Units.UnitCommon
             UnitData.Health -= damage;
             if (UnitData.Health <= 0)
             {
-                Dies(damageSource);
+                SetToDieNextFrame(damageSource);
             }
+        }
+
+        protected void FixedUpdate()
+        {
+            if (_isDyingNextFrame)
+            {
+                Dies(_deadCause);
+            }
+        }
+
+        private void SetToDieNextFrame(DamageSource deadCause)
+        {
+            _isDyingNextFrame = true;
+            _deadCause = deadCause;
+            PublishDeathEvent(deadCause);
         }
 
         public void Handle(ForceResetEvent @event)
         {
+            if (!ReferenceEquals(@event.DynamicObjectOfInterest, this))
+            {
+                return;
+            }
+            
             TakeDamage(UnitData.MaxHealth, DamageSource.System);
         }
-
-        //todo : make sure the death mechanism works with the agent as well...
+        
         private void Dies(DamageSource damageSource)
         {
             //order should be important here...
@@ -63,5 +86,6 @@ namespace Elements.Units.UnitCommon
         protected abstract void DeathVisualEffect();
 
         protected abstract void DeathEffect(DamageSource damageSource);
+        protected abstract void PublishDeathEvent(DamageSource deadCause);
     }
 }

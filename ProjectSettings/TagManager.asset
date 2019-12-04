@@ -8,6 +8,14 @@ TagManager:
   - DamageAi
   - DamagePlayer
   - DaamgePlayer
+  - agent
+  - walkableSurface
+  - block
+  - goal
+  - food
+  - badFood
+  - ground
+  - Wall
   layers:
   - Default
   - TransparentFX

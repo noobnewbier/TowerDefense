@@ -204,8 +204,8 @@ MonoBehaviour:
     vectorActionSize: 02000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_Model: {fileID: 11400000, guid: 0239d920a69d5804284b33a7228f193a, type: 3}
+  m_InferenceDevice: 1
   m_UseHeuristic: 0
   m_BehaviorName: VelocityBasedAgent
 --- !u!114 &114645794836903142
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
-    maxStep: 500
+    maxStep: 20000
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1

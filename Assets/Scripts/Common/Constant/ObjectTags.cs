@@ -7,5 +7,6 @@ namespace Common.Constant
         public const string DamageAi = "DamageAi";
         public const string Ai = "Ai";
         public const string Player = "Player";
+        public const string Wall = "Wall";
     }
 }

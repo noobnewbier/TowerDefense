@@ -1,3 +1,4 @@
+using System;
 using Elements.Units;
 using UnityEngine;
 
@@ -19,8 +20,21 @@ namespace Movement.Handler
 
         private void FixedUpdate()
         {
-            MoveVertical(inputSource.Vertical(), _acceleration);
-            MoveHorizontal(inputSource.Horizontal(), _rotationSpeed);
+            var horizontal = inputSource.Horizontal();
+            var vertical = inputSource.Vertical();
+#if DEBUG
+            if (horizontal > 1f || horizontal < -1f)
+            {
+                throw new ArgumentOutOfRangeException($"Horizontal: {horizontal} cannot be greater than 1 or smaller than 0");
+            }
+            if (vertical > 1f || vertical < -1f)
+            {
+                throw new ArgumentOutOfRangeException($"Vertical: {vertical} cannot be greater than 1 or smaller than 0");
+            }      
+#endif
+            
+            MoveVertical(vertical, _acceleration);
+            MoveHorizontal(horizontal, _rotationSpeed);
         }
 
         private void MoveVertical(float inputValue, float forwardSpeed)

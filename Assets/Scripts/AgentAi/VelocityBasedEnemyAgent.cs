@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Common.Class;
+using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.Enemies;
@@ -14,23 +16,29 @@ namespace AgentAi
 {
     public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>
     {
+        private IEventAggregator _eventAggregator;
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private VelocityBasedEnemy unit;
 
-        private IEventAggregator _eventAggregator;
-
         public void Handle(EnemyDeadEvent @event)
         {
-            if (@event.Unit != unit) return;
+            if (@event.Enemy != unit)
+            {
+                return;
+            }
+
             RewardIsDead(@event.DeathCause);
         }
+
+        //cannot think of an elegant solution here... but this do the trick
+        public override float[] Heuristic() => new float[2] {Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")};
 
         public override void CollectObservations()
         {
             AddQuaternions();
             AddVelocity();
         }
-        
+
         public override void InitializeAgent()
         {
             base.InitializeAgent();
@@ -38,12 +46,27 @@ namespace AgentAi
             _eventAggregator.Publish(new AgentSpawnedEvent());
         }
 
+        public override void AgentOnDone()
+        {
+            base.AgentOnDone();
+            
+            _eventAggregator.Publish(new AgentDoneEvent());
+        }
+
         public override void AgentAction(float[] vectorAction, string textAction)
-        {   
-            inputService.UpdateVertical(vectorAction[0]);
-            inputService.UpdateHorizontal(vectorAction[1]);
+        {
+            inputService.UpdateVertical(Mathf.Clamp(vectorAction[0], -1, 1));
+            inputService.UpdateHorizontal(Mathf.Clamp(vectorAction[1], -1, 1));
 
             EncourageApproachingPlayer();
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
+            if (other.collider.CompareTag(ObjectTags.Wall))
+            {
+                AddReward(-0.005f);
+            }
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -64,7 +87,7 @@ namespace AgentAi
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             Done();
         }
 
@@ -77,14 +100,6 @@ namespace AgentAi
         private void OnDestroy()
         {
             _eventAggregator.Unsubscribe(this);
-        }
-
-
-        public override void AgentOnDone()
-        {
-            base.AgentOnDone();
-            
-            _eventAggregator.Publish(new AgentDoneEvent());
         }
 
         private void AddQuaternions()
@@ -100,7 +115,7 @@ namespace AgentAi
         //Don't walk around forever pls
         private void EncourageApproachingPlayer()
         {
-            AddReward(-0.0001f);
+            AddReward(-0.001f);
         }
     }
 }

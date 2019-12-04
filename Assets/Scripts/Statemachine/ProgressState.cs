@@ -7,21 +7,13 @@ using UnityEngine;
 
 namespace Statemachine
 {
-    public class ProgressState : StateMachineBehaviour, IHandle<PlayerDeadEvent>, IHandle<EnemyDeadEvent>
+    public class ProgressState : StateMachineBehaviour, IHandle<PlayerDeadEvent>, IHandle<AllEnemyAgentsDeadEvent>
     {
         private static readonly int PlayerDies = Animator.StringToHash("PlayerDies");
         private static readonly int TurnFinishes = Animator.StringToHash("TurnFinishes");
-
-        private Animator _animator;
+        
         private IEventAggregator _eventAggregator;
-        private int _killedCount;
-        private int _totalSpawnerCount;
-
-        public void Handle(EnemyDeadEvent @event)
-        {
-            _killedCount++;
-            if (_killedCount >= _totalSpawnerCount) _animator.SetTrigger(TurnFinishes);
-        }
+        private Animator _animator;
 
         public void Handle(PlayerDeadEvent @event)
         {
@@ -34,10 +26,13 @@ namespace Statemachine
             _eventAggregator = EventAggregatorHolder.Instance;
             _eventAggregator.Subscribe(this);
             _animator = animator;
-            _totalSpawnerCount = FindObjectsOfType<EnemySpawner>().Sum(e => e.TotalEnemyCount);
-            _killedCount = 0;
 
             _eventAggregator.Publish(new WaveStartEvent());
+        }
+
+        public void Handle(AllEnemyAgentsDeadEvent @event)
+        {
+            _animator.SetTrigger(TurnFinishes);
         }
     }
 }

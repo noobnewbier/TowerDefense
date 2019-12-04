@@ -1,14 +1,20 @@
-using System.Diagnostics;
+using System.Collections.Generic;
 using Common.Class;
-using Common.Constant;
+using Common.Interface;
+using Elements.Units.Players;
 using EventManagement;
+using Manager;
 using MLAgents;
 using TrainingSpecific;
+using UnityEngine;
 
 namespace AgentAi
 {
     public class VelocityBasedAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>
     {
+        [SerializeField] private SurvivingEnemyAgentTracker survivingEnemyAgentTracker;
+        [SerializeField] private SurvivingTurretTracker survivingTurretTracker;
+
         private IEventAggregator _eventAggregator;
         private int _agentCount;
         private int _doneAgentCount;
@@ -27,20 +33,7 @@ namespace AgentAi
 
         public override void AcademyReset()
         {
-            _agentCount = 0;
-            _doneAgentCount = 0;
-            _eventAggregator.Publish(new ForceResetEvent());
-        }
-
-        public void Handle(AgentDoneEvent @event)
-        {
-#if TRAINING
-            _doneAgentCount++;
-            if (_doneAgentCount >= _agentCount)
-            {
-                _eventAggregator.Publish(new ForceResetEvent());
-            }
-#endif
+            ClearField();
         }
 
         public void Handle(AgentSpawnedEvent @event)
@@ -48,6 +41,36 @@ namespace AgentAi
 #if TRAINING
             _agentCount++;
 #endif
+        }
+
+        public void Handle(AgentDoneEvent @event)
+        {
+#if TRAINING
+            _doneAgentCount++;
+
+            if (_doneAgentCount == _agentCount)
+            {
+                ClearField();
+            }
+#endif
+        }
+
+        private void ClearField()
+        {
+            _agentCount = 0;
+            _doneAgentCount = 0;
+            
+            var dynamicObjectsOnField = new List<IDynamicObjectOfInterest>();
+
+            dynamicObjectsOnField.AddRange(survivingTurretTracker.TurretsInField);
+            dynamicObjectsOnField.AddRange(survivingEnemyAgentTracker.EnemiesInField);
+            var player = FindObjectOfType<Player>();
+            if (player != null)
+            {
+                dynamicObjectsOnField.Add(player);
+            }
+
+            dynamicObjectsOnField.ForEach(d => _eventAggregator.Publish(new ForceResetEvent(d)));
         }
     }
 }

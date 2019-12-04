@@ -1,7 +1,6 @@
 using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
-using TrainingSpecific;
 using UnityEngine;
 
 namespace Elements.Units.Players
@@ -17,6 +16,14 @@ namespace Elements.Units.Players
         }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            
+            EventAggregator.Publish(new PlayerSpawnedEvent(this));
+        }
+
         protected override void DeathVisualEffect()
         {
             //not implemented
@@ -24,8 +31,12 @@ namespace Elements.Units.Players
 
         protected override void DeathEffect(DamageSource damageSource)
         {
-            EventAggregator.Publish(new PlayerDeadEvent());
             Destroy(gameObject);
+        }
+
+        protected override void PublishDeathEvent(DamageSource deadCause)
+        {
+            EventAggregator.Publish(new PlayerDeadEvent(this));
         }
     }
 }
