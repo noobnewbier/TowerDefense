@@ -61,13 +61,13 @@ namespace AgentAi
             EncourageApproachingPlayer();
         }
 
-        private void OnCollisionStay(Collision other)
-        {
-            if (other.collider.CompareTag(ObjectTags.Wall))
-            {
-                AddReward(-0.005f);
-            }
-        }
+//        private void OnCollisionStay(Collision other)
+//        {
+//            if (other.collider.CompareTag(ObjectTags.Wall))
+//            {
+//                AddReward(-0.005f);
+//            }
+//        }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
         private void RewardIsDead(DamageSource deathCause)

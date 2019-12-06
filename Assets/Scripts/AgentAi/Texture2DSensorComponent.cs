@@ -15,7 +15,7 @@ namespace AgentAi
         /// class
         public override ISensor CreateSensor()
         {
-            var enemyAgentObservationCollector = EnemyAgentObservationCollector.instance;
+            var enemyAgentObservationCollector = EnemyAgentObservationCollector.Instance;
             
             return new Texture2DSensor(
                 grayScale,

@@ -6,14 +6,14 @@ default:
     epsilon: 0.2
     hidden_units: 128
     lambd: 0.95
-    learning_rate: 3.0e-4
+    learning_rate: 2.0e-4
     learning_rate_schedule: linear
     max_steps: 5.0e4
     memory_size: 256
     normalize: false
     num_epoch: 3
     num_layers: 2
-    time_horizon: 64
+    time_horizon: 2048
     sequence_length: 64
     summary_freq: 1000
     use_recurrent: false
@@ -289,12 +289,12 @@ Basic:
 
 VelocityBasedAgent:
     time_horizon: 128
-    batch_size: 64
-    buffer_size: 2024
-    hidden_units: 256
-    num_layers: 1
+    batch_size: 5065
+    buffer_size: 10120
+    hidden_units: 7200
+    num_layers: 2
     beta: 1.0e-2
-    max_steps: 2.0e6
+    max_steps: 3.0e6
     num_epoch: 3
     reward_signals:
         extrinsic:
@@ -304,3 +304,7 @@ VelocityBasedAgent:
             strength: 0.01
             gamma: 0.99
             encoding_size: 256
+    pretraining:
+        demo_path: ../../Demonstrations/VelocityBasedAgent
+        strength: 0.1
+        steps: 100000

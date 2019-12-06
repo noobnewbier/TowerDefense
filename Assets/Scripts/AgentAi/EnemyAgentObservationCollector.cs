@@ -22,7 +22,7 @@ namespace AgentAi
     public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectDestroyedEvent>,
         IHandle<IDynamicObjectSpawnedEvent>, ICanObserveEnvironment
     {
-        public static ICanObserveEnvironment instance;
+        public static ICanObserveEnvironment Instance;
 
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
@@ -63,13 +63,13 @@ namespace AgentAi
 
         private void Awake()
         {
-            if (instance != null)
+            if (Instance != null)
             {
                 Destroy(this);
             }
             else
             {
-                instance = this;
+                Instance = this;
             }
 
             _centerOfTexture = new Vector3(textureWidth / 2f, 0, textureHeight / 2f);
