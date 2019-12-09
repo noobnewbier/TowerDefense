@@ -1,1 +1,0 @@
-To be honest, I am not sure if everyone of them is correct, but let's yolo it
