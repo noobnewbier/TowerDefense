@@ -17,7 +17,9 @@ namespace ProjectSpecificUtils
         [SerializeField] private bool startedObserving;
         [SerializeField] private EnemyAgentObservationCollector enemyAgentObservationCollector;
         [SerializeField] private Unit dummyUnit;
+        [SerializeField] private float observeFrequency;
 
+        private float _timer;
         public void Handle(GameStartEvent @event)
         {
             startedObserving = true;
@@ -44,6 +46,14 @@ namespace ProjectSpecificUtils
         {
             if (startedObserving)
             {
+                _timer += Time.deltaTime;
+                if (_timer < observeFrequency)
+                {
+                    return;
+                }
+
+                _timer = 0f;
+                
                 var texture = enemyAgentObservationCollector.ObserveEnvironment(dummyUnit);
                 var sprite = Sprite.Create(texture, new Rect(Vector2.zero, new Vector2(60f, 60f)), new Vector2(0.5f, 0.5f));
                 if (_spriteRenderer != null) _spriteRenderer.sprite = sprite;

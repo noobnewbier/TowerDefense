@@ -252,9 +252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6ef107ca324bbfa597872c44c75a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startedObserving: 0
+  startedObserving: 1
   enemyAgentObservationCollector: {fileID: 202566773}
   dummyUnit: {fileID: 1349511938}
+  observeFrequency: 5
 --- !u!114 &202566775
 MonoBehaviour:
   m_ObjectHideFlags: 0
