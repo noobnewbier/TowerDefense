@@ -31,19 +31,34 @@ namespace AgentAi
         private Texture2D _observedTexture;
         private Texture2D _terrainTexture;
 
-        [SerializeField] private int textureHeight;
-        [SerializeField] private int textureWidth;
+        [SerializeField] private int mapHeight;
+        [SerializeField] private int mapWidth;
+
+        private int? _textureDimension;
+
+        private int TextureDimension
+        {
+            get
+            {
+                if (!_textureDimension.HasValue)
+                {
+                    _textureDimension = (int) Mathf.Sqrt(Mathf.Pow(mapWidth, 2) * Mathf.Pow(mapHeight, 2));
+                }
+
+                return _textureDimension.Value;
+            }
+        }
 
 
-        public int[] Shape => new int[3] {textureWidth, textureHeight, 3};
+        public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
 
         public Texture2D ObserveEnvironment(Unit unit)
         {
+            //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
-
             DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
 
-            return Instantiate(_observedTexture);
+            return _observedTexture.RotateTexture(unit.transform.eulerAngles.y);
         }
 
         public void Handle(GameStartEvent @event)
@@ -72,11 +87,11 @@ namespace AgentAi
                 Instance = this;
             }
 
-            _centerOfTexture = new Vector3(textureWidth / 2f, 0, textureHeight / 2f);
-            _terrainTexture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGB24, false);
-            _observedTexture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGB24, false);
+            _centerOfTexture = new Vector3(mapWidth / 2f, 0, mapHeight / 2f);
+            _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
+            _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
             _dynamicObjects = new List<IDynamicObjectOfInterest>();
-            _coordinatesWithPriority = new int[textureWidth, textureHeight];
+            _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
         }
 
         private void OnEnable()
@@ -96,8 +111,8 @@ namespace AgentAi
             var interestedObjects = FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
 
             //default to null area
-            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, textureWidth * textureHeight).ToArray();
-            _terrainTexture.SetPixels(0, 0, textureWidth, textureHeight, nullColors);
+            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, TextureDimension * TextureDimension).ToArray();
+            _terrainTexture.SetPixels(0, 0, TextureDimension, TextureDimension, nullColors);
 
             DrawObjectsOnTexture(_terrainTexture, interestedObjects, true);
         }
