@@ -31,34 +31,21 @@ namespace AgentAi
         private Texture2D _observedTexture;
         private Texture2D _terrainTexture;
 
-        [SerializeField] private int mapHeight;
-        [SerializeField] private int mapWidth;
-
-        private int? _textureDimension;
-
-        private int TextureDimension
-        {
-            get
-            {
-                if (!_textureDimension.HasValue)
-                {
-                    _textureDimension = (int) Mathf.Sqrt(Mathf.Pow(mapWidth, 2) * Mathf.Pow(mapHeight, 2));
-                }
-
-                return _textureDimension.Value;
-            }
-        }
+        [SerializeField] [Range(1, 200)] private int mapDimension;
+        private int _textureDimension;
+        private float _textureScaling; 
 
 
-        public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
+        public int[] Shape => new[] {_textureDimension, _textureDimension, 3};
 
         public Texture2D ObserveEnvironment(Unit unit)
         {
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
-
-            return _observedTexture.RotateTexture(unit.transform.eulerAngles.y);
+//            _observedTexture.RotateTexture(unit.transform.eulerAngles.y);
+            
+            return _observedTexture;
         }
 
         public void Handle(GameStartEvent @event)
@@ -86,12 +73,15 @@ namespace AgentAi
             {
                 Instance = this;
             }
+            
+            _textureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2));
+            _textureScaling = _textureDimension / (float)mapDimension;
 
-            _centerOfTexture = new Vector3(mapWidth / 2f, 0, mapHeight / 2f);
-            _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
-            _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
+            _centerOfTexture = new Vector3(mapDimension / 2f, 0, mapDimension / 2f);
+            _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
+            _observedTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
             _dynamicObjects = new List<IDynamicObjectOfInterest>();
-            _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
+            _coordinatesWithPriority = new int[_textureDimension, _textureDimension];
         }
 
         private void OnEnable()
@@ -111,8 +101,8 @@ namespace AgentAi
             var interestedObjects = FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
 
             //default to null area
-            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, TextureDimension * TextureDimension).ToArray();
-            _terrainTexture.SetPixels(0, 0, TextureDimension, TextureDimension, nullColors);
+            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, _textureDimension * _textureDimension).ToArray();
+            _terrainTexture.SetPixels(nullColors);
 
             DrawObjectsOnTexture(_terrainTexture, interestedObjects, true);
         }
@@ -149,8 +139,8 @@ namespace AgentAi
         //technically we will be fine without returning a new one.... we will optimize when we need
         private Bounds RescaleBoundsToTexture(Bounds bounds)
         {
-            //we assume the scene creator have already made the texture height and width aligned with the scene's size in units (so 600 unit wide -> 600 pixels wide in textures)
             bounds.center += _centerOfTexture;
+            bounds.extents /= _textureScaling;
 
             return bounds;
         }

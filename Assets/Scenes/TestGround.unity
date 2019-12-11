@@ -255,7 +255,7 @@ MonoBehaviour:
   startedObserving: 1
   enemyAgentObservationCollector: {fileID: 202566773}
   dummyUnit: {fileID: 1349511938}
-  observeFrequency: 5
+  observeFrequency: 0.02
 --- !u!114 &202566775
 MonoBehaviour:
   m_ObjectHideFlags: 0

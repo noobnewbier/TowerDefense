@@ -11,8 +11,15 @@ namespace Common.Class.ObjectDrawer
         {
         }
 
-        public void DrawObjectWithPriority(Texture2D texture2D, Bounds bounds, Color color, int[,] coordinatesWithPriority,
-            int priority, bool shouldWritePriority)
+        public void DrawObjectWithPriority
+        (
+            Texture2D texture2D,
+            Bounds bounds,
+            Color color,
+            int[,] coordinatesWithPriority,
+            int priority,
+            bool shouldWritePriority
+        )
         {
             for (var y = (int) bounds.min.z; y < bounds.max.z; y++)
             for (var x = (int) bounds.min.x; x < bounds.max.x; x++)
