@@ -1,107 +1,98 @@
 {
   "name": "root",
-  "gauges": [
-    {
-      "name": "VBA.mean_reward",
-      "value": -2.0490000973222777,
-      "min": -2.0490000973222777,
-      "max": 1.478000047733076,
-      "count": 4
-    }
-  ],
-  "total": 68.6635799,
+  "total": 13.2226095,
   "count": 1,
-  "self": 15.503974799999767,
+  "self": 10.103008500000005,
   "children": [
     {
       "name": "TrainerController.advance",
-      "total": 53.159605100000235,
-      "count": 8996,
-      "self": 5.835488800000192,
+      "total": 3.119600999999996,
+      "count": 249,
+      "self": 0.20725409999998412,
       "children": [
         {
           "name": "env_step",
-          "total": 47.32411630000004,
-          "count": 8996,
-          "self": 25.907850099999884,
+          "total": 2.9123469000000117,
+          "count": 249,
+          "self": 0.60977770000002,
           "children": [
             {
               "name": "SubprocessEnvManager._take_step",
-              "total": 21.320668900000303,
-              "count": 8996,
-              "self": 0.133891500000491,
+              "total": 2.2999835999999902,
+              "count": 249,
+              "self": 0.0041233999999761295,
               "children": [
                 {
                   "name": "PPOPolicy.evaluate",
-                  "total": 21.186777399999812,
-                  "count": 8996,
-                  "self": 21.186777399999812
+                  "total": 2.295860200000014,
+                  "count": 249,
+                  "self": 2.295860200000014
                 }
               ]
             },
             {
               "name": "workers",
-              "total": 0.09559729999985755,
-              "count": 8995,
+              "total": 0.00258560000000152,
+              "count": 249,
               "self": 0.0,
               "children": [
                 {
                   "name": "worker_root",
-                  "total": 66.47939739999967,
-                  "count": 8995,
+                  "total": 10.05764819999998,
+                  "count": 249,
                   "is_parallel": true,
-                  "self": 46.02533169999994,
+                  "self": 9.575731599999969,
                   "children": [
                     {
                       "name": "BrainInfo.process_pixels",
-                      "total": 0.025731399999999738,
+                      "total": 0.02002950000000059,
                       "count": 1,
                       "is_parallel": true,
-                      "self": 0.0001006999999999536,
+                      "self": 9.580000000042332e-05,
                       "children": [
                         {
                           "name": "image_decompress",
-                          "total": 0.025630699999999784,
+                          "total": 0.019933700000000165,
                           "count": 1,
                           "is_parallel": true,
-                          "self": 0.025630699999999784
+                          "self": 0.019933700000000165
                         }
                       ]
                     },
                     {
                       "name": "UnityEnvironment.step",
-                      "total": 20.428334299999733,
-                      "count": 8995,
+                      "total": 0.4618871000000109,
+                      "count": 249,
                       "is_parallel": true,
-                      "self": 1.4768304999997746,
+                      "self": 0.04273630000002271,
                       "children": [
                         {
                           "name": "UnityEnvironment._generate_step_input",
-                          "total": 0.41941380000005246,
-                          "count": 8995,
+                          "total": 0.012298900000004664,
+                          "count": 249,
                           "is_parallel": true,
-                          "self": 0.41941380000005246
+                          "self": 0.012298900000004664
                         },
                         {
                           "name": "communicator.exchange",
-                          "total": 16.810423899999904,
-                          "count": 8995,
+                          "total": 0.3590560999999859,
+                          "count": 249,
                           "is_parallel": true,
-                          "self": 16.810423899999904
+                          "self": 0.3590560999999859
                         },
                         {
                           "name": "BrainInfo.process_pixels",
-                          "total": 1.7216661000000038,
-                          "count": 8995,
+                          "total": 0.04779579999999761,
+                          "count": 249,
                           "is_parallel": true,
-                          "self": 0.5842828999999554,
+                          "self": 0.01682259999999225,
                           "children": [
                             {
                               "name": "image_decompress",
-                              "total": 1.1373832000000483,
-                              "count": 8995,
+                              "total": 0.030973200000005363,
+                              "count": 249,
                               "is_parallel": true,
-                              "self": 1.1373832000000483
+                              "self": 0.030973200000005363
                             }
                           ]
                         }

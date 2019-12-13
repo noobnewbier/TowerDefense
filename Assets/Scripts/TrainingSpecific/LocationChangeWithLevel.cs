@@ -27,9 +27,9 @@ namespace TrainingSpecific
         public void Handle(ResetAcademyEvent @event)
         {
             //todo: to be done in a proper way, but lets leave it for now
-//            var currentLevel = (int)@event.Academy.resetParameters[VelocityBasedAcademy.EnvironmentParametersKey.Level];
+            var currentLevel = (int)@event.Academy.resetParameters[VelocityBasedAcademy.EnvironmentParametersKey.Level];
             
-//            transform.position = positions[currentLevel].position;
+            transform.position = positions[currentLevel].position;
         }
     }
 }
