@@ -12,6 +12,11 @@ namespace AgentAi
 {
     public class VelocityBasedAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>
     {
+        public static class EnvironmentParametersKey
+        {
+            public const string Level = "level";
+        }
+        
         [SerializeField] private SurvivingEnemyAgentTracker survivingEnemyAgentTracker;
         [SerializeField] private SurvivingTurretTracker survivingTurretTracker;
 
@@ -34,6 +39,8 @@ namespace AgentAi
         public override void AcademyReset()
         {
             ClearField();
+            
+            _eventAggregator.Publish(new ResetAcademyEvent(this));
         }
 
         public void Handle(AgentSpawnedEvent @event)

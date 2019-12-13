@@ -1,0 +1,48 @@
+default:
+    batch_size: 1024
+    trainer: ppo
+    beta: 5.0e-3
+    buffer_size: 10240
+    epsilon: 0.2
+    hidden_units: 128
+    lambd: 0.95
+    learning_rate: 2.0e-4
+    learning_rate_schedule: linear
+    max_steps: 5.0e4
+    memory_size: 256
+    normalize: false
+    num_epoch: 3
+    num_layers: 2
+    time_horizon: 2048
+    sequence_length: 64
+    summary_freq: 1000
+    use_recurrent: false
+    vis_encode_type: simple
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+
+            
+VelocityBasedAgent:
+    time_horizon: 128
+    batch_size: 64
+    buffer_size: 256
+    hidden_units: 512
+    num_layers: 2
+    beta: 1.0e-2
+    max_steps: 3.0e6
+    num_epoch: 3
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.01
+            gamma: 0.99
+            encoding_size: 256
+#    pretraining:
+#        demo_path: ../../Demonstrations/VelocityBasedAgent
+#        strength: 0.1
+#        steps: 100000
+       

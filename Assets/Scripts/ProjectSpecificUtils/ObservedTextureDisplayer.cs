@@ -55,7 +55,7 @@ namespace ProjectSpecificUtils
                 _timer = 0f;
                 
                 var texture = enemyAgentObservationCollector.ObserveEnvironment(dummyUnit);
-                var sprite = Sprite.Create(texture, new Rect(Vector2.zero, new Vector2(60f, 60f)), new Vector2(0.5f, 0.5f));
+                var sprite = Sprite.Create(texture, new Rect(Vector2.zero, new Vector2(enemyAgentObservationCollector.TextureDimension, enemyAgentObservationCollector.TextureDimension)), new Vector2(0.5f, 0.5f));
                 if (_spriteRenderer != null) _spriteRenderer.sprite = sprite;
                 if (_image != null) _image.sprite = sprite;
             }

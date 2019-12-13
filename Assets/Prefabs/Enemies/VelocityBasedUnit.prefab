@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 7
+    vectorObservationSize: 4
     numStackedVectorObservations: 10
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Model: {fileID: 11400000, guid: 0239d920a69d5804284b33a7228f193a, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
-  m_BehaviorName: VelocityBasedAgent
+  m_BehaviorName: VBA
 --- !u!114 &114645794836903142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
-    maxStep: 20000
+    maxStep: 2048
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1

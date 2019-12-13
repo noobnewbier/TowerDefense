@@ -15,4 +15,4 @@ MonoBehaviour:
   enemiesPrefabs:
   - {fileID: 3610290461812041406, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
   spawnInterval: 0.02
-  totalNumberOfEnemies: 5
+  totalNumberOfEnemies: 1

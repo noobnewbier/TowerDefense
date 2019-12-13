@@ -41,7 +41,7 @@ namespace AgentAi
         public override void CollectObservations()
         {
             AddQuaternions();
-            AddVelocity();
+//            AddVelocity();
         }
 
         public override void InitializeAgent()
