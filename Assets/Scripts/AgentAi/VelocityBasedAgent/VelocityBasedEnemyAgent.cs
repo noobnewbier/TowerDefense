@@ -57,8 +57,9 @@ namespace AgentAi.VelocityBasedAgent
             _eventAggregator = EventAggregatorHolder.Instance;
             _targetPicker = TargetPicker.Instance;
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
-            _eventAggregator.Subscribe(this);
+            _previousClosestDistance = GetCurrentDistanceFromTarget();
 
+            _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
         }
 
@@ -135,19 +136,7 @@ namespace AgentAi.VelocityBasedAgent
         {
             const float reward = 0.1f;
 
-            var path = new NavMeshPath();
-            if (!navMeshAgent.CalculatePath(_targetPicker.Target.Transform.position, path))
-            {
-                return;
-            }
-
-            if (path.status != NavMeshPathStatus.PathComplete)
-            {
-                return;
-            }
-
-            var distance = 0f;
-            for (var i = 0; i < path.corners.Length - 1; i++) distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            var distance = GetCurrentDistanceFromTarget();
 
             if (distance < _previousClosestDistance)
             {
@@ -160,6 +149,28 @@ namespace AgentAi.VelocityBasedAgent
                 AddReward(reward * (distanceDifference / maximumAchievement));
                 _previousClosestDistance = distance;
             }
+        }
+
+        private float GetCurrentDistanceFromTarget()
+        {
+            // some default distance to a avoid bumping the reward to infinity when we can't find a path
+            const float defaultDistance = 5f;
+            
+            var path = new NavMeshPath();
+            if (!navMeshAgent.CalculatePath(_targetPicker.Target.Transform.position, path))
+            {
+                return defaultDistance;
+            }
+
+            if (path.status != NavMeshPathStatus.PathComplete)
+            {
+                return defaultDistance;
+            }
+
+            var distance = 0f;
+            for (var i = 0; i < path.corners.Length - 1; i++) distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+
+            return distance;
         }
 
         private static int PlayerInputToMachineInput(float input)
