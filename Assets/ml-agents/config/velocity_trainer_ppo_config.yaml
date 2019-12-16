@@ -24,7 +24,7 @@ default:
             gamma: 0.99
 
             
-VelocityBasedAgent:
+VBA:
     time_horizon: 128
     batch_size: 64
     buffer_size: 256

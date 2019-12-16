@@ -6,8 +6,9 @@ namespace Common.Enum
 {
     public class AiInterestCategory
     {
-        public static readonly AiInterestCategory Observer = new AiInterestCategory(Color.white, 12, BlockDrawer.Instance);
-
+        public static readonly AiInterestCategory Observer = new AiInterestCategory(Color.white, 13, BlockDrawer.Instance);
+        public static readonly AiInterestCategory Target = new AiInterestCategory(Color.magenta, 12, BlockDrawer.Instance);
+        
         //assuming the player is the target
         public static readonly AiInterestCategory Player = new AiInterestCategory(Color.red, 11, BlockDrawer.Instance);
         public static readonly AiInterestCategory Enemy = new AiInterestCategory(Color.green, 10, BlockDrawer.Instance);

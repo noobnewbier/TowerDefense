@@ -9,5 +9,6 @@ namespace Terrain
     {
         public AiInterestCategory InterestCategory => AiInterestCategory.Ground;
         public Bounds Bounds => GetComponent<Collider>().bounds;
+        public Transform Transform => transform;
     }
 }

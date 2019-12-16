@@ -8,6 +8,7 @@ namespace Common.Interface
     {
         AiInterestCategory InterestCategory { get; }
         Bounds Bounds { get; }
+        Transform Transform { get; }
     }
 
     public interface IDynamicObjectOfInterest : IObjectOfInterest

@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
+using AgentAi.Manager;
 using Common.Class;
 using Common.Constant;
 using Common.Enum;
@@ -11,15 +11,22 @@ using MLAgents;
 using Movement.InputSource;
 using TrainingSpecific;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityUtils;
 
-namespace AgentAi
+namespace AgentAi.VelocityBasedAgent
 {
-    public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>
+    public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
         private IEventAggregator _eventAggregator;
+        private IObserveEnvironmentService _observeEnvironmentService;
+        private ITargetPicker _targetPicker;
+        private float _previousClosestDistance;
         [SerializeField] private AiMovementInputService inputService;
+        [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private VelocityBasedEnemy unit;
+
+        public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
 
         public void Handle(EnemyDeadEvent @event)
         {
@@ -47,6 +54,10 @@ namespace AgentAi
         public override void InitializeAgent()
         {
             base.InitializeAgent();
+            _eventAggregator = EventAggregatorHolder.Instance;
+            _targetPicker = TargetPicker.Instance;
+            _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
+            _eventAggregator.Subscribe(this);
 
             _eventAggregator.Publish(new AgentSpawnedEvent());
         }
@@ -63,7 +74,8 @@ namespace AgentAi
             inputService.UpdateVertical(MachineInputToAction((int) vectorAction[0]));
             inputService.UpdateHorizontal(MachineInputToAction((int) vectorAction[1]));
 
-            EncourageApproachingPlayer();
+            PunishWonderingWithNoReason();
+            EncourageApproachingTarget();
         }
 
         private void OnCollisionStay(Collision other)
@@ -96,14 +108,10 @@ namespace AgentAi
             Done();
         }
 
-        private void Awake()
+        protected override void DisposeAgent()
         {
-            _eventAggregator = EventAggregatorHolder.Instance;
-            _eventAggregator.Subscribe(this);
-        }
+            base.DisposeAgent();
 
-        private void OnDestroy()
-        {
             _eventAggregator.Unsubscribe(this);
         }
 
@@ -118,9 +126,40 @@ namespace AgentAi
         }
 
         //Don't walk around forever pls
-        private void EncourageApproachingPlayer()
+        private void PunishWonderingWithNoReason()
         {
             AddReward(-0.001f);
+        }
+
+        private void EncourageApproachingTarget()
+        {
+            const float reward = 0.1f;
+
+            var path = new NavMeshPath();
+            if (!navMeshAgent.CalculatePath(_targetPicker.Target.Transform.position, path))
+            {
+                return;
+            }
+
+            if (path.status != NavMeshPathStatus.PathComplete)
+            {
+                return;
+            }
+
+            var distance = 0f;
+            for (var i = 0; i < path.corners.Length - 1; i++) distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+
+            if (distance < _previousClosestDistance)
+            {
+                // TODO: we are assuming that the unit's maximum achievement is the maximum distance that it can move in one decision. Is that correct?
+                var maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+                var distanceDifference = _previousClosestDistance - distance;
+
+                Debug.Log(reward * (distanceDifference / maximumAchievement));
+
+                AddReward(reward * (distanceDifference / maximumAchievement));
+                _previousClosestDistance = distance;
+            }
         }
 
         private static int PlayerInputToMachineInput(float input)
@@ -148,7 +187,7 @@ namespace AgentAi
                     machineInputAsAction = ActionFlag.NegativeAction;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"input: {input} is not valid, it must between 0-2");
+                    throw new ArgumentOutOfRangeException($"input: {input} is not valid, it must be between 0-2");
             }
 
             return (int) machineInputAsAction;

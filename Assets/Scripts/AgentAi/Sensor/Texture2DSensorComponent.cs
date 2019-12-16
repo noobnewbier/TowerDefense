@@ -1,14 +1,13 @@
-using Elements.Units.UnitCommon;
+using AgentAi.Manager;
 using MLAgents.Sensor;
 using UnityEngine;
 
-namespace AgentAi
+namespace AgentAi.Sensor
 {
     public class Texture2DSensorComponent : SensorComponent
     {
         [SerializeField] private bool grayScale;
         [SerializeField] private string sensorName = "Texture2DSensor";
-        [SerializeField] private Unit unit;
 
         /// for "shape", please See reference for shape in
         /// <see cref="CompressedObservation" />
@@ -16,13 +15,12 @@ namespace AgentAi
         public override ISensor CreateSensor()
         {
             var enemyAgentObservationCollector = EnemyAgentObservationCollector.Instance;
-            
+
             return new Texture2DSensor(
                 grayScale,
                 sensorName,
                 enemyAgentObservationCollector.Shape,
-                unit,
-                enemyAgentObservationCollector
+                GetComponent<ICanObserveEnvironment>()
             );
         }
     }

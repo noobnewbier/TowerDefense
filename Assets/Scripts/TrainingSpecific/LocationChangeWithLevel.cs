@@ -1,4 +1,4 @@
-using AgentAi;
+using AgentAi.VelocityBasedAgent;
 using Common.Class;
 using EventManagement;
 using UnityEngine;

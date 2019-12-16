@@ -1,6 +1,5 @@
 using Common.Class;
 using Common.Enum;
-using Common.Event;
 using Common.Interface;
 using EventManagement;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Elements
 
         public abstract AiInterestCategory InterestCategory { get; }
         public abstract Bounds Bounds { get; }
+        public Transform Transform => transform;
 
         protected virtual void OnEnable()
         {

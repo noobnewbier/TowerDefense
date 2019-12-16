@@ -325,6 +325,12 @@ namespace MLAgents
                 academy.AgentForceReset -= ForceReset;
             }
             m_Brain?.Dispose();
+            DisposeAgent();
+        }
+
+        //DANGER: You are extending a beta library here
+        protected virtual void DisposeAgent()
+        {
         }
 
         /// <summary>

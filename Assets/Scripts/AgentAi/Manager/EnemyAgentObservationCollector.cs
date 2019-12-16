@@ -10,56 +10,49 @@ using EventManagement;
 using UnityEngine;
 using UnityUtils;
 
-namespace AgentAi
+namespace AgentAi.Manager
 {
-    public interface ICanObserveEnvironment
+    public interface IObserveEnvironmentService
     {
-        Texture2D ObserveEnvironment(Unit unit);
         int[] Shape { get; }
+        Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
     }
 
     // Perhaps the main bottleneck... be careful with this
-    public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectDestroyedEvent>,
-        IHandle<IDynamicObjectSpawnedEvent>, ICanObserveEnvironment
+    public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IObserveEnvironmentService
     {
-        public static ICanObserveEnvironment Instance;
+        public static IObserveEnvironmentService Instance;
 
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
-        private IList<IDynamicObjectOfInterest> _dynamicObjects;
-        private IEventAggregator _eventAggregator;
         private Texture2D _observedTexture;
         private Texture2D _terrainTexture;
+        private IEventAggregator _eventAggregator;
 
+        [SerializeField] private  ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] [Range(1, 200)] private int mapDimension;
         public int TextureDimension { get; private set; }
-
-
-        public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
-
-        public Texture2D ObserveEnvironment(Unit unit)
-        {
-            //if this is too slow, rotate before writing
-            Graphics.CopyTexture(_terrainTexture, _observedTexture);
-            DrawObjectsOnTexture(_observedTexture, _dynamicObjects.ReplaceAll(unit, GetObserverRepresentation(unit)), false);
-//            _observedTexture.RotateTexture(unit.transform.eulerAngles.y - 90);
-
-            return Instantiate(_observedTexture);
-        }
 
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
         }
 
-        public void Handle(IDynamicObjectDestroyedEvent @event)
-        {
-            _dynamicObjects.Remove(@event.DynamicObject);
-        }
+        public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
 
-        public void Handle(IDynamicObjectSpawnedEvent @event)
+        public Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target)
         {
-            _dynamicObjects.Add(@event.DynamicObject);
+            var objectsWithTargetAndObserver = objectsOfInterestTracker.DynamicObjectOfInterests
+                .ReplaceAll(observer, GetObserverRepresentation(observer))
+                .ReplaceAll(target, GetTargetRepresentation(target));
+
+            //if this is too slow, rotate before writing
+            Graphics.CopyTexture(_terrainTexture, _observedTexture);
+            DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
+
+//            _observedTexture.RotateTexture(unit.transform.eulerAngles.y - 90);
+
+            return Instantiate(_observedTexture);
         }
 
         private void Awake()
@@ -79,7 +72,6 @@ namespace AgentAi
             _centerOfTexture = new Vector3(TextureDimension / 2f, 0, TextureDimension / 2f);
             _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
             _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
-            _dynamicObjects = new List<IDynamicObjectOfInterest>();
             _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
         }
 
@@ -97,7 +89,7 @@ namespace AgentAi
 
         private void SetupTextures()
         {
-            var interestedObjects = FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
+            var interestedObjects = objectsOfInterestTracker.StaticObjectOfInterests;
 
             //default to null area
             var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, TextureDimension * TextureDimension).ToArray();
@@ -144,16 +136,32 @@ namespace AgentAi
         }
 
         private static IDynamicObjectOfInterest GetObserverRepresentation(IObjectOfInterest dynamicObjectOfInterest) => new Observer(dynamicObjectOfInterest);
+        private static IDynamicObjectOfInterest GetTargetRepresentation(IObjectOfInterest dynamicObjectOfInterest) => new Target(dynamicObjectOfInterest);
 
         private class Observer : IDynamicObjectOfInterest
         {
             public Observer(IObjectOfInterest objectOfInterest)
             {
                 Bounds = objectOfInterest.Bounds;
+                Transform = objectOfInterest.Transform;
             }
 
             public AiInterestCategory InterestCategory => AiInterestCategory.Observer;
             public Bounds Bounds { get; }
+            public Transform Transform { get; }
+        }
+
+        private class Target : IDynamicObjectOfInterest
+        {
+            public Target(IObjectOfInterest objectOfInterest)
+            {
+                Bounds = objectOfInterest.Bounds;
+                Transform = objectOfInterest.Transform;
+            }
+
+            public AiInterestCategory InterestCategory => AiInterestCategory.Target;
+            public Bounds Bounds { get; }
+            public Transform Transform { get; }
         }
     }
 }
