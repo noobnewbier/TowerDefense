@@ -482,4 +482,5 @@ sysinfo.txt
 
 # Custom
 [Bb]uild/
-Assets/ml-agents/config/summaries/*.*
+Assets/ml-agents/config/summaries/**
+Assets/ml-agents/config/models/**
