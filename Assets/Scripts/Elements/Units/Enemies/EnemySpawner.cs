@@ -2,6 +2,7 @@ using Common.Class;
 using Common.Event;
 using EventManagement;
 using UnityEngine;
+using UnityUtils.LocationProviders;
 
 namespace Elements.Units.Enemies
 {
@@ -13,10 +14,7 @@ namespace Elements.Units.Enemies
         private float _timer;
 
         [SerializeField] private EnemySpawnPointData enemySpawnPointData;
-
-        //Spawn within radius
-        [SerializeField] private float radius;
-        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private LocationProvider locationProvider;
         public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
 
         public void Handle(WaveStartEvent @event)
@@ -43,13 +41,16 @@ namespace Elements.Units.Enemies
             if (_timer >= enemySpawnPointData.SpawnInterval)
             {
                 _timer = 0f;
-                ObjectSpawner.SpawnInCircle(
+
+                var newEnemy = Instantiate(
                     enemySpawnPointData.EnemiesPrefabs[Random.Range(0, enemySpawnPointData.EnemiesPrefabs.Length)],
-                    radius,
-                    spawnPoint.position
-                ).transform.parent = transform;
+                    locationProvider.ProvideLocation(),
+                    Quaternion.identity
+                );
 
-
+                newEnemy.transform.parent = transform;
+                newEnemy.transform.Rotate(new Vector2(0f, Random.Range(0f, 360f)));
+                
                 _spawnedEnemiesCount++;
             }
         }

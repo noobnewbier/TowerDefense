@@ -143,12 +143,12 @@ namespace AgentAi.Manager
             public Observer(IObjectOfInterest objectOfInterest)
             {
                 Bounds = objectOfInterest.Bounds;
-                Transform = objectOfInterest.Transform;
+                DynamicObjectTransform = objectOfInterest.DynamicObjectTransform;
             }
 
             public AiInterestCategory InterestCategory => AiInterestCategory.Observer;
             public Bounds Bounds { get; }
-            public Transform Transform { get; }
+            public Transform DynamicObjectTransform { get; }
         }
 
         private class Target : IDynamicObjectOfInterest
@@ -156,12 +156,12 @@ namespace AgentAi.Manager
             public Target(IObjectOfInterest objectOfInterest)
             {
                 Bounds = objectOfInterest.Bounds;
-                Transform = objectOfInterest.Transform;
+                DynamicObjectTransform = objectOfInterest.DynamicObjectTransform;
             }
 
             public AiInterestCategory InterestCategory => AiInterestCategory.Target;
             public Bounds Bounds { get; }
-            public Transform Transform { get; }
+            public Transform DynamicObjectTransform { get; }
         }
     }
 }

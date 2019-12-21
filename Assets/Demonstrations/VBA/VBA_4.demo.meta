@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: e56a0a538301fda46a01374030dabc2a
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/Demonstrations/VBA/VBA_4.demo
+  externalObjects: {}
+  userData: ' (MLAgents.Demonstration)'
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 7bd65ce151aaa4a41a45312543c56be1, type: 3}

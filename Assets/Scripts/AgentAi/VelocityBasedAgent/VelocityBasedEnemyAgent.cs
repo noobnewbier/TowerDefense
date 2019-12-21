@@ -47,7 +47,7 @@ namespace AgentAi.VelocityBasedAgent
 
         public override void CollectObservations()
         {
-            AddQuaternions();
+            AddRotation();
 //            AddVelocity();
         }
 
@@ -72,11 +72,16 @@ namespace AgentAi.VelocityBasedAgent
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
-            inputService.UpdateVertical(MachineInputToAction((int) vectorAction[0]));
-            inputService.UpdateHorizontal(MachineInputToAction((int) vectorAction[1]));
+            var xAction = IsInValidInput(vectorAction[0]) ? 0 : (int) vectorAction[0];
+            var yAction = IsInValidInput(vectorAction[1]) ? 0 : (int) vectorAction[1];
+            
+            inputService.UpdateVertical(MachineInputToAction(xAction));
+            inputService.UpdateHorizontal(MachineInputToAction(yAction));
 
             PunishWonderingWithNoReason();
             EncourageApproachingTarget();
+            
+            Monitor.Log("Reward", GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
@@ -116,9 +121,10 @@ namespace AgentAi.VelocityBasedAgent
             _eventAggregator.Unsubscribe(this);
         }
 
-        private void AddQuaternions()
+        private void AddRotation()
         {
-            AddVectorObs(unit.Rigidbody.rotation);
+            Monitor.Log("Rotation", transform.rotation.eulerAngles.y / 360f);
+            AddVectorObs(transform.rotation.eulerAngles.y / 360f);
         }
 
         private void AddVelocity()
@@ -134,7 +140,7 @@ namespace AgentAi.VelocityBasedAgent
 
         private void EncourageApproachingTarget()
         {
-            const float reward = 0.1f;
+            const float reward = 0.15f;
 
             var distance = GetCurrentDistanceFromTarget();
 
@@ -143,8 +149,6 @@ namespace AgentAi.VelocityBasedAgent
                 // TODO: we are assuming that the unit's maximum achievement is the maximum distance that it can move in one decision. Is that correct?
                 var maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
                 var distanceDifference = _previousClosestDistance - distance;
-
-                Debug.Log(reward * (distanceDifference / maximumAchievement));
 
                 AddReward(reward * (distanceDifference / maximumAchievement));
                 _previousClosestDistance = distance;
@@ -155,9 +159,9 @@ namespace AgentAi.VelocityBasedAgent
         {
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
             const float defaultDistance = 5f;
-            
+
             var path = new NavMeshPath();
-            if (!navMeshAgent.CalculatePath(_targetPicker.Target.Transform.position, path))
+            if (!navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path))
             {
                 return defaultDistance;
             }
@@ -217,5 +221,7 @@ namespace AgentAi.VelocityBasedAgent
             NegativeAction = -1,
             NoAction = 0
         }
+
+        private static bool IsInValidInput(float input) => float.IsNaN(input) || float.IsInfinity(input);
     }
 }

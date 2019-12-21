@@ -203,12 +203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 4
-    numStackedVectorObservations: 10
+    vectorObservationSize: 1
+    numStackedVectorObservations: 1
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 0239d920a69d5804284b33a7228f193a, type: 3}
+  m_Model: {fileID: 11400000, guid: 1f0f0d1283c79f04590dd337482b758c, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 1
   m_BehaviorName: VBA
@@ -230,8 +230,8 @@ MonoBehaviour:
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   inputService: {fileID: 6168960639002132815}
-  unit: {fileID: 3254465578691183710}
   navMeshAgent: {fileID: 195993168461723704}
+  unit: {fileID: 3254465578691183710}
 --- !u!114 &114793291740294168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   record: 1
-  demonstrationName: VelocityBasedAgentBehaviour
+  demonstrationName: VBA
 --- !u!114 &114690090028309910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +260,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grayScale: 0
   sensorName: Texture2DSensor
-  unit: {fileID: 3254465578691183710}
 --- !u!195 &195993168461723704
 NavMeshAgent:
   m_ObjectHideFlags: 0

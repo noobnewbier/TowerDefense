@@ -22,7 +22,6 @@ namespace Elements.Units.UnitCommon
     {
         [SerializeField] private Collider unitCollider;
         protected abstract UnitData UnitData { get; set; }
-        public Transform Transform => transform;
         public override Bounds Bounds => unitCollider.bounds;
 
         private DamageSource _deadCause;

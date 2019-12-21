@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace ProjectSpecificUtils
 {
-    public class ObservedTextureDisplayer : MonoBehaviour, IHandle<GameStartEvent>
+    public class ObservedTextureDisplayer : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectSpawnedEvent>
     {
         private IEventAggregator _eventAggregator;
         private Image _image;
@@ -20,6 +20,7 @@ namespace ProjectSpecificUtils
         private float _timer;
 
         [SerializeField] private EnemyAgentObservationCollector enemyAgentObservationCollector;
+        [SerializeField] private bool automaticUpdateObserver;
 
         //interface cannot be serialized, do a dirty cast when using this
         [SerializeField] private MonoBehaviour maybeCanObserve;
@@ -54,7 +55,7 @@ namespace ProjectSpecificUtils
 
         private void FixedUpdate()
         {
-            var canObserve = TryGetCanObserveEnvironment();
+            var canObserve = GetCanObserveEnvironment();
             if (startedObserving && canObserve != null)
             {
                 _timer += Time.deltaTime;
@@ -80,14 +81,27 @@ namespace ProjectSpecificUtils
         }
 
         [CanBeNull]
-        private ICanObserveEnvironment TryGetCanObserveEnvironment()
+        private ICanObserveEnvironment GetCanObserveEnvironment()
         {
+            if (maybeCanObserve == null) return null;
+            
             if (maybeCanObserve is ICanObserveEnvironment canObserveEnvironment)
             {
                 return canObserveEnvironment;
             }
 
             return maybeCanObserve.GetComponent<ICanObserveEnvironment>();
+        }
+
+        public void Handle(IDynamicObjectSpawnedEvent @event)
+        {
+            if (!automaticUpdateObserver) return;
+            
+            var canObserverEnvironment = @event.DynamicObject.DynamicObjectTransform.GetComponent<ICanObserveEnvironment>();
+            if (canObserverEnvironment != null)
+            {
+                maybeCanObserve = canObserverEnvironment as MonoBehaviour;
+            }
         }
     }
 }

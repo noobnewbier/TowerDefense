@@ -13,7 +13,7 @@ namespace Elements
 
         public abstract AiInterestCategory InterestCategory { get; }
         public abstract Bounds Bounds { get; }
-        public Transform Transform => transform;
+        public Transform DynamicObjectTransform => transform;
 
         protected virtual void OnEnable()
         {

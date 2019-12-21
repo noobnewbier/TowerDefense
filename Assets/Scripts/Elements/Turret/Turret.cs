@@ -67,7 +67,7 @@ namespace Elements.Turret
 
             if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f)) _targetRefreshTimer += Time.fixedDeltaTime;
 
-            var targetPosition = _currentTarget != null ? _currentTarget.Transform.position : (Vector3?) null;
+            var targetPosition = _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
             if (targetPosition.HasValue) Aim(targetPosition.Value);
 
             genericShootService.IsShooting = ShouldShoot();
