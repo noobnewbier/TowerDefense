@@ -1,6 +1,7 @@
 using Common.Class;
 using Common.Event;
 using EventManagement;
+using ScriptableService;
 using UnityEngine;
 using UnityUtils.LocationProviders;
 
@@ -15,6 +16,7 @@ namespace Elements.Units.Enemies
 
         [SerializeField] private EnemySpawnPointData enemySpawnPointData;
         [SerializeField] private LocationProvider locationProvider;
+
         public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
 
         public void Handle(WaveStartEvent @event)
@@ -42,17 +44,32 @@ namespace Elements.Units.Enemies
             {
                 _timer = 0f;
 
-                var newEnemy = Instantiate(
-                    enemySpawnPointData.EnemiesPrefabs[Random.Range(0, enemySpawnPointData.EnemiesPrefabs.Length)],
-                    locationProvider.ProvideLocation(),
-                    Quaternion.identity
-                );
-
-                newEnemy.transform.parent = transform;
-                newEnemy.transform.Rotate(new Vector2(0f, Random.Range(0f, 360f)));
-                
-                _spawnedEnemiesCount++;
+                SpawnEnemy();
             }
+        }
+
+        private void SpawnEnemy()
+        {
+            var newEnemyComponent = enemySpawnPointData.Enemies[Random.Range(0, enemySpawnPointData.Enemies.Length)];
+            var newEnemyGameObject = Instantiate(
+                newEnemyComponent.gameObject,
+                locationProvider.ProvideLocation(),
+                Quaternion.identity
+            );
+
+            newEnemyGameObject.transform.parent = transform;
+            newEnemyGameObject.transform.Rotate(new Vector2(0f, Random.Range(0f, 360f)));
+
+            while (!SpawnPointValidator.IsSpawnPointValid(
+                newEnemyComponent.Bounds.center,
+                newEnemyComponent.Bounds.extents,
+                newEnemyGameObject.transform.rotation
+            ))
+            {
+                newEnemyGameObject.transform.position = locationProvider.ProvideLocation();
+            }
+
+            _spawnedEnemiesCount++;
         }
 
         private void OnDisable()

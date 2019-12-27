@@ -4,5 +4,6 @@ namespace Common.Constant
     {
         public const string PlayerDamageTaker = "PlayerDamageTaker";
         public const string AiDamageTaker = "AIDamageTaker";
+        public const string Obstacle = "Obstacle";
     }
 }

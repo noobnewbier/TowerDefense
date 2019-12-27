@@ -4,32 +4,29 @@ using Common.Class;
 using Common.Event;
 using Common.Interface;
 using EventManagement;
+using Experimental;
 using UnityEngine;
 
 namespace AgentAi.Manager
 {
     public class ObjectsOfInterestTracker : MonoBehaviour, IHandle<IDynamicObjectDestroyedEvent>, IHandle<IDynamicObjectSpawnedEvent>
     {
+        [SerializeField] private DynamicObjectsSet dynamicObjectsSet;
+        
         private IEventAggregator _eventAggregator;
-        private IList<IDynamicObjectOfInterest> _dynamicObjects;
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public IEnumerable<IStaticObjectOfInterest> StaticObjectOfInterests => FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
-        public IEnumerable<IDynamicObjectOfInterest> DynamicObjectOfInterests => new List<IDynamicObjectOfInterest>(_dynamicObjects);
+        public IEnumerable<IDynamicObjectOfInterest> DynamicObjectOfInterests => new List<IDynamicObjectOfInterest>(dynamicObjectsSet.Items);
 
         public void Handle(IDynamicObjectDestroyedEvent @event)
         {
-            _dynamicObjects.Remove(@event.DynamicObject);
+            dynamicObjectsSet.Items.Remove(@event.DynamicObject);
         }
 
         public void Handle(IDynamicObjectSpawnedEvent @event)
         {
-            _dynamicObjects.Add(@event.DynamicObject);
-        }
-
-        private void Awake()
-        {
-            _dynamicObjects = new List<IDynamicObjectOfInterest>();
+            dynamicObjectsSet.Items.Add(@event.DynamicObject);
         }
 
         private void OnEnable()

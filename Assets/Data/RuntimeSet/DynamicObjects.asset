@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
-  m_Name: DemoSpawnData
+  m_Script: {fileID: 11500000, guid: 344771ca9b7c400ba27d004c0dd7bd52, type: 3}
+  m_Name: DynamicObjects
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 3254465578691183710, guid: 26238e1c494f38444893a79bd54d9a2d, type: 3}
-  spawnInterval: 0.02
-  totalNumberOfEnemies: 1

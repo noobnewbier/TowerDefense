@@ -1,5 +1,8 @@
 using Common.Class;
 using EventManagement;
+using ScriptableService;
+using Terrain;
+using TrainingSpecific.Events;
 using UnityEngine;
 using UnityUtils;
 using UnityUtils.LocationProviders;
@@ -7,19 +10,19 @@ using UnityUtils.ScaleProviders;
 
 namespace TrainingSpecific
 {
-    public class DynamicObstacleController : MonoBehaviour, IHandle<SessionBeginState>
+    public class DynamicObstacleController : MonoBehaviour, IHandle<SessionBeginEvent>
     {
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ActivityProvider activityProvider;
         [SerializeField] private ScaleProvider scaleProvider;
-        [SerializeField] private GameObject dynamicObstacle;
-        
+        [SerializeField] private DynamicObstacle dynamicObstacle;
+
         private IEventAggregator _eventAggregator;
 
         private void OnEnable()
         {
             _eventAggregator = EventAggregatorHolder.Instance;
-            
+
             _eventAggregator.Subscribe(this);
         }
 
@@ -28,11 +31,14 @@ namespace TrainingSpecific
             _eventAggregator.Unsubscribe(this);
         }
 
-        public void Handle(SessionBeginState @event)
+        public void Handle(SessionBeginEvent @event)
         {
-            dynamicObstacle.transform.position = locationProvider.ProvideLocation();
-            dynamicObstacle.SetActive(activityProvider.ProvideIsActive());
-            dynamicObstacle.transform.localScale = scaleProvider.ProvideScale();
+            dynamicObstacle.gameObject.SetActive(activityProvider.ProvideIsActive());
+            do
+            {
+                dynamicObstacle.transform.position = locationProvider.ProvideLocation();
+                dynamicObstacle.transform.localScale = scaleProvider.ProvideScale();
+            } while (!SpawnPointValidator.IsSpawnPointValid(dynamicObstacle.Bounds.center, dynamicObstacle.Bounds.extents, dynamicObstacle.transform.rotation));
         }
     }
 }
