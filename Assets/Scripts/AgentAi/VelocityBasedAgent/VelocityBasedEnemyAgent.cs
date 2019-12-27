@@ -5,11 +5,13 @@ using Common.Class;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
+using Common.Interface;
 using Elements.Units.Enemies;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
 using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityUtils;
@@ -45,12 +47,6 @@ namespace AgentAi.VelocityBasedAgent
             PlayerInputToMachineInput(Input.GetAxis("Horizontal"))
         };
 
-        public override void CollectObservations()
-        {
-            AddRotation();
-//            AddVelocity();
-        }
-
         public override void InitializeAgent()
         {
             base.InitializeAgent();
@@ -74,14 +70,12 @@ namespace AgentAi.VelocityBasedAgent
         {
             var xAction = IsInValidInput(vectorAction[0]) ? 0 : (int) vectorAction[0];
             var yAction = IsInValidInput(vectorAction[1]) ? 0 : (int) vectorAction[1];
-            
+
             inputService.UpdateVertical(MachineInputToAction(xAction));
             inputService.UpdateHorizontal(MachineInputToAction(yAction));
 
             PunishWonderingWithNoReason();
             EncourageApproachingTarget();
-            
-            Monitor.Log("Reward", GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
@@ -120,27 +114,16 @@ namespace AgentAi.VelocityBasedAgent
 
             _eventAggregator.Unsubscribe(this);
         }
-
-        private void AddRotation()
-        {
-            Monitor.Log("Rotation", transform.rotation.eulerAngles.y / 360f);
-            AddVectorObs(transform.rotation.eulerAngles.y / 360f);
-        }
-
-        private void AddVelocity()
-        {
-            AddVectorObs(unit.Rigidbody.velocity);
-        }
-
+        
         //Don't walk around forever pls
         private void PunishWonderingWithNoReason()
         {
-            AddReward(-0.001f);
+            AddReward(-0.01f);
         }
 
         private void EncourageApproachingTarget()
         {
-            const float reward = 0.15f;
+            const float reward = 0.1f;
 
             var distance = GetCurrentDistanceFromTarget();
 
@@ -159,9 +142,8 @@ namespace AgentAi.VelocityBasedAgent
         {
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
             const float defaultDistance = 5f;
-
             var path = new NavMeshPath();
-            if (!navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path))
+            if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path))
             {
                 return defaultDistance;
             }

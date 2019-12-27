@@ -1,6 +1,6 @@
 using Common.Interface;
 
-namespace TrainingSpecific
+namespace TrainingSpecific.Events
 {
     public struct ForceResetEvent
     {

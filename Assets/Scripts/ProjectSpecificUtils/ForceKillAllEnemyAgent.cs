@@ -3,6 +3,7 @@ using Common.Class;
 using EventManagement;
 using Manager;
 using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 
 namespace ProjectSpecificUtils
@@ -18,7 +19,7 @@ namespace ProjectSpecificUtils
 
         private void OnGUI()
         {
-            if (GUI.Button(new Rect(5, 5, 150, 20), "Kill EnemyAgents"))
+            if (GUI.Button(new Rect(10, 35, 125, 20), "Kill EnemyAgents"))
             {
                 foreach (var enemy in agentTracker.EnemiesInField.ToList())
                 {

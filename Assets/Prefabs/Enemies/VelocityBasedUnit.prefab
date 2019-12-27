@@ -202,12 +202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 0
     numStackedVectorObservations: 1
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 1f0f0d1283c79f04590dd337482b758c, type: 3}
+  m_Model: {fileID: 11400000, guid: 0afc5c0c9372aac4eaacc5db8051e3b8, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
   m_BehaviorName: VBA

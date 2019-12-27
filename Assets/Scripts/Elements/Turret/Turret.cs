@@ -5,6 +5,7 @@ using Common.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 using UnityUtils;
 

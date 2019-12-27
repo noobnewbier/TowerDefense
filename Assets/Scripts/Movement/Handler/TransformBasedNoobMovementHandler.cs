@@ -13,7 +13,7 @@ namespace Movement.Handler
 
         private void MoveVertical(float value)
         {
-            transform.Translate(transform.forward * value);
+            transform.position += transform.forward * value;
         }
 
         private void MoveHorizontal(float value)

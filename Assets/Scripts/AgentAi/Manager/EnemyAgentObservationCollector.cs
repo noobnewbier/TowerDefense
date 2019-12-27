@@ -7,6 +7,7 @@ using Common.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityUtils;
 
@@ -29,7 +30,7 @@ namespace AgentAi.Manager
         private Texture2D _terrainTexture;
         private IEventAggregator _eventAggregator;
 
-        [SerializeField] private  ObjectsOfInterestTracker objectsOfInterestTracker;
+        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] [Range(1, 200)] private int mapDimension;
         public int TextureDimension { get; private set; }
 
@@ -40,17 +41,18 @@ namespace AgentAi.Manager
 
         public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
 
-        public Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target)
+        public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
             var objectsWithTargetAndObserver = objectsOfInterestTracker.DynamicObjectOfInterests
                 .ReplaceAll(observer, GetObserverRepresentation(observer))
                 .ReplaceAll(target, GetTargetRepresentation(target));
 
+
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
 
-//            _observedTexture.RotateTexture(unit.transform.eulerAngles.y - 90);
+            _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y);
 
             return Instantiate(_observedTexture);
         }
@@ -66,8 +68,8 @@ namespace AgentAi.Manager
                 Instance = this;
             }
 
-//            TextureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2));
             TextureDimension = mapDimension;
+            TextureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2));
 
             _centerOfTexture = new Vector3(TextureDimension / 2f, 0, TextureDimension / 2f);
             _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);

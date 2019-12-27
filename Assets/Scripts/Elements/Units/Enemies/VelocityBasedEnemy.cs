@@ -22,6 +22,7 @@ namespace Elements.Units.Enemies
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
 
         public float Acceleration => data.Acceleration;
+        public float Deceleration => data.Deceleration;
         public float MaxSpeed => data.MaxSpeed;
         public Rigidbody Rigidbody => rb;
         public float RotationSpeed => data.RotationSpeed;

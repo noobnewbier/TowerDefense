@@ -7,6 +7,7 @@ namespace Elements.Units.Enemies.Data
     public class VelocityBasedUnitData : UnitData
     {
         [SerializeField] private float acceleration;
+        [SerializeField] private float deceleration;
         [SerializeField] private int damage;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private float maxSpeed;
@@ -16,6 +17,8 @@ namespace Elements.Units.Enemies.Data
         public int Damage => damage;
 
         public float Acceleration => acceleration;
+
+        public float Deceleration => deceleration;
 
         public float RotationSpeed => rotationSpeed;
     }

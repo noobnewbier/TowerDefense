@@ -10,11 +10,13 @@ namespace AgentAi.Manager
     {
         IDynamicObjectOfInterest Target { get; }
     }
-    
-    public class TargetPicker : MonoBehaviour, ITargetPicker, IHandle<PlayerSpawnedEvent>
+
+    public class TargetPicker : MonoBehaviour, ITargetPicker, IHandle<PlayerSpawnedEvent>, IHandle<PlayerDeadEvent>
     {
         public static TargetPicker Instance { get; private set; }
+
         public IDynamicObjectOfInterest Target { get; private set; }
+
         private IEventAggregator _eventAggregator;
 
         private void Awake()
@@ -42,6 +44,11 @@ namespace AgentAi.Manager
         private void OnDisable()
         {
             _eventAggregator.Unsubscribe(this);
+        }
+
+        public void Handle(PlayerDeadEvent @event)
+        {
+            Target = null;
         }
     }
 }

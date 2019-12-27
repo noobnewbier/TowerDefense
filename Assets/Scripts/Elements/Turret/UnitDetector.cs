@@ -6,6 +6,7 @@ using Elements.Units.Enemies;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 
 namespace Elements.Turret

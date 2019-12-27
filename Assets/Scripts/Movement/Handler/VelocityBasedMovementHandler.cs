@@ -7,6 +7,7 @@ namespace Movement.Handler
     public class VelocityBasedMovementHandler : MovementHandler
     {
         private float _acceleration;
+        private float _deceleration;
         private float _rotationSpeed;
         private float _maxSpeed;
         [SerializeField] private Rigidbody rb;
@@ -15,6 +16,7 @@ namespace Movement.Handler
         {
             _rotationSpeed = ((IHasRotation) unit).RotationSpeed;
             _acceleration = ((IMoveByVelocity) unit).Acceleration;
+            _deceleration = ((IMoveByVelocity) unit).Deceleration;
             _maxSpeed = ((IMoveByVelocity) unit).MaxSpeed;
         }
 
@@ -39,8 +41,9 @@ namespace Movement.Handler
 
         private void MoveVertical(float inputValue, float forwardSpeed)
         {
+            var speed = inputValue < 0 ? _deceleration : _acceleration;
             var velocity = rb.velocity;
-            velocity += inputValue * forwardSpeed * transform.forward;
+            velocity += inputValue * speed * transform.forward;
             
             rb.velocity = Vector3.ClampMagnitude(velocity, _maxSpeed);
         }

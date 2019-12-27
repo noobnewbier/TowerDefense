@@ -10,9 +10,6 @@ namespace UnityChan
     [RequireComponent(typeof(Animator))]
     public class UnityChanMovementHandler : MovementHandler
     {
-        // アニメーター各ステートへの参照
-        private static readonly int IdleState = Animator.StringToHash("Base Layer.Idle");
-        private static readonly int LocoState = Animator.StringToHash("Base Layer.Locomotion");
         private static readonly int RestState = Animator.StringToHash("Base Layer.Rest");
         private Animator _anim; // キャラにアタッチされるアニメーターへの参照
 
@@ -22,31 +19,18 @@ namespace UnityChan
         public float backwardSpeed = 2.0f;
 
         private GameObject _cameraObject; // メインカメラへの参照
-
-        // キャラクターコントローラ（カプセルコライダ）の参照
-        [SerializeField] private CapsuleCollider col;
+        
         private AnimatorStateInfo _currentBaseState; // base layerで使われる、アニメーターの現在の状態の参照
 
         // 以下キャラクターコントローラ用パラメタ
         // 前進速度
         public float forwardSpeed = 7.0f;
 
-        public float lookSmoother = 3.0f; // a smoothing setting for camera motion
-
-        // CapsuleColliderで設定されているコライダのHeiht、Centerの初期値を収める変数
-        private float _orgColHeight;
-        private Vector3 _originalColliderCenter;
-
         [SerializeField] private Rigidbody rb;
         [SerializeField] private Transform transformToMove;
 
         // 旋回速度
         public float rotateSpeed = 2.0f;
-
-        public bool useCurves = true; // Mecanimでカーブ調整を使うか設定する
-
-        // このスイッチが入っていないとカーブは使われない
-        public float useCurvesHeight = 0.5f; // カーブ補正の有効高さ（地面をすり抜けやすい時には大きくする）
 
         // キャラクターコントローラ（カプセルコライダ）の移動量
         private Vector3 _velocity;
@@ -59,12 +43,8 @@ namespace UnityChan
         {
             // Animatorコンポーネントを取得する
             _anim = GetComponent<Animator>();
-            // CapsuleColliderコンポーネントを取得する（カプセル型コリジョン）
             //メインカメラを取得する
             _cameraObject = GameObject.FindWithTag("MainCamera");
-            // CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
-            _orgColHeight = col.height;
-            _originalColliderCenter = col.center;
         }
 
 
@@ -100,31 +80,7 @@ namespace UnityChan
             // 左右のキー入力でキャラクタをY軸で旋回させる
             transformToMove.Rotate(0, h * rotateSpeed, 0);
 
-
-            // 以下、Animatorの各ステート中での処理
-            // Locomotion中
-            // 現在のベースレイヤーがlocoStateの時
-            if (_currentBaseState.fullPathHash == LocoState)
-            {
-                //カーブでコライダ調整をしている時は、念のためにリセットする
-                if (useCurves)
-                {
-                    ResetCollider();
-                }
-            }
-            // IDLE中の処理
-            // 現在のベースレイヤーがidleStateの時
-            else if (_currentBaseState.fullPathHash == IdleState)
-            {
-                //カーブでコライダ調整をしている時は、念のためにリセットする
-                if (useCurves)
-                {
-                    ResetCollider();
-                }
-            }
-            // REST中の処理
-            // 現在のベースレイヤーがrestStateの時
-            else if (_currentBaseState.fullPathHash == RestState)
+            if (_currentBaseState.fullPathHash == RestState)
             {
                 //cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
                 // ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
@@ -133,14 +89,6 @@ namespace UnityChan
                     _anim.SetBool(Rest, false);
                 }
             }
-        }
-
-        // キャラクターのコライダーサイズのリセット関数
-        private void ResetCollider()
-        {
-            // コンポーネントのHeight、Centerの初期値を戻す
-            col.height = _orgColHeight;
-            col.center = _originalColliderCenter;
         }
     }
 }

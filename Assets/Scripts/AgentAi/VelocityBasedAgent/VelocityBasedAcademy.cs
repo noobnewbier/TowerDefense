@@ -1,11 +1,8 @@
-using System.Collections.Generic;
+using AgentAi.Manager;
 using Common.Class;
-using Common.Interface;
-using Elements.Units.Players;
 using EventManagement;
-using Manager;
 using MLAgents;
-using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 
 namespace AgentAi.VelocityBasedAgent
@@ -14,18 +11,17 @@ namespace AgentAi.VelocityBasedAgent
     {
         private int _agentCount;
         private int _doneAgentCount;
-
         private IEventAggregator _eventAggregator;
+        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
 
-        [SerializeField] private SurvivingEnemyAgentTracker survivingEnemyAgentTracker;
-        [SerializeField] private SurvivingTurretTracker survivingTurretTracker;
 
+        //bug here!
         public void Handle(AgentDoneEvent @event)
         {
 #if TRAINING
             _doneAgentCount++;
 
-            if (_doneAgentCount == _agentCount)
+            if (_doneAgentCount >= _agentCount)
             {
                 ClearField();
             }
@@ -55,7 +51,7 @@ namespace AgentAi.VelocityBasedAgent
         {
             ClearField();
 
-            _eventAggregator.Publish(new ResetAcademyEvent(this));
+            _eventAggregator.Publish(new CurrentTrainingLevelEvent((int) resetParameters[EnvironmentParametersKey.Level]));
         }
 
         private void ClearField()
@@ -63,20 +59,10 @@ namespace AgentAi.VelocityBasedAgent
             _agentCount = 0;
             _doneAgentCount = 0;
 
-            var dynamicObjectsOnField = new List<IDynamicObjectOfInterest>();
-
-            dynamicObjectsOnField.AddRange(survivingTurretTracker.TurretsInField);
-            dynamicObjectsOnField.AddRange(survivingEnemyAgentTracker.EnemiesInField);
-            var player = FindObjectOfType<Player>();
-            if (player != null)
-            {
-                dynamicObjectsOnField.Add(player);
-            }
-
-            dynamicObjectsOnField.ForEach(d => _eventAggregator.Publish(new ForceResetEvent(d)));
+            foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests) _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
         }
 
-        public static class EnvironmentParametersKey
+        private static class EnvironmentParametersKey
         {
             public const string Level = "level";
         }

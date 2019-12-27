@@ -6,6 +6,7 @@ using Common.Event;
 using Common.Interface;
 using EventManagement;
 using TrainingSpecific;
+using TrainingSpecific.Events;
 using UnityEngine;
 
 /*
@@ -42,6 +43,11 @@ namespace Elements.Units.UnitCommon
 
         protected void TakeDamage(int damage, DamageSource damageSource)
         {
+            if (_isDyingNextFrame)
+            {
+                return;
+            }
+            
             UnitData.Health -= damage;
             if (UnitData.Health <= 0)
             {

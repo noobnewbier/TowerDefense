@@ -26,7 +26,7 @@ namespace Elements.Units.Enemies
 
         public float RotationSpeed => ((VelocityBasedUnitData) unitData).RotationSpeed;
         public float Acceleration => ((VelocityBasedUnitData) unitData).Acceleration;
+        public float Deceleration => ((VelocityBasedUnitData) unitData).Deceleration;
         public float MaxSpeed => ((VelocityBasedUnitData) unitData).MaxSpeed;
-        public Rigidbody Rigidbody => GetComponent<Rigidbody>();
     }
 }
