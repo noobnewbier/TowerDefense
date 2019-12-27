@@ -27,12 +27,12 @@ default:
 VBA:
     time_horizon: 512
     epsilon: 0.2
-    batch_size: 256
-    buffer_size: 4096
+    batch_size: 512
+    buffer_size: 8192
     hidden_units: 1024
     num_layers: 3
     beta: 1.0e-3
-    max_steps: 5e6
+    max_steps: 3.0e6
     num_epoch: 3
     reward_signals:
         extrinsic:
@@ -42,13 +42,13 @@ VBA:
             strength: 0.01
             gamma: 0.99
             encoding_size: 256
-        gail:
-            strength: 0.01
-            gamma: 0.99
-            encoding_size: 256
-            demo_path: ../../Demonstrations/VBA/VBA.demo
-    pretraining:
-        demo_path: ../../Demonstrations/VBA/VBA.demo
-        strength: 0.5
-        steps: 100000
+#        gail:
+#            strength: 0.01
+#            gamma: 0.99
+#            encoding_size: 256
+#            demo_path: ../../Demonstrations/VBA/VBA.demo
+#    pretraining:
+#        demo_path: ../../Demonstrations/VBA/VBA.demo
+#        strength: 0.5
+#        steps: 100000
        
