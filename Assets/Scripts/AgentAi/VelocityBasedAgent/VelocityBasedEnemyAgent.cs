@@ -5,12 +5,10 @@ using Common.Class;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
-using Common.Interface;
 using Elements.Units.Enemies;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
-using TrainingSpecific;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,12 +16,18 @@ using UnityUtils;
 
 namespace AgentAi.VelocityBasedAgent
 {
+    //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
     public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
+        private const float RoamingPunishment = -0.01f;
+
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
-        private ITargetPicker _targetPicker;
         private float _previousClosestDistance;
+        private float _initialDistanceToTarget;
+        private float _totalRewardForApproachingConsideringTimeRequired;
+        private ITargetPicker _targetPicker;
+
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private VelocityBasedEnemy unit;
@@ -40,7 +44,7 @@ namespace AgentAi.VelocityBasedAgent
             RewardIsDead(@event.DeathCause);
         }
 
-        //cannot think of an elegant solution here... but this do the trick
+        //cannot think of an elegant solution for heuristic controller... but this do the trick
         public override float[] Heuristic() => new float[]
         {
             PlayerInputToMachineInput(Input.GetAxis("Vertical")),
@@ -53,10 +57,34 @@ namespace AgentAi.VelocityBasedAgent
             _eventAggregator = EventAggregatorHolder.Instance;
             _targetPicker = TargetPicker.Instance;
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
-            _previousClosestDistance = GetCurrentDistanceFromTarget();
 
+            RewardCalculation();
+            
             _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
+        }
+
+        private void RewardCalculation()
+        {
+            _initialDistanceToTarget= GetCurrentDistanceFromTarget();
+            _previousClosestDistance = _initialDistanceToTarget;
+            var minimumPunishmentFromRoaming = GetMinimumPunishmentFromRoaming();
+            _totalRewardForApproachingConsideringTimeRequired = GetTotalApproachingRewardAfterConsideringTimeRequired(minimumPunishmentFromRoaming);            
+        }
+
+        private float GetMinimumPunishmentFromRoaming()
+        {
+            //ignoring the acceleration phase... It's not significant, and frankly you don't know how to calculate it
+            var shortestTimeToTargetInSec = _initialDistanceToTarget / unit.MaxSpeed;
+            return shortestTimeToTargetInSec / Time.fixedDeltaTime * RoamingPunishment / agentParameters.numberOfActionsBetweenDecisions;
+        }
+
+        private static float GetTotalApproachingRewardAfterConsideringTimeRequired(float minimumPunishmentFromRoaming)
+        {
+            //maximum reward you get by "approaching" is 2, you need to get the remaining 1 by actually touching the target
+            const float rewardForApproaching = 2f;
+            
+            return rewardForApproaching + minimumPunishmentFromRoaming;
         }
 
         public override void AgentOnDone()
@@ -74,7 +102,7 @@ namespace AgentAi.VelocityBasedAgent
             inputService.UpdateVertical(MachineInputToAction(xAction));
             inputService.UpdateHorizontal(MachineInputToAction(yAction));
 
-            PunishWonderingWithNoReason();
+            PunishRoaming();
             EncourageApproachingTarget();
         }
 
@@ -82,7 +110,7 @@ namespace AgentAi.VelocityBasedAgent
         {
             if (other.collider.CompareTag(ObjectTags.Wall))
             {
-                AddReward(-0.005f);
+                AddReward(-0.15f);
             }
         }
 
@@ -114,26 +142,22 @@ namespace AgentAi.VelocityBasedAgent
 
             _eventAggregator.Unsubscribe(this);
         }
-        
+
         //Don't walk around forever pls
-        private void PunishWonderingWithNoReason()
+        private void PunishRoaming()
         {
-            AddReward(-0.01f);
+            AddReward(RoamingPunishment);
         }
 
         private void EncourageApproachingTarget()
         {
-            const float reward = 0.1f;
-
             var distance = GetCurrentDistanceFromTarget();
 
             if (distance < _previousClosestDistance)
             {
-                // TODO: we are assuming that the unit's maximum achievement is the maximum distance that it can move in one decision. Is that correct?
-                var maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
                 var distanceDifference = _previousClosestDistance - distance;
 
-                AddReward(reward * (distanceDifference / maximumAchievement));
+                AddReward(_totalRewardForApproachingConsideringTimeRequired * (distanceDifference / _initialDistanceToTarget));
                 _previousClosestDistance = distance;
             }
         }
@@ -190,6 +214,8 @@ namespace AgentAi.VelocityBasedAgent
             return (int) machineInputAsAction;
         }
 
+        private static bool IsInValidInput(float input) => float.IsNaN(input) || float.IsInfinity(input);
+
         private enum MachineInput
         {
             PositiveAction = 2,
@@ -203,7 +229,5 @@ namespace AgentAi.VelocityBasedAgent
             NegativeAction = -1,
             NoAction = 0
         }
-
-        private static bool IsInValidInput(float input) => float.IsNaN(input) || float.IsInfinity(input);
     }
 }

@@ -3,6 +3,7 @@ using EventManagement;
 using UnityEngine;
 using UnityUtils;
 using UnityUtils.LocationProviders;
+using UnityUtils.ScaleProviders;
 
 namespace TrainingSpecific
 {
@@ -10,6 +11,7 @@ namespace TrainingSpecific
     {
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ActivityProvider activityProvider;
+        [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private GameObject dynamicObstacle;
         
         private IEventAggregator _eventAggregator;
@@ -30,6 +32,7 @@ namespace TrainingSpecific
         {
             dynamicObstacle.transform.position = locationProvider.ProvideLocation();
             dynamicObstacle.SetActive(activityProvider.ProvideIsActive());
+            dynamicObstacle.transform.localScale = scaleProvider.ProvideScale();
         }
     }
 }
