@@ -7,7 +7,7 @@ using UnityUtils.LocationProviders;
 
 namespace TrainingSpecific
 {
-    public class PlayerRespawner : MonoBehaviour, IHandle<SpawnPlayerEvent>
+    public class PlayerRespawner : MonoBehaviour, IHandle<SessionBeginEvent>
     {
         private LevelTracker _levelTracker;
         private IEventAggregator _eventAggregator;
@@ -19,7 +19,7 @@ namespace TrainingSpecific
         [SerializeField] private LocationProvider spawnPoint;
 
 
-        public void Handle(SpawnPlayerEvent @event)
+        public void Handle(SessionBeginEvent @event)
         {
             var playerInstance = Instantiate(playerPrefab);
             playerInstance.transform.localScale = Vector3.Scale(playerInstance.transform.localScale, scales[_levelTracker.CurrentLevel]);

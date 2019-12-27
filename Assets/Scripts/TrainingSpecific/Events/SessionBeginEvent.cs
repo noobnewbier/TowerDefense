@@ -1,6 +1,6 @@
 namespace TrainingSpecific.Events
 {
-    public struct SpawnPlayerEvent
+    public struct SessionBeginEvent
     {
     }
 }

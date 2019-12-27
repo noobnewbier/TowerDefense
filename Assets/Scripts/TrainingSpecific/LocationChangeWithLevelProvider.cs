@@ -1,4 +1,3 @@
-using Common.Class;
 using UnityEngine;
 using UnityUtils.LocationProviders;
 
