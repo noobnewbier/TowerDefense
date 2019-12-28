@@ -16,6 +16,7 @@ namespace Elements.Units.Enemies
 
         [SerializeField] private EnemySpawnPointData enemySpawnPointData;
         [SerializeField] private LocationProvider locationProvider;
+        [SerializeField] private SpawnPointValidator spawnPointValidator;
 
         public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
 
@@ -50,24 +51,24 @@ namespace Elements.Units.Enemies
 
         private void SpawnEnemy()
         {
-            var newEnemyComponent = enemySpawnPointData.Enemies[Random.Range(0, enemySpawnPointData.Enemies.Length)];
             var newEnemyGameObject = Instantiate(
-                newEnemyComponent.gameObject,
+                enemySpawnPointData.Enemies[Random.Range(0, enemySpawnPointData.Enemies.Length)].gameObject,
                 locationProvider.ProvideLocation(),
                 Quaternion.identity
             );
-
             newEnemyGameObject.transform.parent = transform;
             newEnemyGameObject.transform.Rotate(new Vector2(0f, Random.Range(0f, 360f)));
 
-            while (!SpawnPointValidator.IsSpawnPointValid(
-                newEnemyComponent.Bounds.center,
-                newEnemyComponent.Bounds.extents,
-                newEnemyGameObject.transform.rotation
+            while (!spawnPointValidator.IsSpawnPointValid(
+                newEnemyGameObject.transform.position,
+                newEnemyGameObject.transform.localScale / 2f,
+                newEnemyGameObject.transform.rotation,
+                newEnemyGameObject
             ))
             {
                 newEnemyGameObject.transform.position = locationProvider.ProvideLocation();
             }
+
 
             _spawnedEnemiesCount++;
         }

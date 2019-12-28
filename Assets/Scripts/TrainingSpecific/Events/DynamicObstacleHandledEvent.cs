@@ -1,6 +1,6 @@
 namespace TrainingSpecific.Events
 {
-    public struct SessionBeginEvent
+    public struct DynamicObstacleHandledEvent
     {
     }
 }

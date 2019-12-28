@@ -19,7 +19,6 @@ namespace Bullet
         private LayerMask _layerMask;
 
         [SerializeField] private BulletData data;
-        public int Damage => data.Damage;
 
         private void Awake()
         {

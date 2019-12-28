@@ -10,13 +10,14 @@ using UnityUtils.ScaleProviders;
 
 namespace TrainingSpecific
 {
-    public class DynamicObstacleController : MonoBehaviour, IHandle<SessionBeginEvent>
+    public class DynamicObstacleController : MonoBehaviour, IHandle<HandleDynamicObstacleEvent>
     {
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ActivityProvider activityProvider;
         [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private DynamicObstacle dynamicObstacle;
-
+        [SerializeField] private SpawnPointValidator spawnPointValidator;
+        
         private IEventAggregator _eventAggregator;
 
         private void OnEnable()
@@ -31,14 +32,25 @@ namespace TrainingSpecific
             _eventAggregator.Unsubscribe(this);
         }
 
-        public void Handle(SessionBeginEvent @event)
+        public void Handle(HandleDynamicObstacleEvent @event)
         {
-            dynamicObstacle.gameObject.SetActive(activityProvider.ProvideIsActive());
-            do
+            var isActive = activityProvider.ProvideIsActive();
+            dynamicObstacle.gameObject.SetActive(isActive);
+            if (isActive)
             {
-                dynamicObstacle.transform.position = locationProvider.ProvideLocation();
-                dynamicObstacle.transform.localScale = scaleProvider.ProvideScale();
-            } while (!SpawnPointValidator.IsSpawnPointValid(dynamicObstacle.Bounds.center, dynamicObstacle.Bounds.extents, dynamicObstacle.transform.rotation));
+                do
+                {
+                    dynamicObstacle.transform.position = locationProvider.ProvideLocation();
+                    dynamicObstacle.transform.localScale = scaleProvider.ProvideScale();
+                } while (!spawnPointValidator.IsSpawnPointValid(
+                    dynamicObstacle.transform.position,
+                    dynamicObstacle.transform.localScale / 2f,
+                    dynamicObstacle.transform.rotation,
+                    dynamicObstacle.gameObject
+                ));
+            }
+            
+            _eventAggregator.Publish(new DynamicObstacleHandledEvent());
         }
     }
 }

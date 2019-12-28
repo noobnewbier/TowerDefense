@@ -9,7 +9,7 @@ using UnityUtils.ScaleProviders;
 
 namespace TrainingSpecific
 {
-    public class PlayerSpawner : MonoBehaviour, IHandle<SessionBeginEvent>
+    public class PlayerSpawner : MonoBehaviour, IHandle<SpawnPlayerEvent>
     {
         private IEventAggregator _eventAggregator;
 
@@ -19,16 +19,23 @@ namespace TrainingSpecific
         [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private LocationProvider spawnPoint;
 
-        public void Handle(SessionBeginEvent @event)
+        [SerializeField] private SpawnPointValidator spawnPointValidator;
+
+        public void Handle(SpawnPlayerEvent @event)
         {
             var playerInstance = Instantiate(playerPrefab.gameObject);
+            var playerComponent = playerInstance.GetComponent<Player>();
             playerInstance.transform.localScale = scaleProvider.ProvideScale();
 
-            var playerBounds = playerInstance.GetComponent<Player>().Bounds;
             do
             {
                 playerInstance.transform.position = spawnPoint.ProvideLocation();
-            } while (!SpawnPointValidator.IsSpawnPointValid(playerBounds.center, playerBounds.extents, playerInstance.transform.rotation));
+            } while (!spawnPointValidator.IsSpawnPointValid(
+                playerInstance.transform.position + Vector3.up * 0.75f,
+                playerComponent.Bounds.size / 2f,
+                Quaternion.identity,
+                playerInstance
+            ));
         }
 
         private void OnEnable()

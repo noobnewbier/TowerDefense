@@ -20,7 +20,7 @@ namespace Elements.Units.Players
         protected override void OnEnable()
         {
             base.OnEnable();
-            
+
             EventAggregator.Publish(new PlayerSpawnedEvent(this));
         }
 

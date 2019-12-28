@@ -8,14 +8,14 @@ namespace Terrain
     public class DynamicObstacle : MonoBehaviour, IDynamicObjectOfInterest
     {
         public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
-        public Bounds Bounds { get; private set; }
+        public Bounds Bounds => _collider.bounds;
         public Transform DynamicObjectTransform => transform;
+
+        private Collider _collider;
 
         private void OnEnable()
         {
-            Bounds = GetComponent<Collider>().bounds;
-
-            GetComponent<NavMeshObstacle>().size = Bounds.size;
+            _collider = GetComponent<Collider>();
         }
     }
 }
