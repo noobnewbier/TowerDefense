@@ -10,7 +10,7 @@ using UnityUtils.ScaleProviders;
 
 namespace TrainingSpecific
 {
-    public class DynamicObstacleController : MonoBehaviour, IHandle<HandleDynamicObstacleEvent>
+    public class IndividualDynamicObstacleController : MonoBehaviour
     {
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ActivityProvider activityProvider;
@@ -18,21 +18,8 @@ namespace TrainingSpecific
         [SerializeField] private DynamicObstacle dynamicObstacle;
         [SerializeField] private SpawnPointValidator spawnPointValidator;
         
-        private IEventAggregator _eventAggregator;
-
-        private void OnEnable()
-        {
-            _eventAggregator = EventAggregatorHolder.Instance;
-
-            _eventAggregator.Subscribe(this);
-        }
-
-        private void OnDisable()
-        {
-            _eventAggregator.Unsubscribe(this);
-        }
-
-        public void Handle(HandleDynamicObstacleEvent @event)
+        
+        public void PrepareObjectForTraining()
         {
             var isActive = activityProvider.ProvideIsActive();
             dynamicObstacle.gameObject.SetActive(isActive);
@@ -49,8 +36,6 @@ namespace TrainingSpecific
                     dynamicObstacle.gameObject
                 ));
             }
-            
-            _eventAggregator.Publish(new DynamicObstacleHandledEvent());
         }
     }
 }

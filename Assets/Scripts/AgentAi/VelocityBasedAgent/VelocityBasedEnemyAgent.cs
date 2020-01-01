@@ -25,8 +25,8 @@ namespace AgentAi.VelocityBasedAgent
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
         private float _initialDistanceToTarget;
-        private float _totalRewardForApproachingConsideringTimeRequired;
         private ITargetPicker _targetPicker;
+        private float _maximumAchievement;
 
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
@@ -58,33 +58,12 @@ namespace AgentAi.VelocityBasedAgent
             _targetPicker = TargetPicker.Instance;
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
 
-            RewardCalculation();
-            
+            _initialDistanceToTarget = GetCurrentDistanceFromTarget();
+            _previousClosestDistance = _initialDistanceToTarget;
+            _maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+
             _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
-        }
-
-        private void RewardCalculation()
-        {
-            _initialDistanceToTarget= GetCurrentDistanceFromTarget();
-            _previousClosestDistance = _initialDistanceToTarget;
-            var minimumPunishmentFromRoaming = GetMinimumPunishmentFromRoaming();
-            _totalRewardForApproachingConsideringTimeRequired = GetTotalApproachingRewardAfterConsideringTimeRequired(minimumPunishmentFromRoaming);            
-        }
-
-        private float GetMinimumPunishmentFromRoaming()
-        {
-            //ignoring the acceleration phase... It's not significant, and frankly you don't know how to calculate it
-            var shortestTimeToTargetInSec = _initialDistanceToTarget / unit.MaxSpeed;
-            return shortestTimeToTargetInSec / Time.fixedDeltaTime * RoamingPunishment / agentParameters.numberOfActionsBetweenDecisions;
-        }
-
-        private static float GetTotalApproachingRewardAfterConsideringTimeRequired(float minimumPunishmentFromRoaming)
-        {
-            //maximum reward you get by "approaching" is 2, you need to get the remaining 1 by actually touching the target
-            const float rewardForApproaching = 2f;
-            
-            return rewardForApproaching + minimumPunishmentFromRoaming;
         }
 
         public override void AgentOnDone()
@@ -110,7 +89,7 @@ namespace AgentAi.VelocityBasedAgent
         {
             if (other.collider.CompareTag(ObjectTags.Wall))
             {
-                AddReward(-0.15f);
+                AddReward(-0.005f);
             }
         }
 
@@ -126,7 +105,7 @@ namespace AgentAi.VelocityBasedAgent
                     AddReward(-1f);
                     break;
                 case DamageSource.SelfDestruction:
-                    AddReward(1f);
+                    AddReward(2f);
                     break;
                 case DamageSource.Ai:
                 default:
@@ -151,14 +130,18 @@ namespace AgentAi.VelocityBasedAgent
 
         private void EncourageApproachingTarget()
         {
+            const float reward = 0.1f;
+
             var distance = GetCurrentDistanceFromTarget();
 
             if (distance < _previousClosestDistance)
             {
                 var distanceDifference = _previousClosestDistance - distance;
+                var rewardPercentage = Mathf.Clamp01(distanceDifference / _maximumAchievement);
 
-                AddReward(_totalRewardForApproachingConsideringTimeRequired * (distanceDifference / _initialDistanceToTarget));
+                AddReward(reward * rewardPercentage);
                 _previousClosestDistance = distance;
+                Debug.Log(GetCumulativeReward());
             }
         }
 

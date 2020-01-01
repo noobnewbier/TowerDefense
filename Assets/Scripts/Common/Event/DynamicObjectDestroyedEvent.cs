@@ -41,6 +41,16 @@ namespace Common.Event
         public IDynamicObjectOfInterest DynamicObject => Enemy;
     }
 
+    public struct DynamicObstacleDestroyedEvent : IDynamicObjectDestroyedEvent
+    {
+        public DynamicObstacleDestroyedEvent(IDynamicObjectOfInterest dynamicObject)
+        {
+            DynamicObject = dynamicObject;
+        }
+
+        public IDynamicObjectOfInterest DynamicObject { get; }
+    }
+
     public interface IDynamicObjectDestroyedEvent
     {
         IDynamicObjectOfInterest DynamicObject { get; }

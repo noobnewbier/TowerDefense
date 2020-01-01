@@ -28,6 +28,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4a99ed5d6840d7980d626dbf2e36aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptableEventAggregator: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
+    type: 2}
 --- !u!1001 &6366859731190157086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 7410030228759972069, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_Name
-      value: DynamicObstacle
+      value: DynamicObstacle Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7410030228759972069, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}

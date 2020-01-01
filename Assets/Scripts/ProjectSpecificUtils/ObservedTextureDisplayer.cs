@@ -65,17 +65,25 @@ namespace ProjectSpecificUtils
                 }
 
                 _timer = 0f;
-
-                var texture = canObserve.GetObservation();
-                var sprite = Sprite.Create(texture, _rect, new Vector2(0.5f, 0.5f));
-                if (_spriteRenderer != null)
+                try
                 {
-                    _spriteRenderer.sprite = sprite;
+                    var texture = canObserve.GetObservation();
+                    var sprite = Sprite.Create(texture, _rect, new Vector2(0.5f, 0.5f));
+                    if (_spriteRenderer != null)
+                    {
+                        _spriteRenderer.sprite = sprite;
+                    }
+
+                    if (_image != null)
+                    {
+                        _image.sprite = sprite;
+                    }
                 }
-
-                if (_image != null)
+                catch (Exception e)
                 {
-                    _image.sprite = sprite;
+                    Debug.Log("---- Observation Displayer Error ----");
+                    Debug.Log(e);
+                    Debug.Log("---- Observation Displayer Error ----");
                 }
             }
         }
@@ -84,7 +92,7 @@ namespace ProjectSpecificUtils
         private ICanObserveEnvironment GetCanObserveEnvironment()
         {
             if (maybeCanObserve == null) return null;
-            
+
             if (maybeCanObserve is ICanObserveEnvironment canObserveEnvironment)
             {
                 return canObserveEnvironment;
@@ -96,7 +104,7 @@ namespace ProjectSpecificUtils
         public void Handle(IDynamicObjectSpawnedEvent @event)
         {
             if (!automaticUpdateObserver) return;
-            
+
             var canObserverEnvironment = @event.DynamicObject.DynamicObjectTransform.GetComponent<ICanObserveEnvironment>();
             if (canObserverEnvironment != null)
             {

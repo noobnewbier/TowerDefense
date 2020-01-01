@@ -42,4 +42,14 @@ namespace Common.Event
         public IDynamicObjectOfInterest DynamicObject => Player;
         public Player Player { get; }
     }
+
+    public struct DynamicObstacleSpawnedEvent : IDynamicObjectSpawnedEvent
+    {
+        public DynamicObstacleSpawnedEvent(IDynamicObjectOfInterest dynamicObject)
+        {
+            DynamicObject = dynamicObject;
+        }
+
+        public IDynamicObjectOfInterest DynamicObject { get; }
+    }
 }

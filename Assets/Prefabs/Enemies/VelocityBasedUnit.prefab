@@ -207,7 +207,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 0afc5c0c9372aac4eaacc5db8051e3b8, type: 3}
+  m_Model: {fileID: 11400000, guid: 714fa6192d80a354e8fd0e7c655ec146, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
   m_BehaviorName: VBA
