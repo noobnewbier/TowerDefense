@@ -11,6 +11,11 @@ namespace TrainingSpecific.StateMachine
         private IEventAggregator _eventAggregator;
         private Animator _stateMachine;
 
+        public void Handle(DynamicObstacleHandledEvent @event)
+        {
+            _stateMachine.SetTrigger(HandledDynamicObstacle);
+        }
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _stateMachine = animator;
@@ -23,11 +28,6 @@ namespace TrainingSpecific.StateMachine
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _eventAggregator.Unsubscribe(this);
-        }
-
-        public void Handle(DynamicObstacleHandledEvent @event)
-        {
-            _stateMachine.SetTrigger(HandledDynamicObstacle);
         }
     }
 }

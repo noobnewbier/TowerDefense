@@ -9,9 +9,14 @@ namespace TrainingSpecific
     public class DynamicObstacleHandler : MonoBehaviour, IHandle<HandleDynamicObstacleEvent>
     {
         private static readonly WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
-        
-        [SerializeField] private IndividualDynamicObstacleController[] controllers;
         private IEventAggregator _eventAggregator;
+
+        [SerializeField] private IndividualDynamicObstacleController[] controllers;
+
+        public void Handle(HandleDynamicObstacleEvent @event)
+        {
+            StartCoroutine(HandleDynamicObjectsCoroutine());
+        }
 
         private void OnEnable()
         {
@@ -23,11 +28,6 @@ namespace TrainingSpecific
         private void OnDisable()
         {
             _eventAggregator.Unsubscribe(this);
-        }
-
-        public void Handle(HandleDynamicObstacleEvent @event)
-        {
-            StartCoroutine(HandleDynamicObjectsCoroutine());
         }
 
         private IEnumerator HandleDynamicObjectsCoroutine()

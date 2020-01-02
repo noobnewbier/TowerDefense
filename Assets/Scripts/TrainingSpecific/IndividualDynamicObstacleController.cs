@@ -1,8 +1,5 @@
-using Common.Class;
-using EventManagement;
 using ScriptableService;
 using Terrain;
-using TrainingSpecific.Events;
 using UnityEngine;
 using UnityUtils;
 using UnityUtils.LocationProviders;
@@ -12,13 +9,13 @@ namespace TrainingSpecific
 {
     public class IndividualDynamicObstacleController : MonoBehaviour
     {
-        [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ActivityProvider activityProvider;
-        [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private DynamicObstacle dynamicObstacle;
+        [SerializeField] private LocationProvider locationProvider;
+        [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private SpawnPointValidator spawnPointValidator;
-        
-        
+
+
         public void PrepareObjectForTraining()
         {
             var isActive = activityProvider.ProvideIsActive();

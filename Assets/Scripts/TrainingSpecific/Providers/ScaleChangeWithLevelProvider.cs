@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityUtils.ScaleProviders;
 
-namespace TrainingSpecific
+namespace TrainingSpecific.Providers
 {
     public class ScaleChangeWithLevelProvider : ScaleProvider
     {

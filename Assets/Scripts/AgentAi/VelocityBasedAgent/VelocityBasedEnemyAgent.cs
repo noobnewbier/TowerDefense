@@ -24,7 +24,6 @@ namespace AgentAi.VelocityBasedAgent
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
-        private float _initialDistanceToTarget;
         private ITargetPicker _targetPicker;
         private float _maximumAchievement;
 
@@ -58,8 +57,7 @@ namespace AgentAi.VelocityBasedAgent
             _targetPicker = TargetPicker.Instance;
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
 
-            _initialDistanceToTarget = GetCurrentDistanceFromTarget();
-            _previousClosestDistance = _initialDistanceToTarget;
+            _previousClosestDistance = GetCurrentDistanceFromTarget();
             _maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
 
             _eventAggregator.Subscribe(this);
@@ -141,7 +139,6 @@ namespace AgentAi.VelocityBasedAgent
 
                 AddReward(reward * rewardPercentage);
                 _previousClosestDistance = distance;
-                Debug.Log(GetCumulativeReward());
             }
         }
 
