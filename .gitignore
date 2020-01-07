@@ -479,3 +479,8 @@ sysinfo.txt
 
 
 # End of https://www.gitignore.io/api/unity,rider,csharp
+
+# Custom
+[Bb]uild/
+Assets/ml-agents/config/summaries/**
+Assets/ml-agents/config/models/**

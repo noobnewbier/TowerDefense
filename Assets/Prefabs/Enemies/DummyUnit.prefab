@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8293550211145048740}
   - component: {fileID: 1016968965}
   - component: {fileID: 7352862185661551323}
+  - component: {fileID: 2300165994004196814}
   m_Layer: 11
   m_Name: DummyUnit
   m_TagString: Enemy
@@ -105,7 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fe3cf398a49aab5e1d079481bff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
+  unitCollider: {fileID: 8293550211145048740}
+  unitData: {fileID: 11400000, guid: 5323e5ea77dda0b4db76d39e52d69b1f, type: 2}
 --- !u!54 &7352862185661551323
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -122,3 +124,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2300165994004196814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417a4c8388cc47dfaaf5882ad2336662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 1016968965}

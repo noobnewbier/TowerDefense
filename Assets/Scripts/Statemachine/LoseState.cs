@@ -1,8 +1,8 @@
-using Common;
-using Common.Events;
+using Common.Class;
+using Common.Event;
 using UnityEngine;
 
-namespace StateMachine
+namespace Statemachine
 {
     public class LoseState : StateMachineBehaviour
     {

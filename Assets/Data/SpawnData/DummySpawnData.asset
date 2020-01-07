@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
   m_Name: DummySpawnData
   m_EditorClassIdentifier: 
-  enemiesPrefabs:
-  - {fileID: 3610290461812041406, guid: 8335a4afb682b624693c6472a8f4d418, type: 3}
-  spawnInterval: 1
-  totalNumberOfEnemies: 3
+  enemies:
+  - {fileID: 1016968965, guid: 8335a4afb682b624693c6472a8f4d418, type: 3}
+  spawnInterval: 0.02
+  totalNumberOfEnemies: 1
