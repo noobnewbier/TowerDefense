@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityUtils;
 
-namespace TrainingSpecific
+namespace TrainingSpecific.Providers
 {
     public class ActivityChangeWithLevelProvider : ActivityProvider
     {

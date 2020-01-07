@@ -52,6 +52,8 @@ namespace AgentAi.Manager
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
 
+            var observerPosition = observer.transform.position;
+            _observedTexture.TranslateTexture((int) observerPosition.x, (int) observerPosition.z);
             _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y);
 
             return Instantiate(_observedTexture);
@@ -69,10 +71,11 @@ namespace AgentAi.Manager
             }
 
             TextureDimension = mapDimension;
-            TextureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2));
+            TextureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2;
 
             _centerOfTexture = new Vector3(TextureDimension / 2f, 0, TextureDimension / 2f);
             _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
+            
             _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
             _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
         }

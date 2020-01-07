@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityUtils.LocationProviders;
 
-namespace TrainingSpecific
+namespace TrainingSpecific.Providers
 {
     public class LocationChangeWithLevelProvider : LocationProvider
     {

@@ -19,7 +19,7 @@ namespace AgentAi.VelocityBasedAgent
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
     public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
-        private const float RoamingPunishment = -0.01f;
+        private const float RoamingPunishment = -0.025f;
 
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
@@ -81,6 +81,8 @@ namespace AgentAi.VelocityBasedAgent
 
             PunishRoaming();
             EncourageApproachingTarget();
+            
+            Debug.Log(GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
@@ -100,10 +102,10 @@ namespace AgentAi.VelocityBasedAgent
                     AddReward(-0.15f);
                     break;
                 case DamageSource.System:
-                    AddReward(-1f);
+//                    AddReward(-1f);
                     break;
                 case DamageSource.SelfDestruction:
-                    AddReward(2f);
+                    AddReward(1f);
                     break;
                 case DamageSource.Ai:
                 default:
@@ -145,7 +147,7 @@ namespace AgentAi.VelocityBasedAgent
         private float GetCurrentDistanceFromTarget()
         {
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
-            const float defaultDistance = 5f;
+            const float defaultDistance = 10f;
             var path = new NavMeshPath();
             if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path))
             {
