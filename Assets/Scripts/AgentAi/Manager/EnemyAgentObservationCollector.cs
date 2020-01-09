@@ -22,7 +22,7 @@ namespace AgentAi.Manager
     // Perhaps the main bottleneck... be careful with this
     public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IObserveEnvironmentService
     {
-        public static IObserveEnvironmentService Instance;
+        public static IObserveEnvironmentService Instance { get; private set; }
 
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
@@ -44,8 +44,13 @@ namespace AgentAi.Manager
         public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
             var objectsWithTargetAndObserver = objectsOfInterestTracker.DynamicObjectOfInterests
-                .ReplaceAll(observer, GetObserverRepresentation(observer))
-                .ReplaceAll(target, GetTargetRepresentation(target));
+                .ReplaceAll(observer, GetObserverRepresentation(observer));
+
+            if (target != null)
+            {
+                objectsWithTargetAndObserver = objectsWithTargetAndObserver
+                    .ReplaceAll(target, GetTargetRepresentation(target));
+            }
 
 
             //if this is too slow, rotate before writing
@@ -75,7 +80,7 @@ namespace AgentAi.Manager
 
             _centerOfTexture = new Vector3(TextureDimension / 2f, 0, TextureDimension / 2f);
             _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
-            
+
             _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
             _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
         }

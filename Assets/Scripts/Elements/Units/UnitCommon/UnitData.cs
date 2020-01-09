@@ -1,3 +1,4 @@
+using Rules;
 using UnityEngine;
 
 // ReSharper disable ConvertToAutoProperty
@@ -10,6 +11,9 @@ namespace Elements.Units.UnitCommon
         [SerializeField] private int health;
         [SerializeField] private int maxHealth;
         [SerializeField] private float maxSpeed;
+        [SerializeField] private Fact[] facts;
+
+        public Fact[] Facts => facts;
 
         public int Health
         {

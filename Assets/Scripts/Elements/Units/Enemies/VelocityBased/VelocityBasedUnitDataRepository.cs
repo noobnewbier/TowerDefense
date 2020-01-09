@@ -9,6 +9,7 @@ namespace Elements.Units.Enemies.VelocityBased
         float Deceleration { get; }
         float RotationSpeed { get; }
         Effect DamageEffect { get; }
+        Effect SelfEffect { get; }
     }
 
     public class VelocityBasedUnitDataRepository : UnitDataRepository, IVelocityBasedUnitDataRepository
@@ -24,5 +25,6 @@ namespace Elements.Units.Enemies.VelocityBased
         public float Deceleration => _data.Deceleration;
         public float RotationSpeed => _data.RotationSpeed;
         public Effect DamageEffect => _data.DamageEffect;
+        public Effect SelfEffect => _data.SelfEffect;
     }
 }

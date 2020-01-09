@@ -19,7 +19,6 @@ namespace Bullet
         private IEventAggregator _eventAggregator;
         private LayerMask _layerMask;
         
-        [SerializeField] private HealthInstantEffect damageEffect;
         [SerializeField] private BulletData data;
 
         private void Awake()
@@ -98,7 +97,7 @@ namespace Bullet
 
         private void DoDamage(IEffectTaker effectTaker)
         {
-            _eventAggregator.Publish(new ApplyEffectEvent(damageEffect, effectTaker, _bulletEffectSource));
+            _eventAggregator.Publish(new ApplyEffectEvent(data.DamageEffect, effectTaker, _bulletEffectSource));
         }
 
         private void SelfDestroy()

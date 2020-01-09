@@ -1,10 +1,11 @@
-using Common.Constant;
+using System.Linq;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
 using Effects;
 using Elements.Units.Enemies.VelocityBased;
 using Elements.Units.UnitCommon;
+using Rules;
 using UnityEngine;
 
 namespace Elements.Units.Enemies
@@ -14,10 +15,9 @@ namespace Elements.Units.Enemies
         private IVelocityBasedUnitDataRepository _unitDataRepository;
         private IUnitDataService _unitDataService;
         [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
-        [SerializeField] private Effect selfDestructionEffect;
+        [SerializeField] private Rule[] rules;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
-
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataService UnitDataService => _unitDataService;
 
@@ -37,10 +37,10 @@ namespace Elements.Units.Enemies
         private void OnCollisionEnter(Collision other)
         {
             var effectTaker = other.gameObject.GetComponent<IEffectTaker>();
-            if (effectTaker != null && other.collider.CompareTag(ObjectTags.Player))
+            if (effectTaker != null && rules.All(r => r.AdhereToRule(effectTaker)))
             {
                 EventAggregator.Publish(new ApplyEffectEvent(_unitDataRepository.DamageEffect, effectTaker, EffectSource.Ai));
-                ApplyEffect(selfDestructionEffect, EffectSource.SelfDestruction);
+                ApplyEffect(_unitDataRepository.SelfEffect, EffectSource.SelfDestruction);
             }
         }
     }

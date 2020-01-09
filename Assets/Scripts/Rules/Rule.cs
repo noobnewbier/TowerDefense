@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Rules
 {
-    [CreateAssetMenu(menuName = "Data/Rule")]
+    [CreateAssetMenu(menuName = "Rule")]
     public class Rule : ScriptableObject
     {
         [SerializeField] private Fact[] requiredFact;

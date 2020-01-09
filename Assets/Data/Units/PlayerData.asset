@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  maxSpeed: 0
+  facts:
+  - {fileID: 11400000, guid: bf967b86ee99e5f46862ed476c16af18, type: 2}

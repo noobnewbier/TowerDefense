@@ -9,8 +9,11 @@ namespace Elements.Units.Enemies.VelocityBased
     {
         [SerializeField] private float acceleration;
         [SerializeField] private Effect damageEffect;
+        [SerializeField] private Effect selfEffect;
         [SerializeField] private float deceleration;
         [SerializeField] private float rotationSpeed;
+
+        public Effect SelfEffect => selfEffect;
 
         public Effect DamageEffect => damageEffect;
 

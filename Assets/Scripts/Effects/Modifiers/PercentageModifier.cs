@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Effects.Modifiers
 {
+    [CreateAssetMenu(menuName = "Modifier/Percentage")]
     public class PercentageModifier : Modifier
     {
         [SerializeField] private float percentage;

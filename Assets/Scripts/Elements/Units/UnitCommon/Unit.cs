@@ -23,13 +23,12 @@ namespace Elements.Units.UnitCommon
     public abstract class Unit : Element, IEffectTaker, IHandle<ForceResetEvent>
     {
         private IList<EffectHandler> _effectsHandler;
-        [SerializeField] private Fact[] facts;
         [SerializeField] private Collider unitCollider;
         public override Bounds Bounds => unitCollider.bounds;
         protected abstract IUnitDataRepository UnitDataRepository { get; }
         protected abstract IUnitDataService UnitDataService { get; }
 
-        public IEnumerable<Fact> Facts => facts;
+        public IEnumerable<Fact> Facts => UnitDataRepository.Facts;
 
         public void Handle(ApplyEffectEvent @event)
         {

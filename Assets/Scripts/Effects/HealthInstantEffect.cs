@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Effects
 {
-    [CreateAssetMenu(menuName = "Data/InstantEffect/HealthEffect")]
+    [CreateAssetMenu(menuName = "InstantEffect/HealthEffect")]
     public class HealthInstantEffect : Effect
     {
         public override int Duration => 0;

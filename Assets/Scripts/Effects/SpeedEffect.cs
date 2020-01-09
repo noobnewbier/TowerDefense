@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Effects
 {
+    [CreateAssetMenu(menuName = "TemporaryEffect/SpeedEffect")]
     public class SpeedEffect : Effect
     {
         [SerializeField] private int duration;

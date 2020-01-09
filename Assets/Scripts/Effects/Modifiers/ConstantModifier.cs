@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Effects.Modifiers
 {
+    [CreateAssetMenu(menuName = "Modifier/Constant")]
     public class ConstantModifier : Modifier
     {
         [SerializeField] private float amount;
