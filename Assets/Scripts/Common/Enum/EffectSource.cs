@@ -1,10 +1,11 @@
 namespace Common.Enum
 {
-    public enum DamageSource
+    public enum EffectSource
     {
         Ai,
         Player,
         SelfDestruction,
+        Environment,
         System
     }
 }

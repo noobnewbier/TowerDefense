@@ -1,0 +1,19 @@
+using Common.Enum;
+using Elements.Units.UnitCommon;
+using UnityEngine;
+
+namespace Effects
+{
+    [CreateAssetMenu(menuName = "Data/InstantEffect/HealthEffect")]
+    public class HealthInstantEffect : Effect
+    {
+        public override int Duration => 0;
+
+        public override void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource effectSource)
+        {
+            base.FirstEffectApply(service, dataRepository, effectSource);
+
+            service.ModifyHealth((int) modifier.ModifyValue(dataRepository.Health), effectSource);
+        }
+    }
+}

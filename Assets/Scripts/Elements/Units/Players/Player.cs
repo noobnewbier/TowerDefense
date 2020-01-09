@@ -1,26 +1,26 @@
 using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
-using Interactable;
 using UnityEngine;
 
 namespace Elements.Units.Players
 {
-    public class Player : Unit, ICanInteract
+    public class Player : Unit
     {
-        [SerializeField] private UnitData unitData;
+        private IUnitDataRepository _unitDataRepository;
+        private IUnitDataService _unitDataService;
+        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
 
-        protected override UnitData UnitData
-        {
-            get => unitData;
-            set => unitData = value;
-        }
+        protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
+        protected override IUnitDataService UnitDataService => _unitDataService;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
 
         protected override void OnEnable()
         {
             base.OnEnable();
+            _unitDataRepository = provider.ProvideUnitDataRepository();
+            _unitDataService = provider.ProvideUnitDataService();
 
             EventAggregator.Publish(new PlayerSpawnedEvent(this));
         }
@@ -30,19 +30,14 @@ namespace Elements.Units.Players
             //todo: not implemented
         }
 
-        protected override void DeathEffect(DamageSource damageSource)
+        protected override void DeathEffect()
         {
             Destroy(gameObject);
         }
 
-        protected override void PublishDeathEvent(DamageSource deadCause)
+        protected override void PublishDeathEvent(EffectSource deadCause)
         {
             EventAggregator.Publish(new PlayerDeadEvent(this));
-        }
-
-        public void Handle(ApplyEffectEvent @event)
-        {
-            @event.Effect.ApplyEffect(unitData);
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
-using Common.Class;
-using Common.Constant;
-using Elements.Units.Players;
-using EventManagement;
+using System.Linq;
+using Common.Enum;
+using Common.Event;
+using Common.Interface;
+using Experimental;
+using Rules;
 using UnityEngine;
 
 namespace Interactable.PickUps
@@ -10,12 +12,13 @@ namespace Interactable.PickUps
     [RequireComponent(typeof(Collider))]
     public class PickUp : MonoBehaviour, IInteractable
     {
-        private IEventAggregator _eventAggregator;
+        [SerializeField] private PickUpData data;
+        [SerializeField] private Rule[] rules;
+        [SerializeField] private ScriptableEventAggregator scriptableEventAggregator;
 
         private void OnEnable()
         {
-            _eventAggregator = EventAggregatorHolder.Instance;
-            _eventAggregator.Subscribe(this);
+            scriptableEventAggregator.Instance.Subscribe(this);
 
             if (!GetComponent<Collider>().isTrigger)
             {
@@ -23,18 +26,18 @@ namespace Interactable.PickUps
             }
         }
 
-
         private void OnDisable()
         {
-            _eventAggregator.Unsubscribe(this);
+            scriptableEventAggregator.Instance.Unsubscribe(this);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            var canInteract = other.GetComponent<ICanInteract>();
-            if (canInteract != null)
+            var effectTaker = other.GetComponent<IEffectTaker>();
+
+            if (rules.All(r => r.AdhereToRule(effectTaker)))
             {
-                
+                scriptableEventAggregator.Instance.Publish(new ApplyEffectEvent(data.Effect, effectTaker, EffectSource.Environment));
             }
         }
     }

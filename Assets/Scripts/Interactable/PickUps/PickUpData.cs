@@ -7,5 +7,6 @@ namespace Interactable.PickUps
     public class PickUpData : ScriptableObject
     {
         [SerializeField] private Effect effect;
+        public Effect Effect => effect;
     }
 }

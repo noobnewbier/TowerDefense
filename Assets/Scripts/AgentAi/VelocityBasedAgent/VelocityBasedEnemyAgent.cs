@@ -6,6 +6,7 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.Enemies;
+using Elements.Units.Enemies.VelocityBased;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
@@ -22,14 +23,16 @@ namespace AgentAi.VelocityBasedAgent
         private const float RoamingPunishment = -0.025f;
 
         private IEventAggregator _eventAggregator;
+        private float _maximumAchievement;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
         private ITargetPicker _targetPicker;
-        private float _maximumAchievement;
 
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
+        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
         [SerializeField] private VelocityBasedEnemy unit;
+
 
         public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
 
@@ -58,7 +61,7 @@ namespace AgentAi.VelocityBasedAgent
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
 
             _previousClosestDistance = GetCurrentDistanceFromTarget();
-            _maximumAchievement = unit.MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+            _maximumAchievement = provider.ProvideUnitDataRepository().MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
 
             _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
@@ -81,7 +84,7 @@ namespace AgentAi.VelocityBasedAgent
 
             PunishRoaming();
             EncourageApproachingTarget();
-            
+
             Debug.Log(GetCumulativeReward());
         }
 
@@ -94,20 +97,20 @@ namespace AgentAi.VelocityBasedAgent
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
-        private void RewardIsDead(DamageSource deathCause)
+        private void RewardIsDead(EffectSource deathCause)
         {
             switch (deathCause)
             {
-                case DamageSource.Player:
+                case EffectSource.Player:
                     AddReward(-0.15f);
                     break;
-                case DamageSource.System:
+                case EffectSource.System:
 //                    AddReward(-1f);
                     break;
-                case DamageSource.SelfDestruction:
+                case EffectSource.SelfDestruction:
                     AddReward(1f);
                     break;
-                case DamageSource.Ai:
+                case EffectSource.Ai:
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -1,5 +1,5 @@
 using System;
-using Elements.Units;
+using Elements.Units.Enemies.VelocityBased;
 using UnityEngine;
 
 namespace Movement.Handler
@@ -11,13 +11,17 @@ namespace Movement.Handler
         private float _rotationSpeed;
         private float _maxSpeed;
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
+        
 
         private void OnEnable()
         {
-            _rotationSpeed = ((IHasRotation) unit).RotationSpeed;
-            _acceleration = ((IMoveByVelocity) unit).Acceleration;
-            _deceleration = ((IMoveByVelocity) unit).Deceleration;
-            _maxSpeed = ((IMoveByVelocity) unit).MaxSpeed;
+            var repository = provider.ProvideUnitDataRepository();
+            
+            _rotationSpeed = repository.RotationSpeed;
+            _acceleration = repository.Acceleration;
+            _deceleration = repository.Deceleration;
+            _maxSpeed = repository.MaxSpeed;
         }
 
         private void FixedUpdate()

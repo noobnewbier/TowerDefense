@@ -65,9 +65,7 @@ namespace Elements.Units.Enemies
                 newEnemyGameObject.transform.rotation,
                 newEnemyGameObject
             ))
-            {
                 newEnemyGameObject.transform.position = locationProvider.ProvideLocation();
-            }
 
 
             _spawnedEnemiesCount++;

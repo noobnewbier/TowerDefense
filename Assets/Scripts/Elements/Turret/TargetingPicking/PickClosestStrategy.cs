@@ -14,7 +14,10 @@ namespace Elements.Turret.TargetingPicking
             foreach (var enemy in enemies)
             {
                 var distance = Vector3.Distance(enemy.DynamicObjectTransform.position, turretTransform.position);
-                if (!(distance < minDistance)) continue;
+                if (!(distance < minDistance))
+                {
+                    continue;
+                }
 
                 currentClosest = enemy;
                 minDistance = distance;

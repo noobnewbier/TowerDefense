@@ -1,20 +1,18 @@
+using Effects;
 using Elements.Units.UnitCommon;
 using UnityEngine;
 
-namespace Elements.Units.Enemies.Data
+namespace Elements.Units.Enemies.VelocityBased
 {
     [CreateAssetMenu(menuName = "Data/VelocityBasedUnitData")]
     public class VelocityBasedUnitData : UnitData
     {
         [SerializeField] private float acceleration;
+        [SerializeField] private Effect damageEffect;
         [SerializeField] private float deceleration;
-        [SerializeField] private int damage;
         [SerializeField] private float rotationSpeed;
-        [SerializeField] private float maxSpeed;
 
-        public float MaxSpeed => maxSpeed;
-
-        public int Damage => damage;
+        public Effect DamageEffect => damageEffect;
 
         public float Acceleration => acceleration;
 

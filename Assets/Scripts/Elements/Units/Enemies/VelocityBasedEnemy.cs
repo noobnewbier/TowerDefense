@@ -2,30 +2,32 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
-using Elements.Units.Enemies.Data;
+using Effects;
+using Elements.Units.Enemies.VelocityBased;
 using Elements.Units.UnitCommon;
 using UnityEngine;
 
 namespace Elements.Units.Enemies
 {
-    public class VelocityBasedEnemy : Enemy, IHasRotation, IMoveByVelocity
+    public class VelocityBasedEnemy : Enemy
     {
-        [SerializeField] private VelocityBasedUnitData data;
-        [SerializeField] private Rigidbody rb;
-
-        protected override UnitData UnitData
-        {
-            get => data;
-            set => data = (VelocityBasedUnitData) value;
-        }
+        private IVelocityBasedUnitDataRepository _unitDataRepository;
+        private IUnitDataService _unitDataService;
+        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
+        [SerializeField] private Effect selfDestructionEffect;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
 
-        public float Acceleration => data.Acceleration;
-        public float Deceleration => data.Deceleration;
-        public float MaxSpeed => data.MaxSpeed;
-        public Rigidbody Rigidbody => rb;
-        public float RotationSpeed => data.RotationSpeed;
+        protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
+        protected override IUnitDataService UnitDataService => _unitDataService;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _unitDataRepository = provider.ProvideUnitDataRepository();
+            _unitDataService = provider.ProvideUnitDataService();
+        }
 
         protected override void DeathVisualEffect()
         {
@@ -34,11 +36,11 @@ namespace Elements.Units.Enemies
 
         private void OnCollisionEnter(Collision other)
         {
-            var damageTaker = other.gameObject.GetComponent<IDamageTaker>();
-            if (damageTaker != null && other.collider.CompareTag(ObjectTags.Player))
+            var effectTaker = other.gameObject.GetComponent<IEffectTaker>();
+            if (effectTaker != null && other.collider.CompareTag(ObjectTags.Player))
             {
-                EventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, DamageSource.Ai));
-                TakeDamage(data.MaxHealth, DamageSource.SelfDestruction);
+                EventAggregator.Publish(new ApplyEffectEvent(_unitDataRepository.DamageEffect, effectTaker, EffectSource.Ai));
+                ApplyEffect(selfDestructionEffect, EffectSource.SelfDestruction);
             }
         }
     }
