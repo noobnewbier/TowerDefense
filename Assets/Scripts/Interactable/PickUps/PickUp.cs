@@ -1,10 +1,11 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
+using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
 using Experimental;
-using Rules;
 using UnityEngine;
 
 namespace Interactable.PickUps
@@ -13,7 +14,6 @@ namespace Interactable.PickUps
     public class PickUp : MonoBehaviour, IInteractable
     {
         [SerializeField] private PickUpData data;
-        [SerializeField] private Rule[] rules;
         [SerializeField] private ScriptableEventAggregator scriptableEventAggregator;
 
         private void OnEnable()
@@ -35,10 +35,24 @@ namespace Interactable.PickUps
         {
             var effectTaker = other.GetComponent<IEffectTaker>();
 
-            if (rules.All(r => r.AdhereToRule(effectTaker)))
+            if (effectTaker != null &&data.Rules.All(r => r.AdhereToRule(effectTaker)))
             {
                 scriptableEventAggregator.Instance.Publish(new ApplyEffectEvent(data.Effect, effectTaker, EffectSource.Environment));
+
+                SelfDestroy();
             }
+        }
+
+        private void SelfDestroy()
+        {
+            VisualDestroyEffect();
+            Destroy(gameObject);
+        }
+
+        [Conditional(GameConfig.GameplayMode)]
+        private void VisualDestroyEffect()
+        {
+            //TODO: Add visual effect
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Effects
     [CreateAssetMenu(menuName = "InstantEffect/HealthEffect")]
     public class HealthInstantEffect : Effect
     {
+        public override bool CanStack => true;
         public override int Duration => 0;
 
         public override void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource effectSource)

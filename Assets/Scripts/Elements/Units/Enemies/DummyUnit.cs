@@ -1,5 +1,4 @@
 using Common.Enum;
-using Elements.Units.Enemies.VelocityBased;
 using Elements.Units.UnitCommon;
 using UnityEngine;
 
@@ -8,9 +7,9 @@ namespace Elements.Units.Enemies
     //this is a dummy that can potentially fit into anything, if configured correctly
     public class DummyUnit : Enemy
     {
-        private IVelocityBasedUnitDataRepository _unitDataRepository;
+        private IUnitDataRepository _unitDataRepository;
         private IUnitDataService _unitDataService;
-        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
+        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataService UnitDataService => _unitDataService;

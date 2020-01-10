@@ -1,3 +1,4 @@
+using System;
 using Common.Enum;
 
 namespace Elements.Units.UnitCommon
@@ -8,10 +9,11 @@ namespace Elements.Units.UnitCommon
         bool IsDyingNextFrame { get; }
         EffectSource DeathSource { get; }
         void ModifyHealth(int value, EffectSource source);
-        void ModifySpeed(float value);
+        void ModifyForwardSpeed(float value);
+        void ModifyBackwardSpeed(float value);
+
     }
-
-
+    
     public class UnitDataService : IUnitDataService
     {
         private readonly UnitData _unitData;
@@ -39,12 +41,17 @@ namespace Elements.Units.UnitCommon
                 DeathSource = source;
             }
 
-            _unitData.Health = value;
+            _unitData.Health = Math.Min(value, _unitData.MaxHealth);
         }
 
-        public void ModifySpeed(float value)
+        public void ModifyForwardSpeed(float value)
         {
-            _unitData.MaxSpeed = value;
+            _unitData.MaxForwardSpeed= value;
+        }
+
+        public void ModifyBackwardSpeed(float value)
+        {
+            _unitData.MaxBackwardSpeed = value;
         }
     }
 }

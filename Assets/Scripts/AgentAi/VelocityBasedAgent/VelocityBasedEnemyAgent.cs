@@ -6,7 +6,7 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.Enemies;
-using Elements.Units.Enemies.VelocityBased;
+using Elements.Units.UnitCommon;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
@@ -23,15 +23,15 @@ namespace AgentAi.VelocityBasedAgent
         private const float RoamingPunishment = -0.025f;
 
         private IEventAggregator _eventAggregator;
-        private float _maximumAchievement;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
         private ITargetPicker _targetPicker;
+        private IUnitDataRepository _unitDataRepository;
 
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
-        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
-        [SerializeField] private VelocityBasedEnemy unit;
+        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        [SerializeField] private SuicidalEnemy unit;
 
 
         public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
@@ -61,7 +61,7 @@ namespace AgentAi.VelocityBasedAgent
             _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
 
             _previousClosestDistance = GetCurrentDistanceFromTarget();
-            _maximumAchievement = provider.ProvideUnitDataRepository().MaxSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+            _unitDataRepository = provider.ProvideUnitDataRepository();
 
             _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
@@ -116,6 +116,8 @@ namespace AgentAi.VelocityBasedAgent
             }
 
             Done();
+            
+            Debug.Log("got death reward");
         }
 
         protected override void DisposeAgent()
@@ -140,7 +142,8 @@ namespace AgentAi.VelocityBasedAgent
             if (distance < _previousClosestDistance)
             {
                 var distanceDifference = _previousClosestDistance - distance;
-                var rewardPercentage = Mathf.Clamp01(distanceDifference / _maximumAchievement);
+                var maximumAchievement = _unitDataRepository.MaxForwardSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+                var rewardPercentage = Mathf.Clamp01(distanceDifference / maximumAchievement);
 
                 AddReward(reward * rewardPercentage);
                 _previousClosestDistance = distance;

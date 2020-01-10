@@ -9,6 +9,8 @@ namespace Effects
     public abstract class Effect : ScriptableObject
     {
         [SerializeField] protected Modifier modifier;
+        public abstract bool CanStack { get; }
+        
         public abstract int Duration { get; }
 
         public virtual void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource source)

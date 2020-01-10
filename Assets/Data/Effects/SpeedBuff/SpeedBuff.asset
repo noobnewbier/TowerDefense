@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
-  m_Name: VelocityBasedNoAIControlledByPlayerSpawnData
+  m_Script: {fileID: 11500000, guid: 25dd136c5f1c4c08addde516fcc20f18, type: 3}
+  m_Name: SpeedBuff
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 3254465578691183710, guid: c350afe5d9449754e9fae88959af5570, type: 3}
-  spawnInterval: 0
-  totalNumberOfEnemies: 1
+  modifier: {fileID: 11400000, guid: d934ca80281f46b41a209f56e6178da8, type: 2}
+  duration: 5

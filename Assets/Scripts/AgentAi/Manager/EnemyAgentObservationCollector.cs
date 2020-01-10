@@ -32,14 +32,14 @@ namespace AgentAi.Manager
 
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] [Range(1, 200)] private int mapDimension;
-        public int TextureDimension { get; private set; }
+        private int _textureDimension;
 
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
         }
 
-        public int[] Shape => new[] {TextureDimension, TextureDimension, 3};
+        public int[] Shape => new[] {_textureDimension, _textureDimension, 3};
 
         public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
@@ -75,14 +75,14 @@ namespace AgentAi.Manager
                 Instance = this;
             }
 
-            TextureDimension = mapDimension;
-            TextureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2;
+            _textureDimension = mapDimension;
+            _textureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2;
 
-            _centerOfTexture = new Vector3(TextureDimension / 2f, 0, TextureDimension / 2f);
-            _terrainTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
+            _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
+            _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
 
-            _observedTexture = new Texture2D(TextureDimension, TextureDimension, TextureFormat.RGB24, false);
-            _coordinatesWithPriority = new int[TextureDimension, TextureDimension];
+            _observedTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
+            _coordinatesWithPriority = new int[_textureDimension, _textureDimension];
         }
 
         private void OnEnable()
@@ -102,7 +102,7 @@ namespace AgentAi.Manager
             var interestedObjects = objectsOfInterestTracker.StaticObjectOfInterests;
 
             //default to null area
-            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, TextureDimension * TextureDimension).ToArray();
+            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, _textureDimension * _textureDimension).ToArray();
             _terrainTexture.SetPixels(nullColors);
 
             DrawObjectsOnTexture(_terrainTexture, interestedObjects, true);

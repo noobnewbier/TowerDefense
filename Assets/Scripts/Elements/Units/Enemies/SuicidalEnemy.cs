@@ -3,18 +3,20 @@ using Common.Enum;
 using Common.Event;
 using Common.Interface;
 using Effects;
-using Elements.Units.Enemies.VelocityBased;
 using Elements.Units.UnitCommon;
 using Rules;
 using UnityEngine;
 
 namespace Elements.Units.Enemies
 {
-    public class VelocityBasedEnemy : Enemy
+    //enemy that touches you and explode, deals damage and destruct itself
+    public class SuicidalEnemy : Enemy
     {
-        private IVelocityBasedUnitDataRepository _unitDataRepository;
+        private IUnitDataRepository _unitDataRepository;
         private IUnitDataService _unitDataService;
-        [SerializeField] private VelocityBasedDataServiceAndRepositoryProvider provider;
+        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        [SerializeField] private Effect damageEffect;
+        [SerializeField] private Effect selfEffectWhenCollide;
         [SerializeField] private Rule[] rules;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
@@ -39,8 +41,8 @@ namespace Elements.Units.Enemies
             var effectTaker = other.gameObject.GetComponent<IEffectTaker>();
             if (effectTaker != null && rules.All(r => r.AdhereToRule(effectTaker)))
             {
-                EventAggregator.Publish(new ApplyEffectEvent(_unitDataRepository.DamageEffect, effectTaker, EffectSource.Ai));
-                ApplyEffect(_unitDataRepository.SelfEffect, EffectSource.SelfDestruction);
+                EventAggregator.Publish(new ApplyEffectEvent(damageEffect, effectTaker, EffectSource.Ai));
+                ApplyEffect(selfEffectWhenCollide, EffectSource.SelfDestruction);
             }
         }
     }

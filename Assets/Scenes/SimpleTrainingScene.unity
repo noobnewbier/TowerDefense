@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626c4c3931b64918b6e81f1c2d4c01cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPointData: {fileID: 11400000, guid: db2fb2565d99bfa408ed29cab18cca5f,
+  enemySpawnPointData: {fileID: 11400000, guid: aa5cdee894c382e4189920022e246de0,
     type: 2}
   locationProvider: {fileID: 1096023334}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
@@ -2946,7 +2946,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dynamicObjectsSet
       value: 
-      objectReference: {fileID: 11400000, guid: a174c58d3ca627c4d9ec0080e8719970,
+      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
         type: 2}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}

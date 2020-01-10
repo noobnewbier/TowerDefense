@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSource: {fileID: 6469938424911708569}
   rb: {fileID: 7352862185661551323}
-  provider: {fileID: 594674787278894796}
+  provider: {fileID: 3670857956697645784}
+  transformToMove: {fileID: 6048740561362155733}
 --- !u!114 &6469938424911708569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,8 +104,8 @@ GameObject:
   - component: {fileID: 8293550211145048740}
   - component: {fileID: 7352862185661551323}
   - component: {fileID: 3254465578691183710}
-  - component: {fileID: 594674787278894796}
   - component: {fileID: 114481341022929574}
+  - component: {fileID: 3670857956697645784}
   m_Layer: 11
   m_Name: VelocityBasedUnitNoAIByPlayer
   m_TagString: Enemy
@@ -216,22 +217,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 8293550211145048740}
-  provider: {fileID: 594674787278894796}
+  provider: {fileID: 3670857956697645784}
+  damageEffect: {fileID: 11400000, guid: 318999a390179b448b4549faebace0b3, type: 2}
+  selfEffectWhenCollide: {fileID: 11400000, guid: edc9282f3500f7b43b2b5a55ba860957,
+    type: 2}
   rules:
   - {fileID: 11400000, guid: a04c3488d73b51948a7ddb6212b74584, type: 2}
---- !u!114 &594674787278894796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3610290461812041406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c93044639aa45f5987794245b6fd228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitData: {fileID: 11400000, guid: bc633983c96f25449990ee4aa850b778, type: 2}
 --- !u!114 &114481341022929574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +236,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 3254465578691183710}
+--- !u!114 &3670857956697645784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb3782cd7534e3aa1ff86315ddd51e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
 --- !u!1 &8297780213500903645
 GameObject:
   m_ObjectHideFlags: 0

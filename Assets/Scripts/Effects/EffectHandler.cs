@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Common.Enum;
 using Elements.Units.UnitCommon;
 
@@ -5,12 +7,13 @@ namespace Effects
 {
     public class EffectHandler
     {
-        private readonly Effect _effect;
+        public Effect Effect { get; }
+        public bool IsDone { get; private set; }
         private readonly EffectSource _effectSource;
         private readonly IUnitDataRepository _unitDataRepository;
         private readonly IUnitDataService _unitDataService;
 
-        private int _timer;
+        private float _timer;
 
         public EffectHandler
         (
@@ -20,31 +23,46 @@ namespace Effects
             EffectSource effectSource
         )
         {
-            _effect = effect;
+            Effect = effect;
             _unitDataRepository = unitDataRepository;
             _unitDataService = unitDataService;
             _effectSource = effectSource;
         }
 
-        public void InitEffect()
+        /// <summary>
+        /// Try to initialize the effect if possible, returning if it can initialize the effect
+        /// </summary>
+        /// <param name="existingEffects">The effects that the unit already have at the moment</param>
+        /// <returns>a boolean flag indicating whether or not the effect should be applied</returns>
+        public bool TryInitEffect(IEnumerable<Effect> existingEffects)
         {
-            _effect.FirstEffectApply(_unitDataService, _unitDataRepository, _effectSource);
-        }
-
-        public void OnTick()
-        {
-            if (_timer > _effect.Duration)
+            if (!Effect.CanStack && existingEffects.Contains(Effect))
             {
-                OnEnd();
+                return false;
             }
             
-            _timer++;
-            _effect.TickEffect(_unitDataService, _unitDataRepository, _effectSource);
+            Effect.FirstEffectApply(_unitDataService, _unitDataRepository, _effectSource);
+
+            return true;
+        }
+
+        public void OnTick(float deltaTime)
+        {
+            if (_timer > Effect.Duration)
+            {
+                OnEnd();
+                return;
+            }
+            
+            _timer += deltaTime;
+            Effect.TickEffect(_unitDataService, _unitDataRepository, _effectSource);
         }
 
         private void OnEnd()
         {
-            _effect.EndEffect(_unitDataService, _unitDataRepository, _effectSource);
+            IsDone = true;
+            
+            Effect.EndEffect(_unitDataService, _unitDataRepository, _effectSource);
         }
     }
 }

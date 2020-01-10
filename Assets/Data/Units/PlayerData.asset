@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946d113f32894c5a8d1774d4182ec85a, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  maxSpeed: 0
   facts:
   - {fileID: 11400000, guid: bf967b86ee99e5f46862ed476c16af18, type: 2}
+  health: 100
+  maxBackwardSpeed: 2
+  maxForwardSpeed: 7
+  maxHealth: 100
+  rotationSpeed: 2

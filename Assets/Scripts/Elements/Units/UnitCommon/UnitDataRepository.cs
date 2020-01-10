@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Rules;
 
 namespace Elements.Units.UnitCommon
@@ -5,8 +6,10 @@ namespace Elements.Units.UnitCommon
     public interface IUnitDataRepository
     {
         int Health { get; }
-        float MaxSpeed { get; }
-        Fact[] Facts { get; }
+        float MaxForwardSpeed { get; }
+        IEnumerable<Fact> Facts { get; }
+        float MaxBackwardSpeed { get; }
+        float RotationSpeed { get; }
     }
 
     public class UnitDataRepository : IUnitDataRepository
@@ -19,7 +22,9 @@ namespace Elements.Units.UnitCommon
         }
 
         public int Health => _unitData.Health;
-        public float MaxSpeed => _unitData.MaxSpeed;
-        public Fact[] Facts => _unitData.Facts;
+        public float MaxForwardSpeed => _unitData.MaxForwardSpeed;
+        public float MaxBackwardSpeed => _unitData.MaxBackwardSpeed;
+        public float RotationSpeed => _unitData.RotationSpeed;
+        public IEnumerable<Fact> Facts => _unitData.Facts;
     }
 }

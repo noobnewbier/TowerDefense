@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
@@ -22,7 +23,7 @@ namespace Elements.Units.UnitCommon
     [DefaultExecutionOrder(20)]
     public abstract class Unit : Element, IEffectTaker, IHandle<ForceResetEvent>
     {
-        private IList<EffectHandler> _effectsHandler;
+        private List<EffectHandler> _effectsHandlers;
         [SerializeField] private Collider unitCollider;
         public override Bounds Bounds => unitCollider.bounds;
         protected abstract IUnitDataRepository UnitDataRepository { get; }
@@ -52,7 +53,7 @@ namespace Elements.Units.UnitCommon
 
         protected virtual void Awake()
         {
-            _effectsHandler = new List<EffectHandler>();
+            _effectsHandlers = new List<EffectHandler>();
         }
 
         protected void FixedUpdate()
@@ -63,7 +64,7 @@ namespace Elements.Units.UnitCommon
                 Dies();
             }
 
-            foreach (var handler in _effectsHandler) handler.OnTick();
+            UpdateEffects();
 
             // TODO: this looks a bit strange to me... seems weird to be actively asking "am I going to die?" 
             // If it is going to die after applying the effect, publish the event it is going to die 
@@ -82,15 +83,26 @@ namespace Elements.Units.UnitCommon
 
         [Conditional(GameConfig.GameplayMode)]
         protected abstract void DeathVisualEffect();
+
         protected abstract void DeathEffect();
         protected abstract void PublishDeathEvent(EffectSource deadCause);
 
         protected void ApplyEffect(Effect effect, EffectSource source)
         {
             var handler = effect.CreateEffectHandler(UnitDataService, UnitDataRepository, source);
-            handler.InitEffect();
+            var canApply = handler.TryInitEffect(_effectsHandlers.Select(h => h.Effect));
 
-            _effectsHandler.Add(handler);
+            if (canApply)
+            {
+                _effectsHandlers.Add(handler);
+            }
+        }
+
+        private void UpdateEffects()
+        {
+            foreach (var handler in _effectsHandlers) handler.OnTick(Time.fixedDeltaTime);
+
+            _effectsHandlers.RemoveAll(h => h.IsDone);
         }
     }
 }

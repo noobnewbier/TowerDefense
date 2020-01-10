@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
-  m_Name: VelocityBasedNoAIControlledByPlayerSpawnData
+  m_Script: {fileID: 11500000, guid: f2d70980f5064f02bb9bd4d07ecb05f5, type: 3}
+  m_Name: SpeedBuffPickUp
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 3254465578691183710, guid: c350afe5d9449754e9fae88959af5570, type: 3}
-  spawnInterval: 0
-  totalNumberOfEnemies: 1
+  effect: {fileID: 11400000, guid: a801cd8d7c18a3441a778a273193feb1, type: 2}
+  rules:
+  - {fileID: 11400000, guid: a04c3488d73b51948a7ddb6212b74584, type: 2}
