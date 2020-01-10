@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 195862218070122982}
   - component: {fileID: 8118238483107726195}
   m_Layer: 11
-  m_Name: VelocityBasedUnitHeuristic
+  m_Name: SuicidaUnitHeuristic
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Model: {fileID: 11400000, guid: da9493dadbd5a60448908a3da9bae27a, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 1
-  m_BehaviorName: VBA
+  m_BehaviorName: Suicide
 --- !u!114 &114645794836903142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,14 +230,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
-    maxStep: 4096
-    resetOnDone: 0
+    maxStep: 0
+    resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
-  inputService: {fileID: 6168960639002132815}
-  navMeshAgent: {fileID: 195862218070122982}
-  provider: {fileID: 114032696697541832, guid: 26238e1c494f38444893a79bd54d9a2d, type: 3}
-  unit: {fileID: 3254465578691183710}
+  inputService: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  provider: {fileID: 0}
+  unit: {fileID: 0}
 --- !u!114 &114261176968331674
 MonoBehaviour:
   m_ObjectHideFlags: 0

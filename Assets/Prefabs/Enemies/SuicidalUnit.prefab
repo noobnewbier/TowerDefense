@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 195152517545128316}
   - component: {fileID: 3704630309950303712}
   m_Layer: 11
-  m_Name: VelocityBasedUnit
+  m_Name: SuicidalUnit
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Model: {fileID: 11400000, guid: cf4d70f5ec961d94189a87e3332dd0e6, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
-  m_BehaviorName: VBA
+  m_BehaviorName: Suicide
 --- !u!114 &114645794836903142
 MonoBehaviour:
   m_ObjectHideFlags: 0

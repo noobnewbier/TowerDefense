@@ -15,10 +15,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityUtils;
 
-namespace AgentAi.VelocityBasedAgent
+namespace AgentAi.SuicidalEnemyAgent
 {
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class VelocityBasedEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
+    public class SuicidalEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
         private const float RoamingPunishment = -0.025f;
 
@@ -116,7 +116,7 @@ namespace AgentAi.VelocityBasedAgent
             }
 
             Done();
-            
+
             Debug.Log("got death reward");
         }
 
