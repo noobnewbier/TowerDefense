@@ -4,7 +4,6 @@ using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
-using TrainingSpecific;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityUtils;
@@ -30,12 +29,14 @@ namespace Elements.Turret
 
         //it does not matter for a turret
         public override Bounds Bounds => new Bounds(transform.position, Vector3.one);
+
         public void Handle(ForceResetEvent @event)
         {
             if (!ReferenceEquals(@event.DynamicObjectOfInterest, this))
             {
                 return;
             }
+
             Destroy(gameObject);
         }
 
@@ -47,14 +48,14 @@ namespace Elements.Turret
         protected override void OnEnable()
         {
             base.OnEnable();
-            
+
             EventAggregator.Publish(new TurretSpawnedEvent(this));
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            
+
             EventAggregator.Publish(new TurretDestroyedEvent(this));
         }
 
@@ -66,10 +67,16 @@ namespace Elements.Turret
                 _targetRefreshTimer = 0f;
             }
 
-            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f)) _targetRefreshTimer += Time.fixedDeltaTime;
+            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
+            {
+                _targetRefreshTimer += Time.fixedDeltaTime;
+            }
 
             var targetPosition = _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
-            if (targetPosition.HasValue) Aim(targetPosition.Value);
+            if (targetPosition.HasValue)
+            {
+                Aim(targetPosition.Value);
+            }
 
             genericShootService.IsShooting = ShouldShoot();
         }
@@ -82,9 +89,6 @@ namespace Elements.Turret
         }
 
         //Shoot as long as we have enemies - Kill On Sight Comrade
-        private bool ShouldShoot()
-        {
-            return unitDetector.EnemiesInRange.Any();
-        }
+        private bool ShouldShoot() => unitDetector.EnemiesInRange.Any();
     }
 }

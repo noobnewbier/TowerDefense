@@ -13,12 +13,12 @@ namespace Elements.Units.Enemies
             EventAggregator.Publish(new EnemySpawnedEvent(this));
         }
 
-        protected override void DeathEffect(DamageSource damageSource)
+        protected override void DeathEffect()
         {
             Destroy(gameObject);
         }
 
-        protected override void PublishDeathEvent(DamageSource deadCause)
+        protected override void PublishDeathEvent(EffectSource deadCause)
         {
             EventAggregator.Publish(new EnemyDeadEvent(this, deadCause));
         }

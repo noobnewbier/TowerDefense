@@ -1,11 +1,13 @@
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
+using Effects;
 using EventManagement;
-using TrainingSpecific;
+using Rules;
 using TrainingSpecific.Events;
 using UnityEngine;
 
@@ -19,55 +21,24 @@ using UnityEngine;
 namespace Elements.Units.UnitCommon
 {
     [DefaultExecutionOrder(20)]
-    public abstract class Unit : Element, IDamageTaker, IHandle<ForceResetEvent>
+    public abstract class Unit : Element, IEffectTaker, IHandle<ForceResetEvent>
     {
+        private List<EffectHandler> _effectsHandlers;
         [SerializeField] private Collider unitCollider;
-        protected abstract UnitData UnitData { get; set; }
         public override Bounds Bounds => unitCollider.bounds;
+        protected abstract IUnitDataRepository UnitDataRepository { get; }
+        protected abstract IUnitDataService UnitDataService { get; }
 
-        private DamageSource _deadCause;
-        private bool _isDyingNextFrame;
+        public IEnumerable<Fact> Facts => UnitDataRepository.Facts;
 
-        public void Handle(DamageEvent @event)
+        public void Handle(ApplyEffectEvent @event)
         {
-            if (ReferenceEquals(@event.DamageTaker, this) && !_isDyingNextFrame)
-            {
-                TakeDamage(@event.Amount, @event.DamageSource);
-            }
-        }
-
-        protected void Awake()
-        {
-            UnitData = Instantiate(UnitData);
-        }
-
-        protected void TakeDamage(int damage, DamageSource damageSource)
-        {
-            if (_isDyingNextFrame)
+            if (!ReferenceEquals(@event.EffectTaker, this) || UnitDataService.IsDyingNextFrame)
             {
                 return;
             }
-            
-            UnitData.Health -= damage;
-            if (UnitData.Health <= 0)
-            {
-                SetToDieNextFrame(damageSource);
-            }
-        }
 
-        protected void FixedUpdate()
-        {
-            if (_isDyingNextFrame)
-            {
-                Dies(_deadCause);
-            }
-        }
-
-        private void SetToDieNextFrame(DamageSource deadCause)
-        {
-            _isDyingNextFrame = true;
-            _deadCause = deadCause;
-            PublishDeathEvent(deadCause);
+            ApplyEffect(@event.Effect, @event.Source);
         }
 
         public void Handle(ForceResetEvent @event)
@@ -76,21 +47,62 @@ namespace Elements.Units.UnitCommon
             {
                 return;
             }
-            
-            TakeDamage(UnitData.MaxHealth, DamageSource.System);
+
+            UnitDataService.ModifyHealth(-UnitDataRepository.Health, EffectSource.System);
         }
-        
-        private void Dies(DamageSource damageSource)
+
+        protected virtual void Awake()
+        {
+            _effectsHandlers = new List<EffectHandler>();
+        }
+
+        protected void FixedUpdate()
+        {
+            // If it is going to die, die
+            if (UnitDataService.IsDyingNextFrame)
+            {
+                Dies();
+            }
+
+            UpdateEffects();
+
+            // TODO: this looks a bit strange to me... seems weird to be actively asking "am I going to die?" 
+            // If it is going to die after applying the effect, publish the event it is going to die 
+            if (UnitDataService.IsDyingNextFrame)
+            {
+                PublishDeathEvent(UnitDataService.DeathSource);
+            }
+        }
+
+        private void Dies()
         {
             //order should be important here...
             DeathVisualEffect();
-            DeathEffect(damageSource);
+            DeathEffect();
         }
 
         [Conditional(GameConfig.GameplayMode)]
         protected abstract void DeathVisualEffect();
 
-        protected abstract void DeathEffect(DamageSource damageSource);
-        protected abstract void PublishDeathEvent(DamageSource deadCause);
+        protected abstract void DeathEffect();
+        protected abstract void PublishDeathEvent(EffectSource deadCause);
+
+        protected void ApplyEffect(Effect effect, EffectSource source)
+        {
+            var handler = effect.CreateEffectHandler(UnitDataService, UnitDataRepository, source);
+            var canApply = handler.TryInitEffect(_effectsHandlers.Select(h => h.Effect));
+
+            if (canApply)
+            {
+                _effectsHandlers.Add(handler);
+            }
+        }
+
+        private void UpdateEffects()
+        {
+            foreach (var handler in _effectsHandlers) handler.OnTick(Time.fixedDeltaTime);
+
+            _effectsHandlers.RemoveAll(h => h.IsDone);
+        }
     }
 }

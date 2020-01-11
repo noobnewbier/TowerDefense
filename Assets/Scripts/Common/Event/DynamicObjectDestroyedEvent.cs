@@ -30,14 +30,14 @@ namespace Common.Event
 
     public struct EnemyDeadEvent : IDynamicObjectDestroyedEvent
     {
-        public EnemyDeadEvent(Enemy enemy, DamageSource deathCause)
+        public EnemyDeadEvent(Enemy enemy, EffectSource deathCause)
         {
             Enemy = enemy;
             DeathCause = deathCause;
         }
 
         public Enemy Enemy { get; }
-        public DamageSource DeathCause { get; }
+        public EffectSource DeathCause { get; }
         public IDynamicObjectOfInterest DynamicObject => Enemy;
     }
 

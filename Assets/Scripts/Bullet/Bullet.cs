@@ -5,6 +5,7 @@ using Common.Constant;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
+using Effects;
 using EventManagement;
 using UnityEngine;
 using UnityUtils;
@@ -13,11 +14,11 @@ namespace Bullet
 {
     public class Bullet : PooledMonoBehaviour
     {
-        private DamageSource _bulletDamageSource;
+        private EffectSource _bulletEffectSource;
         private float _cumulatedTraveledDistance;
         private IEventAggregator _eventAggregator;
         private LayerMask _layerMask;
-
+        
         [SerializeField] private BulletData data;
 
         private void Awake()
@@ -30,11 +31,11 @@ namespace Bullet
             {
                 case ObjectTags.DamageAi:
                     layerToIgnore = LayerNames.PlayerDamageTaker;
-                    _bulletDamageSource = DamageSource.Player;
+                    _bulletEffectSource = EffectSource.Player;
                     break;
                 case ObjectTags.DamagePlayer:
                     layerToIgnore = LayerNames.AiDamageTaker;
-                    _bulletDamageSource = DamageSource.Ai;
+                    _bulletEffectSource = EffectSource.Ai;
                     break;
                 default:
                     throw new NotImplementedException("dude, wth am I supposed to do? What should I hit? I am confused as a bullet");
@@ -57,7 +58,10 @@ namespace Bullet
             var traveledDistance = data.Speed * Time.fixedDeltaTime;
             _cumulatedTraveledDistance += traveledDistance;
 
-            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask)) OnCollide(hit);
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask))
+            {
+                OnCollide(hit);
+            }
 
             if (_cumulatedTraveledDistance > data.Range)
             {
@@ -80,17 +84,20 @@ namespace Bullet
 
         private void OnCollide(RaycastHit hit)
         {
-            var damageTaker = hit.transform.GetComponent<IDamageTaker>();
+            var effectTaker = hit.transform.GetComponent<IEffectTaker>();
 
-            if (damageTaker != null) DoDamage(damageTaker);
+            if (effectTaker != null)
+            {
+                DoDamage(effectTaker);
+            }
 
             AfterEffect(hit.point);
             SelfDestroy();
         }
 
-        private void DoDamage(IDamageTaker damageTaker)
+        private void DoDamage(IEffectTaker effectTaker)
         {
-            _eventAggregator.Publish(new DamageEvent(damageTaker, data.Damage, _bulletDamageSource));
+            _eventAggregator.Publish(new ApplyEffectEvent(data.DamageEffect, effectTaker, _bulletEffectSource));
         }
 
         private void SelfDestroy()

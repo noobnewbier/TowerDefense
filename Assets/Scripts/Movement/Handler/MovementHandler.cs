@@ -8,6 +8,5 @@ namespace Movement.Handler
     public abstract class MovementHandler : MonoBehaviour
     {
         [SerializeField] protected MovementInputSource inputSource;
-        [SerializeField] protected Unit unit;
     }
 }

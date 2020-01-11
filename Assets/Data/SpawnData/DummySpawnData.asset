@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DummySpawnData
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1016968965, guid: 8335a4afb682b624693c6472a8f4d418, type: 3}
+  - {fileID: 3254465578691183710, guid: 5f06994d5af535742869443dd3114c36, type: 3}
   spawnInterval: 0.02
   totalNumberOfEnemies: 1

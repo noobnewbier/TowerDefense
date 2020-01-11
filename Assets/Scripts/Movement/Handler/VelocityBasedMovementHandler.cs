@@ -1,23 +1,21 @@
 using System;
-using Elements.Units;
+using Elements.Units.UnitCommon;
 using UnityEngine;
 
 namespace Movement.Handler
 {
     public class VelocityBasedMovementHandler : MovementHandler
     {
-        private float _acceleration;
-        private float _deceleration;
-        private float _rotationSpeed;
-        private float _maxSpeed;
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        [SerializeField] private Transform transformToMove;
+
+        private IUnitDataRepository _repository;
+
 
         private void OnEnable()
         {
-            _rotationSpeed = ((IHasRotation) unit).RotationSpeed;
-            _acceleration = ((IMoveByVelocity) unit).Acceleration;
-            _deceleration = ((IMoveByVelocity) unit).Deceleration;
-            _maxSpeed = ((IMoveByVelocity) unit).MaxSpeed;
+            _repository = provider.ProvideUnitDataRepository();
         }
 
         private void FixedUpdate()
@@ -29,28 +27,28 @@ namespace Movement.Handler
             {
                 throw new ArgumentOutOfRangeException($"Horizontal: {horizontal} cannot be greater than 1 or smaller than 0");
             }
+
             if (vertical > 1f || vertical < -1f)
             {
                 throw new ArgumentOutOfRangeException($"Vertical: {vertical} cannot be greater than 1 or smaller than 0");
-            }      
+            }
 #endif
-            
-            MoveVertical(vertical, _acceleration);
-            MoveHorizontal(horizontal, _rotationSpeed);
+
+            MoveVertical(vertical);
+            MoveHorizontal(horizontal);
         }
 
-        private void MoveVertical(float inputValue, float forwardSpeed)
+        private void MoveVertical(float inputValue)
         {
-            var speed = inputValue < 0 ? _deceleration : _acceleration;
-            var velocity = rb.velocity;
-            velocity += inputValue * speed * transform.forward;
-            
-            rb.velocity = Vector3.ClampMagnitude(velocity, _maxSpeed);
+            var speed = inputValue < 0 ? _repository.MaxBackwardSpeed : _repository.MaxForwardSpeed;
+            var velocity = inputValue * speed * transform.forward;
+
+            transformToMove.localPosition += velocity * Time.fixedDeltaTime;
         }
 
-        private void MoveHorizontal(float inputValue, float rotationSpeed)
+        private void MoveHorizontal(float inputValue)
         {
-            rb.transform.Rotate(rotationSpeed * inputValue * Vector3.up);
+            rb.transform.Rotate(_repository.RotationSpeed * inputValue * Vector3.up);
         }
     }
 }

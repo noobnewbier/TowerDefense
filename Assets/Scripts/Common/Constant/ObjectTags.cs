@@ -8,5 +8,6 @@ namespace Common.Constant
         public const string Ai = "Ai";
         public const string Player = "Player";
         public const string Wall = "Wall";
+        public const string PickUp = "PickUp";
     }
 }

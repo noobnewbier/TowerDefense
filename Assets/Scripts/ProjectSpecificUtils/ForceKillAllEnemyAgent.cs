@@ -2,7 +2,6 @@ using System.Linq;
 using Common.Class;
 using EventManagement;
 using Manager;
-using TrainingSpecific;
 using TrainingSpecific.Events;
 using UnityEngine;
 
