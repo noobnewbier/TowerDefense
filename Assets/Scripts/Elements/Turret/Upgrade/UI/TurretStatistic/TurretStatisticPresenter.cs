@@ -1,7 +1,7 @@
 using System;
 using EventManagement;
 
-namespace Elements.Turret.Upgrade.UI
+namespace Elements.Turret.Upgrade.UI.TurretStatistic
 {
     public interface IStatisticPresenter : IDisposable
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Elements.Turret.Upgrade.UI
+namespace Elements.Turret.Upgrade.UI.TurretStatistic
 {
     public interface IStatisticView
     {
