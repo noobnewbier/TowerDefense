@@ -21,9 +21,9 @@ namespace Elements.Turret
 
         private PooledMonoBehaviour _pooledBullet;
         private float _targetRefreshTimer;
-
-        [SerializeField] private TurretData data;
         [SerializeField] private GenericShootService genericShootService;
+
+        [SerializeField] private TurretInformationRepository repository;
         [SerializeField] private Transform turretRotatable;
         [SerializeField] private UnitDetector unitDetector;
 
@@ -34,20 +34,12 @@ namespace Elements.Turret
 
         public void Handle(ForceResetEvent @event)
         {
-            if (!ReferenceEquals(@event.DynamicObjectOfInterest, this))
-            {
-                return;
-            }
+            if (!ReferenceEquals(@event.DynamicObjectOfInterest, this)) return;
 
             Destroy(gameObject);
         }
 
-        public IEnumerable<Fact> Facts => data.Facts;
-
-        private void Awake()
-        {
-            unitDetector.Initialize(data);
-        }
+        public IEnumerable<Fact> Facts => repository.Facts;
 
         protected override void OnEnable()
         {
@@ -67,20 +59,14 @@ namespace Elements.Turret
         {
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
-                _currentTarget = data.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
+                _currentTarget = repository.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
                 _targetRefreshTimer = 0f;
             }
 
-            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
-            {
-                _targetRefreshTimer += Time.fixedDeltaTime;
-            }
+            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f)) _targetRefreshTimer += Time.fixedDeltaTime;
 
             var targetPosition = _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
-            if (targetPosition.HasValue)
-            {
-                Aim(targetPosition.Value);
-            }
+            if (targetPosition.HasValue) Aim(targetPosition.Value);
 
             genericShootService.IsShooting = ShouldShoot();
         }
@@ -89,7 +75,7 @@ namespace Elements.Turret
         {
             var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
 
-            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, data.RotateSpeed * Time.fixedDeltaTime);
+            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, repository.RotateSpeed * Time.fixedDeltaTime);
         }
 
         //Shoot as long as we have enemies - Kill On Sight Comrade

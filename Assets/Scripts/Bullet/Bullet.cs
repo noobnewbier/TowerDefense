@@ -23,7 +23,7 @@ namespace Bullet
 
         private void Awake()
         {
-            #region set up layer so we do not hit friendly fire
+            #region set up layer so we do not friendly fire
 
             string layerToIgnore;
 

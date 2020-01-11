@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8462197b81ba49fe8061ad4b06fabfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 2960eeec2a2c0e4468f17f837d3d633c, type: 2}
   genericShootService: {fileID: 8884615131391382605}
+  repository: {fileID: 11400000, guid: 0440113427568464b9e980c6937a5a4f, type: 2}
   turretRotatable: {fileID: 2580605541360687346}
   unitDetector: {fileID: 6347404220687763523}
 --- !u!135 &6977584255035843831
@@ -473,8 +473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 1520384083734201723}
-  data: {fileID: 11400000, guid: a626bc5ea7a99c040a92bc893bb83a37, type: 2}
   inputSource: {fileID: 8884615131391382605}
+  repository: {fileID: 11400000, guid: 0440113427568464b9e980c6937a5a4f, type: 2}
 --- !u!114 &6347404220687763523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeCollider: {fileID: 6977584255035843831}
+  repository: {fileID: 11400000, guid: 0440113427568464b9e980c6937a5a4f, type: 2}
 --- !u!114 &8884615131391382605
 MonoBehaviour:
   m_ObjectHideFlags: 0

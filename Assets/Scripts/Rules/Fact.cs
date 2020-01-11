@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Rules
 {
-    [CreateAssetMenu(menuName = "Information")]
+    [CreateAssetMenu(menuName = "Fact")]
     public class Fact : ScriptableObject
     {
         [SerializeField] private string description;
