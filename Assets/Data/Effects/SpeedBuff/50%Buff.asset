@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f86ed912e1da4c21ad2722092e5a9297, type: 3}
-  m_Name: 10%Buff
+  m_Name: 50%Buff
   m_EditorClassIdentifier: 
-  percentage: 1.1
+  percentage: 1.5

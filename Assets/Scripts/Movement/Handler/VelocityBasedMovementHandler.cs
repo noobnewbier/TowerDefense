@@ -6,7 +6,6 @@ namespace Movement.Handler
 {
     public class VelocityBasedMovementHandler : MovementHandler
     {
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
         [SerializeField] private Transform transformToMove;
 
@@ -41,14 +40,14 @@ namespace Movement.Handler
         private void MoveVertical(float inputValue)
         {
             var speed = inputValue < 0 ? _repository.MaxBackwardSpeed : _repository.MaxForwardSpeed;
-            var velocity = inputValue * speed * transform.forward;
+            var velocity = inputValue * speed * transformToMove.forward;
 
             transformToMove.localPosition += velocity * Time.fixedDeltaTime;
         }
 
         private void MoveHorizontal(float inputValue)
         {
-            rb.transform.Rotate(_repository.RotationSpeed * inputValue * Vector3.up);
+            transformToMove.Rotate(_repository.RotationSpeed * inputValue * Vector3.up);
         }
     }
 }
