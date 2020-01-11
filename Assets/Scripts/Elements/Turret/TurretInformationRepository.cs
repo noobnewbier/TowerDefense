@@ -11,12 +11,16 @@ namespace Elements.Turret
     public class TurretInformationRepository : ScriptableObject
     {
         [SerializeField] private BulletShooterData bulletShooterData;
+        [SerializeField] private float damageValueInUi;
+        [SerializeField] private string description;
         [SerializeField] private TurretData turretData;
+
+        public string Description => description;
 
         public float ShootFrequency => bulletShooterData.ShootFrequency;
 
         //we don't actually have access to how much damage a turret does, it wouldn't be possible to calculate either as they can be poisoning enemies etc. Instead we "fake" a damage value so we can display it in the UI
-        public float DamageValueInUI => 0f;
+        public float DamageValueInUi => damageValueInUi;
         public float RotateSpeed => turretData.RotateSpeed;
         public IEnumerable<Fact> Facts => turretData.Facts;
         public float DetectionRange => turretData.DetectionRange;
