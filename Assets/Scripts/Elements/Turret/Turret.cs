@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using Bullet.InputSource;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using Rules;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityUtils;
@@ -11,7 +13,7 @@ using UnityUtils;
 namespace Elements.Turret
 {
     [RequireComponent(typeof(UnitDetector))]
-    public class Turret : Element, IHandle<ForceResetEvent>
+    public class Turret : Element, IHandle<ForceResetEvent>, IHasFact
     {
         private const float UpdateTargetInterval = 0.5f;
 
@@ -39,6 +41,8 @@ namespace Elements.Turret
 
             Destroy(gameObject);
         }
+
+        public IEnumerable<Fact> Facts => data.Facts;
 
         private void Awake()
         {
