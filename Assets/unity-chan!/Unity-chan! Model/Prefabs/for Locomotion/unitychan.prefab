@@ -6918,10 +6918,8 @@ GameObject:
   m_Component:
   - component: {fileID: 400100}
   - component: {fileID: 9500000}
-  - component: {fileID: 13600000}
-  - component: {fileID: 5400000}
   - component: {fileID: 11400000}
-  - component: {fileID: 595159457}
+  - component: {fileID: 1651780740}
   m_Layer: 12
   m_Name: unitychan
   m_TagString: Player
@@ -6947,6 +6945,8 @@ Transform:
   - {fileID: 400004}
   - {fileID: 400002}
   - {fileID: 397078065}
+  - {fileID: 8645080476665564364}
+  - {fileID: 9065456973373780019}
   - {fileID: 8143917506744192915}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -6970,36 +6970,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &13600000
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100338}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
---- !u!54 &5400000
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100338}
-  serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7032,7 +7002,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 8564dc45968774e70ad835503fda627e, type: 2}
   delayWeight: 0.3
   isKeepFace: 0
---- !u!114 &595159457
+--- !u!114 &1651780740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7041,20 +7011,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9001bcbd91e76437cb0f52f12764f2f0, type: 3}
+  m_Script: {fileID: 11500000, guid: b94ff328ea3e4fd1b4d5b37b395be656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputSource: {fileID: 0}
-  unit: {fileID: 0}
   animSpeed: 1.5
-  backwardSpeed: 2
-  col: {fileID: 0}
-  forwardSpeed: 7
-  lookSmoother: 3
-  rb: {fileID: 0}
-  rotateSpeed: 2
-  useCurves: 1
-  useCurvesHeight: 0.5
 --- !u!1 &397078064
 GameObject:
   m_ObjectHideFlags: 0
@@ -7085,6 +7046,66 @@ Transform:
   m_Father: {fileID: 400100}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2277213186935390110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8645080476665564364}
+  m_Layer: 12
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8645080476665564364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277213186935390110}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.988, z: 0.163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400100}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7032392374319193748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9065456973373780019}
+  m_Layer: 12
+  m_Name: TurretSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9065456973373780019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032392374319193748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400100}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8022469735368844085
 GameObject:
   m_ObjectHideFlags: 0
@@ -7113,5 +7134,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400100}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

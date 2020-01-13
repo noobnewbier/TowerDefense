@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515f51d8c49f47c8ac6892e8a5ff11cc, type: 3}
   m_Name: TurretPlacementControlModel
   m_EditorClassIdentifier: 
-  turretShopEntry: {fileID: 11400000, guid: 45c58febf7109484ba6a650e1fbaf7b2, type: 2}
+  turretProvider: {fileID: 3473750386440864997, guid: 84a3fab7296e8004e8028ea7c92d80e3,
+    type: 3}

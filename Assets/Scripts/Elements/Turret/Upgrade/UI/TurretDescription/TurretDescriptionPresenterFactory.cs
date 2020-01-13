@@ -1,17 +1,19 @@
-using EventManagement;
+using Elements.Turret.Upgrade.UI.Option;
+using Experimental;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Elements.Turret.Upgrade.UI.TurretDescription
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/TurretDescriptionPresenter")]
     public class TurretDescriptionPresenterFactory : ScriptableObject
     {
-        [SerializeField] private IEventAggregator eventAggregator;
-        [SerializeField] private TurretDescriptionModel model;
+        [FormerlySerializedAs("eventAggregator")] [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
+        [SerializeField] private SelectedOptionModel model;
 
         public ITurretDescriptionPresenter CreatePresenter(ITurretDescriptionView view)
         {
-            return new TurretDescriptionPresenter(eventAggregator, view, model);
+            return new TurretDescriptionPresenter(eventAggregatorProvider.ProvideEventAggregator(), view, model);
         }
     }
 }

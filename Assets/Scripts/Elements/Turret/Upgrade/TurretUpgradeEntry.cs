@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using Rules;
-using Shop;
 using UnityEngine;
 
 namespace Elements.Turret.Upgrade
 {
+    [CreateAssetMenu(menuName = "Data/TurretUpgradeEntry")]
     public class TurretUpgradeEntry : ScriptableObject
     {
-        [SerializeField] private TurretShopEntry shopEntry;
-
-        public TurretShopEntry ShopEntry => shopEntry;
-
         [SerializeField] private Rule[] rulesToUpgrade;
+        [SerializeField] private TurretProvider turretProvider;
+
         public IEnumerable<Rule> RulesToUpgrade => rulesToUpgrade;
+        public ITurretRepository TurretRepository => turretProvider.GetRepository();
+
+        public TurretProvider TurretProvider => turretProvider;
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7437e2921ca7d47b702c8ccd98ee2c, type: 3}
   m_Name: IsPlayer
   m_EditorClassIdentifier: 
-  description: 
+  description: holder is a player

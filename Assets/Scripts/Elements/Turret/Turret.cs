@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Bullet.InputSource;
+using Common.Constant;
 using Common.Enum;
 using Common.Event;
+using Elements.Turret.Upgrade;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using Rules;
@@ -13,17 +16,16 @@ using UnityUtils;
 namespace Elements.Turret
 {
     [RequireComponent(typeof(UnitDetector))]
-    public class Turret : Element, IHandle<ForceResetEvent>, IHasFact
+    public class Turret : Element, IHandle<ForceResetEvent>, IUpgradable
     {
         private const float UpdateTargetInterval = 0.5f;
 
         private Unit _currentTarget;
-
+        private ITurretRepository _repository;
         private PooledMonoBehaviour _pooledBullet;
         private float _targetRefreshTimer;
         [SerializeField] private GenericShootService genericShootService;
-
-        [SerializeField] private TurretInformationRepository repository;
+        [SerializeField] private TurretProvider repositoryProvider;
         [SerializeField] private Transform turretRotatable;
         [SerializeField] private UnitDetector unitDetector;
 
@@ -39,12 +41,13 @@ namespace Elements.Turret
             Destroy(gameObject);
         }
 
-        public IEnumerable<Fact> Facts => repository.Facts;
+        public IEnumerable<Fact> Facts => _repository.Facts;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
+            _repository = repositoryProvider.GetRepository();
             EventAggregator.Publish(new TurretSpawnedEvent(this));
         }
 
@@ -59,7 +62,7 @@ namespace Elements.Turret
         {
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
-                _currentTarget = repository.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
+                _currentTarget = _repository.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
                 _targetRefreshTimer = 0f;
             }
 
@@ -75,7 +78,25 @@ namespace Elements.Turret
         {
             var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
 
-            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, repository.RotateSpeed * Time.fixedDeltaTime);
+            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, _repository.RotateSpeed * Time.fixedDeltaTime);
+        }
+
+        public void UpgradeFrom(GameObject newTurret)
+        {
+            UpgradeVisualEffect();
+
+            var selfTransform = transform;
+            
+            newTurret.transform.position = selfTransform.position;
+            newTurret.transform.rotation = selfTransform.rotation;
+            
+            Destroy(gameObject);
+        }
+
+        [Conditional(GameConfig.GameplayMode)]
+        private void UpgradeVisualEffect()
+        {
+            //todo: implementation
         }
 
         //Shoot as long as we have enemies - Kill On Sight Comrade

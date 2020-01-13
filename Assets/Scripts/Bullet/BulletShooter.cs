@@ -9,13 +9,17 @@ namespace Bullet
     {
         private PooledMonoBehaviour _pooledBullet;
         private float _timer;
+        private IBulletShooterRepository _repository;
+
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private BulletsShooterInputSource inputSource;
-        [SerializeField] private TurretInformationRepository repository;
+        [SerializeField] private BulletShooterRepositoryProvider provider;
 
         private void OnEnable()
         {
-            _pooledBullet = repository.PooledBullet;
+            _repository = provider.ProvideRepository();
+
+            _pooledBullet = _repository.PooledBullet;
         }
 
         private void Shoot()
@@ -28,7 +32,7 @@ namespace Bullet
 
         private void FixedUpdate()
         {
-            if (inputSource.ReceivedShootBulletInput() && _timer >= repository.ShootFrequency)
+            if (inputSource.ReceivedShootBulletInput() && _timer >= _repository.ShootFrequency)
             {
                 _timer = 0f;
                 Shoot();

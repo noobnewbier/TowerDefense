@@ -33,7 +33,7 @@ namespace Elements.Turret.Placement
             var position = turretSpawnPoint.position;
             turretGameObject.transform.position = new Vector3(
                 position.x,
-                0.5f, //hard code value, fix later
+                0.5f, //hard code value such that turret stands on the ground, fix later
                 position.z
             );
 

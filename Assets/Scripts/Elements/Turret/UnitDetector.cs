@@ -15,9 +15,11 @@ namespace Elements.Turret
     /// <see cref="ForceResetEvent" />
     public class UnitDetector : Element, IHandle<EnemyDeadEvent>
     {
+        private ITurretRepository _repository;
+
+        [SerializeField] private TurretProvider provider;
         [SerializeField] private SphereCollider rangeCollider;
-        [SerializeField] private TurretInformationRepository repository;
-        
+
         public IList<Enemy> EnemiesInRange { get; private set; }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.TurretRange;
@@ -31,26 +33,21 @@ namespace Elements.Turret
         protected override void OnEnable()
         {
             base.OnEnable();
-            
+
+            _repository = provider.GetRepository();
             EnemiesInRange = new List<Enemy>();
-            rangeCollider.radius = repository.DetectionRange;
+            rangeCollider.radius = _repository.DetectionRange;
             rangeCollider.isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy))
-            {
-                EnemiesInRange.Add(other.gameObject.GetComponent<Enemy>());
-            }
+            if (other.CompareTag(ObjectTags.Enemy)) EnemiesInRange.Add(other.gameObject.GetComponent<Enemy>());
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy))
-            {
-                EnemiesInRange.Remove(other.GetComponent<Enemy>());
-            }
+            if (other.CompareTag(ObjectTags.Enemy)) EnemiesInRange.Remove(other.GetComponent<Enemy>());
         }
     }
 }

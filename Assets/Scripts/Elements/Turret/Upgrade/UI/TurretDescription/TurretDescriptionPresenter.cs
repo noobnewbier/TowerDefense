@@ -1,9 +1,11 @@
 using System;
+using Elements.Turret.Upgrade.UI.Option;
+using Elements.Turret.Upgrade.UI.Option.ListView;
 using EventManagement;
 
 namespace Elements.Turret.Upgrade.UI.TurretDescription
 {
-    public interface ITurretDescriptionPresenter : IDisposable, IHandle<TurretDescriptionTextUpdateEvent>
+    public interface ITurretDescriptionPresenter : IDisposable, IHandle<SelectUpgradeOptionEvent>
     {
     }
 
@@ -11,9 +13,9 @@ namespace Elements.Turret.Upgrade.UI.TurretDescription
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly ITurretDescriptionView _view;
-        private readonly ITurretDescriptionModel _model;
+        private readonly ISelectedOptionModel _model;
 
-        public TurretDescriptionPresenter(IEventAggregator eventAggregator, ITurretDescriptionView view, ITurretDescriptionModel model)
+        public TurretDescriptionPresenter(IEventAggregator eventAggregator, ITurretDescriptionView view, ISelectedOptionModel model)
         {
             _eventAggregator = eventAggregator;
             _view = view;
@@ -27,11 +29,9 @@ namespace Elements.Turret.Upgrade.UI.TurretDescription
             _eventAggregator.Unsubscribe(this);
         }
 
-        public void Handle(TurretDescriptionTextUpdateEvent @event)
+        public void Handle(SelectUpgradeOptionEvent @event)
         {
-            if (@event.UpdatedDescription != _model) return;
-            
-            _view.UpdateText(_model.Description);
+            _view.UpdateText(_model.SelectedUpgradeOptionModel.Description);
         }
     }
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b2e4dfa08b4cc686d7eca9d8a2a7f9, type: 3}
+  m_Name: HighRangeBulletShooter
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4196306277223974843, guid: 49017c57b74b9ab4888d74e998669600, type: 3}
+  shootFrequency: 1
