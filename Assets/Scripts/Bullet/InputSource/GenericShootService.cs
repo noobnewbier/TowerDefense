@@ -9,7 +9,7 @@ namespace Bullet.InputSource
     /// instead.
     public class GenericShootService : BulletsShooterInputSource
     {
-        public bool IsShooting { get; set; }
+        public bool IsShooting { private get; set; }
 
         public override bool ReceivedShootBulletInput()
         {

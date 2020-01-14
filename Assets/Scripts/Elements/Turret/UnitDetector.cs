@@ -15,7 +15,11 @@ namespace Elements.Turret
     /// <see cref="ForceResetEvent" />
     public class UnitDetector : Element, IHandle<EnemyDeadEvent>
     {
+        private ITurretRepository _repository;
+
+        [SerializeField] private TurretProvider provider;
         [SerializeField] private SphereCollider rangeCollider;
+
         public IList<Enemy> EnemiesInRange { get; private set; }
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.TurretRange;
@@ -26,27 +30,24 @@ namespace Elements.Turret
             EnemiesInRange.Remove(@event.Enemy);
         }
 
-        public void Initialize(TurretData data)
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
+            _repository = provider.GetRepository();
             EnemiesInRange = new List<Enemy>();
-            rangeCollider.radius = data.DetectionRange;
+            rangeCollider.radius = _repository.DetectionRange;
             rangeCollider.isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy))
-            {
-                EnemiesInRange.Add(other.gameObject.GetComponent<Enemy>());
-            }
+            if (other.CompareTag(ObjectTags.Enemy)) EnemiesInRange.Add(other.gameObject.GetComponent<Enemy>());
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy))
-            {
-                EnemiesInRange.Remove(other.GetComponent<Enemy>());
-            }
+            if (other.CompareTag(ObjectTags.Enemy)) EnemiesInRange.Remove(other.GetComponent<Enemy>());
         }
     }
 }

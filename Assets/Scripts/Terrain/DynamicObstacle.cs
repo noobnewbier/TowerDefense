@@ -5,12 +5,13 @@ using Common.Event;
 using Common.Interface;
 using Experimental;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Terrain
 {
     public class DynamicObstacle : MonoBehaviour, IDynamicObjectOfInterest
     {
-        [SerializeField] private ScriptableEventAggregator scriptableEventAggregator;
+        [FormerlySerializedAs("scriptableEventAggregator")] [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
         
         public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
         public Bounds Bounds => _collider.bounds;
@@ -21,12 +22,12 @@ namespace Terrain
         {
             _collider = GetComponent<Collider>();
             
-            scriptableEventAggregator.Instance.Publish(new DynamicObstacleSpawnedEvent(this));
+            eventAggregatorProvider.ProvideEventAggregator().Publish(new DynamicObstacleSpawnedEvent(this));
         }
 
         private void OnDisable()
         {
-            scriptableEventAggregator.Instance.Publish(new DynamicObstacleDestroyedEvent(this));
+            eventAggregatorProvider.ProvideEventAggregator().Publish(new DynamicObstacleDestroyedEvent(this));
         }
     }
 }

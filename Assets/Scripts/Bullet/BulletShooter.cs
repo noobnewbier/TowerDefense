@@ -1,4 +1,5 @@
 using Bullet.InputSource;
+using Elements.Turret;
 using UnityEngine;
 using UnityUtils;
 
@@ -8,13 +9,17 @@ namespace Bullet
     {
         private PooledMonoBehaviour _pooledBullet;
         private float _timer;
-        [SerializeField] private Transform bulletSpawnPoint;
-        [SerializeField] private BulletShooterData data;
-        [SerializeField] private BulletsShooterInputSource inputSource;
+        private IBulletShooterRepository _repository;
 
-        private void Awake()
+        [SerializeField] private Transform bulletSpawnPoint;
+        [SerializeField] private BulletsShooterInputSource inputSource;
+        [SerializeField] private BulletShooterRepositoryProvider provider;
+
+        private void OnEnable()
         {
-            _pooledBullet = data.Bullet.GetComponent<PooledMonoBehaviour>();
+            _repository = provider.ProvideRepository();
+
+            _pooledBullet = _repository.PooledBullet;
         }
 
         private void Shoot()
@@ -27,15 +32,13 @@ namespace Bullet
 
         private void FixedUpdate()
         {
-            if (inputSource.ReceivedShootBulletInput() && _timer >= data.ShootFrequency)
+            if (inputSource.ReceivedShootBulletInput() && _timer >= _repository.ShootFrequency)
             {
                 _timer = 0f;
                 Shoot();
             }
             else
-            {
                 _timer += Time.deltaTime;
-            }
         }
     }
 }

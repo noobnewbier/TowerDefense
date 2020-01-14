@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2219f3962e94c44bfe8fc381e381cf0, type: 3}
+  m_Name: UpgradeOptionPresenterFactory
+  m_EditorClassIdentifier: 
+  eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
+    type: 2}
+  upgradeOptionModels:
+  - {fileID: 11400000, guid: 8dd2a604a16776b458da24f60a66f8ab, type: 2}
+  - {fileID: 11400000, guid: 1de3626fc0cb0e049bea1002215b4b5a, type: 2}
+  - {fileID: 11400000, guid: af64d52b98551c44dbcee49ea1a71390, type: 2}
+  selectedOptionModel: {fileID: 11400000, guid: 0c39323d73d0a534d8d546eba855c760,
+    type: 2}

@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &397078064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 397078065}
-  m_Layer: 12
-  m_Name: TurretSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &397078065
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397078064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1461203814}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385160466
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSource: {fileID: 1385160468}
   model: {fileID: 11400000, guid: a79a1cf9d78070c4d9c4c9bd09a83567, type: 2}
-  turretSpawnPoint: {fileID: 397078065}
+  turretSpawnPoint: {fileID: 1085589427}
 --- !u!114 &1385160468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb0e10c12ae4b06b8a3d50173904b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1651780740
+--- !u!114 &1651780737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +68,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461694064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94ff328ea3e4fd1b4d5b37b395be656, type: 3}
+  m_Script: {fileID: 11500000, guid: 531501f2fee94d58bff39593d7e33080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputSource: {fileID: 1866765610}
-  animSpeed: 1.5
+  provider: {fileID: 1408436746}
+  transformToMove: {fileID: 6048740561362155733}
 --- !u!1 &1866765609
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +128,7 @@ GameObject:
   - component: {fileID: 2108124182}
   - component: {fileID: 2108124184}
   - component: {fileID: 2108124183}
+  - component: {fileID: 1519255946}
   m_Layer: 12
   m_Name: Gun
   m_TagString: Untagged
@@ -190,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121995a0692d4b80b3298a76706a35c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 8645080476665564364}
-  data: {fileID: 11400000, guid: a626bc5ea7a99c040a92bc893bb83a37, type: 2}
+  bulletSpawnPoint: {fileID: 8645080475373593934}
   inputSource: {fileID: 2108124183}
+  provider: {fileID: 1519255946}
 --- !u!114 &2108124183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,36 +177,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc5ca24ce9145f192e6d90bc5b2a491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2277213186935390110
-GameObject:
+--- !u!114 &1519255946
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8645080476665564364}
-  m_Layer: 12
-  m_Name: BulletSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8645080476665564364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277213186935390110}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.988, z: 0.163}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1461203814}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 2108124181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f6a7405e75409db12409e98cbf684f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shooterData: {fileID: 11400000, guid: a626bc5ea7a99c040a92bc893bb83a37, type: 2}
 --- !u!1 &3610290461812041406
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +202,7 @@ GameObject:
   - component: {fileID: 6298031117951140053}
   - component: {fileID: 1538229938}
   - component: {fileID: 1538229937}
-  - component: {fileID: 114448051223175990}
+  - component: {fileID: 1408436746}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -286,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 1538229937}
-  provider: {fileID: 0}
+  provider: {fileID: 1408436746}
 --- !u!54 &1538229938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -317,7 +272,7 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
---- !u!114 &114448051223175990
+--- !u!114 &1408436746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,10 +281,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3610290461812041406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c93044639aa45f5987794245b6fd228, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb3782cd7534e3aa1ff86315ddd51e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitData: {fileID: 0}
+  unitData: {fileID: 11400000, guid: 84d996a5eaa27be49aa8b0acc1e61200, type: 2}
 --- !u!1001 &1461594498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,34 +340,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 397078065, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8143917506744192915, guid: 40046bae76ac54bffb59f14f47d9ba1b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
+    - target: {fileID: 1651780740, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
       propertyPath: inputSource
       value: 
       objectReference: {fileID: 1866765610}
-    - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-      propertyPath: provider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1538229938}
-    - target: {fileID: 595159457, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-      propertyPath: transformToMove
-      value: 
-      objectReference: {fileID: 6048740561362155733}
-    m_RemovedComponents:
-    - {fileID: 13600000, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
-    - {fileID: 5400000, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40046bae76ac54bffb59f14f47d9ba1b, type: 3}
 --- !u!1 &1461694064 stripped
 GameObject:
@@ -423,6 +355,18 @@ GameObject:
 --- !u!4 &1461203814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400100, guid: 40046bae76ac54bffb59f14f47d9ba1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1461594498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1085589427 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 397078065, guid: 40046bae76ac54bffb59f14f47d9ba1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1461594498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8645080475373593934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8645080476665564364, guid: 40046bae76ac54bffb59f14f47d9ba1b,
     type: 3}
   m_PrefabInstance: {fileID: 1461594498}
   m_PrefabAsset: {fileID: 0}

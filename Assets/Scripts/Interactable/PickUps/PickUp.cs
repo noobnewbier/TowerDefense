@@ -7,6 +7,7 @@ using Common.Event;
 using Common.Interface;
 using Experimental;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Interactable.PickUps
 {
@@ -14,11 +15,11 @@ namespace Interactable.PickUps
     public class PickUp : MonoBehaviour, IInteractable
     {
         [SerializeField] private PickUpData data;
-        [SerializeField] private ScriptableEventAggregator scriptableEventAggregator;
+        [FormerlySerializedAs("scriptableEventAggregator")] [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
 
         private void OnEnable()
         {
-            scriptableEventAggregator.Instance.Subscribe(this);
+            eventAggregatorProvider.ProvideEventAggregator().Subscribe(this);
 
             if (!GetComponent<Collider>().isTrigger)
             {
@@ -28,7 +29,7 @@ namespace Interactable.PickUps
 
         private void OnDisable()
         {
-            scriptableEventAggregator.Instance.Unsubscribe(this);
+            eventAggregatorProvider.ProvideEventAggregator().Unsubscribe(this);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,7 +38,7 @@ namespace Interactable.PickUps
 
             if (effectTaker != null &&data.Rules.All(r => r.AdhereToRule(effectTaker)))
             {
-                scriptableEventAggregator.Instance.Publish(new ApplyEffectEvent(data.Effect, effectTaker, EffectSource.Environment));
+                eventAggregatorProvider.ProvideEventAggregator().Publish(new ApplyEffectEvent(data.Effect, effectTaker, EffectSource.Environment));
 
                 SelfDestroy();
             }

@@ -1,19 +1,12 @@
-using Shop;
 using UnityEngine;
 
 namespace Elements.Turret.Placement
 {
-    public interface ITurretPlacementControlModel //we will figure this out a bit later
-    {
-        GameObject CopyOfTurret { get; }
-    }
-
     [CreateAssetMenu(menuName = "Data/TurretPlacementControlModel")]
-    public class TurretPlacementControlModel : ScriptableObject, ITurretPlacementControlModel
+    public class TurretPlacementControlModel : ScriptableObject
     {
-        [SerializeField] private TurretShopEntry turretShopEntry;
-        public int TurretPrice => turretShopEntry.Price;
-
-        public GameObject CopyOfTurret => Instantiate(turretShopEntry.TurretPrefab);
+        [SerializeField] private TurretProvider turretProvider;
+        public int TurretPrice => turretProvider.GetRepository().Cost;
+        public GameObject CopyOfTurret => turretProvider.GetTurretPrefab();
     }
 }

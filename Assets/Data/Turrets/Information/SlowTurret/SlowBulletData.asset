@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fae11b705d449338900039930ad9777, type: 3}
+  m_Name: SlowBulletData
+  m_EditorClassIdentifier: 
+  afterEffect: {fileID: 6914795473069714702, guid: 21f3a76adbfdd764b840e8b361843a46,
+    type: 3}
+  damageEffect: {fileID: 11400000, guid: 9f01a1396d1481647a1d42013301b7f6, type: 2}
+  range: 10
+  speed: 2
