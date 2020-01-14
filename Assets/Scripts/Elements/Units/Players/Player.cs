@@ -1,3 +1,4 @@
+using System;
 using Common.Enum;
 using Common.Event;
 using Elements.Units.UnitCommon;
@@ -8,11 +9,11 @@ namespace Elements.Units.Players
     public class Player : Unit
     {
         private IUnitDataRepository _unitDataRepository;
-        private IUnitDataService _unitDataService;
-        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        private IUnitDataModificationService _unitDataModificationService;
+        [SerializeField] private UnitProvider provider;
 
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
-        protected override IUnitDataService UnitDataService => _unitDataService;
+        protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
 
@@ -20,11 +21,11 @@ namespace Elements.Units.Players
         {
             base.OnEnable();
             _unitDataRepository = provider.ProvideUnitDataRepository();
-            _unitDataService = provider.ProvideUnitDataService();
+            _unitDataModificationService = provider.ProvideUnitDataService();
 
             EventAggregator.Publish(new PlayerSpawnedEvent(this));
         }
-
+        
         protected override void DeathVisualEffect()
         {
             //todo: not implemented

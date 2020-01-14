@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
-  m_Name: VelocityBasedSpawnData
+  m_Script: {fileID: 11500000, guid: 8e7e485e83b248d2a21dd8441fdaa309, type: 3}
+  m_Name: -10HealthEffect
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 3254465578691183710, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
-  spawnInterval: 0
-  totalNumberOfEnemies: 1
+  modifier: {fileID: 11400000, guid: 70916e6a8ba732e48be99b26461688c5, type: 2}

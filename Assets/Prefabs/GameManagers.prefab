@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3352325463867796295, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: m_Name
-      value: Managers (1)
+      value: GameManagerManagers
       objectReference: {fileID: 0}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
@@ -72,5 +72,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1a01610e30fda6d4d87c9c8aba75ad3d, type: 2}
+    - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: dynamicObjectsSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfc7f86947ab1244f89ccbb57d99a675, type: 3}

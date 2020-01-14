@@ -11,7 +11,7 @@ namespace Effects
         public bool IsDone { get; private set; }
         private readonly EffectSource _effectSource;
         private readonly IUnitDataRepository _unitDataRepository;
-        private readonly IUnitDataService _unitDataService;
+        private readonly IUnitDataModificationService _unitDataModificationService;
 
         private float _timer;
 
@@ -19,13 +19,13 @@ namespace Effects
         (
             Effect effect,
             IUnitDataRepository unitDataRepository,
-            IUnitDataService unitDataService,
+            IUnitDataModificationService unitDataModificationService,
             EffectSource effectSource
         )
         {
             Effect = effect;
             _unitDataRepository = unitDataRepository;
-            _unitDataService = unitDataService;
+            _unitDataModificationService = unitDataModificationService;
             _effectSource = effectSource;
         }
 
@@ -41,7 +41,7 @@ namespace Effects
                 return false;
             }
             
-            Effect.FirstEffectApply(_unitDataService, _unitDataRepository, _effectSource);
+            Effect.FirstEffectApply(_unitDataModificationService, _unitDataRepository, _effectSource);
 
             return true;
         }
@@ -55,14 +55,14 @@ namespace Effects
             }
             
             _timer += deltaTime;
-            Effect.TickEffect(_unitDataService, _unitDataRepository, _effectSource);
+            Effect.TickEffect(_unitDataModificationService, _unitDataRepository, _effectSource);
         }
 
         private void OnEnd()
         {
             IsDone = true;
             
-            Effect.EndEffect(_unitDataService, _unitDataRepository, _effectSource);
+            Effect.EndEffect(_unitDataModificationService, _unitDataRepository, _effectSource);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Elements.Units.UnitCommon
         IEnumerable<Fact> Facts { get; }
         float MaxBackwardSpeed { get; }
         float RotationSpeed { get; }
+        float MaxHealth { get; }
     }
 
     public class UnitDataRepository : IUnitDataRepository
@@ -25,6 +26,7 @@ namespace Elements.Units.UnitCommon
         public float MaxForwardSpeed => _unitData.MaxForwardSpeed;
         public float MaxBackwardSpeed => _unitData.MaxBackwardSpeed;
         public float RotationSpeed => _unitData.RotationSpeed;
+        public float MaxHealth => _unitData.MaxHealth;
         public IEnumerable<Fact> Facts => _unitData.Facts;
     }
 }

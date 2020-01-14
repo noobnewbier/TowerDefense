@@ -10,11 +10,11 @@ namespace Effects
         public override bool CanStack => true;
         public override int Duration => 0;
 
-        public override void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource effectSource)
+        public override void FirstEffectApply(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource effectSource)
         {
-            base.FirstEffectApply(service, dataRepository, effectSource);
+            base.FirstEffectApply(modificationService, dataRepository, effectSource);
 
-            service.ModifyHealth((int) modifier.ModifyValue(dataRepository.Health), effectSource);
+            modificationService.ModifyHealth((int) modifier.ModifyValue(dataRepository.Health), effectSource);
         }
     }
 }

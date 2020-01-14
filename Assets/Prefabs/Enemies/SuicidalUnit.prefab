@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputSource: {fileID: 6168960639002132815}
-  rb: {fileID: 7352862185661551323}
   provider: {fileID: 3704630309950303712}
   transformToMove: {fileID: 6048740561362155733}
 --- !u!114 &6168960639002132815
@@ -236,7 +235,7 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 1
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
-  provider: {fileID: 0}
+  provider: {fileID: 3704630309950303712}
   unit: {fileID: 3254465578691183710}
 --- !u!114 &114146839934506344
 MonoBehaviour:
@@ -286,6 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb3782cd7534e3aa1ff86315ddd51e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
+    type: 2}
+  unit: {fileID: 3254465578691183710}
   unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
 --- !u!1 &8297780213500903645
 GameObject:

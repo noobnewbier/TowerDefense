@@ -1,26 +1,30 @@
 using System;
 using Common.Enum;
+using EventManagement;
 
 namespace Elements.Units.UnitCommon
 {
     //part-time repository :)   
-    public interface IUnitDataService
+    public interface IUnitDataModificationService
     {
         bool IsDyingNextFrame { get; }
         EffectSource DeathSource { get; }
         void ModifyHealth(int value, EffectSource source);
         void ModifyForwardSpeed(float value);
         void ModifyBackwardSpeed(float value);
-
     }
-    
-    public class UnitDataService : IUnitDataService
+
+    public class UnitDataModificationModificationService : IUnitDataModificationService
     {
         private readonly UnitData _unitData;
+        private readonly Unit _unit;
+        private readonly IEventAggregator _eventAggregator;
 
-        public UnitDataService(UnitData unitData)
+        public UnitDataModificationModificationService(UnitData unitData, IEventAggregator eventAggregator, Unit unit)
         {
             _unitData = unitData;
+            _eventAggregator = eventAggregator;
+            _unit = unit;
         }
 
         public bool IsDyingNextFrame { get; private set; }
@@ -42,11 +46,13 @@ namespace Elements.Units.UnitCommon
             }
 
             _unitData.Health = Math.Min(value, _unitData.MaxHealth);
+
+            _eventAggregator.Publish(new UnitHealthChangedEvent(_unit));
         }
 
         public void ModifyForwardSpeed(float value)
         {
-            _unitData.MaxForwardSpeed= value;
+            _unitData.MaxForwardSpeed = value;
         }
 
         public void ModifyBackwardSpeed(float value)

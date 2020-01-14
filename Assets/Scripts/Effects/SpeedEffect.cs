@@ -11,20 +11,20 @@ namespace Effects
         public override bool CanStack => false;
         public override int Duration => duration;
 
-        public override void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource effectSource)
+        public override void FirstEffectApply(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource effectSource)
         {
-            base.FirstEffectApply(service, dataRepository, effectSource);
+            base.FirstEffectApply(modificationService, dataRepository, effectSource);
 
-            service.ModifyForwardSpeed(modifier.ModifyValue(dataRepository.MaxForwardSpeed));
-            service.ModifyBackwardSpeed(modifier.ModifyValue(dataRepository.MaxBackwardSpeed));
+            modificationService.ModifyForwardSpeed(modifier.ModifyValue(dataRepository.MaxForwardSpeed));
+            modificationService.ModifyBackwardSpeed(modifier.ModifyValue(dataRepository.MaxBackwardSpeed));
         }
 
-        public override void EndEffect(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource effectSource)
+        public override void EndEffect(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource effectSource)
         {
-            base.EndEffect(service, dataRepository, effectSource);
+            base.EndEffect(modificationService, dataRepository, effectSource);
 
-            service.ModifyForwardSpeed(modifier.RevertValue(dataRepository.MaxForwardSpeed));
-            service.ModifyBackwardSpeed(modifier.RevertValue(dataRepository.MaxBackwardSpeed));
+            modificationService.ModifyForwardSpeed(modifier.RevertValue(dataRepository.MaxForwardSpeed));
+            modificationService.ModifyBackwardSpeed(modifier.RevertValue(dataRepository.MaxBackwardSpeed));
         }
     }
 }

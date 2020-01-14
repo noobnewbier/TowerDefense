@@ -13,22 +13,22 @@ namespace Elements.Units.Enemies
     public class SuicidalEnemy : Enemy
     {
         private IUnitDataRepository _unitDataRepository;
-        private IUnitDataService _unitDataService;
-        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        private IUnitDataModificationService _unitDataModificationService;
+        [SerializeField] private UnitProvider provider;
         [SerializeField] private Effect damageEffect;
         [SerializeField] private Effect selfEffectWhenCollide;
         [SerializeField] private Rule[] rules;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
-        protected override IUnitDataService UnitDataService => _unitDataService;
+        protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
 
         protected override void Awake()
         {
             base.Awake();
 
             _unitDataRepository = provider.ProvideUnitDataRepository();
-            _unitDataService = provider.ProvideUnitDataService();
+            _unitDataModificationService = provider.ProvideUnitDataService();
         }
 
         protected override void DeathVisualEffect()

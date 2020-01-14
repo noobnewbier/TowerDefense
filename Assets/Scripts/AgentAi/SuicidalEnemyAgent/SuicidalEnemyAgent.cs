@@ -30,7 +30,7 @@ namespace AgentAi.SuicidalEnemyAgent
 
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
-        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        [SerializeField] private UnitProvider provider;
         [SerializeField] private SuicidalEnemy unit;
 
 
