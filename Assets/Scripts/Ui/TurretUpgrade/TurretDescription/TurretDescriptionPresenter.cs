@@ -1,9 +1,9 @@
 using System;
-using Elements.Turret.Upgrade.UI.Option;
-using Elements.Turret.Upgrade.UI.Option.ListView;
 using EventManagement;
+using Ui.TurretUpgrade.Option;
+using Ui.TurretUpgrade.Option.ListView;
 
-namespace Elements.Turret.Upgrade.UI.TurretDescription
+namespace Ui.TurretUpgrade.TurretDescription
 {
     public interface ITurretDescriptionPresenter : IDisposable, IHandle<SelectUpgradeOptionEvent>
     {

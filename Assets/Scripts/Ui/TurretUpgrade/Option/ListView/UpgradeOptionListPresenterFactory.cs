@@ -1,8 +1,9 @@
+using Elements.Turret.Upgrade;
 using Experimental;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.Option.ListView
+namespace Ui.TurretUpgrade.Option.ListView
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/UpgradeOptionListPresenter")]
     public class UpgradeOptionListPresenterFactory : ScriptableObject

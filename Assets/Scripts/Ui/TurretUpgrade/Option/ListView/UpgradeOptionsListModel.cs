@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Elements.Turret.Upgrade.UI.Option.Entry;
+using Elements.Turret.Upgrade;
+using Ui.TurretUpgrade.Option.Entry;
 using UnityEngine;
 
-namespace Elements.Turret.Upgrade.UI.Option.ListView
+namespace Ui.TurretUpgrade.Option.ListView
 {
     public interface IUpgradeOptionListModel
     {

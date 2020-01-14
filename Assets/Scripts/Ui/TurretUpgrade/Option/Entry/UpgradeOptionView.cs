@@ -1,10 +1,9 @@
-using System;
+using Elements.Turret;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.Option.Entry
+namespace Ui.TurretUpgrade.Option.Entry
 {
     public interface IUpgradeOptionView
     {

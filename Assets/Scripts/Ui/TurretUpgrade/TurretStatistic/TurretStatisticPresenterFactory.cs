@@ -1,9 +1,9 @@
-using Elements.Turret.Upgrade.UI.Option;
 using Experimental;
+using Ui.TurretUpgrade.Option;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.TurretStatistic
+namespace Ui.TurretUpgrade.TurretStatistic
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/TurretStatisticPresenterFactory")]
     public class TurretStatisticPresenterFactory : ScriptableObject

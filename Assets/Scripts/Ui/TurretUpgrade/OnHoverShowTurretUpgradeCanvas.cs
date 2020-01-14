@@ -1,9 +1,8 @@
-using Elements.Turret.Upgrade.UI;
 using EventManagement;
 using Experimental;
 using UnityEngine;
 
-namespace Elements.Turret.Upgrade
+namespace Ui.TurretUpgrade
 {
     public class OnHoverShowTurretUpgradeCanvas : MonoBehaviour, IHandle<UserFocusOnCanvasChangedEvent>
     {

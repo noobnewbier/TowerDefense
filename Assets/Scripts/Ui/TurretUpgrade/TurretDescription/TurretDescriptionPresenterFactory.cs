@@ -1,9 +1,9 @@
-using Elements.Turret.Upgrade.UI.Option;
 using Experimental;
+using Ui.TurretUpgrade.Option;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.TurretDescription
+namespace Ui.TurretUpgrade.TurretDescription
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/TurretDescriptionPresenter")]
     public class TurretDescriptionPresenterFactory : ScriptableObject

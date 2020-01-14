@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Elements.Turret.Upgrade.UI.TurretDescription
+namespace Ui.TurretUpgrade.TurretDescription
 {
     public interface ITurretDescriptionView
     {

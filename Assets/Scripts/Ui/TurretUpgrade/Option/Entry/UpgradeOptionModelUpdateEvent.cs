@@ -1,4 +1,4 @@
-namespace Elements.Turret.Upgrade.UI.Option.Entry
+namespace Ui.TurretUpgrade.Option.Entry
 {
     public struct UpgradeOptionModelUpdateEvent
     {

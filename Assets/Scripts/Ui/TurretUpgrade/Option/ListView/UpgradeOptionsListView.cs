@@ -1,8 +1,8 @@
-using System;
-using Elements.Turret.Upgrade.UI.Option.Entry;
+using Elements.Turret;
+using Ui.TurretUpgrade.Option.Entry;
 using UnityEngine;
 
-namespace Elements.Turret.Upgrade.UI.Option.ListView
+namespace Ui.TurretUpgrade.Option.ListView
 {
     public interface IUpgradeOptionsListView
     {

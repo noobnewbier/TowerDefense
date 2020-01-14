@@ -1,9 +1,8 @@
+using Elements.Turret.Upgrade;
 using Experimental;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.Option.Entry
+namespace Ui.TurretUpgrade.Option.Entry
 {
     public interface IUpgradeOptionModel
     {

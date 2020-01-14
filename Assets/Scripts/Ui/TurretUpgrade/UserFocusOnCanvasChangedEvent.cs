@@ -1,4 +1,4 @@
-namespace Elements.Turret.Upgrade.UI
+namespace Ui.TurretUpgrade
 {
     public struct UserFocusOnCanvasChangedEvent
     {

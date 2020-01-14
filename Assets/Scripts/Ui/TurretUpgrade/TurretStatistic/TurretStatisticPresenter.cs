@@ -1,11 +1,10 @@
 using System;
 using Common.Constant;
-using Elements.Turret.Upgrade.UI.Option;
-using Elements.Turret.Upgrade.UI.Option.ListView;
 using EventManagement;
-using TMPro;
+using Ui.TurretUpgrade.Option;
+using Ui.TurretUpgrade.Option.ListView;
 
-namespace Elements.Turret.Upgrade.UI.TurretStatistic
+namespace Ui.TurretUpgrade.TurretStatistic
 {
     public interface IStatisticPresenter : IDisposable
     {

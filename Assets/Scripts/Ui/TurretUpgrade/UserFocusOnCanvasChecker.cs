@@ -3,7 +3,7 @@ using Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Elements.Turret.Upgrade.UI
+namespace Ui.TurretUpgrade
 {
     public class UserFocusOnCanvasChecker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

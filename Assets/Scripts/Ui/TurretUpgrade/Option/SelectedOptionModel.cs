@@ -1,10 +1,10 @@
-using Elements.Turret.Upgrade.UI.Option.Entry;
-using Elements.Turret.Upgrade.UI.Option.ListView;
 using Experimental;
+using Ui.TurretUpgrade.Option.Entry;
+using Ui.TurretUpgrade.Option.ListView;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Elements.Turret.Upgrade.UI.Option
+namespace Ui.TurretUpgrade.Option
 {
     public interface ISelectOptionService
     {

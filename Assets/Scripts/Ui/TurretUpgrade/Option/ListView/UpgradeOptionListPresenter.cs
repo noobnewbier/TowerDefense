@@ -1,8 +1,8 @@
 using System;
+using Elements.Turret.Upgrade;
 using EventManagement;
-using Rules;
 
-namespace Elements.Turret.Upgrade.UI.Option.ListView
+namespace Ui.TurretUpgrade.Option.ListView
 {
     public interface IUpgradeOptionListPresenter : IDisposable
     {

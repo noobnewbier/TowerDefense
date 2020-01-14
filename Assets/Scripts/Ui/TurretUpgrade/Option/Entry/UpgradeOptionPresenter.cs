@@ -1,7 +1,8 @@
 using System;
+using Elements.Turret.Upgrade;
 using EventManagement;
 
-namespace Elements.Turret.Upgrade.UI.Option.Entry
+namespace Ui.TurretUpgrade.Option.Entry
 {
     public interface IUpgradeOptionPresenter : IDisposable
     {
