@@ -21,7 +21,7 @@ namespace Elements.Turret.Upgrade.UI.Option.Entry
     public class UpgradeOptionModel : ScriptableObject, IUpgradeOptionModel
     {
         private TurretUpgradeEntry _turretUpgradeEntry;
-        [FormerlySerializedAs("eventAggregator")] [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
+        [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
 
         public float DetectionRange => _turretUpgradeEntry.TurretRepository.DetectionRange;
         public float ShootFrequency => _turretUpgradeEntry.TurretRepository.BulletShooterRepository.ShootFrequency;

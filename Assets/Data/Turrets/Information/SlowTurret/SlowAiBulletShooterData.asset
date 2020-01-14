@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b2e4dfa08b4cc686d7eca9d8a2a7f9, type: 3}
   m_Name: SlowAiBulletShooterData
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
+  bullet: {fileID: 852656939912531455, guid: 9d742fecc255c0c4b87e4783612ebfe0, type: 3}
   shootFrequency: 1

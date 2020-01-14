@@ -17,6 +17,6 @@ MonoBehaviour:
   description: Slow Enemies!
   detectionRange: 10
   facts: []
-  rotateSpeed: 2
+  rotateSpeed: 70
   targetingStrategy: {fileID: 11400000, guid: 41bc4887f69a14143883f8bd425e45b1, type: 2}
   turretName: Slow Turret

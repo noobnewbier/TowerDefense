@@ -9,6 +9,7 @@ using Effects;
 using EventManagement;
 using UnityEngine;
 using UnityUtils;
+using Debug = UnityEngine.Debug;
 
 namespace Bullet
 {
@@ -90,7 +91,6 @@ namespace Bullet
             {
                 DoDamage(effectTaker);
             }
-
             AfterEffect(hit.point);
             SelfDestroy();
         }

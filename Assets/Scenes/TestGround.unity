@@ -725,7 +725,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemySpawnPointData
       value: 
-      objectReference: {fileID: 11400000, guid: 0e49cf75bac7e7f43811597b8e988de9,
+      objectReference: {fileID: 11400000, guid: 10d0ddeb47d7fa24d990ccbd6f6a7e1d,
         type: 2}
     - target: {fileID: 2943558794771551508, guid: c9ba2ef52be38494ea2fc23d97192d7e,
         type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24336d1a6be48e7bfbf3043285f115a, type: 3}
   m_Name: HighRangeTurretUpgradeEntry
   m_EditorClassIdentifier: 
-  rulesToUpgrade: []
+  rulesToUpgrade:
+  - {fileID: 11400000, guid: 80abaefc645938043960505cd202a6ee, type: 2}
   turretProvider: {fileID: 1056405677965643029, guid: 44c5e7a3714b80d4e87035043bb24502,
     type: 3}
