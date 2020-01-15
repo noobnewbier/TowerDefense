@@ -8,11 +8,11 @@ namespace Elements.Units.Enemies
     public class DummyUnit : Enemy
     {
         private IUnitDataRepository _unitDataRepository;
-        private IUnitDataService _unitDataService;
-        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        private IUnitDataModificationService _unitDataModificationService;
+        [SerializeField] private UnitProvider provider;
         public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
-        protected override IUnitDataService UnitDataService => _unitDataService;
+        protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
         protected override void DeathVisualEffect()
         {
             // do nothing
@@ -23,7 +23,7 @@ namespace Elements.Units.Enemies
             base.Awake();
 
             _unitDataRepository = provider.ProvideUnitDataRepository();
-            _unitDataService = provider.ProvideUnitDataService();
+            _unitDataModificationService = provider.ProvideUnitDataService();
         }
     }
 }

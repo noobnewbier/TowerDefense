@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
+  m_Name: SuicidalUnitNoAIControlledByPlayerSpawnData
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 7112716002195525612, guid: 1b5f29c3c92aaee458199ef45fd46d38, type: 3}
+  spawnInterval: 0
+  totalNumberOfEnemies: 1

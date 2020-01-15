@@ -13,19 +13,19 @@ namespace Effects
         
         public abstract int Duration { get; }
 
-        public virtual void FirstEffectApply(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource source)
+        public virtual void FirstEffectApply(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource source)
         {
         }
 
-        public virtual void TickEffect(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource source)
+        public virtual void TickEffect(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource source)
         {
         }
 
-        public virtual void EndEffect(IUnitDataService service, IUnitDataRepository dataRepository, EffectSource source)
+        public virtual void EndEffect(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource source)
         {
         }
 
         public EffectHandler CreateEffectHandler
-            (IUnitDataService service, IUnitDataRepository dataRepository, EffectSource source) => new EffectHandler(this, dataRepository, service, source);
+            (IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource source) => new EffectHandler(this, dataRepository, modificationService, source);
     }
 }

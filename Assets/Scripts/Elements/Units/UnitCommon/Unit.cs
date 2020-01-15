@@ -27,13 +27,13 @@ namespace Elements.Units.UnitCommon
         [SerializeField] private Collider unitCollider;
         public override Bounds Bounds => unitCollider.bounds;
         protected abstract IUnitDataRepository UnitDataRepository { get; }
-        protected abstract IUnitDataService UnitDataService { get; }
+        protected abstract IUnitDataModificationService UnitDataModificationService { get; }
 
         public IEnumerable<Fact> Facts => UnitDataRepository.Facts;
 
         public void Handle(ApplyEffectEvent @event)
         {
-            if (!ReferenceEquals(@event.EffectTaker, this) || UnitDataService.IsDyingNextFrame)
+            if (!ReferenceEquals(@event.EffectTaker, this) || UnitDataModificationService.IsDyingNextFrame)
             {
                 return;
             }
@@ -48,7 +48,7 @@ namespace Elements.Units.UnitCommon
                 return;
             }
 
-            UnitDataService.ModifyHealth(-UnitDataRepository.Health, EffectSource.System);
+            UnitDataModificationService.ModifyHealth(-UnitDataRepository.Health, EffectSource.System);
         }
 
         protected virtual void Awake()
@@ -59,7 +59,7 @@ namespace Elements.Units.UnitCommon
         protected void FixedUpdate()
         {
             // If it is going to die, die
-            if (UnitDataService.IsDyingNextFrame)
+            if (UnitDataModificationService.IsDyingNextFrame)
             {
                 Dies();
             }
@@ -68,9 +68,9 @@ namespace Elements.Units.UnitCommon
 
             // TODO: this looks a bit strange to me... seems weird to be actively asking "am I going to die?" 
             // If it is going to die after applying the effect, publish the event it is going to die 
-            if (UnitDataService.IsDyingNextFrame)
+            if (UnitDataModificationService.IsDyingNextFrame)
             {
-                PublishDeathEvent(UnitDataService.DeathSource);
+                PublishDeathEvent(UnitDataModificationService.DeathSource);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Elements.Units.UnitCommon
 
         protected void ApplyEffect(Effect effect, EffectSource source)
         {
-            var handler = effect.CreateEffectHandler(UnitDataService, UnitDataRepository, source);
+            var handler = effect.CreateEffectHandler(UnitDataModificationService, UnitDataRepository, source);
             var canApply = handler.TryInitEffect(_effectsHandlers.Select(h => h.Effect));
 
             if (canApply)

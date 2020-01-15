@@ -6,7 +6,7 @@ namespace Movement.Handler
 {
     public class VelocityBasedMovementHandler : MovementHandler
     {
-        [SerializeField] private UnitDataServiceAndRepositoryProvider provider;
+        [SerializeField] private UnitProvider provider;
         [SerializeField] private Transform transformToMove;
 
         private IUnitDataRepository _repository;
