@@ -1,11 +1,4 @@
-﻿// ----------------------------------------------------------------------------
-// Unite 2017 - Game Architecture with Scriptable Objects
-// 
-// Author: Ryan Hipple
-// Date:   10/04/17
-// ----------------------------------------------------------------------------
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Experimental
 {
@@ -21,7 +14,7 @@ namespace Experimental
 
         public static implicit operator float(FloatVariable variable)
         {
-            return variable.value;
+            return variable.Value;
         }
     }
 }
