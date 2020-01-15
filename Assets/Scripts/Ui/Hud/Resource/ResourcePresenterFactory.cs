@@ -1,7 +1,7 @@
 using Experimental;
 using UnityEngine;
 
-namespace Ui.Player.Resource
+namespace Ui.Hud.Resource
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/ResourcePresenter")]
     public class ResourcePresenterFactory : ScriptableObject

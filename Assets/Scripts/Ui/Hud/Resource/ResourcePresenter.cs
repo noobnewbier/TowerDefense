@@ -1,6 +1,6 @@
 using Experimental;
 
-namespace Ui.Player.Resource
+namespace Ui.Hud.Resource
 {
     public interface IResourcePresenter
     {

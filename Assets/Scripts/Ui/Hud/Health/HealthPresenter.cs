@@ -2,7 +2,7 @@ using System;
 using Elements.Units.UnitCommon;
 using EventManagement;
 
-namespace Ui.Player.Health
+namespace Ui.Hud.Health
 {
     public interface IHealthPresenter : IHandle<UnitHealthChangedEvent>, IDisposable
     {

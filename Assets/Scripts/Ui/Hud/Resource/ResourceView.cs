@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Ui.Player.Resource
+namespace Ui.Hud.Resource
 {
     public interface IResourceView
     {

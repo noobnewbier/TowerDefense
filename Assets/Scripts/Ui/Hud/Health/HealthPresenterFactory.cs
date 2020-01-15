@@ -2,7 +2,7 @@ using Elements.Units.UnitCommon;
 using Experimental;
 using UnityEngine;
 
-namespace Ui.Player.Health
+namespace Ui.Hud.Health
 {
     [CreateAssetMenu(menuName = "ScriptableFactory/HealthPresenter")]
     public class HealthPresenterFactory : ScriptableObject

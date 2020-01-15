@@ -1,7 +1,7 @@
 using Elements.Units.UnitCommon;
 using UnityEngine;
 
-namespace Ui.Player.Health
+namespace Ui.Hud.Health
 {
     public interface IHealthView
     {
@@ -15,7 +15,6 @@ namespace Ui.Player.Health
         [SerializeField] private Transform barTransform;
         
         private IHealthPresenter _presenter;
-        
         
         private void OnEnable()
         {
