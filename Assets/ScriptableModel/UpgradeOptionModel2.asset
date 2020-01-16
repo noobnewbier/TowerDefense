@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3410f4e10aa48f991c12a3ddbf20fd9, type: 3}
   m_Name: UpgradeOptionModel2
   m_EditorClassIdentifier: 
-  eventAggregator: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3, type: 2}
+  eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
+    type: 2}
