@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 3}
   damageEffect: {fileID: 11400000, guid: 318999a390179b448b4549faebace0b3, type: 2}
   range: 10
-  speed: 2
+  speed: 15

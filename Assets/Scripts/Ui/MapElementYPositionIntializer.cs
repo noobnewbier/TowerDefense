@@ -7,7 +7,7 @@ namespace Ui
     {
         [SerializeField] private FloatVariable yPosition;
 
-        private void Update()
+        private void Start()
         {
             var selfTransform = transform;
             var position = selfTransform.position;
