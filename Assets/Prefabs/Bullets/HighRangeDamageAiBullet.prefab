@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166,
         type: 3}
       propertyPath: m_Name
-      value: DamageAiBullet
+      value: HighRangeDamageAiBullet
       objectReference: {fileID: 0}
     - target: {fileID: 4368757702058295674, guid: 0f4768a9bef52354a9d1c3cba7504166,
         type: 3}
@@ -67,5 +67,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8803083318307884884, guid: 0f4768a9bef52354a9d1c3cba7504166,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 90b4fd52e6edba144b1564fc65a0b957,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
