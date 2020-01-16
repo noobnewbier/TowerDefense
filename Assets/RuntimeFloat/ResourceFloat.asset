@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceab5ad8b0834e358504bb62eb3051d8, type: 3}
   m_Name: ResourceFloat
   m_EditorClassIdentifier: 
-  initialValue: 100
-  currentValue: 0
+  initialValue: 200
+  currentValue: 110.80066

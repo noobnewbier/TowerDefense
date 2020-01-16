@@ -1,6 +1,7 @@
 using System;
 using Elements.Turret.Upgrade;
 using EventManagement;
+using ScriptableService;
 
 namespace Ui.TurretUpgrade.Option.Entry
 {
@@ -17,6 +18,7 @@ namespace Ui.TurretUpgrade.Option.Entry
         private readonly IUpgradeOptionModel _model;
         private readonly ISelectedOptionModel _selectedOptionModel;
         private readonly IUpgradable _upgradable;
+        private readonly IUseResourceService _useResourceService;
 
         public UpgradeOptionPresenter
         (
@@ -24,7 +26,8 @@ namespace Ui.TurretUpgrade.Option.Entry
             IUpgradeOptionView view,
             IUpgradeOptionModel model,
             ISelectedOptionModel selectedOptionModel,
-            IUpgradable upgradable
+            IUpgradable upgradable,
+            IUseResourceService useResourceService
         )
         {
             _eventAggregator = eventAggregator;
@@ -32,6 +35,7 @@ namespace Ui.TurretUpgrade.Option.Entry
             _model = model;
             _selectedOptionModel = selectedOptionModel;
             _upgradable = upgradable;
+            _useResourceService = useResourceService;
 
             _eventAggregator.Subscribe(this);
         }
@@ -64,7 +68,11 @@ namespace Ui.TurretUpgrade.Option.Entry
 
         public void OnSelectOption()
         {
-            _upgradable.UpgradeFrom(_selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretProvider.GetTurretPrefab());
+            //this look ridiculously fishy...
+            if (_useResourceService.TryUseResource(_selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretRepository.Cost))
+            {
+                _upgradable.UpgradeFrom(_selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretProvider.GetTurretPrefab());
+            }
         }
     }
 }

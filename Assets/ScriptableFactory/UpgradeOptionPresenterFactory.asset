@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af64d52b98551c44dbcee49ea1a71390, type: 2}
   selectedOptionModel: {fileID: 11400000, guid: 0c39323d73d0a534d8d546eba855c760,
     type: 2}
+  useResourceService: {fileID: 11400000, guid: 49e2907159e9903408256c42ce05335f, type: 2}

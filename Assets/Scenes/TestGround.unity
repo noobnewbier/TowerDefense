@@ -1150,6 +1150,11 @@ PrefabInstance:
       propertyPath: resourceManager
       value: 
       objectReference: {fileID: 683461573}
+    - target: {fileID: 1385160469, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: useResourceService
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e2907159e9903408256c42ce05335f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
 --- !u!1 &1533861715

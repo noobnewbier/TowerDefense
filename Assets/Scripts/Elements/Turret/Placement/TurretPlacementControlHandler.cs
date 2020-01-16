@@ -1,5 +1,6 @@
 using Elements.Turret.Placement.InputSource;
 using Manager;
+using ScriptableService;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,26 +8,23 @@ namespace Elements.Turret.Placement
 {
     public class TurretPlacementControlHandler : MonoBehaviour
     {
-        [SerializeField] private ResourceManager resourceManager;
+        [SerializeField] private UseResourceService useResourceService;
         [SerializeField] private TurretPlacementInputSource inputSource;
         [SerializeField] private TurretPlacementControlModel model;
         [SerializeField] private Transform turretSpawnPoint;
-        
+
 
         private void Update()
         {
             if (inputSource.ReceivedPlaceTurretInput())
             {
-                if (resourceManager.Resource >= model.TurretPrice)
-                {
-                    PlaceTurret(model.CopyOfTurret);
-                }
+                TryPlaceTurret(model.CopyOfTurret);
             }
         }
 
-        private void PlaceTurret(GameObject turretGameObject)
+        private void TryPlaceTurret(GameObject turretGameObject)
         {
-            if (resourceManager.TryUseResource(model.TurretPrice))
+            if (useResourceService.TryUseResource(model.TurretPrice))
             {
                 //just to offset the height, assuming origin is half the height;
                 var position = turretSpawnPoint.position;

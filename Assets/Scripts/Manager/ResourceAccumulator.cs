@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace Manager
 {
-    public class ResourceManager : MonoBehaviour
+    public class ResourceAccumulator : MonoBehaviour
     {
         [FormerlySerializedAs("money")] [SerializeField] private RuntimeFloat resource;
         [FormerlySerializedAs("moneyGainPerTick")] [SerializeField] private float resourceGainPerTick = 0.0005f;
@@ -14,17 +14,6 @@ namespace Manager
         private void FixedUpdate()
         {
             resource.CurrentValue += resourceGainPerTick;
-        }
-
-        public bool TryUseResource(int amount)
-        {
-            if (resource.CurrentValue > amount)
-            {
-                resource.CurrentValue -= amount;
-                return true;
-            }
-
-            return false;
         }
     }
 }
