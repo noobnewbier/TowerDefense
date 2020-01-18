@@ -344,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392737558376094949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9114165, y: -5.1105, z: 3.3236256}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8767907256098995311}
@@ -951,10 +951,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1552840796576611384}
     m_Modifications:
-    - target: {fileID: 5797897387027120787, guid: db40f695215efb247b132e8458e805c6,
+    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
+      propertyPath: m_Name
+      value: UpgradeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6790852408894734000, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
@@ -1061,15 +1066,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+    - target: {fileID: 5797897387027120787, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
-      propertyPath: m_Name
-      value: UpgradeCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2052201252340418977, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
