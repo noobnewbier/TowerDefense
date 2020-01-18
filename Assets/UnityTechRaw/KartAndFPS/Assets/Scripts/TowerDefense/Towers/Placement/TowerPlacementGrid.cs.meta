@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6743ae14a014d9c4a8175807d87a38db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_PlacementTilePrefab: {fileID: 1479808366027836, guid: 8ce97201eea4a404b86d7d0906b89847,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
