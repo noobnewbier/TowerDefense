@@ -4,5 +4,6 @@ namespace Elements.Turret.Placement.InputSource
     {
         //todo: fill this in w/ reinforcement AI or algorithmic implementation 
         public override bool ReceivedPlaceTurretInput() => false;
+        public override bool ReceivedPendingTurretPlacementInput() => false;
     }
 }

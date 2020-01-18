@@ -2,8 +2,15 @@ using UnityEngine;
 
 namespace Elements.Turret.Placement.InputSource
 {
-    public abstract class TurretPlacementInputSource : MonoBehaviour
+    public interface ITurretPlacementInputSource
+    {
+        bool ReceivedPlaceTurretInput();
+        bool ReceivedPendingTurretPlacementInput();
+    }
+
+    public abstract class TurretPlacementInputSource : MonoBehaviour, ITurretPlacementInputSource
     {
         public abstract bool ReceivedPlaceTurretInput();
+        public abstract bool ReceivedPendingTurretPlacementInput();
     }
 }

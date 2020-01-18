@@ -347,6 +347,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &520212095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1385160466, guid: e924d8ccae252b843b4b1a4315cc5177,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519255944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &520212097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1385160468, guid: e924d8ccae252b843b4b1a4315cc5177,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519255944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520212095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb0e10c12ae4b06b8a3d50173904b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &520212099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520212095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca539be5547340d5b573ca5fffe3a7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretPositionVisualizingPrefab: {fileID: 1131360899257277859, guid: 042b0a7d69bda114d9c6f09598a3d895,
+    type: 3}
+  turretPosition: {fileID: 628353334}
+  turretPlacementInputSource: {fileID: 520212097}
+  presenterFactory: {fileID: 11400000, guid: aeee0fa7f99674442a5f242cc848ffbc, type: 2}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +439,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7479
+    m_Bits: 7735
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -444,6 +479,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPosition: {fileID: 220371420}
   smooth: 3
+--- !u!4 &628353334 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1085589427, guid: e924d8ccae252b843b4b1a4315cc5177,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519255944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &678080396
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1012939894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1122,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085589427, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 698562931, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1620,6 +1665,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
+        type: 3}
+      propertyPath: money
+      value: 
+      objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
+        type: 2}
+    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
+        type: 3}
+      propertyPath: moneyGainPerTick
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
+        type: 3}
+      propertyPath: resource
+      value: 
+      objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
+        type: 2}
+    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
+        type: 3}
+      propertyPath: resourceGainPerTick
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 992040664964059129, guid: 02a29137a37e1b348812b5f6ed1ed799,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1674,28 +1741,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
-        type: 3}
-      propertyPath: money
-      value: 
-      objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
-        type: 2}
-    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
-        type: 3}
-      propertyPath: moneyGainPerTick
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
-        type: 3}
-      propertyPath: resource
-      value: 
-      objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
-        type: 2}
-    - target: {fileID: 992040666564131234, guid: 02a29137a37e1b348812b5f6ed1ed799,
-        type: 3}
-      propertyPath: resourceGainPerTick
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 992040666564131232, guid: 02a29137a37e1b348812b5f6ed1ed799,
         type: 3}
