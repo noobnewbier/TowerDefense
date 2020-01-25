@@ -213,7 +213,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: cf4d70f5ec961d94189a87e3332dd0e6, type: 3}
+  m_Model: {fileID: 11400000, guid: 7537994ac002f3a44b438b6eea23ca47, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
   m_BehaviorName: Suicide

@@ -341,8 +341,8 @@ MonoBehaviour:
     width: 20
     height: 20
     qualityLevel: 0
-    timeScale: 6
-    targetFrameRate: 30
+    timeScale: 6.7
+    targetFrameRate: 0
   m_InferenceConfiguration:
     width: 1280
     height: 720
@@ -352,7 +352,7 @@ MonoBehaviour:
   resetParameters:
     m_ResetParameters:
     - key: level
-      value: 0
+      value: 2
   objectsOfInterestTracker: {fileID: 477507500}
 --- !u!4 &161040336
 Transform:
@@ -471,7 +471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -2948,6 +2948,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
         type: 2}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: precision
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3003,6 +3008,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3352325462267338001, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352325462267338003, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: resource
+      value: 
+      objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfc7f86947ab1244f89ccbb57d99a675, type: 3}
 --- !u!1001 &4793952624436167370
@@ -3016,6 +3032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DebugHelpers
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793952624822536967, guid: 68a561bd5018b4746ac20829c30deefc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4793952624822536964, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
@@ -3082,6 +3103,16 @@ PrefabInstance:
       propertyPath: agentTracker
       value: 
       objectReference: {fileID: 563044553}
+    - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
+        type: 3}
+      propertyPath: startedObserving
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
+        type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a561bd5018b4746ac20829c30deefc, type: 3}
 --- !u!1001 &7270064860473353103
@@ -3159,7 +3190,13 @@ PrefabInstance:
     - target: {fileID: 5493804785905650252, guid: ac3c7ad692fb9fc4d802d9683e118698,
         type: 3}
       propertyPath: m_Name
-      value: 
+      value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1207623983522280332, guid: ac3c7ad692fb9fc4d802d9683e118698,
+        type: 3}
+      propertyPath: yPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: c27a00c31b4274a48834c7ed49f7fee9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac3c7ad692fb9fc4d802d9683e118698, type: 3}

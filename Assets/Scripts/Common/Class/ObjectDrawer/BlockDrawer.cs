@@ -26,7 +26,7 @@ namespace Common.Class.ObjectDrawer
             size.x = Mathf.Max(size.x, 1f);
             size.z = Mathf.Max(size.z, 1f);
             bounds.size = size;
-            
+
             for (var y = (int) bounds.min.z; y < bounds.max.z; y++)
             for (var x = (int) bounds.min.x; x < bounds.max.x; x++)
             {

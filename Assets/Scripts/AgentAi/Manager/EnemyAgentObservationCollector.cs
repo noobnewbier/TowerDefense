@@ -32,6 +32,8 @@ namespace AgentAi.Manager
 
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] [Range(1, 200)] private int mapDimension;
+        [Range(1, 10)] [SerializeField] private int precision = 1;
+
         private int _textureDimension;
 
         public void Handle(GameStartEvent @event)
@@ -51,8 +53,7 @@ namespace AgentAi.Manager
                 objectsWithTargetAndObserver = objectsWithTargetAndObserver
                     .ReplaceAll(target, GetTargetRepresentation(target));
             }
-
-
+            
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
@@ -75,8 +76,7 @@ namespace AgentAi.Manager
                 Instance = this;
             }
 
-            _textureDimension = mapDimension;
-            _textureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2;
+            _textureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2 * precision;
 
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
             _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
@@ -140,7 +140,9 @@ namespace AgentAi.Manager
         //technically we will be fine without returning a new one.... we will optimize when we need
         private Bounds RescaleBoundsToTexture(Bounds bounds)
         {
+            bounds.center *= precision;
             bounds.center += _centerOfTexture;
+            bounds.size *= precision;
 
             return bounds;
         }

@@ -47,8 +47,8 @@ namespace Elements.Units.UnitCommon
             {
                 return;
             }
-
-            UnitDataModificationService.ModifyHealth(-UnitDataRepository.Health, EffectSource.System);
+            
+            ApplyEffect(ForceResetEffect.Instance, EffectSource.System);
         }
 
         protected virtual void Awake()

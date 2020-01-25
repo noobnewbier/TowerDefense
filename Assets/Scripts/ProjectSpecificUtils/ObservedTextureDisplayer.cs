@@ -1,5 +1,4 @@
 using AgentAi;
-using AgentAi.Manager;
 using Common.Class;
 using Common.Event;
 using EventManagement;
@@ -14,13 +13,12 @@ namespace ProjectSpecificUtils
 
         private float _timer;
         [SerializeField] private bool automaticUpdateObserver;
-
-        [SerializeField] private EnemyAgentObservationCollector enemyAgentObservationCollector;
-
         //interface cannot be serialized, do a dirty cast when using this
         [SerializeField] private MonoBehaviour maybeCanObserve;
         [SerializeField] private float observeFrequency;
         [SerializeField] private bool startedObserving;
+        [SerializeField] [Range(1, 100)] private float scale;
+
 
         public void Handle(GameStartEvent @event)
         {
@@ -73,7 +71,7 @@ namespace ProjectSpecificUtils
 
                 var texture = canObserve.GetObservation();
 
-                GUI.DrawTexture(new Rect(Screen.width - texture.width, 0f, texture.width, texture.height), texture);
+                GUI.DrawTexture(new Rect(Screen.width - texture.width * scale, 0f, texture.width * scale, texture.height * scale), texture);
             }
         }
 

@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4a99ed5d6840d7980d626dbf2e36aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableEventAggregator: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
+  eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
 --- !u!1001 &6366859731190157086
 PrefabInstance:
@@ -102,6 +102,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
+        type: 3}
+      propertyPath: yPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 6700421993267104716, guid: 2211a7dd4c325f84f9a0a85e197605e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2211a7dd4c325f84f9a0a85e197605e5, type: 3}

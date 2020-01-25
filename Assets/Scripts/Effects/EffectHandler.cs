@@ -14,6 +14,7 @@ namespace Effects
         private readonly IUnitDataModificationService _unitDataModificationService;
 
         private float _timer;
+        private bool _isFirstApply = true;
 
         public EffectHandler
         (
@@ -36,25 +37,25 @@ namespace Effects
         /// <returns>a boolean flag indicating whether or not the effect should be applied</returns>
         public bool TryInitEffect(IEnumerable<Effect> existingEffects)
         {
-            if (!Effect.CanStack && existingEffects.Contains(Effect))
-            {
-                return false;
-            }
-            
-            Effect.FirstEffectApply(_unitDataModificationService, _unitDataRepository, _effectSource);
-
-            return true;
+            return Effect.CanStack || !existingEffects.Contains(Effect);
         }
 
         public void OnTick(float deltaTime)
         {
+            _timer += deltaTime;
+            
+            if (_isFirstApply)
+            {
+                _isFirstApply = false;
+                Effect.FirstEffectApply(_unitDataModificationService, _unitDataRepository, _effectSource);
+            }
+            
             if (_timer > Effect.Duration)
             {
                 OnEnd();
                 return;
             }
             
-            _timer += deltaTime;
             Effect.TickEffect(_unitDataModificationService, _unitDataRepository, _effectSource);
         }
 

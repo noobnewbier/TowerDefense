@@ -5,9 +5,9 @@ using MLAgents;
 using TrainingSpecific.Events;
 using UnityEngine;
 
-namespace AgentAi.SuicidalEnemyAgent
+namespace AgentAi.Suicidal
 {
-    public class SuicidalEnemyAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>
+    public class SuicidalUnitAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>
     {
         private int _agentCount;
         private int _doneAgentCount;

@@ -15,10 +15,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityUtils;
 
-namespace AgentAi.SuicidalEnemyAgent
+namespace AgentAi.Suicidal
 {
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class SuicidalEnemyAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
+    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
         private const float RoamingPunishment = -0.025f;
 
@@ -32,8 +32,7 @@ namespace AgentAi.SuicidalEnemyAgent
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private UnitProvider provider;
         [SerializeField] private SuicidalEnemy unit;
-
-
+        
         public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
 
         public void Handle(EnemyDeadEvent @event)
@@ -84,15 +83,13 @@ namespace AgentAi.SuicidalEnemyAgent
 
             PunishRoaming();
             EncourageApproachingTarget();
-
-            Debug.Log(GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
         {
             if (other.collider.CompareTag(ObjectTags.Wall))
             {
-                AddReward(-0.005f);
+                AddReward(-0.15f);
             }
         }
 
@@ -116,8 +113,6 @@ namespace AgentAi.SuicidalEnemyAgent
             }
 
             Done();
-
-            Debug.Log("got death reward");
         }
 
         protected override void DisposeAgent()

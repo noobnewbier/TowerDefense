@@ -6,6 +6,7 @@ namespace Common.Enum
 {
     public class AiInterestCategory
     {
+        //was 13, consider swap it back
         public static readonly AiInterestCategory Observer = new AiInterestCategory(Color.white, 13, BlockDrawer.Instance);
         public static readonly AiInterestCategory Target = new AiInterestCategory(Color.magenta, 12, BlockDrawer.Instance);
         

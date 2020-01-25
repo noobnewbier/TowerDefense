@@ -61,15 +61,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerForTraining Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 6298031117951140053, guid: e924d8ccae252b843b4b1a4315cc5177,
-        type: 3}
-      propertyPath: unitCollider
-      value: 
-      objectReference: {fileID: 2303961442986115189}
-    - target: {fileID: 1538229938, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 6048740561362155733, guid: e924d8ccae252b843b4b1a4315cc5177,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,19 +120,43 @@ PrefabInstance:
       propertyPath: inputSource
       value: 
       objectReference: {fileID: 6175990960069445188}
-    - target: {fileID: 1952923683, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+    - target: {fileID: 1385160469, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: useResourceService
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e2907159e9903408256c42ce05335f,
+        type: 2}
+    - target: {fileID: 896140550, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
       propertyPath: inputSource
       value: 
       objectReference: {fileID: 4301879153146773811}
+    - target: {fileID: 1651780737, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: inputSource
+      value: 
+      objectReference: {fileID: 4301879153146773811}
+    - target: {fileID: 6298031117951140053, guid: e924d8ccae252b843b4b1a4315cc5177,
+        type: 3}
+      propertyPath: unitCollider
+      value: 
+      objectReference: {fileID: 2303961442986115189}
+    - target: {fileID: 1538229938, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 2108124184, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
       propertyPath: inputSource
       value: 
       objectReference: {fileID: 4429367688806797844}
+    - target: {fileID: 1952923683, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+      propertyPath: inputSource
+      value: 
+      objectReference: {fileID: 4301879153146773811}
     m_RemovedComponents:
     - {fileID: 1538229937, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
     - {fileID: 1385160468, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
     - {fileID: 1866765610, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
     - {fileID: 2108124183, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+    - {fileID: 896140550, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
+    - {fileID: 1471404738, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
 --- !u!1 &2869590142119890065 stripped
 GameObject:
