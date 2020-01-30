@@ -16,6 +16,7 @@ namespace AgentAi.Manager
     public interface IObserveEnvironmentService
     {
         int[] Shape { get; }
+        bool GrayScale { get; }
         Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
     }
 
@@ -32,8 +33,8 @@ namespace AgentAi.Manager
 
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] [Range(1, 200)] private int mapDimension;
-        [Range(1, 10)] [SerializeField] private int precision = 1;
-
+        [SerializeField] private bool grayScale;
+        [Range(1, 10)] [SerializeField] private float precision = 1;
         private int _textureDimension;
 
         public void Handle(GameStartEvent @event)
@@ -41,7 +42,8 @@ namespace AgentAi.Manager
             SetupTextures();
         }
 
-        public int[] Shape => new[] {_textureDimension, _textureDimension, 3};
+        public int[] Shape => new[] {_textureDimension, _textureDimension, grayScale ? 1 : 3};
+        public bool GrayScale => grayScale;
 
         public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
@@ -53,14 +55,14 @@ namespace AgentAi.Manager
                 objectsWithTargetAndObserver = objectsWithTargetAndObserver
                     .ReplaceAll(target, GetTargetRepresentation(target));
             }
-            
+
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
 
             var observerPosition = observer.transform.position;
-            _observedTexture.TranslateTexture((int) observerPosition.x, (int) observerPosition.z);
-            _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y);
+            _observedTexture.TranslateTexture((int) (observerPosition.x * precision), (int) (observerPosition.z * precision));
+            _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y, AiInterestCategory.NullArea.Color);
 
             return Instantiate(_observedTexture);
         }
@@ -76,7 +78,7 @@ namespace AgentAi.Manager
                 Instance = this;
             }
 
-            _textureDimension = Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2 * precision;
+            _textureDimension = (int) (Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2 * precision);
 
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
             _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);

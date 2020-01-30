@@ -69,7 +69,6 @@ namespace AgentAi.Suicidal
         public override void AgentOnDone()
         {
             base.AgentOnDone();
-
             _eventAggregator.Publish(new AgentDoneEvent());
         }
 
@@ -83,13 +82,15 @@ namespace AgentAi.Suicidal
 
             PunishRoaming();
             EncourageApproachingTarget();
+            
+            Debug.Log(GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
         {
             if (other.collider.CompareTag(ObjectTags.Wall))
             {
-                AddReward(-0.15f);
+                AddReward(-0.05f);
             }
         }
 

@@ -18,7 +18,8 @@ namespace ProjectSpecificUtils
         [SerializeField] private float observeFrequency;
         [SerializeField] private bool startedObserving;
         [SerializeField] [Range(1, 100)] private float scale;
-
+        [SerializeField] private bool markCentreWithMagenta;
+        
 
         public void Handle(GameStartEvent @event)
         {
@@ -70,6 +71,11 @@ namespace ProjectSpecificUtils
                 _timer = 0f;
 
                 var texture = canObserve.GetObservation();
+                if (markCentreWithMagenta)
+                {
+                    texture.SetPixel(texture.width/2, texture.height/2, Color.magenta);
+                    texture.Apply();
+                }
 
                 GUI.DrawTexture(new Rect(Screen.width - texture.width * scale, 0f, texture.width * scale, texture.height * scale), texture);
             }

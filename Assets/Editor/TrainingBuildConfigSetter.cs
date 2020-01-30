@@ -8,7 +8,6 @@ using UnityEditor;
 ///     Adds the given define symbols to PlayerSettings define symbols.
 ///     Just add your own define symbols to the Symbols property at the below.
 /// </summary>
-[InitializeOnLoad]
 // ReSharper disable once CheckNamespace
 public static class TrainingBuildConfigSetter
 {

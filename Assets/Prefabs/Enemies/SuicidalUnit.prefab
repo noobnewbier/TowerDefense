@@ -213,7 +213,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 7537994ac002f3a44b438b6eea23ca47, type: 3}
+  m_Model: {fileID: 11400000, guid: 19cef80a5392dfe45924ffebf3bda6d6, type: 3}
   m_InferenceDevice: 1
   m_UseHeuristic: 0
   m_BehaviorName: Suicide
@@ -250,7 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grayScale: 0
   sensorName: Texture2DSensor
 --- !u!195 &195152517545128316
 NavMeshAgent:

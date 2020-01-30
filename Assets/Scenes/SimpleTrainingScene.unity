@@ -338,11 +338,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrainingConfiguration:
-    width: 20
-    height: 20
+    width: 1280
+    height: 1280
     qualityLevel: 0
-    timeScale: 6.7
-    targetFrameRate: 0
+    timeScale: 1
+    targetFrameRate: 30
   m_InferenceConfiguration:
     width: 1280
     height: 720
@@ -352,7 +352,7 @@ MonoBehaviour:
   resetParameters:
     m_ResetParameters:
     - key: level
-      value: 2
+      value: 0
   objectsOfInterestTracker: {fileID: 477507500}
 --- !u!4 &161040336
 Transform:
@@ -471,7 +471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626c4c3931b64918b6e81f1c2d4c01cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPointData: {fileID: 11400000, guid: aa5cdee894c382e4189920022e246de0,
+  enemySpawnPointData: {fileID: 11400000, guid: db2fb2565d99bfa408ed29cab18cca5f,
     type: 2}
   locationProvider: {fileID: 1096023334}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
@@ -2953,6 +2953,11 @@ PrefabInstance:
       propertyPath: precision
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: grayScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3106,12 +3111,17 @@ PrefabInstance:
     - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: startedObserving
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: scale
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
+        type: 3}
+      propertyPath: markCentreWithMagenta
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a561bd5018b4746ac20829c30deefc, type: 3}

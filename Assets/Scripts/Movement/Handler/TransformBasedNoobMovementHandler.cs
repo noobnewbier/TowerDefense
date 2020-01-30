@@ -13,7 +13,8 @@ namespace Movement.Handler
 
         private void MoveVertical(float value)
         {
-            transform.position += transform.forward * value;
+            var selfTransform = transform;
+            selfTransform.position += selfTransform.forward * value;
         }
 
         private void MoveHorizontal(float value)

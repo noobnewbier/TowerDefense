@@ -6,7 +6,6 @@ namespace AgentAi.Sensor
 {
     public class Texture2DSensorComponent : SensorComponent
     {
-        [SerializeField] private bool grayScale;
         [SerializeField] private string sensorName = "Texture2DSensor";
 
         /// for "shape", please See reference for shape in
@@ -17,7 +16,7 @@ namespace AgentAi.Sensor
             var enemyAgentObservationCollector = EnemyAgentObservationCollector.Instance;
 
             return new Texture2DSensor(
-                grayScale,
+                enemyAgentObservationCollector.GrayScale,
                 sensorName,
                 enemyAgentObservationCollector.Shape,
                 GetComponent<ICanObserveEnvironment>()

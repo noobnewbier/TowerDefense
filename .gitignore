@@ -482,5 +482,6 @@ sysinfo.txt
 
 # Custom
 [Bb]uild/
+[Bb]estBuild/
 Assets/ml-agents/config/summaries/**
 Assets/ml-agents/config/models/**
