@@ -70,20 +70,18 @@ namespace AgentAi.Suicidal
         {
             base.AgentOnDone();
             _eventAggregator.Publish(new AgentDoneEvent());
+            _eventAggregator.Unsubscribe(this);
         }
 
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public override void AgentAction(float[] vectorAction)
         {
             var xAction = IsInValidInput(vectorAction[0]) ? 0 : (int) vectorAction[0];
             var yAction = IsInValidInput(vectorAction[1]) ? 0 : (int) vectorAction[1];
 
             inputService.UpdateVertical(MachineInputToAction(xAction));
             inputService.UpdateHorizontal(MachineInputToAction(yAction));
-
             PunishRoaming();
             EncourageApproachingTarget();
-            
-            Debug.Log(GetCumulativeReward());
         }
 
         private void OnCollisionStay(Collision other)
@@ -115,14 +113,7 @@ namespace AgentAi.Suicidal
 
             Done();
         }
-
-        protected override void DisposeAgent()
-        {
-            base.DisposeAgent();
-
-            _eventAggregator.Unsubscribe(this);
-        }
-
+        
         //Don't walk around forever pls
         private void PunishRoaming()
         {

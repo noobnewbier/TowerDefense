@@ -22,7 +22,8 @@ public static class TrainingBuildConfigSetter
     private static readonly string[] TrainingSymbols =
     {
         GameConfig.TrainingMode,
-        "ENABLE_TENSORFLOW"
+        "ENABLE_TENSORFLOW",
+        "ENABLE_BARRACUDA"
     };
 
     private static readonly string[] GameplaySymbols =

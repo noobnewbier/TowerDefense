@@ -208,15 +208,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 0
+    vectorObservationSize: 1
     numStackedVectorObservations: 1
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 19cef80a5392dfe45924ffebf3bda6d6, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 1
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: Suicide
+  m_TeamID: 0
+  m_useChildSensors: 0
 --- !u!114 &114645794836903142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +235,7 @@ MonoBehaviour:
     maxStep: 4096
     resetOnDone: 0
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
+    numberOfActionsBetweenDecisions: 3
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   provider: {fileID: 3704630309950303712}

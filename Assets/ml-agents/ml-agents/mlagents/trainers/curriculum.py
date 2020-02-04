@@ -1,6 +1,7 @@
 import os
 import json
 import math
+from typing import Dict, Any, TextIO
 
 from .exception import CurriculumConfigError, CurriculumLoadingError
 
@@ -10,12 +11,10 @@ logger = logging.getLogger("mlagents.trainers")
 
 
 class Curriculum(object):
-    def __init__(self, location, default_reset_parameters):
+    def __init__(self, location):
         """
         Initializes a Curriculum object.
         :param location: Path to JSON defining curriculum.
-        :param default_reset_parameters: Set of reset parameters for
-               environment.
         """
         self.max_lesson_num = 0
         self.measure = None
@@ -44,11 +43,6 @@ class Curriculum(object):
 
         parameters = self.data["parameters"]
         for key in parameters:
-            if key not in default_reset_parameters:
-                raise CurriculumConfigError(
-                    "The parameter {0} in Curriculum {1} is not present in "
-                    "the Environment".format(key, location)
-                )
             if len(parameters[key]) != self.max_lesson_num + 1:
                 raise CurriculumConfigError(
                     "The parameter {0} in Curriculum {1} must have {2} values "
@@ -58,14 +52,14 @@ class Curriculum(object):
                 )
 
     @property
-    def lesson_num(self):
+    def lesson_num(self) -> int:
         return self._lesson_num
 
     @lesson_num.setter
-    def lesson_num(self, lesson_num):
+    def lesson_num(self, lesson_num: int) -> None:
         self._lesson_num = max(0, min(lesson_num, self.max_lesson_num))
 
-    def increment_lesson(self, measure_val):
+    def increment_lesson(self, measure_val: float) -> bool:
         """
         Increments the lesson number depending on the progress given.
         :param measure_val: Measure of progress (either reward or percentage
@@ -94,7 +88,7 @@ class Curriculum(object):
                 return True
         return False
 
-    def get_config(self, lesson=None):
+    def get_config(self, lesson: int = None) -> Dict[str, Any]:
         """
         Returns reset parameters which correspond to the lesson.
         :param lesson: The lesson you want to get the config of. If None, the
@@ -113,7 +107,7 @@ class Curriculum(object):
         return config
 
     @staticmethod
-    def load_curriculum_file(location):
+    def load_curriculum_file(location: str) -> None:
         try:
             with open(location) as data_file:
                 return Curriculum._load_curriculum(data_file)
@@ -127,7 +121,7 @@ class Curriculum(object):
             )
 
     @staticmethod
-    def _load_curriculum(fp):
+    def _load_curriculum(fp: TextIO) -> None:
         try:
             return json.load(fp)
         except json.decoder.JSONDecodeError as e:

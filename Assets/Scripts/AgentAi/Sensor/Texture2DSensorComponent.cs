@@ -22,5 +22,7 @@ namespace AgentAi.Sensor
                 GetComponent<ICanObserveEnvironment>()
             );
         }
+
+        public override int[] GetObservationShape() => EnemyAgentObservationCollector.Instance.Shape;
     }
 }

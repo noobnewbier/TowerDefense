@@ -21,6 +21,10 @@ jobs:
     executor: << parameters.executor >>
     working_directory: ~/repo
 
+    # Run additional numpy checks on unit tests
+    environment:
+      TEST_ENFORCE_NUMPY_FLOAT32: 1
+
     steps:
       - checkout
 
@@ -61,12 +65,6 @@ jobs:
             pytest --cov=ml-agents --cov=ml-agents-envs --cov=gym-unity --cov-report html --junitxml=test-reports/junit.xml -p no:warnings
 
       - run:
-          name: Check Code Style using pre-commit
-          command: |
-            . venv/bin/activate
-            pre-commit run --show-diff-on-failure --all-files
-
-      - run:
           name: Verify there are no hidden/missing metafiles.
           # Renaming files or deleting files can leave metafiles behind that makes Unity very unhappy.
           command: |
@@ -84,8 +82,52 @@ jobs:
           path: htmlcov
           destination: htmlcov
 
+  pre-commit:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo/
+
+    steps:
+      - checkout
+      - run:
+          name: Combine precommit config and python versions for caching
+          command: |
+            cat .pre-commit-config.yaml > pre-commit-deps.txt
+            python -VV >> pre-commit-deps.txt
+
+      - restore_cache:
+          keys:
+          - v1-precommit-deps-{{ checksum "pre-commit-deps.txt" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install --upgrade setuptools
+            pip install pre-commit
+            # Install the hooks now so that they'll be cached
+            pre-commit install-hooks
+
+      - save_cache:
+          paths:
+            - ~/.cache/pre-commit
+            - ./venv
+          key: v1-precommit-deps-{{ checksum "pre-commit-deps.txt" }}
+
+      - run:
+          name: Check Code Style using pre-commit
+          command: |
+            . venv/bin/activate
+            pre-commit run --show-diff-on-failure --all-files
 
   markdown_link_check:
+    parameters:
+      precommit_command:
+        type: string
+        description: precommit hook to run
+        default: markdown-link-check
     docker:
       - image: circleci/node:12.6.0
     working_directory: ~/repo
@@ -117,7 +159,7 @@ jobs:
           name: Run markdown-link-check via precommit
           command: |
             . venv/bin/activate
-            pre-commit run --hook-stage manual markdown-link-check --all-files
+            pre-commit run --hook-stage manual << parameters.precommit_command >> --all-files
 
   protobuf_generation_check:
     docker:
@@ -128,7 +170,7 @@ jobs:
       - checkout
       - run:
           name: Combine proto files for caching
-          command: cat protobuf-definitions/proto/mlagents/envs/communicator_objects/*.proto > /tmp/proto_deps.txt
+          command: cat protobuf-definitions/proto/mlagents_envs/communicator_objects/*.proto > /tmp/proto_deps.txt
 
       - restore_cache:
           keys:
@@ -223,9 +265,16 @@ workflows:
           executor: python373
           pyversion: 3.7.3
           # Test python 3.7 with the newest supported versions
-          pip_constraints: test_constraints_max_version.txt
+          pip_constraints: test_constraints_max_tf1_version.txt
+      - build_python:
+          name: python_3.7.3+tf2
+          executor: python373
+          pyversion: 3.7.3
+          # Test python 3.7 with the newest supported versions
+          pip_constraints: test_constraints_max_tf2_version.txt
       - markdown_link_check
       - protobuf_generation_check
+      - pre-commit
       - deploy:
           name: deploy ml-agents-envs
           directory: ml-agents-envs
@@ -250,3 +299,15 @@ workflows:
               only: /[0-9]+(\.[0-9]+)*(\.dev[0-9]+)*/
             branches:
               ignore: /.*/
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - develop
+    jobs:
+      - markdown_link_check:
+          name: markdown-link-check full
+          precommit_command: markdown-link-check-full

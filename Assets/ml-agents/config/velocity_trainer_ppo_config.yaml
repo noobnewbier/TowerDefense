@@ -6,8 +6,8 @@ default:
     epsilon: 0.1
     hidden_units: 128
     lambd: 0.95
-    learning_rate: 1.0e-4
-    learning_rate_schedule: constant
+    learning_rate: 3.0e-4
+    learning_rate_schedule: linear
     max_steps: 5.0e4
     memory_size: 256
     normalize: false
@@ -37,18 +37,15 @@ Suicide:
     reward_signals:
         extrinsic:
             strength: 1.0
-            gamma: 0.99
+            gamma: 0.8
         curiosity:
             strength: 0.05
-            gamma: 0.99
+            gamma: 0.8
             encoding_size: 256
-#        gail:
-#            strength: 0.01
-#            gamma: 0.99
-#            encoding_size: 256
-#            demo_path: ../../Demonstrations/VBA/VBA.demo
-#    pretraining:
-#        demo_path: ../../Demonstrations/VBA/VBA.demo
-#        strength: 0.5
-#        steps: 100000
+        gail:
+            strength: 0.01
+            gamma: 0.8
+            encoding_size: 256
+            demo_path: ../../Demonstrations/
+
        

@@ -31,13 +31,15 @@ namespace AgentAi.Sensor
 
         public int[] GetFloatObservationShape() => _shape;
 
-        public void WriteToTensor(TensorProxy tensorProxy, int agentIndex)
+        public int Write(WriteAdapter adapter)
         {
-            using (TimerStack.Instance.Scoped(ScopedName))
+            using (TimerStack.Instance.Scoped("RenderTexSensor.GetCompressedObservation"))
             {
                 var texture = _canObserveEnvironment.GetObservation();
-                Utilities.TextureToTensorProxy(texture, tensorProxy, _grayScale, agentIndex);
+                var numWritten = Utilities.TextureToTensorProxy(texture, adapter, _grayScale);
                 Object.Destroy(texture);
+                
+                return numWritten;
             }
         }
 
@@ -51,6 +53,10 @@ namespace AgentAi.Sensor
                 Object.Destroy(texture);
                 return compressed;
             }
+        }
+
+        public void Update()
+        {
         }
 
         public SensorCompressionType GetCompressionType() => SensorCompressionType.PNG;

@@ -13,6 +13,7 @@ namespace AgentAi.Suicidal
         private int _doneAgentCount;
         private IEventAggregator _eventAggregator;
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
+        [Range(0, 5)] [SerializeField] private int initialLevel;
 
 
         //bug here!
@@ -37,6 +38,8 @@ namespace AgentAi.Suicidal
 
         private void OnEnable()
         {
+            FloatProperties.SetProperty(EnvironmentParametersKey.Level, initialLevel);
+
             _eventAggregator = EventAggregatorHolder.Instance;
 
             _eventAggregator.Subscribe(this);
@@ -51,7 +54,7 @@ namespace AgentAi.Suicidal
         {
             ClearField();
 
-            _eventAggregator.Publish(new CurrentTrainingLevelEvent((int) resetParameters[EnvironmentParametersKey.Level]));
+            _eventAggregator.Publish(new CurrentTrainingLevelEvent((int) FloatProperties.GetPropertyWithDefault(EnvironmentParametersKey.Level, 0f)));
         }
 
         private void ClearField()
