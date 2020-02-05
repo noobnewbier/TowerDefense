@@ -20,8 +20,6 @@ namespace AgentAi.Suicidal
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
     public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
-        private const float RoamingPunishment = -0.025f;
-
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
@@ -31,16 +29,15 @@ namespace AgentAi.Suicidal
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private UnitProvider provider;
+        [SerializeField] private SuicidalUnitAgentRewardConfig rewardConfig;
         [SerializeField] private SuicidalEnemy unit;
-        
+
+
         public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
 
         public void Handle(EnemyDeadEvent @event)
         {
-            if (@event.Enemy != unit)
-            {
-                return;
-            }
+            if (@event.Enemy != unit) return;
 
             RewardIsDead(@event.DeathCause);
         }
@@ -86,10 +83,7 @@ namespace AgentAi.Suicidal
 
         private void OnCollisionStay(Collision other)
         {
-            if (other.collider.CompareTag(ObjectTags.Wall))
-            {
-                AddReward(-0.05f);
-            }
+            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(rewardConfig.ContactWithObstaclePunishment);
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -98,13 +92,13 @@ namespace AgentAi.Suicidal
             switch (deathCause)
             {
                 case EffectSource.Player:
-                    AddReward(-0.15f);
+                    AddReward(rewardConfig.KilledPunishment);
                     break;
                 case EffectSource.System:
 //                    AddReward(-1f);
                     break;
                 case EffectSource.SelfDestruction:
-                    AddReward(1f);
+                    AddReward(rewardConfig.SelfDestructionReward);
                     break;
                 case EffectSource.Ai:
                 default:
@@ -113,26 +107,24 @@ namespace AgentAi.Suicidal
 
             Done();
         }
-        
+
         //Don't walk around forever pls
         private void PunishRoaming()
         {
-            AddReward(RoamingPunishment);
+            AddReward(rewardConfig.RoamingPunishment);
         }
 
         private void EncourageApproachingTarget()
         {
-            const float reward = 0.1f;
-
             var distance = GetCurrentDistanceFromTarget();
 
             if (distance < _previousClosestDistance)
             {
                 var distanceDifference = _previousClosestDistance - distance;
-                var maximumAchievement = _unitDataRepository.MaxForwardSpeed * Time.fixedDeltaTime * agentParameters.numberOfActionsBetweenDecisions;
+                var maximumAchievement = _unitDataRepository.MaxForwardSpeed * Time.fixedDeltaTime;
                 var rewardPercentage = Mathf.Clamp01(distanceDifference / maximumAchievement);
-
-                AddReward(reward * rewardPercentage);
+                
+                AddReward(rewardConfig.MaxApproachReward * rewardPercentage);
                 _previousClosestDistance = distance;
             }
         }
@@ -142,15 +134,9 @@ namespace AgentAi.Suicidal
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
             const float defaultDistance = 10f;
             var path = new NavMeshPath();
-            if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path))
-            {
-                return defaultDistance;
-            }
+            if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path)) return defaultDistance;
 
-            if (path.status != NavMeshPathStatus.PathComplete)
-            {
-                return defaultDistance;
-            }
+            if (path.status != NavMeshPathStatus.PathComplete) return defaultDistance;
 
             var distance = 0f;
             for (var i = 0; i < path.corners.Length - 1; i++) distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
@@ -160,10 +146,7 @@ namespace AgentAi.Suicidal
 
         private static int PlayerInputToMachineInput(float input)
         {
-            if (FloatUtil.NearlyEqual(input, 0))
-            {
-                return (int) MachineInput.NoAction;
-            }
+            if (FloatUtil.NearlyEqual(input, 0)) return (int) MachineInput.NoAction;
 
             return input > 0 ? (int) MachineInput.PositiveAction : (int) MachineInput.NegativeAction;
         }

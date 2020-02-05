@@ -15,35 +15,29 @@ namespace AgentAi.Manager
 {
     public interface IObserveEnvironmentService
     {
-        int[] Shape { get; }
-        bool GrayScale { get; }
         Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
     }
 
     // Perhaps the main bottleneck... be careful with this
     public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IObserveEnvironmentService
     {
-        public static IObserveEnvironmentService Instance { get; private set; }
-
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
+        private IEventAggregator _eventAggregator;
         private Texture2D _observedTexture;
         private Texture2D _terrainTexture;
-        private IEventAggregator _eventAggregator;
+        private int _textureDimension;
+        [SerializeField] private EnemyAgentObservationConfig config;
 
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
-        [SerializeField] [Range(1, 200)] private int mapDimension;
-        [SerializeField] private bool grayScale;
-        [Range(1, 10)] [SerializeField] private float precision = 1;
-        private int _textureDimension;
+        public static IObserveEnvironmentService Instance { get; private set; }
 
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
         }
 
-        public int[] Shape => new[] {_textureDimension, _textureDimension, grayScale ? 1 : 3};
-        public bool GrayScale => grayScale;
+        public bool GrayScale => config.GrayScale;
 
         public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
@@ -61,7 +55,7 @@ namespace AgentAi.Manager
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
 
             var observerPosition = observer.transform.position;
-            _observedTexture.TranslateTexture((int) (observerPosition.x * precision), (int) (observerPosition.z * precision));
+            _observedTexture.TranslateTexture((int) (observerPosition.x * config.Precision), (int) (observerPosition.z * config.Precision));
             _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y, AiInterestCategory.NullArea.Color);
 
             return Instantiate(_observedTexture);
@@ -70,15 +64,11 @@ namespace AgentAi.Manager
         private void Awake()
         {
             if (Instance != null)
-            {
                 Destroy(this);
-            }
             else
-            {
                 Instance = this;
-            }
 
-            _textureDimension = (int) (Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2 * precision);
+            _textureDimension = config.CalculateTextureDimension();
 
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
             _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
@@ -142,9 +132,9 @@ namespace AgentAi.Manager
         //technically we will be fine without returning a new one.... we will optimize when we need
         private Bounds RescaleBoundsToTexture(Bounds bounds)
         {
-            bounds.center *= precision;
+            bounds.center *= config.Precision;
             bounds.center += _centerOfTexture;
-            bounds.size *= precision;
+            bounds.size *= config.Precision;
 
             return bounds;
         }
