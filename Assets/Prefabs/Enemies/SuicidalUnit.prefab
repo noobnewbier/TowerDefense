@@ -213,7 +213,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 2df331717909af14f9edb6afe6b4f85e, type: 3}
+  m_Model: {fileID: 11400000, guid: d6324809fb9576b42a3176cc9a2f9fcb, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Suicide
@@ -239,7 +239,7 @@ MonoBehaviour:
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   provider: {fileID: 3704630309950303712}
-  rewardConfig: {fileID: 11400000, guid: cdec28e26ac214542a97a9300d54b7d5, type: 2}
+  rewardConfig: {fileID: 11400000, guid: 04b06292a2ee8bb4595d246003965090, type: 2}
   unit: {fileID: 3254465578691183710}
 --- !u!114 &114146839934506344
 MonoBehaviour:
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorName: Texture2DSensor
-  config: {fileID: 11400000, guid: c3cd2608bab71284f94c959e2165847c, type: 2}
+  config: {fileID: 11400000, guid: ac299c0565907f04591123f6fd1c56da, type: 2}
 --- !u!195 &195152517545128316
 NavMeshAgent:
   m_ObjectHideFlags: 0
