@@ -37,8 +37,6 @@ namespace AgentAi.Manager
             SetupTextures();
         }
 
-        public bool GrayScale => config.GrayScale;
-
         public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
         {
             var objectsWithTargetAndObserver = objectsOfInterestTracker.DynamicObjectOfInterests

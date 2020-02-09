@@ -3,11 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Editor/EditorCommon" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Assets/Scripts/EventAggregator" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/EventManagement" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/ShaderCommon" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/UnityUtils" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Assets/Scripts/ml-agents" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/ml-agents" vcs="Git" />
   </component>
 </project>

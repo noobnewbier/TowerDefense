@@ -111,7 +111,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 699ced788e767b141b3c6a3a8d9105c5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e88d8344e7175734095bcb87851fb901, type: 2}
 --- !u!1 &114731206
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -629,7 +629,7 @@ PrefabInstance:
     - target: {fileID: 7410030228759972068, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7410030228759972068, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
@@ -1001,7 +1001,7 @@ PrefabInstance:
     - target: {fileID: 7410030228759972068, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7410030228759972068, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
@@ -1667,7 +1667,7 @@ PrefabInstance:
         type: 3}
       propertyPath: config
       value: 
-      objectReference: {fileID: 11400000, guid: c3cd2608bab71284f94c959e2165847c,
+      objectReference: {fileID: 11400000, guid: deb01ea82707678459c1636224780db4,
         type: 2}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
@@ -1757,7 +1757,7 @@ PrefabInstance:
     - target: {fileID: 4793952624822536967, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4793952624822536964, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
