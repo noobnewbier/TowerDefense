@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: b64bc1d4b250d1342a1bb67ce2b62df1
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/Demonstrations/Suicide_22.demo
+  externalObjects: {}
+  userData: ' (MLAgents.Demonstration)'
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 7bd65ce151aaa4a41a45312543c56be1, type: 3}

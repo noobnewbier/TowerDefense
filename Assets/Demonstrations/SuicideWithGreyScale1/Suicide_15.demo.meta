@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: f7e9a443c7d878d49a61bce3209efa37
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400002: Assets/Demonstrations/SuicideWithGreyScale1/Suicide_15.demo
+  externalObjects: {}
+  userData: ' (MLAgents.Demonstration)'
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 7bd65ce151aaa4a41a45312543c56be1, type: 3}

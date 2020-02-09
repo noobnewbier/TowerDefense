@@ -1,0 +1,1 @@
+Distinct Color Observation, with target size > 2 for all levels
