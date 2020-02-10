@@ -11,12 +11,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1131360899257277858}
   m_Layer: 0
-  m_Name: TurretPlacementVisualizer
+  m_Name: InvalidTurretPlacementIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1131360899257277858
 Transform:
   m_ObjectHideFlags: 0

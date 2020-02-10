@@ -1,28 +1,34 @@
 using Elements.Turret.Placement.InputSource;
+using ScriptableService;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ui.Turret.Placement
 {
     public interface ITurretPositionVisualizer
     {
         void FinishVisualizePosition();
-        void UpdateVisualizerPosition();
-        void StartVisualizePosition();
+        void StartVisualizePosition(bool initialSpawnpointValidity);
+        void OnInvalidSpawnpoint();
+        void OnValidSpawnpoint();
     }
 
     public class TurretPositionVisualizer : MonoBehaviour, ITurretPositionVisualizer
     {
-        [SerializeField] private GameObject turretPositionVisualizingPrefab;
+        [SerializeField] private GameObject validTurretPositionIndicator;
+        [SerializeField] private GameObject invalidTurretPositionIndicator;
         [SerializeField] private Transform turretPosition;
         [SerializeField] private TurretPlacementInputSource turretPlacementInputSource;
         [SerializeField] private TurretPositionPresenterFactory presenterFactory;
+        [SerializeField] private Vector3 spawnpointMargin;
+        
 
-        private GameObject _currentVisualizer;
+        private GameObject _currentIndicator;
         private ITurretPositionPresenter _presenter;
 
         private void OnEnable()
         {
-            _presenter = presenterFactory.CreatePresenter(this, turretPlacementInputSource);
+            _presenter = presenterFactory.CreatePresenter(this, turretPlacementInputSource, turretPosition, spawnpointMargin);
         }
 
         private void Update()
@@ -30,21 +36,30 @@ namespace Ui.Turret.Placement
             _presenter.OnUpdate();
         }
 
-        public void UpdateVisualizerPosition()
+        public void StartVisualizePosition(bool initialSpawnpointValidity)
         {
-            _currentVisualizer.transform.position = turretPosition.position;
-            _currentVisualizer.transform.rotation = turretPosition.rotation;
+            _currentIndicator = initialSpawnpointValidity ? validTurretPositionIndicator : invalidTurretPositionIndicator;
+            
+            _currentIndicator.SetActive(true);
         }
 
-        public void StartVisualizePosition()
+        public void OnInvalidSpawnpoint()
         {
-            _currentVisualizer = Instantiate(turretPositionVisualizingPrefab, turretPosition);
+            _currentIndicator = invalidTurretPositionIndicator;
+            _currentIndicator.SetActive(true);
+            validTurretPositionIndicator.SetActive(false);
+        }
+
+        public void OnValidSpawnpoint()
+        {
+            _currentIndicator = validTurretPositionIndicator;
+            _currentIndicator.SetActive(true);
+            invalidTurretPositionIndicator.SetActive(false);
         }
 
         public void FinishVisualizePosition()
         {
-            Destroy(_currentVisualizer);
+            _currentIndicator.SetActive(false);
         }
-        
     }
 }

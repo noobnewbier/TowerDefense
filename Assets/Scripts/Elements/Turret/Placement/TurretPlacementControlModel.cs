@@ -7,6 +7,7 @@ namespace Elements.Turret.Placement
     {
         [SerializeField] private TurretProvider turretProvider;
         public int TurretPrice => turretProvider.GetRepository().Cost;
-        public GameObject CopyOfTurret => turretProvider.GetTurretPrefab();
+        public GameObject ProvideCopyOfTurret => turretProvider.GetTurretPrefab();
+        public Vector3 HalfSize => turretProvider.HalfSize;
     }
 }

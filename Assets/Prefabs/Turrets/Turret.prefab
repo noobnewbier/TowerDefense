@@ -413,6 +413,7 @@ MonoBehaviour:
   turretData: {fileID: 11400000, guid: 2960eeec2a2c0e4468f17f837d3d633c, type: 2}
   turret: {fileID: 3220006330832632566}
   bulletShooterRepositoryProvider: {fileID: 508349808315234538}
+  mCollider: {fileID: 8834248223672945148}
 --- !u!114 &8281522127211796472
 MonoBehaviour:
   m_ObjectHideFlags: 0

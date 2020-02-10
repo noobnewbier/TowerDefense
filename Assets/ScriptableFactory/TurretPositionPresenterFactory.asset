@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeedc4bc30824bf59643333804835249, type: 3}
   m_Name: TurretPositionPresenterFactory
   m_EditorClassIdentifier: 
+  spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
+    type: 2}
+  placemenControlModel: {fileID: 11400000, guid: a79a1cf9d78070c4d9c4c9bd09a83567,
+    type: 2}

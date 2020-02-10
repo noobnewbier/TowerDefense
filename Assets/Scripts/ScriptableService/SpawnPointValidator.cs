@@ -3,8 +3,19 @@ using UnityEngine;
 
 namespace ScriptableService
 {
+    public interface ISpawnPointValidator
+    {
+        bool IsSpawnPointValid
+        (
+            Vector3 centerWorldSpace,
+            Vector3 halfSize,
+            Quaternion orientation,
+            GameObject tobeSpawned = null
+        );
+    }
+
     [CreateAssetMenu(menuName = "ScriptableService/SpawnPointValidator")]
-    public class SpawnPointValidator : ScriptableObject
+    public class SpawnPointValidator : ScriptableObject, ISpawnPointValidator
     {
         private static int _layerMask;
 
@@ -14,7 +25,7 @@ namespace ScriptableService
         private void OnEnable()
         {
             _layerMask = (1 << LayerMask.NameToLayer(LayerNames.Obstacle)) | (1 << LayerMask.NameToLayer(LayerNames.AiDamageTaker)) |
-                         (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker));
+                         (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker)) | (1 << LayerMask.NameToLayer(LayerNames.Turret));
         }
 
         public bool IsSpawnPointValid
@@ -22,11 +33,10 @@ namespace ScriptableService
             Vector3 centerWorldSpace,
             Vector3 halfSize,
             Quaternion orientation,
-            GameObject tobeSpawned
+            GameObject tobeSpawned = null
         )
         {
-            var resultSize = Physics.OverlapBoxNonAlloc(centerWorldSpace, halfSize, _buffer, orientation, _layerMask);
-
+            var resultSize = Physics.OverlapBoxNonAlloc(centerWorldSpace, halfSize, _buffer, orientation, _layerMask, QueryTriggerInteraction.Ignore);
             switch (resultSize)
             {
                 case 0:
