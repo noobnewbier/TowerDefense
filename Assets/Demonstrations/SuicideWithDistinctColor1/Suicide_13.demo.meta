@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: ce3a0d6cc8440344bba1201078b498a2
 ScriptedImporter:
   fileIDToRecycleName:
-    11400000: Assets/Demonstrations/Suicide_13.demo
+    11400002: Assets/Demonstrations/SuicideWithDistinctColor1/Suicide_13.demo
   externalObjects: {}
   userData: ' (MLAgents.Demonstration)'
   assetBundleName: 
