@@ -52,11 +52,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4368757702058295674}
     m_Modifications:
-    - target: {fileID: 9136113832033682929, guid: df3bcadff6ac4744e8e9b6c006769bf8,
-        type: 3}
-      propertyPath: m_Name
-      value: BasicBulletFBX
-      objectReference: {fileID: 0}
     - target: {fileID: 9136113832033327569, guid: df3bcadff6ac4744e8e9b6c006769bf8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -112,6 +107,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9136113832033682929, guid: df3bcadff6ac4744e8e9b6c006769bf8,
+        type: 3}
+      propertyPath: m_Name
+      value: BasicBulletFBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136113832031427377, guid: df3bcadff6ac4744e8e9b6c006769bf8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36c7baa347d68f347a9aa9698aa1bcdd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df3bcadff6ac4744e8e9b6c006769bf8, type: 3}
 --- !u!4 &4658972020150729058 stripped
