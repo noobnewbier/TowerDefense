@@ -59,7 +59,7 @@ namespace Bullet
             var traveledDistance = data.Speed * Time.fixedDeltaTime;
             _cumulatedTraveledDistance += traveledDistance;
 
-            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask))
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, traveledDistance, _layerMask, QueryTriggerInteraction.Ignore))
             {
                 OnCollide(hit);
             }
