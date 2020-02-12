@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 8281522127211796472}
   - component: {fileID: 508349808315234538}
   - component: {fileID: 8834248223672945148}
+  - component: {fileID: 4149531046140469926}
   m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
@@ -386,6 +387,8 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1520384083734201723}
   inputSource: {fileID: 8884615131391382605}
   provider: {fileID: 508349808315234538}
+  timer: {fileID: 4149531046140469926}
+  randomFactor: 0.85
 --- !u!114 &8884615131391382605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +460,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &4149531046140469926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2392737558376094949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d576227e3e28e45a26092621663a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInitialized: 0
+  threshold: 0
+  timer: 0
 --- !u!1 &5701559935337832726
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,20 +1000,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1552840796576611384}
     m_Modifications:
-    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+    - target: {fileID: 5797897387027120787, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
-      propertyPath: m_Name
-      value: UpgradeCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_SizeDelta.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6790852408894734000, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
@@ -1102,10 +1110,20 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5797897387027120787, guid: db40f695215efb247b132e8458e805c6,
+    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
+      propertyPath: m_Name
+      value: UpgradeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2052201252340418977, guid: db40f695215efb247b132e8458e805c6,
         type: 3}
@@ -1534,6 +1552,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db40f695215efb247b132e8458e805c6, type: 3}
+--- !u!1 &9188084591087533762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7471134171809181969}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4148722059053191073 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6790852408894734000, guid: db40f695215efb247b132e8458e805c6,
@@ -1543,12 +1567,6 @@ RectTransform:
 --- !u!224 &4024115828522562434 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5797897387027120787, guid: db40f695215efb247b132e8458e805c6,
-    type: 3}
-  m_PrefabInstance: {fileID: 7471134171809181969}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9188084591087533762 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1741888872070303699, guid: db40f695215efb247b132e8458e805c6,
     type: 3}
   m_PrefabInstance: {fileID: 7471134171809181969}
   m_PrefabAsset: {fileID: 0}

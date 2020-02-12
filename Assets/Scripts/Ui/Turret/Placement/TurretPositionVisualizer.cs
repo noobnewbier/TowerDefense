@@ -21,7 +21,6 @@ namespace Ui.Turret.Placement
         [SerializeField] private TurretPlacementInputSource turretPlacementInputSource;
         [SerializeField] private TurretPositionPresenterFactory presenterFactory;
         [SerializeField] private Vector3 spawnpointMargin;
-        
 
         private GameObject _currentIndicator;
         private ITurretPositionPresenter _presenter;
