@@ -6,7 +6,7 @@ namespace Bullet.InputSource
     {
         public override bool ReceivedShootBulletInput()
         {
-            return Input.GetMouseButtonDown(1);
+            return Input.GetMouseButton(1);
         }
     }
 }

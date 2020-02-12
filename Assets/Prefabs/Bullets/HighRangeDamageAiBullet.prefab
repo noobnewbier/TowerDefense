@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighRangeDamageAiBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 8585241543760437819, guid: 0f4768a9bef52354a9d1c3cba7504166,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4368757702058295674, guid: 0f4768a9bef52354a9d1c3cba7504166,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,5 +78,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 90b4fd52e6edba144b1564fc65a0b957,
         type: 2}
+    - target: {fileID: 4658972020153023362, guid: 0f4768a9bef52354a9d1c3cba7504166,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36c7baa347d68f347a9aa9698aa1bcdd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4768a9bef52354a9d1c3cba7504166, type: 3}
