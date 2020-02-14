@@ -37,15 +37,9 @@ namespace Movement.Animation
             animator.SetBool(IsShooting, shooterInputSource.ReceivedShootBulletInput());
 
             animator.SetFloat(Speed, movementInputSource.Vertical());
-            animator.SetFloat(ShootFrequency, ExponentialEaseOut(shootTimer.NormalizedTime));
+            animator.SetFloat(ShootFrequency, Easing.ExponentialEaseOut(shootTimer.NormalizedTime, easingParameter));
 
             animator.speed = animSpeed;
-        }
-
-        private float ExponentialEaseOut(float x)
-        {
-            var y = 1 - Mathf.Pow(1 - x, easingParameter);
-            return y;
         }
     }
 }

@@ -33,7 +33,6 @@
       <Path>Build</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
-      <Path>Temp</Path>
       <Path>UIElementsSchema</Path>
       <Path>VirtualEnvironment</Path>
       <Path>obj</Path>

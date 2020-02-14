@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: c9de71458653eb74d802862d303ad11f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Horizontal dial
+    100004: SC ACU left
+    100006: SC ACU Right
+    100008: SC EXT CEllarray
+    100010: SC external INTF
+    100012: SC GUN energy line
+    100014: SC TIBLIS Pulse Cannon
+    100016: Vertical Dial
+    400000: //RootNode
+    400002: Horizontal dial
+    400004: SC ACU left
+    400006: SC ACU Right
+    400008: SC EXT CEllarray
+    400010: SC external INTF
+    400012: SC GUN energy line
+    400014: SC TIBLIS Pulse Cannon
+    400016: Vertical Dial
+    2100000: Main color 01
+    2100002: Main color 02
+    2100004: No Name
+    2300000: //RootNode
+    2300002: Horizontal dial
+    2300004: SC ACU left
+    2300006: SC ACU Right
+    2300008: SC EXT CEllarray
+    2300010: SC external INTF
+    2300012: SC GUN energy line
+    2300014: SC TIBLIS Pulse Cannon
+    2300016: Vertical Dial
+    3300000: //RootNode
+    3300002: Horizontal dial
+    3300004: SC ACU left
+    3300006: SC ACU Right
+    3300008: SC EXT CEllarray
+    3300010: SC external INTF
+    3300012: SC GUN energy line
+    3300014: SC TIBLIS Pulse Cannon
+    3300016: Vertical Dial
+    4300000: GUN base
+    4300002: Horizontal dial
+    4300004: SC external INTF
+    4300006: SC EXT CEllarray
+    4300008: Vertical Dial
+    4300010: SC GUN energy line
+    4300012: SC TIBLIS Pulse Cannon
+    4300014: SC ACU Right
+    4300016: SC ACU left
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
