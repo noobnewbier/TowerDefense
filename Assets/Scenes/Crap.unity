@@ -135,12 +135,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72091484}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.551115e-17, y: 0.79242253, z: 0.00000023841858}
-  m_LocalScale: {x: 0.5844711, y: 0.57775444, z: 7.0804696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2502487, z: 0}
+  m_LocalScale: {x: 0.34160647, y: 0.33380026, z: 50.13304}
   m_Children: []
-  m_Father: {fileID: 232493741}
-  m_RootOrder: 1
+  m_Father: {fileID: 1855790104}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &95553004
 GameObject:
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f6a7405e75409db12409e98cbf684f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooterData: {fileID: 11400000, guid: 89b1221cadb6a2849b31cd79c55db513, type: 2}
+  shooterData: {fileID: 11400000, guid: 2979192a2abb2484889252ce6a8eaf74, type: 2}
 --- !u!114 &232493745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,13 +389,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53179e65cd1f469888bfc43e60dcc7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationTimer: {fileID: 232493747}
+  isDebug: 0
   originalTransform: {fileID: 72091485}
+  randomFactor: 0.025
   recoilEaseOutStrength: 5
   recoiledTransform: {fileID: 1728932716}
   recoilSpeed: 0.33
   recoverySpeed: 0.7
+  recoveryTimer: {fileID: 1229866197}
   shooterTimer: {fileID: 232493743}
-  animationTimer: {fileID: 232493747}
+  timeTillRecovery: 0.2
 --- !u!1 &282090389
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +469,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1229866195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229866196}
+  - component: {fileID: 1229866197}
+  m_Layer: 0
+  m_Name: RecoveryTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229866196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229866195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 232493741}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1229866197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229866195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d576227e3e28e45a26092621663a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInitialized: 0
+  threshold: 0
+  timer: 0
 --- !u!1 &1728932715
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,11 +538,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728932715}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.551115e-17, y: 0.79242253, z: -0.551}
-  m_LocalScale: {x: 0.5844711, y: 0.57775444, z: 7.0804696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2502484, z: -3.4269462}
+  m_LocalScale: {x: 0.34160647, y: 0.3338002, z: 50.133053}
   m_Children: []
-  m_Father: {fileID: 232493741}
+  m_Father: {fileID: 1855790104}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804502276
@@ -617,3 +667,9 @@ Transform:
   m_Father: {fileID: 232493740}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1855790104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400010, guid: 09f11d9676b335b478004c553a6612ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 232493738}
+  m_PrefabAsset: {fileID: 0}

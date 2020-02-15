@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityUtils;
+using Random = UnityEngine.Random;
 
 namespace Elements.Turret.Animation
 {
@@ -9,36 +10,36 @@ namespace Elements.Turret.Animation
     {
         private Coroutine _currentCoroutine;
         private bool _isRecoiling;
+        [SerializeField] private Timer animationTimer;
+        [SerializeField] private bool isDebug;
         [SerializeField] private Transform originalTransform;
+        [SerializeField] private float randomFactor;
         [SerializeField] private float recoilEaseOutStrength = 2;
         [SerializeField] private Transform recoiledTransform;
         [SerializeField] private float recoilSpeed;
         [SerializeField] private float recoverySpeed;
+        [SerializeField] private Timer recoveryTimer;
         [SerializeField] private Timer shooterTimer;
-        [SerializeField] private Timer animationTimer;
-        
+        [SerializeField] private float timeTillRecovery;
+
 
         private void OnEnable()
         {
             //required otherwise the timer remains un initialized, throwing an exception
             animationTimer.Init(recoilSpeed);
+            recoveryTimer.Init(timeTillRecovery);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            if (isDebug) return;
+
             //someone shooted
             if (shooterTimer.ResetInThisFrame)
-            {
                 Recoil();
-            }
-            else
-            {
+            else if (_isRecoiling && recoveryTimer.TryResetIfPassedThreshold())
                 //if it was recoiling, and the recoil movement finished 
-                if (_isRecoiling && _currentCoroutine == null)
-                {
-                    Recover();
-                }
-            }
+                Recover();
         }
 
         [ContextMenu("Recoil")]
@@ -53,7 +54,7 @@ namespace Elements.Turret.Animation
                 StartCoroutine(
                     AnimationCoroutine(
                         originalTransform.position,
-                        recoiledTransform.position,
+                        recoiledTransform.position + Vector3.one * Random.Range(0, randomFactor),
                         Easing.EaseOutElastic
                     )
                 );
@@ -92,8 +93,8 @@ namespace Elements.Turret.Animation
                     return FloatUtil.NearlyEqual(animationTimer.NormalizedTime, 1);
                 }
             );
-
             _currentCoroutine = null;
+            recoveryTimer.Reset();
         }
     }
 }
