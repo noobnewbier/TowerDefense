@@ -3,85 +3,45 @@ guid: 09f11d9676b335b478004c553a6612ee
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Camera
-    100002: ground plane
-    100004: GUN base
-    100006: //RootNode
-    100008: Horizontal dial
-    100010: human referance
-    100012: Light cold fill
-    100014: Light warm fill
-    100016: Mesh.008
-    100018: Plane.000
-    100020: Plane.001
-    100022: SC ACU left
-    100024: SC ACU Right
-    100026: SC EXT CEllarray
-    100028: SC external INTF
-    100030: SC GUN energy line
-    100032: SC TIBLIS Pulse Cannon
-    100034: Vertical Dial
-    400000: Camera
-    400002: ground plane
-    400004: GUN base
-    400006: //RootNode
-    400008: Horizontal dial
-    400010: human referance
-    400012: Light cold fill
-    400014: Light warm fill
-    400016: Mesh.008
-    400018: Plane.000
-    400020: Plane.001
-    400022: SC ACU left
-    400024: SC ACU Right
-    400026: SC EXT CEllarray
-    400028: SC external INTF
-    400030: SC GUN energy line
-    400032: SC TIBLIS Pulse Cannon
-    400034: Vertical Dial
-    2000000: Camera
+    100000: //RootNode
+    100002: Horizontal dial
+    100004: SC ACU left
+    100006: SC ACU Right
+    100008: SC EXT CEllarray
+    100010: SC external INTF
+    100012: SC GUN energy line
+    100014: SC TIBLIS Pulse Cannon
+    100016: Vertical Dial
+    400000: //RootNode
+    400002: Horizontal dial
+    400004: SC ACU left
+    400006: SC ACU Right
+    400008: SC EXT CEllarray
+    400010: SC external INTF
+    400012: SC GUN energy line
+    400014: SC TIBLIS Pulse Cannon
+    400016: Vertical Dial
     2100000: Main color 01
     2100002: Main color 02
     2100004: No Name
-    2100006: Ground material
-    2100008: human referance
-    2100010: light cold fill
-    2100012: light warm fill
-    2100014: Light white fill
-    2300000: ground plane
-    2300002: GUN base
-    2300004: Horizontal dial
-    2300006: human referance
-    2300008: Light cold fill
-    2300010: Light warm fill
-    2300012: Mesh.008
-    2300014: Plane.000
-    2300016: Plane.001
-    2300018: SC ACU left
-    2300020: SC ACU Right
-    2300022: SC EXT CEllarray
-    2300024: SC external INTF
-    2300026: SC GUN energy line
-    2300028: SC TIBLIS Pulse Cannon
-    2300030: Vertical Dial
-    2300032: //RootNode
-    3300000: ground plane
-    3300002: GUN base
-    3300004: Horizontal dial
-    3300006: human referance
-    3300008: Light cold fill
-    3300010: Light warm fill
-    3300012: Mesh.008
-    3300014: Plane.000
-    3300016: Plane.001
-    3300018: SC ACU left
-    3300020: SC ACU Right
-    3300022: SC EXT CEllarray
-    3300024: SC external INTF
-    3300026: SC GUN energy line
-    3300028: SC TIBLIS Pulse Cannon
-    3300030: Vertical Dial
-    3300032: //RootNode
+    2300000: //RootNode
+    2300002: Horizontal dial
+    2300004: SC ACU left
+    2300006: SC ACU Right
+    2300008: SC EXT CEllarray
+    2300010: SC external INTF
+    2300012: SC GUN energy line
+    2300014: SC TIBLIS Pulse Cannon
+    2300016: Vertical Dial
+    3300000: //RootNode
+    3300002: Horizontal dial
+    3300004: SC ACU left
+    3300006: SC ACU Right
+    3300008: SC EXT CEllarray
+    3300010: SC external INTF
+    3300012: SC GUN energy line
+    3300014: SC TIBLIS Pulse Cannon
+    3300016: Vertical Dial
     4300000: GUN base
     4300002: Horizontal dial
     4300004: SC external INTF
@@ -91,15 +51,6 @@ ModelImporter:
     4300012: SC TIBLIS Pulse Cannon
     4300014: SC ACU Right
     4300016: SC ACU left
-    4300018: Mesh.008
-    4300020: ground plane
-    4300022: human referance
-    4300024: Light cold fill
-    4300026: Light warm fill
-    4300028: Plane.000
-    4300030: Plane.001
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -153,7 +104,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -180,7 +131,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
