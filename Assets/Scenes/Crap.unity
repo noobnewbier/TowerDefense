@@ -399,7 +399,7 @@ MonoBehaviour:
   recoverySpeed: 0.7
   recoveryTimer: {fileID: 1229866197}
   shooterTimer: {fileID: 232493743}
-  timeTillRecovery: 0.2
+  timeTillRecovery: 0.65
 --- !u!1 &282090389
 GameObject:
   m_ObjectHideFlags: 0
