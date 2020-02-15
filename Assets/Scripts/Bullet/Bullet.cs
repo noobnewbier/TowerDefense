@@ -63,16 +63,16 @@ namespace Bullet
             {
                 OnCollide(hit);
             }
-
-            if (_cumulatedTraveledDistance > data.Range)
-            {
-                AfterEffect(hit.point);
-                SelfDestroy();
-            }
             else
             {
                 var selfTransform = transform;
                 selfTransform.position += selfTransform.forward * traveledDistance;
+                
+                if (_cumulatedTraveledDistance > data.Range)
+                {
+                    AfterEffect(transform.position);
+                    SelfDestroy();
+                }
             }
         }
 
