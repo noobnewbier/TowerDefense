@@ -2,6 +2,8 @@ using Bullet.InputSource;
 using Elements.Turret;
 using UnityEngine;
 using UnityUtils;
+using UnityUtils.BooleanProviders;
+using UnityUtils.Timers;
 
 namespace Bullet
 {
@@ -13,7 +15,8 @@ namespace Bullet
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private BulletsShooterInputSource inputSource;
         [SerializeField] private BulletShooterRepositoryProvider provider;
-        [SerializeField] private Timer timer;
+        [SerializeField] private StateRepresenter isShootingState;
+        [SerializeField] private ThresholdTimer timer;
         [Range(0, 1)] [SerializeField] private float randomFactor = 0.85f;
 
 
@@ -39,7 +42,15 @@ namespace Bullet
 
         private void FixedUpdate()
         {
-            if (inputSource.ReceivedShootBulletInput() && timer.TryResetIfPassedThreshold()) Shoot();
+            if (inputSource.ReceivedShootBulletInput() && timer.TryResetIfPassedThreshold())
+            {
+                Shoot();
+                isShootingState.SetState(true);
+            }
+            else
+            {
+                isShootingState.SetState(false);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using Elements.Turret.Placement.InputSource;
 using Movement.InputSource;
 using UnityEngine;
 using UnityUtils;
+using UnityUtils.Timers;
 
 namespace Movement.Animation
 {
@@ -22,7 +23,7 @@ namespace Movement.Animation
         [SerializeField] private BulletShooterRepositoryProvider bulletShooterRepositoryProvider;
         [SerializeField] private MovementInputSource movementInputSource;
         [SerializeField] private BulletsShooterInputSource shooterInputSource;
-        [SerializeField] private Timer shootTimer;
+        [SerializeField] private ThresholdTimer shootTimer;
         [SerializeField] private TurretPlacementInputSource turretPlacementInputSource;
 
         private void OnEnable()

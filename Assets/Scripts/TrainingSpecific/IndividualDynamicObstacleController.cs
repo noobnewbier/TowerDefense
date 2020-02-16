@@ -1,7 +1,9 @@
 using ScriptableService;
 using Terrain;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityUtils;
+using UnityUtils.BooleanProviders;
 using UnityUtils.LocationProviders;
 using UnityUtils.ScaleProviders;
 
@@ -9,7 +11,7 @@ namespace TrainingSpecific
 {
     public class IndividualDynamicObstacleController : MonoBehaviour
     {
-        [SerializeField] private ActivityProvider activityProvider;
+        [FormerlySerializedAs("activityProvider")] [SerializeField] private BooleanProvider booleanProvider;
         [SerializeField] private DynamicObstacle dynamicObstacle;
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ScaleProvider scaleProvider;
@@ -18,7 +20,7 @@ namespace TrainingSpecific
 
         public void PrepareObjectForTraining()
         {
-            var isActive = activityProvider.ProvideIsActive();
+            var isActive = booleanProvider.ProvideBoolean();
             dynamicObstacle.gameObject.SetActive(isActive);
             if (isActive)
             {
