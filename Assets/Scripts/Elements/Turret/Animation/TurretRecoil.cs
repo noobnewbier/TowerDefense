@@ -13,7 +13,9 @@ namespace Elements.Turret.Animation
         private Coroutine _currentCoroutine;
         private bool _isRecoiling;
         [SerializeField] private ThresholdTimer animationTimer;
+        [Range(0, 1f)] [SerializeField] private float currentPositionStrength;
         [SerializeField] private bool isDebug;
+        [SerializeField] private StateRepresenter isShootingState;
         [SerializeField] private Transform originalTransform;
         [SerializeField] private float randomFactor;
         [SerializeField] private float recoilEaseOutStrength = 2;
@@ -22,8 +24,6 @@ namespace Elements.Turret.Animation
         [SerializeField] private float recoverySpeed;
         [SerializeField] private ThresholdTimer recoveryTimer;
         [SerializeField] private float timeTillRecovery;
-        [SerializeField] private StateRepresenter isShootingState;
-        
 
 
         private void OnEnable()
@@ -81,15 +81,16 @@ namespace Elements.Turret.Animation
                 );
         }
 
-        private IEnumerator AnimationCoroutine(Vector3 originalPosition,
+        private IEnumerator AnimationCoroutine(Vector3 startingPosition,
                                                Vector3 targetPosition,
                                                Func<float, float> easingFunction)
         {
+            var currentPosition = transform.position;
             yield return new WaitUntil(
                 () =>
                 {
                     transform.position = Vector3.Lerp(
-                        originalPosition,
+                        startingPosition * (1f - currentPositionStrength) + currentPosition * currentPositionStrength,
                         targetPosition,
                         easingFunction(animationTimer.NormalizedTime)
                     );

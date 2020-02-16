@@ -501,7 +501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTimer: {fileID: 232493747}
+  currentPositionStrength: 0.313
   isDebug: 0
+  isShootingState: {fileID: 1635196044}
   originalTransform: {fileID: 72091485}
   randomFactor: 0.025
   recoilEaseOutStrength: 5
@@ -510,7 +512,6 @@ MonoBehaviour:
   recoverySpeed: 0.7
   recoveryTimer: {fileID: 1229866197}
   timeTillRecovery: 0.65
-  isShootingState: {fileID: 1635196044}
 --- !u!4 &232493749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 09f11d9676b335b478004c553a6612ee,
