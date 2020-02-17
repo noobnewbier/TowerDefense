@@ -2,27 +2,29 @@ using UnityEngine;
 
 namespace Elements.Turret.Animation
 {
+    [RequireComponent(typeof(Renderer))]
     public class DissolveShaderController : MonoBehaviour
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
         private MaterialPropertyBlock[] _propertyBlocks;
-        [SerializeField] private Renderer controlledRenderer;
+        private Renderer _controlledRenderer;
 
         private void OnEnable()
         {
+            _controlledRenderer = GetComponent<Renderer>();
             InitializePropertyBlocks();
         }
 
         private void GetCurrentPropertyBlocks()
         {
             var currentIndex = 0;
-            for (var i = 0; i < controlledRenderer.materials.Length; i++)
-                controlledRenderer.GetPropertyBlock(_propertyBlocks[currentIndex++], i);
+            for (var i = 0; i < _controlledRenderer.materials.Length; i++)
+                _controlledRenderer.GetPropertyBlock(_propertyBlocks[currentIndex++], i);
         }
 
         private void InitializePropertyBlocks()
         {
-            _propertyBlocks = new MaterialPropertyBlock[controlledRenderer.materials.Length];
+            _propertyBlocks = new MaterialPropertyBlock[_controlledRenderer.materials.Length];
             for (var i = 0; i < _propertyBlocks.Length; i++)
                 _propertyBlocks[i] = new MaterialPropertyBlock();
         }
@@ -35,7 +37,7 @@ namespace Elements.Turret.Animation
             for (var i = 0; i < _propertyBlocks.Length; i++)
             {
                 _propertyBlocks[i].SetFloat(DissolveAmount, dissolveAmount);
-                controlledRenderer.SetPropertyBlock(_propertyBlocks[i], i);
+                _controlledRenderer.SetPropertyBlock(_propertyBlocks[i], i);
             }            
         }
     }

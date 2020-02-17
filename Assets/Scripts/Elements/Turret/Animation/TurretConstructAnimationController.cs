@@ -10,19 +10,19 @@ namespace Elements.Turret.Animation
         [SerializeField] private ThresholdTimer animationTimer;
         [SerializeField] private DissolveShaderController[] shaderControllers;
 
-        [ContextMenu("StartTurretSpawnAnimation")]
-        public void StartTurretSpawnAnimation()
+        [ContextMenu("ConstructTurretAnimation")]
+        public void ConstructTurretAnimation()
         {
-            StartCoroutine(TurretSpawnAnimationCoroutine());
+            StartCoroutine(ConstructTurretAnimationCoroutine());
         }
 
-        [ContextMenu("StopTurretSpawnAnimation")]
-        public void StopTurretSpawnAnimation()
+        [ContextMenu("DestructTurretAnimation")]
+        public void DestructTurretAnimation()
         {
             StartCoroutine(TurretDestructAnimationCoroutine());
         }
 
-        private IEnumerator TurretSpawnAnimationCoroutine()
+        private IEnumerator ConstructTurretAnimationCoroutine()
         {
             animationTimer.Reset();
             yield return new WaitUntil(() =>
