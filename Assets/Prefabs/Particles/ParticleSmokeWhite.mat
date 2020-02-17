@@ -53,7 +53,7 @@ Material:
     - _FlipbookMode: 0
     - _Glossiness: 0.5
     - _InvFade: 0.8275
-    - _LightingEnabled: 0
+    - _LightingEnabled: 1
     - _Metallic: 0
     - _Mode: 0
     - _SoftParticlesEnabled: 0

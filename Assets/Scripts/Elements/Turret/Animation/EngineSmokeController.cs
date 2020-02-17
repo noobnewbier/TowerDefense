@@ -5,22 +5,27 @@ namespace Elements.Turret.Animation
 {
     public class EngineSmokeController : MonoBehaviour
     {
-        [SerializeField] private GameObject[] particleSystemsGameObjects;
+        [SerializeField] private ParticleSystem[] particleSystems;
         [SerializeField] private ThresholdTimer startSmokeTimer;
         [SerializeField] private ThresholdTimer stopSmokeTimer;
+        private bool _isCurrentlyPlaying = false;
 
 
         private void Update()
         {
-            if (stopSmokeTimer.PassedThreshold)
+            if (stopSmokeTimer.PassedThreshold && _isCurrentlyPlaying)
                 SetParticlesActivity(false);
-            else if (startSmokeTimer.PassedThreshold) SetParticlesActivity(true);
+            else if (startSmokeTimer.PassedThreshold && !_isCurrentlyPlaying) SetParticlesActivity(true);
         }
 
         private void SetParticlesActivity(bool shouldEmitParticles)
         {
-            foreach (var particleSystemsGameObject in particleSystemsGameObjects)
-                particleSystemsGameObject.SetActive(shouldEmitParticles);
+            _isCurrentlyPlaying = shouldEmitParticles;
+            foreach (var p in particleSystems)
+                if (shouldEmitParticles)
+                    p.Play();
+                else
+                    p.Stop();
         }
     }
 }
