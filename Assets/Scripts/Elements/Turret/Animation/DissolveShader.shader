@@ -4,7 +4,7 @@ Shader "Noobnewbier/Dissolve" {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _DissolveGuide("Dissolve Guide (RGB)", 2D) = "white" {}
-        _DissolveAmount("Dissolve Amount", Range(0.0, 1.0)) = 0
+        [PerRendererdData] _DissolveAmount("Dissolve Amount", Range(0.0, 1.0)) = 0
  
         _DissolveSize("Dissolve Size", Range(0.0, 1.0)) = 0.15
         _DissolveRamp("Dissolve Ramp (RGB)", 2D) = "white" {}
