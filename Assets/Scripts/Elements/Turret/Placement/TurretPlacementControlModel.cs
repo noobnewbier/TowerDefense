@@ -6,8 +6,7 @@ namespace Elements.Turret.Placement
     public class TurretPlacementControlModel : ScriptableObject
     {
         [SerializeField] private TurretProvider turretProvider;
-        public int TurretPrice => turretProvider.GetRepository().Cost;
-        public GameObject ProvideCopyOfTurret => turretProvider.GetTurretPrefab();
-        public Vector3 HalfSize => turretProvider.HalfSize;
+
+        public TurretProvider TurretProvider => turretProvider;
     }
 }

@@ -13,8 +13,8 @@ namespace Ui.Turret.Option.Entry
         [SerializeField] private UpgradeOptionModel[] upgradeOptionModels;
         [SerializeField] private SelectedOptionModel selectedOptionModel;
         [SerializeField] private UseResourceService useResourceService;
-
-
+        [SerializeField] private PlaceTurretService placeTurretService;
+        
         public IUpgradeOptionPresenter CreatePresenter(IUpgradeOptionView view, IUpgradable upgradable, int index)
         {
             return new UpgradeOptionPresenter(
@@ -23,7 +23,8 @@ namespace Ui.Turret.Option.Entry
                 upgradeOptionModels[index],
                 selectedOptionModel,
                 upgradable,
-                useResourceService
+                useResourceService,
+                placeTurretService
             );
         }
     }

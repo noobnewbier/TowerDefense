@@ -15,3 +15,4 @@ MonoBehaviour:
   allUpgradableTurrets:
   - {fileID: 11400000, guid: fd8fcaf94fefeee4782de3703baa1cdc, type: 2}
   - {fileID: 11400000, guid: 2b8fb42c86745b242a1ec0150a9216f5, type: 2}
+  - {fileID: 11400000, guid: b76fec5ca91e8f842a003f7f68650414, type: 2}

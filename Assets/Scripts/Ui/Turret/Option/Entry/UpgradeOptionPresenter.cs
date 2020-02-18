@@ -14,21 +14,21 @@ namespace Ui.Turret.Option.Entry
     public class UpgradeOptionPresenter : IUpgradeOptionPresenter, IHandle<UpgradeOptionModelUpdateEvent>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IUpgradeOptionView _view;
         private readonly IUpgradeOptionModel _model;
+        private readonly IPlaceTurretService _placeTurretService;
         private readonly ISelectedOptionModel _selectedOptionModel;
         private readonly IUpgradable _upgradable;
         private readonly IUseResourceService _useResourceService;
+        private readonly IUpgradeOptionView _view;
 
-        public UpgradeOptionPresenter
-        (
+        public UpgradeOptionPresenter(
             IEventAggregator eventAggregator,
             IUpgradeOptionView view,
             IUpgradeOptionModel model,
             ISelectedOptionModel selectedOptionModel,
             IUpgradable upgradable,
-            IUseResourceService useResourceService
-        )
+            IUseResourceService useResourceService,
+            IPlaceTurretService placeTurretService)
         {
             _eventAggregator = eventAggregator;
             _view = view;
@@ -36,13 +36,9 @@ namespace Ui.Turret.Option.Entry
             _selectedOptionModel = selectedOptionModel;
             _upgradable = upgradable;
             _useResourceService = useResourceService;
+            _placeTurretService = placeTurretService;
 
             _eventAggregator.Subscribe(this);
-        }
-
-        public void Dispose()
-        {
-            _eventAggregator.Unsubscribe(this);
         }
 
         public void Handle(UpgradeOptionModelUpdateEvent @event)
@@ -61,6 +57,11 @@ namespace Ui.Turret.Option.Entry
             }
         }
 
+        public void Dispose()
+        {
+            _eventAggregator.Unsubscribe(this);
+        }
+
         public void OnCheckOption()
         {
             _selectedOptionModel.SelectOption(_model);
@@ -69,9 +70,17 @@ namespace Ui.Turret.Option.Entry
         public void OnSelectOption()
         {
             //this look ridiculously fishy...
-            if (_useResourceService.TryUseResource(_selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretRepository.Cost))
+            if (_useResourceService.TryUseResource(
+                _selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretRepository.Cost
+            ))
             {
-                _upgradable.UpgradeFrom(_selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretProvider.GetTurretPrefab());
+                _upgradable.Destruct();
+                var newTurretProvider =
+                    _selectedOptionModel.SelectedUpgradeOptionModel.TurretUpgradeEntry.TurretProvider;
+                _placeTurretService.PlaceTurret(
+                    newTurretProvider,
+                    _upgradable.CurrentTransform
+                );
             }
         }
     }

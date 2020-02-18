@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace Elements.Turret.Upgrade
 {
-    public interface IUpgradable :IHasFact
+    public interface IUpgradable : IHasFact
     {
-        void UpgradeFrom(GameObject newTurret);
+        Transform CurrentTransform { get; }
+        void Destruct();
+        void Construct();
     }
 }

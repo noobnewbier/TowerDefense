@@ -5,21 +5,37 @@ using UnityUtils.Timers;
 
 namespace Elements.Turret.Animation
 {
-    public class TurretConstructAnimationController : MonoBehaviour
+    public interface IHasAnimation
+    {
+        bool IsPlayingAnimation { get; }
+    }
+    public interface IConstructAnimationController : IHasAnimation
+    {
+        void ConstructTurretAnimation();
+    }
+
+    public interface IDestructAnimationController : IHasAnimation
+    {
+        void DestructTurretAnimation();
+    }
+
+    public class TurretAnimationController : MonoBehaviour, IConstructAnimationController, IDestructAnimationController
     {
         [SerializeField] private ThresholdTimer animationTimer;
         [SerializeField] private DissolveShaderController[] shaderControllers;
 
+        private Coroutine _currentCoroutine;
+        
         [ContextMenu("ConstructTurretAnimation")]
         public void ConstructTurretAnimation()
         {
-            StartCoroutine(ConstructTurretAnimationCoroutine());
+            _currentCoroutine = StartCoroutine(ConstructTurretAnimationCoroutine());
         }
 
         [ContextMenu("DestructTurretAnimation")]
         public void DestructTurretAnimation()
         {
-            StartCoroutine(TurretDestructAnimationCoroutine());
+            _currentCoroutine = StartCoroutine(TurretDestructAnimationCoroutine());
         }
 
         private IEnumerator ConstructTurretAnimationCoroutine()
@@ -31,6 +47,8 @@ namespace Elements.Turret.Animation
 
                 return animationTimer.PassedThreshold;
             });
+            
+            _currentCoroutine = null;
         }
 
         private void AnimateDissolveShaders(float easedTime)
@@ -50,6 +68,10 @@ namespace Elements.Turret.Animation
 
                 return animationTimer.PassedThreshold;
             });
+            
+            _currentCoroutine = null;
         }
+
+        public bool IsPlayingAnimation => _currentCoroutine != null;
     }
 }

@@ -68,7 +68,7 @@ namespace Ui.Turret.Placement
             //will be wrong if local scale no longer aligns with actual size
             var isValid = _spawnPointValidator.IsSpawnPointValid(
                 _spawnpoint.position,
-                _turretPlacementControlModel.HalfSize + _spawnpointMargin,
+                _turretPlacementControlModel.TurretProvider.HalfSize + _spawnpointMargin,
                 _spawnpoint.rotation
             );
 

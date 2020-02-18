@@ -21,3 +21,4 @@ MonoBehaviour:
   selectedOptionModel: {fileID: 11400000, guid: 0c39323d73d0a534d8d546eba855c760,
     type: 2}
   useResourceService: {fileID: 11400000, guid: 49e2907159e9903408256c42ce05335f, type: 2}
+  placeTurretService: {fileID: 11400000, guid: c4089bd9a55927c428621e588ae1f40b, type: 2}

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,21 +13,24 @@ using EventManagement;
 using Rules;
 using TrainingSpecific.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityUtils;
 
 namespace Elements.Turret
 {
-    [RequireComponent(typeof(UnitDetector))]
     public class Turret : Element, IHandle<ForceResetEvent>, IUpgradable
     {
         private const float UpdateTargetInterval = 0.5f;
 
         private Unit _currentTarget;
-        private ITurretRepository _repository;
         private PooledMonoBehaviour _pooledBullet;
+        private ITurretRepository _repository;
         private float _targetRefreshTimer;
         [SerializeField] private GenericShootService genericShootService;
-        [SerializeField] private TurretProvider repositoryProvider;
+
+        [FormerlySerializedAs("repositoryProvider")] [SerializeField]
+        private TurretProvider turretProvider;
+
         [SerializeField] private Transform turretRotatable;
         [SerializeField] private UnitDetector unitDetector;
 
@@ -43,32 +48,54 @@ namespace Elements.Turret
 
         public IEnumerable<Fact> Facts => _repository.Facts;
 
+        //don't really know how to best handle upgrades visual effect tbh
+        public void Destruct()
+        {
+            DestructVisualEffect();
+        }
+
+        public void Construct()
+        {
+            ConstructVisualEffect();
+        }
+
+        public Transform CurrentTransform => transform;
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            _repository = repositoryProvider.GetRepository();
+            _repository = turretProvider.GetRepository();
             EventAggregator.Publish(new TurretSpawnedEvent(this));
+        }
+
+        private void Start()
+        {
+            Construct();
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-
+            
             EventAggregator.Publish(new TurretDestroyedEvent(this));
         }
 
         private void FixedUpdate()
         {
+            if (!CanShoot()) return;
+
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
                 _currentTarget = _repository.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
                 _targetRefreshTimer = 0f;
             }
 
-            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f)) _targetRefreshTimer += Time.fixedDeltaTime;
+            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
+                _targetRefreshTimer += Time.fixedDeltaTime;
 
-            var targetPosition = _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
+            var targetPosition =
+                _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
             if (targetPosition.HasValue) Aim(targetPosition.Value);
 
             genericShootService.IsShooting = ShouldShoot();
@@ -78,28 +105,45 @@ namespace Elements.Turret
         {
             var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
 
-            turretRotatable.rotation = Quaternion.RotateTowards(turretRotatable.rotation, targetDir, _repository.RotateSpeed * Time.fixedDeltaTime);
-        }
-
-        public void UpgradeFrom(GameObject newTurret)
-        {
-            UpgradeVisualEffect();
-
-            var selfTransform = transform;
-            
-            newTurret.transform.position = selfTransform.position;
-            newTurret.transform.rotation = selfTransform.rotation;
-            
-            Destroy(gameObject);
+            turretRotatable.rotation = Quaternion.RotateTowards(
+                turretRotatable.rotation,
+                targetDir,
+                _repository.RotateSpeed * Time.fixedDeltaTime
+            );
         }
 
         [Conditional(GameConfig.GameplayMode)]
-        private void UpgradeVisualEffect()
+        private void DestructVisualEffect()
         {
-            //todo: implementation
+            StartCoroutine(DestructVisualEffectCoroutine());
+        }
+
+        [Conditional(GameConfig.GameplayMode)]
+        private void ConstructVisualEffect()
+        {
+            turretProvider.ConstructAnimationController.ConstructTurretAnimation();
+        }
+
+        private IEnumerator DestructVisualEffectCoroutine()
+        {
+            turretProvider.DestructAnimationController.DestructTurretAnimation();
+
+            yield return new WaitUntil(() => !turretProvider.DestructAnimationController.IsPlayingAnimation);
+
+            Destroy(gameObject);
         }
 
         //Shoot as long as we have enemies - Kill On Sight Comrade
-        private bool ShouldShoot() => unitDetector.EnemiesInRange.Any();
+        private bool ShouldShoot()
+        {
+            return unitDetector.EnemiesInRange.Any();
+        }
+
+        //cannot shoot during destruct or construct animation
+        private bool CanShoot()
+        {
+            return !turretProvider.DestructAnimationController.IsPlayingAnimation &&
+                   !turretProvider.ConstructAnimationController.IsPlayingAnimation;
+        }
     }
 }
