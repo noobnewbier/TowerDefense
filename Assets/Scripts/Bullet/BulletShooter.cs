@@ -1,6 +1,7 @@
 using Bullet.InputSource;
 using Elements.Turret;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityUtils;
 using UnityUtils.BooleanProviders;
 using UnityUtils.Timers;
@@ -14,10 +15,19 @@ namespace Bullet
 
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private BulletsShooterInputSource inputSource;
-        [SerializeField] private BulletShooterRepositoryProvider provider;
+
+        [Tooltip("Most random when 0, least random at 1")]
+        [FormerlySerializedAs("randomFactor")]
+        [Range(0, 1)]
+        [SerializeField]
+        private float inverseRandomFactor = 0.85f;
+
         [SerializeField] private StateRepresenter isShootingState;
+
+        [Range(0, 1)] [SerializeField] private float parallelToGroundStrength = 0;
+
+        [SerializeField] private BulletShooterRepositoryProvider provider;
         [SerializeField] private ThresholdTimer timer;
-        [Range(0, 1)] [SerializeField] private float randomFactor = 0.85f;
 
 
         private void OnEnable()
@@ -32,11 +42,12 @@ namespace Bullet
         {
             var newBullet = _pooledBullet.GetPooledInstance();
             newBullet.transform.position = bulletSpawnPoint.position;
-
+            var bulletSpawnPointRotation = bulletSpawnPoint.rotation;
+            var spawnpointEuler = bulletSpawnPointRotation.eulerAngles;
             //introduce slight inconsistency in the shooting projectile
-            var rand = Random.Range(randomFactor, 1f);
-            var parallelToGroundRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
-            var bulletRotation = Quaternion.Lerp(bulletSpawnPoint.rotation, parallelToGroundRotation, rand);
+            var rand = Random.Range(inverseRandomFactor, 1f);
+            var parallelToGroundRotation = Quaternion.Euler(0f, spawnpointEuler.y, spawnpointEuler.z);
+            var bulletRotation = Quaternion.Lerp(bulletSpawnPointRotation, parallelToGroundRotation, rand * parallelToGroundStrength);
             newBullet.transform.rotation = bulletRotation;
         }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +6,7 @@ using Bullet.InputSource;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
+using Elements.Turret.Rotation;
 using Elements.Turret.Upgrade;
 using Elements.Units.UnitCommon;
 using EventManagement;
@@ -27,11 +27,11 @@ namespace Elements.Turret
         private ITurretRepository _repository;
         private float _targetRefreshTimer;
         [SerializeField] private GenericShootService genericShootService;
+        [SerializeField] private Rotator rotator;
 
         [FormerlySerializedAs("repositoryProvider")] [SerializeField]
         private TurretProvider turretProvider;
 
-        [SerializeField] private Transform turretRotatable;
         [SerializeField] private UnitDetector unitDetector;
 
         public override AiInterestCategory InterestCategory => AiInterestCategory.Turret;
@@ -77,7 +77,7 @@ namespace Elements.Turret
         protected override void OnDisable()
         {
             base.OnDisable();
-            
+
             EventAggregator.Publish(new TurretDestroyedEvent(this));
         }
 
@@ -87,12 +87,11 @@ namespace Elements.Turret
 
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
-                _currentTarget = _repository.TargetingStrategy.ChooseTarget(transform, unitDetector.EnemiesInRange);
+                _currentTarget = _repository.TargetingStrategy.ChooseTarget(transform, unitDetector.VisibleEnemies);
                 _targetRefreshTimer = 0f;
             }
 
-            if (unitDetector.EnemiesInRange.Any() || FloatUtil.NearlyEqual(_targetRefreshTimer, 0f))
-                _targetRefreshTimer += Time.fixedDeltaTime;
+            _targetRefreshTimer += Time.fixedDeltaTime;
 
             var targetPosition =
                 _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
@@ -103,13 +102,7 @@ namespace Elements.Turret
 
         private void Aim(Vector3 targetPosition)
         {
-            var targetDir = Quaternion.LookRotation(targetPosition - turretRotatable.position);
-
-            turretRotatable.rotation = Quaternion.RotateTowards(
-                turretRotatable.rotation,
-                targetDir,
-                _repository.RotateSpeed * Time.fixedDeltaTime
-            );
+            rotator.LookAt(targetPosition, _repository.RotateSpeed);
         }
 
         [Conditional(GameConfig.GameplayMode)]
@@ -136,7 +129,7 @@ namespace Elements.Turret
         //Shoot as long as we have enemies - Kill On Sight Comrade
         private bool ShouldShoot()
         {
-            return unitDetector.EnemiesInRange.Any();
+            return unitDetector.VisibleEnemies.Any();
         }
 
         //cannot shoot during destruct or construct animation

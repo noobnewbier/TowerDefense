@@ -5,8 +5,7 @@ namespace ScriptableService
 {
     public interface ISpawnPointValidator
     {
-        bool IsSpawnPointValid
-        (
+        bool IsSpawnPointValid(
             Vector3 centerWorldSpace,
             Vector3 halfSize,
             Quaternion orientation,
@@ -22,21 +21,21 @@ namespace ScriptableService
         //As long as it has 2 element, we can return false, no need to store more
         private readonly Collider[] _buffer = new Collider[2];
 
-        private void OnEnable()
-        {
-            _layerMask = (1 << LayerMask.NameToLayer(LayerNames.Obstacle)) | (1 << LayerMask.NameToLayer(LayerNames.AiDamageTaker)) |
-                         (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker)) | (1 << LayerMask.NameToLayer(LayerNames.Turret));
-        }
-
-        public bool IsSpawnPointValid
-        (
+        public bool IsSpawnPointValid(
             Vector3 centerWorldSpace,
             Vector3 halfSize,
             Quaternion orientation,
             GameObject tobeSpawned = null
         )
         {
-            var resultSize = Physics.OverlapBoxNonAlloc(centerWorldSpace, halfSize, _buffer, orientation, _layerMask, QueryTriggerInteraction.Ignore);
+            var resultSize = Physics.OverlapBoxNonAlloc(
+                centerWorldSpace,
+                halfSize,
+                _buffer,
+                orientation,
+                _layerMask,
+                QueryTriggerInteraction.Ignore
+            );
             switch (resultSize)
             {
                 case 0:
@@ -48,6 +47,14 @@ namespace ScriptableService
                 default:
                     return false;
             }
+        }
+
+        private void OnEnable()
+        {
+            _layerMask = (1 << LayerMask.NameToLayer(LayerNames.Obstacle)) |
+                         (1 << LayerMask.NameToLayer(LayerNames.AiDamageTaker)) |
+                         (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker)) |
+                         (1 << LayerMask.NameToLayer(LayerNames.Turret));
         }
     }
 }
