@@ -6,6 +6,5 @@
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/EventManagement" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/ShaderCommon" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/UnityUtils" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Assets/ml-agents" vcs="Git" />
   </component>
 </project>
