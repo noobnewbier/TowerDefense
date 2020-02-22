@@ -15,3 +15,5 @@ MonoBehaviour:
   grayScale: 0
   mapDimension: 50
   precision: 1
+  useTextureRotation: 1
+  useTranslation: 1

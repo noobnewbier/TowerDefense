@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSource: {fileID: 1385160468}
   model: {fileID: 11400000, guid: a79a1cf9d78070c4d9c4c9bd09a83567, type: 2}
+  placeTurretService: {fileID: 0}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
     type: 2}
   turretSpawnPoint: {fileID: 5597242191625540307}
@@ -181,6 +182,7 @@ GameObject:
   - component: {fileID: 2108124183}
   - component: {fileID: 1519255946}
   - component: {fileID: 4317019756293318575}
+  - component: {fileID: 8399380170322657863}
   m_Layer: 12
   m_Name: BulletShooter
   m_TagString: Untagged
@@ -216,9 +218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 5443937810178721935}
   inputSource: {fileID: 2108124183}
+  inverseRandomFactor: 0.85
+  isShootingState: {fileID: 8399380170322657863}
+  parallelToGroundStrength: 0
   provider: {fileID: 1519255946}
   timer: {fileID: 4317019756293318575}
-  randomFactor: 0.85
 --- !u!114 &2108124183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +263,18 @@ MonoBehaviour:
   isInitialized: 0
   threshold: 0
   timer: 0
+--- !u!114 &8399380170322657863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108124181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d815763c766c4139af17a7e1cbbf8c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &59706424971289314
 GameObject:
   m_ObjectHideFlags: 0

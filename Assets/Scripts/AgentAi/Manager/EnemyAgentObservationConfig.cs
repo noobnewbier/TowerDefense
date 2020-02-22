@@ -9,11 +9,27 @@ namespace AgentAi.Manager
         [SerializeField] [Range(1, 200)] private int mapDimension;
         [Range(1, 10)] [SerializeField] private float precision = 1;
 
-        public int MapDimension => mapDimension;
+        [SerializeField] private bool useTextureRotation;
+        [SerializeField] private bool useTranslation;
+
+        public bool UseTranslation => useTranslation;
+        public bool UseTextureRotation => useTextureRotation;
         public bool GrayScale => grayScale;
         public float Precision => precision;
 
-        public int CalculateTextureDimension() => (int) (Mathf.CeilToInt(Mathf.Sqrt(Mathf.Pow(mapDimension, 2) * 2)) * 2 * precision);
+        public int CalculateTextureDimension()
+        {
+            var maximumSideLength = (float) mapDimension;
+            if (useTextureRotation)
+            {
+                maximumSideLength *= maximumSideLength;
+                maximumSideLength = Mathf.Sqrt(maximumSideLength);
+            }
+
+            if (useTranslation) maximumSideLength *= 2;
+
+            return (int) (Mathf.CeilToInt(maximumSideLength) * precision);
+        }
 
         public int[] CalculateShape()
         {

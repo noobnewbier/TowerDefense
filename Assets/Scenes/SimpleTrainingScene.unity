@@ -337,7 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601b636d70df4186aee04996bf5f313f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsOfInterestTracker: {fileID: 477507500}
+  objectsOfInterestTracker: {fileID: 11400000, guid: d12ddd9211b820a4fadbfda14ce48eda,
+    type: 2}
   initialLevel: 0
 --- !u!4 &161040336
 Transform:
@@ -396,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d571bd76b0bc74c4391998525047377c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  boolean: 0
 --- !u!1 &167045365
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e9ea9fd95749f990537a23523ea4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activityProvider: {fileID: 334388492}
+  booleanProvider: {fileID: 334388492}
   dynamicObstacle: {fileID: 1640529723}
   locationProvider: {fileID: 334388493}
   scaleProvider: {fileID: 334388491}
@@ -879,18 +880,6 @@ Transform:
   m_Father: {fileID: 1743708323}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &477507500 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
-    type: 3}
-  m_PrefabInstance: {fileID: 3352325463001772080}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e5259158cdd4a7a844317a77f4cd330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d571bd76b0bc74c4391998525047377c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 1
+  boolean: 1
 --- !u!1 &748657337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,7 +1397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d571bd76b0bc74c4391998525047377c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  boolean: 0
 --- !u!1 &994099671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fb529aedf90054e84d9cdbb5c90a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToBeActive: 0.75
+  chanceToBeTrue: 0.75
 --- !u!4 &994099673
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e9ea9fd95749f990537a23523ea4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activityProvider: {fileID: 1002542710}
+  booleanProvider: {fileID: 1002542710}
   dynamicObstacle: {fileID: 184450714}
   locationProvider: {fileID: 1002542711}
   scaleProvider: {fileID: 1002542709}
@@ -1782,7 +1771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626c4c3931b64918b6e81f1c2d4c01cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPointData: {fileID: 11400000, guid: db2fb2565d99bfa408ed29cab18cca5f,
+  enemySpawnPointData: {fileID: 11400000, guid: aa5cdee894c382e4189920022e246de0,
     type: 2}
   locationProvider: {fileID: 1096023334}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
@@ -1865,7 +1854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d571bd76b0bc74c4391998525047377c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  boolean: 0
 --- !u!1 &1182285125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,7 +1898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fb529aedf90054e84d9cdbb5c90a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToBeActive: 0.5
+  chanceToBeTrue: 0.5
 --- !u!1 &1218180754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,7 +1988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e9ea9fd95749f990537a23523ea4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activityProvider: {fileID: 1218180756}
+  booleanProvider: {fileID: 1218180756}
   dynamicObstacle: {fileID: 2612663424737457829}
   locationProvider: {fileID: 1218180757}
   scaleProvider: {fileID: 1218180755}
@@ -2207,7 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fb529aedf90054e84d9cdbb5c90a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToBeActive: 0.35
+  chanceToBeTrue: 0.35
 --- !u!1001 &1640529722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2389,18 +2378,6 @@ Transform:
   m_Father: {fileID: 1526563712}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1712841680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-    type: 3}
-  m_PrefabInstance: {fileID: 3352325463001772080}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e8c13d4aa9440bb0125afbd3870c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1731862189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,7 +2978,7 @@ PrefabInstance:
         type: 3}
       propertyPath: config
       value: 
-      objectReference: {fileID: 11400000, guid: deb01ea82707678459c1636224780db4,
+      objectReference: {fileID: 11400000, guid: 9f6f7235ca5f7974598508f5d47814cc,
         type: 2}
     - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
@@ -3015,7 +2992,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bfc7f86947ab1244f89ccbb57d99a675, type: 3}
 --- !u!1001 &4793952624436167370
 PrefabInstance:
@@ -3093,7 +3071,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyAgentObservationCollector
       value: 
-      objectReference: {fileID: 1712841680}
+      objectReference: {fileID: 0}
     - target: {fileID: 4793952625491560759, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: agentTracker

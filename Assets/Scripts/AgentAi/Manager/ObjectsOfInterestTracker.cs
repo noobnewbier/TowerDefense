@@ -9,15 +9,21 @@ using UnityEngine;
 
 namespace AgentAi.Manager
 {
-    public class ObjectsOfInterestTracker : MonoBehaviour, IHandle<IDynamicObjectDestroyedEvent>, IHandle<IDynamicObjectSpawnedEvent>
+    [CreateAssetMenu(menuName = "ScriptableService/ObjectOfInterestTracker")]
+    public class ObjectsOfInterestTracker : ScriptableObject, IHandle<IDynamicObjectDestroyedEvent>,
+                                            IHandle<IDynamicObjectSpawnedEvent>
     {
-        [SerializeField] private DynamicObjectsSet dynamicObjectsSet;
-        
         private IEventAggregator _eventAggregator;
+        [SerializeField] private DynamicObjectsSet dynamicObjectsSet;
+        [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
+        
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
-        public IEnumerable<IStaticObjectOfInterest> StaticObjectOfInterests => FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
-        public IEnumerable<IDynamicObjectOfInterest> DynamicObjectOfInterests => new List<IDynamicObjectOfInterest>(dynamicObjectsSet.Items);
+        public IEnumerable<IStaticObjectOfInterest> StaticObjectOfInterests =>
+            FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
+
+        public IEnumerable<IDynamicObjectOfInterest> DynamicObjectOfInterests =>
+            new List<IDynamicObjectOfInterest>(dynamicObjectsSet.Items);
 
         public void Handle(IDynamicObjectDestroyedEvent @event)
         {
@@ -31,7 +37,7 @@ namespace AgentAi.Manager
 
         private void OnEnable()
         {
-            _eventAggregator = EventAggregatorHolder.Instance;
+            _eventAggregator = eventAggregatorProvider.ProvideEventAggregator();
 
             _eventAggregator.Subscribe(this);
         }

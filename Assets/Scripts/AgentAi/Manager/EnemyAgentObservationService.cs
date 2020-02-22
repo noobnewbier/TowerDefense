@@ -7,6 +7,7 @@ using Common.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using Experimental;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityUtils;
@@ -16,10 +17,12 @@ namespace AgentAi.Manager
     public interface IObserveEnvironmentService
     {
         Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
+        EnemyAgentObservationConfig Config { get; }
     }
 
     // Perhaps the main bottleneck... be careful with this
-    public class EnemyAgentObservationCollector : MonoBehaviour, IHandle<GameStartEvent>, IObserveEnvironmentService
+    [CreateAssetMenu(menuName = "ScriptableService/EnemyAgentObservationService")]
+    public class EnemyAgentObservationService : ScriptableObject, IHandle<GameStartEvent>, IObserveEnvironmentService
     {
         private Vector3 _centerOfTexture;
         private int[,] _coordinatesWithPriority;
@@ -28,9 +31,9 @@ namespace AgentAi.Manager
         private Texture2D _terrainTexture;
         private int _textureDimension;
         [SerializeField] private EnemyAgentObservationConfig config;
-
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
-        public static IObserveEnvironmentService Instance { get; private set; }
+        [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
+        
 
         public void Handle(GameStartEvent @event)
         {
@@ -43,41 +46,41 @@ namespace AgentAi.Manager
                 .ReplaceAll(observer, GetObserverRepresentation(observer));
 
             if (target != null)
-            {
                 objectsWithTargetAndObserver = objectsWithTargetAndObserver
                     .ReplaceAll(target, GetTargetRepresentation(target));
-            }
 
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
             DrawObjectsOnTexture(_observedTexture, objectsWithTargetAndObserver, false);
 
             var observerPosition = observer.transform.position;
-            _observedTexture.TranslateTexture((int) (observerPosition.x * config.Precision), (int) (observerPosition.z * config.Precision));
-            _observedTexture.RotateTexture(-observer.transform.rotation.eulerAngles.y, AiInterestCategory.NullArea.Color);
+            if (config.UseTranslation)
+                _observedTexture.TranslateTexture(
+                    (int) (observerPosition.x * config.Precision),
+                    (int) (observerPosition.z * config.Precision)
+                );
+
+            if (config.UseTextureRotation)
+                _observedTexture.RotateTexture(
+                    -observer.transform.rotation.eulerAngles.y,
+                    AiInterestCategory.NullArea.Color
+                );
 
             return Instantiate(_observedTexture);
         }
 
-        private void Awake()
+        public EnemyAgentObservationConfig Config => config;
+
+        private void OnEnable()
         {
-            if (Instance != null)
-                Destroy(this);
-            else
-                Instance = this;
-
             _textureDimension = config.CalculateTextureDimension();
-
+            _eventAggregator = eventAggregatorProvider.ProvideEventAggregator();
+            
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
             _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
 
             _observedTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
             _coordinatesWithPriority = new int[_textureDimension, _textureDimension];
-        }
-
-        private void OnEnable()
-        {
-            _eventAggregator = EventAggregatorHolder.Instance;
 
             _eventAggregator.Subscribe(this);
         }
@@ -92,13 +95,16 @@ namespace AgentAi.Manager
             var interestedObjects = objectsOfInterestTracker.StaticObjectOfInterests;
 
             //default to null area
-            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, _textureDimension * _textureDimension).ToArray();
+            var nullColors = Enumerable.Repeat(AiInterestCategory.NullArea.Color, _textureDimension * _textureDimension)
+                .ToArray();
             _terrainTexture.SetPixels(nullColors);
 
             DrawObjectsOnTexture(_terrainTexture, interestedObjects, true);
         }
 
-        private void DrawObjectsOnTexture(Texture2D texture2D, IEnumerable<IObjectOfInterest> interestedObjects, bool shouldWritePriority)
+        private void DrawObjectsOnTexture(Texture2D texture2D,
+                                          IEnumerable<IObjectOfInterest> interestedObjects,
+                                          bool shouldWritePriority)
         {
             interestedObjects = interestedObjects.ToList().OrderBy(i => i.InterestCategory.Priority);
 
@@ -119,7 +125,9 @@ namespace AgentAi.Manager
                 catch (IndexOutOfRangeException e)
                 {
                     Debug.Log(e);
-                    Debug.Log($"{objectOfInterest} is going out of predefined area, Rescaled Bounds: {objectOfInterest.Bounds}");
+                    Debug.Log(
+                        $"{objectOfInterest} is going out of predefined area, Rescaled Bounds: {objectOfInterest.Bounds}"
+                    );
                 }
             }
 
@@ -137,8 +145,15 @@ namespace AgentAi.Manager
             return bounds;
         }
 
-        private static IDynamicObjectOfInterest GetObserverRepresentation(IObjectOfInterest dynamicObjectOfInterest) => new Observer(dynamicObjectOfInterest);
-        private static IDynamicObjectOfInterest GetTargetRepresentation(IObjectOfInterest dynamicObjectOfInterest) => new Target(dynamicObjectOfInterest);
+        private static IDynamicObjectOfInterest GetObserverRepresentation(IObjectOfInterest dynamicObjectOfInterest)
+        {
+            return new Observer(dynamicObjectOfInterest);
+        }
+
+        private static IDynamicObjectOfInterest GetTargetRepresentation(IObjectOfInterest dynamicObjectOfInterest)
+        {
+            return new Target(dynamicObjectOfInterest);
+        }
 
         private class Observer : IDynamicObjectOfInterest
         {

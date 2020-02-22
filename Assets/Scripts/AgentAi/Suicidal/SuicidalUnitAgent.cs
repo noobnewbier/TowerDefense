@@ -13,6 +13,7 @@ using Movement.InputSource;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using UnityUtils;
 
 namespace AgentAi.Suicidal
@@ -26,14 +27,20 @@ namespace AgentAi.Suicidal
         private ITargetPicker _targetPicker;
         private IUnitDataRepository _unitDataRepository;
 
+        [FormerlySerializedAs("rewardConfig")] [SerializeField]
+        private SuicidalUnitAgentConfig config;
+
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
+        [SerializeField] private ObservationServiceProvider observationServiceProvider;
         [SerializeField] private UnitProvider provider;
-        [SerializeField] private SuicidalUnitAgentRewardConfig rewardConfig;
         [SerializeField] private SuicidalEnemy unit;
 
 
-        public Texture2D GetObservation() => _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
+        public Texture2D GetObservation()
+        {
+            return _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.Target);
+        }
 
         public void Handle(EnemyDeadEvent @event)
         {
@@ -43,21 +50,23 @@ namespace AgentAi.Suicidal
         }
 
         //cannot think of an elegant solution for heuristic controller... but this do the trick
-        public override float[] Heuristic() => new float[]
+        public override float[] Heuristic()
         {
-            PlayerInputToMachineInput(Input.GetAxis("Vertical")),
-            PlayerInputToMachineInput(Input.GetAxis("Horizontal"))
-        };
+            return new float[]
+            {
+                PlayerInputToMachineInput(Input.GetAxis("Vertical")),
+                PlayerInputToMachineInput(Input.GetAxis("Horizontal"))
+            };
+        }
 
         public override void InitializeAgent()
         {
             base.InitializeAgent();
             _eventAggregator = EventAggregatorHolder.Instance;
             _targetPicker = TargetPicker.Instance;
-            _observeEnvironmentService = EnemyAgentObservationCollector.Instance;
-
             _previousClosestDistance = GetCurrentDistanceFromTarget();
             _unitDataRepository = provider.ProvideUnitDataRepository();
+            _observeEnvironmentService = observationServiceProvider.ProvideService();
 
             _eventAggregator.Subscribe(this);
             _eventAggregator.Publish(new AgentSpawnedEvent());
@@ -81,9 +90,20 @@ namespace AgentAi.Suicidal
             EncourageApproachingTarget();
         }
 
+        public override void CollectObservations()
+        {
+            base.CollectObservations();
+            if (config.UseVectorRotation) AddRotationObservation();
+        }
+
+        private void AddRotationObservation()
+        {
+            AddVectorObs(unit.transform.rotation.eulerAngles.y / 360f);
+        }
+
         private void OnCollisionStay(Collision other)
         {
-            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(rewardConfig.ContactWithObstaclePunishment);
+            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(config.ContactWithObstaclePunishment);
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -92,13 +112,13 @@ namespace AgentAi.Suicidal
             switch (deathCause)
             {
                 case EffectSource.Player:
-                    AddReward(rewardConfig.KilledPunishment);
+                    AddReward(config.KilledPunishment);
                     break;
                 case EffectSource.System:
 //                    AddReward(-1f);
                     break;
                 case EffectSource.SelfDestruction:
-                    AddReward(rewardConfig.SelfDestructionReward);
+                    AddReward(config.SelfDestructionReward);
                     break;
                 case EffectSource.Ai:
                 default:
@@ -111,7 +131,7 @@ namespace AgentAi.Suicidal
         //Don't walk around forever pls
         private void PunishRoaming()
         {
-            AddReward(rewardConfig.RoamingPunishment);
+            AddReward(config.RoamingPunishment);
         }
 
         private void EncourageApproachingTarget()
@@ -123,8 +143,8 @@ namespace AgentAi.Suicidal
                 var distanceDifference = _previousClosestDistance - distance;
                 var maximumAchievement = _unitDataRepository.MaxForwardSpeed * Time.fixedDeltaTime;
                 var rewardPercentage = Mathf.Clamp01(distanceDifference / maximumAchievement);
-                
-                AddReward(rewardConfig.MaxApproachReward * rewardPercentage);
+
+                AddReward(config.MaxApproachReward * rewardPercentage);
                 _previousClosestDistance = distance;
             }
         }
@@ -134,12 +154,16 @@ namespace AgentAi.Suicidal
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
             const float defaultDistance = 10f;
             var path = new NavMeshPath();
-            if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(_targetPicker.Target.DynamicObjectTransform.position, path)) return defaultDistance;
+            if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(
+                    _targetPicker.Target.DynamicObjectTransform.position,
+                    path
+                )) return defaultDistance;
 
             if (path.status != NavMeshPathStatus.PathComplete) return defaultDistance;
 
             var distance = 0f;
-            for (var i = 0; i < path.corners.Length - 1; i++) distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            for (var i = 0; i < path.corners.Length - 1; i++)
+                distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
 
             return distance;
         }
@@ -172,7 +196,10 @@ namespace AgentAi.Suicidal
             return (int) machineInputAsAction;
         }
 
-        private static bool IsInValidInput(float input) => float.IsNaN(input) || float.IsInfinity(input);
+        private static bool IsInValidInput(float input)
+        {
+            return float.IsNaN(input) || float.IsInfinity(input);
+        }
 
         private enum MachineInput
         {

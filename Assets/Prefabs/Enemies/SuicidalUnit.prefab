@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 114146839934506344}
   - component: {fileID: 195152517545128316}
   - component: {fileID: 3704630309950303712}
+  - component: {fileID: 3740444877222987529}
   m_Layer: 11
   m_Name: SuicidalUnit
   m_TagString: Enemy
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 0
+    vectorObservationSize: 1
     numStackedVectorObservations: 1
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3610290461812041406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddaa5530e4498ed439f9d11ec8469987, type: 3}
+  m_Script: {fileID: 11500000, guid: 56e01eeac5380094f9f100a3761afd47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
@@ -236,10 +237,11 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 3
+  config: {fileID: 11400000, guid: 263a4cdf948de8149a64f577c60d4165, type: 2}
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
+  observationServiceProvider: {fileID: 3740444877222987529}
   provider: {fileID: 3704630309950303712}
-  rewardConfig: {fileID: 11400000, guid: 5783cc8200292304a93cfb33c0da1334, type: 2}
   unit: {fileID: 3254465578691183710}
 --- !u!114 &114146839934506344
 MonoBehaviour:
@@ -253,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  observationServiceProvider: {fileID: 3740444877222987529}
   sensorName: Texture2DSensor
-  config: {fileID: 11400000, guid: deb01ea82707678459c1636224780db4, type: 2}
 --- !u!195 &195152517545128316
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -293,6 +295,19 @@ MonoBehaviour:
     type: 2}
   unit: {fileID: 3254465578691183710}
   unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
+--- !u!114 &3740444877222987529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610290461812041406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e75dbaf0fd4a999e0d121d5e5a1447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observationService: {fileID: 11400000, guid: 87ac96796c48549479ef6891462ee4e9, type: 2}
 --- !u!1 &8297780213500903645
 GameObject:
   m_ObjectHideFlags: 0
