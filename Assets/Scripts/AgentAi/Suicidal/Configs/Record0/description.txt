@@ -1,0 +1,8 @@
+Similarity color observation, 
+- use vector rotation
+- not using demos
+
+Stuck at stage 0
+
+I think it is not working as Unity does not support both visual and vector observation used at the same time
+https://github.com/Unity-Technologies/ml-agents/issues/2183

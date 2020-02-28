@@ -1,1 +1,0 @@
-Similarity color observation, with vector rotation only

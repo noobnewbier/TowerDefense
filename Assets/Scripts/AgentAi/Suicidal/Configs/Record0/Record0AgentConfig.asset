@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48de31199fc846ecb9b42b779741ecfb, type: 3}
-  m_Name: SuicidalUnitDistinctColor4AgentConfig
+  m_Name: Record0AgentConfig
   m_EditorClassIdentifier: 
   contactWithObstaclePunishment: -0.15
   killedPunishment: -0.15

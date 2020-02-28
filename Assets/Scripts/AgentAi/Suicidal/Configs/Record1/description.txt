@@ -1,0 +1,3 @@
+Similarity color observation, 
+- use texture rotation
+- not using demos
