@@ -23,7 +23,7 @@ namespace AgentAi.Manager
             if (useTextureRotation)
             {
                 maximumSideLength *= maximumSideLength;
-                maximumSideLength = Mathf.Sqrt(maximumSideLength);
+                maximumSideLength = Mathf.Sqrt(maximumSideLength * 2);
             }
 
             if (useTranslation) maximumSideLength *= 2;
