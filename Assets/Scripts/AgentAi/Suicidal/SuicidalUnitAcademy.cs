@@ -38,7 +38,10 @@ namespace AgentAi.Suicidal
 
         private void OnEnable()
         {
-            FloatProperties.SetProperty(EnvironmentParametersKey.Level, initialLevel);
+            if (Application.isEditor)
+            {
+                FloatProperties.SetProperty(EnvironmentParametersKey.Level, initialLevel);
+            }
 
             _eventAggregator = EventAggregatorHolder.Instance;
 
@@ -54,7 +57,11 @@ namespace AgentAi.Suicidal
         {
             ClearField();
 
-            _eventAggregator.Publish(new CurrentTrainingLevelEvent((int) FloatProperties.GetPropertyWithDefault(EnvironmentParametersKey.Level, 0f)));
+            _eventAggregator.Publish(
+                new CurrentTrainingLevelEvent(
+                    (int) FloatProperties.GetPropertyWithDefault(EnvironmentParametersKey.Level, 0f)
+                )
+            );
         }
 
         private void ClearField()
@@ -62,7 +69,8 @@ namespace AgentAi.Suicidal
             _agentCount = 0;
             _doneAgentCount = 0;
 
-            foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests) _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
+            foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests)
+                _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
         }
 
         private static class EnvironmentParametersKey
