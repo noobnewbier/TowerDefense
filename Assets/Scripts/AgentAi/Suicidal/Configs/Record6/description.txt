@@ -1,0 +1,7 @@
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- USE demos and Gail
+
+RESULTS:
+- forget everything after stage 4(spinning around, face target, and then do thing), seems to be because of bumping into the wall, punishment is too huge leading to problem with gradient descent? 

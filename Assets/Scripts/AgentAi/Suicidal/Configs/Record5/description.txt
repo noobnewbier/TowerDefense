@@ -1,0 +1,12 @@
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- not using demos
+
+vel config changes
+- use only 128 hidden units
+- use 5 num_epoch instead of 3
+
+
+RESULTS:
+- somehow learned to avoid obstacles on level 4, but forget how to approach target in a straight line

@@ -1,0 +1,4 @@
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- not using demos
