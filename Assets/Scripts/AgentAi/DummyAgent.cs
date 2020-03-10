@@ -6,9 +6,12 @@ namespace AgentAi
 {
     public class DummyAgent : MonoBehaviour, ICanObserveEnvironment
     {
-        [SerializeField] private Unit unit;
         [SerializeField] private EnemyAgentObservationService observationService;
-        
-        public Texture2D GetObservation() => observationService.CreateObservationAsTexture(unit, null);
+        [SerializeField] private Unit unit;
+
+        public Texture2D GetObservation()
+        {
+            return observationService.CreateObservationAsTexture(unit, null);
+        }
     }
 }

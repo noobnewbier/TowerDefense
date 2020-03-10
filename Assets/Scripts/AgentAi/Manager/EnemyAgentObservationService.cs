@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Class;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
@@ -16,8 +15,8 @@ namespace AgentAi.Manager
 {
     public interface IObserveEnvironmentService
     {
-        Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
         EnemyAgentObservationConfig Config { get; }
+        Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
     }
 
     // Perhaps the main bottleneck... be careful with this
@@ -31,9 +30,9 @@ namespace AgentAi.Manager
         private Texture2D _terrainTexture;
         private int _textureDimension;
         [SerializeField] private EnemyAgentObservationConfig config;
-        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
-        
+        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
+
 
         public void Handle(GameStartEvent @event)
         {
@@ -75,7 +74,7 @@ namespace AgentAi.Manager
         {
             _textureDimension = config.CalculateTextureDimension();
             _eventAggregator = eventAggregatorProvider.ProvideEventAggregator();
-            
+
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
             _terrainTexture = new Texture2D(_textureDimension, _textureDimension, TextureFormat.RGB24, false);
 

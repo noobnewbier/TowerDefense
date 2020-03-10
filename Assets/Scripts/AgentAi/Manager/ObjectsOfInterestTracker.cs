@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Common.Class;
 using Common.Event;
 using Common.Interface;
 using EventManagement;
@@ -16,7 +15,7 @@ namespace AgentAi.Manager
         private IEventAggregator _eventAggregator;
         [SerializeField] private DynamicObjectsSet dynamicObjectsSet;
         [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
-        
+
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public IEnumerable<IStaticObjectOfInterest> StaticObjectOfInterests =>

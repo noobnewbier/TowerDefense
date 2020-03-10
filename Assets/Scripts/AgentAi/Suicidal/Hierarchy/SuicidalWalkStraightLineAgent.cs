@@ -3,9 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using AgentAi.Manager;
 using AgentAi.Manager.TargetPicker;
 using Common.Class;
-using Common.Constant;
 using Common.Enum;
 using Common.Event;
+using Common.Interface;
 using Elements.Units.Enemies;
 using Elements.Units.UnitCommon;
 using EventManagement;
@@ -16,28 +16,27 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityUtils;
 
-namespace AgentAi.Suicidal
+namespace AgentAi.Suicidal.Hierarchy
 {
-    //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
+    public class SuicidalWalkStraightLineAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
+        private IDynamicObjectOfInterest _currentTarget;
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
         private ITargetPicker _targetPicker;
         private IUnitDataRepository _unitDataRepository;
 
-        [SerializeField] private SuicidalUnitAgentConfig config;
+        [SerializeField] private SuicidalWalkStraightLineConfig config;
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private ObservationServiceProvider observationServiceProvider;
         [SerializeField] private UnitProvider provider;
         [SerializeField] private SuicidalEnemy unit;
 
-
         public Texture2D GetObservation()
         {
-            return _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.RequestTarget());
+            return _observeEnvironmentService.CreateObservationAsTexture(unit, _currentTarget);
         }
 
         public void Handle(EnemyDeadEvent @event)
@@ -88,20 +87,10 @@ namespace AgentAi.Suicidal
             EncourageApproachingTarget();
         }
 
-        public override void CollectObservations()
+        private void OnTriggerEnter(Collider other)
         {
-            base.CollectObservations();
-            if (config.UseVectorRotation) AddRotationObservation();
-        }
-
-        private void AddRotationObservation()
-        {
-            AddVectorObs(unit.transform.rotation.eulerAngles.y / 360f);
-        }
-
-        private void OnCollisionStay(Collision other)
-        {
-            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(config.ContactWithObstaclePunishment);
+            if (other.GetComponent<IDynamicObjectOfInterest>() == _currentTarget)
+                _currentTarget = _targetPicker.RequestTarget();
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -113,7 +102,6 @@ namespace AgentAi.Suicidal
                     AddReward(config.KilledPunishment);
                     break;
                 case EffectSource.System:
-//                    AddReward(-1f);
                     break;
                 case EffectSource.SelfDestruction:
                     AddReward(config.SelfDestructionReward);

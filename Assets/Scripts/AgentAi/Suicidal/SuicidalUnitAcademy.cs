@@ -12,8 +12,8 @@ namespace AgentAi.Suicidal
         private int _agentCount;
         private int _doneAgentCount;
         private IEventAggregator _eventAggregator;
-        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
         [Range(0, 5)] [SerializeField] private int initialLevel;
+        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
 
 
         //bug here!
@@ -22,10 +22,7 @@ namespace AgentAi.Suicidal
 #if TRAINING
             _doneAgentCount++;
 
-            if (_doneAgentCount >= _agentCount)
-            {
-                ClearField();
-            }
+            if (_doneAgentCount >= _agentCount) ClearField();
 #endif
         }
 
@@ -38,10 +35,7 @@ namespace AgentAi.Suicidal
 
         private void OnEnable()
         {
-            if (Application.isEditor)
-            {
-                FloatProperties.SetProperty(EnvironmentParametersKey.Level, initialLevel);
-            }
+            if (Application.isEditor) FloatProperties.SetProperty(EnvironmentParametersKey.Level, initialLevel);
 
             _eventAggregator = EventAggregatorHolder.Instance;
 

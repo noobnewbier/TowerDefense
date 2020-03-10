@@ -1,5 +1,4 @@
 using MLAgents;
-using MLAgents.InferenceBrain;
 using MLAgents.Sensor;
 using UnityEngine;
 
@@ -15,8 +14,7 @@ namespace AgentAi.Sensor
         private readonly string _name;
         private readonly int[] _shape;
 
-        public Texture2DSensor
-        (
+        public Texture2DSensor(
             bool grayScale,
             string name,
             int[] shape,
@@ -29,7 +27,10 @@ namespace AgentAi.Sensor
             _canObserveEnvironment = canObserveEnvironment;
         }
 
-        public int[] GetFloatObservationShape() => _shape;
+        public int[] GetFloatObservationShape()
+        {
+            return _shape;
+        }
 
         public int Write(WriteAdapter adapter)
         {
@@ -38,7 +39,7 @@ namespace AgentAi.Sensor
                 var texture = _canObserveEnvironment.GetObservation();
                 var numWritten = Utilities.TextureToTensorProxy(texture, adapter, _grayScale);
                 Object.Destroy(texture);
-                
+
                 return numWritten;
             }
         }
@@ -59,8 +60,14 @@ namespace AgentAi.Sensor
         {
         }
 
-        public SensorCompressionType GetCompressionType() => SensorCompressionType.PNG;
+        public SensorCompressionType GetCompressionType()
+        {
+            return SensorCompressionType.PNG;
+        }
 
-        public string GetName() => _name;
+        public string GetName()
+        {
+            return _name;
+        }
     }
 }

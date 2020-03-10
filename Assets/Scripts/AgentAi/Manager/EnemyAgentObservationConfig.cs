@@ -8,10 +8,10 @@ namespace AgentAi.Manager
         [SerializeField] private bool grayScale;
         [SerializeField] [Range(1, 200)] private int mapDimension;
         [Range(1, 10)] [SerializeField] private float precision = 1;
-
         [SerializeField] private bool useTextureRotation;
         [SerializeField] private bool useTranslation;
 
+        public int MapDimension => mapDimension;
         public bool UseTranslation => useTranslation;
         public bool UseTextureRotation => useTextureRotation;
         public bool GrayScale => grayScale;

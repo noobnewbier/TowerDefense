@@ -71,6 +71,9 @@ namespace Common.Enum
         public static readonly AiInterestCategory TurretRange = new AiInterestCategory(Turret.Color, 7, CircleDrawer.Instance);
         public static readonly AiInterestCategory Ground = new AiInterestCategory(Color.grey, 5, BlockDrawer.Instance);
         public static readonly AiInterestCategory NullArea = new AiInterestCategory(Color.white, 0, BlockDrawer.Instance);
+        
+        //debug
+        public static readonly AiInterestCategory System = new AiInterestCategory(Color.grey, 0, BlockDrawer.Instance); 
 
         #endregion
 

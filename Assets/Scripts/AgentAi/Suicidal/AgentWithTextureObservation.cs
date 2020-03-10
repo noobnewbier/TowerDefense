@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace AgentAi.Suicidal
 {
-    public class AgentWithTextureObservation : MLAgents.Agent
+    public class AgentWithTextureObservation : Agent
     {
         [FormerlySerializedAs("rewardConfig")] [SerializeField]
         protected SuicidalUnitAgentConfig config;

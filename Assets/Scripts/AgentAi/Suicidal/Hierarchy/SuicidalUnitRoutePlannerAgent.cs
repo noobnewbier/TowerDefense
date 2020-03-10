@@ -3,9 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using AgentAi.Manager;
 using AgentAi.Manager.TargetPicker;
 using Common.Class;
-using Common.Constant;
 using Common.Enum;
 using Common.Event;
+using Common.Interface;
 using Elements.Units.Enemies;
 using Elements.Units.UnitCommon;
 using EventManagement;
@@ -14,30 +14,25 @@ using Movement.InputSource;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityUtils;
 
-namespace AgentAi.Suicidal
+namespace AgentAi.Suicidal.Hierarchy
 {
-    //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
+    public class SuicidalUnitRoutePlannerAgent : Agent, ITargetPicker, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
     {
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
         private ITargetPicker _targetPicker;
-        private IUnitDataRepository _unitDataRepository;
 
-        [SerializeField] private SuicidalUnitAgentConfig config;
-        [SerializeField] private AiMovementInputService inputService;
+        [SerializeField] private SuicidalUnitRoutePlannerConfig config;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private ObservationServiceProvider observationServiceProvider;
-        [SerializeField] private UnitProvider provider;
         [SerializeField] private SuicidalEnemy unit;
 
 
         public Texture2D GetObservation()
         {
-            return _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.RequestTarget());
+            return _observeEnvironmentService.CreateObservationAsTexture(unit, null);
         }
 
         public void Handle(EnemyDeadEvent @event)
@@ -52,8 +47,6 @@ namespace AgentAi.Suicidal
         {
             return new float[]
             {
-                PlayerInputToMachineInput(Input.GetAxis("Vertical")),
-                PlayerInputToMachineInput(Input.GetAxis("Horizontal"))
             };
         }
 
@@ -63,7 +56,6 @@ namespace AgentAi.Suicidal
             _eventAggregator = EventAggregatorHolder.Instance;
             _targetPicker = PickPlayerTargetPicker.Instance;
             _previousClosestDistance = GetCurrentDistanceFromTarget();
-            _unitDataRepository = provider.ProvideUnitDataRepository();
             _observeEnvironmentService = observationServiceProvider.ProvideService();
 
             _eventAggregator.Subscribe(this);
@@ -79,29 +71,10 @@ namespace AgentAi.Suicidal
 
         public override void AgentAction(float[] vectorAction)
         {
-            var xAction = IsInValidInput(vectorAction[0]) ? 0 : (int) vectorAction[0];
-            var yAction = IsInValidInput(vectorAction[1]) ? 0 : (int) vectorAction[1];
+            var newTargetPosition = InputToTargetPosition(vectorAction[0], vectorAction[1]);
 
-            inputService.UpdateVertical(MachineInputToAction(xAction));
-            inputService.UpdateHorizontal(MachineInputToAction(yAction));
             PunishRoaming();
             EncourageApproachingTarget();
-        }
-
-        public override void CollectObservations()
-        {
-            base.CollectObservations();
-            if (config.UseVectorRotation) AddRotationObservation();
-        }
-
-        private void AddRotationObservation()
-        {
-            AddVectorObs(unit.transform.rotation.eulerAngles.y / 360f);
-        }
-
-        private void OnCollisionStay(Collision other)
-        {
-            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(config.ContactWithObstaclePunishment);
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -113,7 +86,6 @@ namespace AgentAi.Suicidal
                     AddReward(config.KilledPunishment);
                     break;
                 case EffectSource.System:
-//                    AddReward(-1f);
                     break;
                 case EffectSource.SelfDestruction:
                     AddReward(config.SelfDestructionReward);
@@ -166,51 +138,17 @@ namespace AgentAi.Suicidal
             return distance;
         }
 
-        private static int PlayerInputToMachineInput(float input)
+        public IDynamicObjectOfInterest RequestTarget()
         {
-            if (FloatUtil.NearlyEqual(input, 0)) return (int) MachineInput.NoAction;
-
-            return input > 0 ? (int) MachineInput.PositiveAction : (int) MachineInput.NegativeAction;
+            throw new NotImplementedException();
         }
 
-        private static int MachineInputToAction(int input)
+        private Vector2 InputToTargetPosition(float x, float y)
         {
-            ActionFlag machineInputAsAction;
-            switch (input)
-            {
-                case (int) MachineInput.NoAction:
-                    machineInputAsAction = ActionFlag.NoAction;
-                    break;
-                case (int) MachineInput.PositiveAction:
-                    machineInputAsAction = ActionFlag.PositiveAction;
-                    break;
-                case (int) MachineInput.NegativeAction:
-                    machineInputAsAction = ActionFlag.NegativeAction;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException($"input: {input} is not valid, it must be between 0-2");
-            }
+            var xCord = Mathf.RoundToInt(Mathf.Clamp(x, -1, 1) * _observeEnvironmentService.Config.MapDimension / 2f);
+            var yCord = Mathf.RoundToInt(Mathf.Clamp(y, -1, 1) * _observeEnvironmentService.Config.MapDimension / 2f);
 
-            return (int) machineInputAsAction;
-        }
-
-        private static bool IsInValidInput(float input)
-        {
-            return float.IsNaN(input) || float.IsInfinity(input);
-        }
-
-        private enum MachineInput
-        {
-            PositiveAction = 2,
-            NegativeAction = 1,
-            NoAction = 0
-        }
-
-        private enum ActionFlag
-        {
-            PositiveAction = 1,
-            NegativeAction = -1,
-            NoAction = 0
+            return new Vector2(xCord, yCord) * _observeEnvironmentService.Config.MapDimension / 2f;
         }
     }
 }
