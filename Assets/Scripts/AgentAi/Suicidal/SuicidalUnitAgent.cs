@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using AgentAi.Manager;
-using AgentAi.Manager.TargetPicker;
 using Common.Class;
 using Common.Constant;
 using Common.Enum;
@@ -11,33 +10,48 @@ using Elements.Units.UnitCommon;
 using EventManagement;
 using MLAgents;
 using Movement.InputSource;
+using ScriptableService;
 using TrainingSpecific.Events;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using UnityUtils;
 
 namespace AgentAi.Suicidal
 {
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment
+    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment, ICollisionStayDelegate
     {
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
         private float _previousClosestDistance;
-        private ITargetPicker _targetPicker;
         private IUnitDataRepository _unitDataRepository;
 
         [SerializeField] private SuicidalUnitAgentConfig config;
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private ObservationServiceProvider observationServiceProvider;
-        [SerializeField] private UnitProvider provider;
+
+        [SerializeField] private PlayerInstanceTracker playerInstanceTracker;
+
         [SerializeField] private SuicidalEnemy unit;
+
+        [FormerlySerializedAs("provider")] [SerializeField]
+        private UnitProvider unitProvider;
 
 
         public Texture2D GetObservation()
         {
-            return _observeEnvironmentService.CreateObservationAsTexture(unit, _targetPicker.RequestTarget());
+            return _observeEnvironmentService.CreateObservationAsTexture(
+                unit,
+                playerInstanceTracker.Player
+            );
+        }
+
+        public void OnCollisionStayCalled(Collision other)
+        {
+            if (other.collider.CompareTag(ObjectTags.Wall))
+                AddReward(config.ContactWithObstaclePunishment);
         }
 
         public void Handle(EnemyDeadEvent @event)
@@ -61,9 +75,8 @@ namespace AgentAi.Suicidal
         {
             base.InitializeAgent();
             _eventAggregator = EventAggregatorHolder.Instance;
-            _targetPicker = PickPlayerTargetPicker.Instance;
             _previousClosestDistance = GetCurrentDistanceFromTarget();
-            _unitDataRepository = provider.ProvideUnitDataRepository();
+            _unitDataRepository = unitProvider.ProvideUnitDataRepository();
             _observeEnvironmentService = observationServiceProvider.ProvideService();
 
             _eventAggregator.Subscribe(this);
@@ -97,11 +110,6 @@ namespace AgentAi.Suicidal
         private void AddRotationObservation()
         {
             AddVectorObs(unit.transform.rotation.eulerAngles.y / 360f);
-        }
-
-        private void OnCollisionStay(Collision other)
-        {
-            if (other.collider.CompareTag(ObjectTags.Wall)) AddReward(config.ContactWithObstaclePunishment);
         }
 
         [SuppressMessage("ReSharper", "RedundantCaseLabel")]
@@ -153,7 +161,7 @@ namespace AgentAi.Suicidal
             const float defaultDistance = 10f;
             var path = new NavMeshPath();
             if (!navMeshAgent.isOnNavMesh || !navMeshAgent.CalculatePath(
-                    _targetPicker.RequestTarget().DynamicObjectTransform.position,
+                    playerInstanceTracker.Player.transform.position,
                     path
                 )) return defaultDistance;
 

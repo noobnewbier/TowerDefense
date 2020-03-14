@@ -73,12 +73,9 @@ GameObject:
   - component: {fileID: 8293550211145048740}
   - component: {fileID: 7352862185661551323}
   - component: {fileID: 3254465578691183710}
-  - component: {fileID: 114311307622947684}
-  - component: {fileID: 114645794836903142}
-  - component: {fileID: 114146839934506344}
   - component: {fileID: 195152517545128316}
   - component: {fileID: 3704630309950303712}
-  - component: {fileID: 3740444877222987529}
+  - component: {fileID: 7871425984914379380}
   m_Layer: 11
   m_Name: SuicidalUnit
   m_TagString: Enemy
@@ -94,12 +91,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3610290461812041406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.11, y: 0, z: 7.5810723}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1714430858}
   - {fileID: 5539693965229257134}
   - {fileID: 4088919242438881465}
+  - {fileID: 2495698162696600675}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -175,7 +173,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &3254465578691183710
 MonoBehaviour:
@@ -196,67 +194,6 @@ MonoBehaviour:
     type: 2}
   rules:
   - {fileID: 11400000, guid: a04c3488d73b51948a7ddb6212b74584, type: 2}
---- !u!114 &114311307622947684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3610290461812041406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    vectorObservationSize: 0
-    numStackedVectorObservations: 1
-    vectorActionSize: 0300000003000000
-    vectorActionDescriptions: []
-    vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 56d70db541812e44ea3f9e3894b73b25, type: 3}
-  m_InferenceDevice: 1
-  m_BehaviorType: 0
-  m_BehaviorName: Suicide
-  m_TeamID: 0
-  m_useChildSensors: 0
---- !u!114 &114645794836903142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3610290461812041406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e01eeac5380094f9f100a3761afd47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 4096
-    resetOnDone: 0
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 3
-  config: {fileID: 11400000, guid: 351050d585b4de048819d417d0829da1, type: 2}
-  inputService: {fileID: 6168960639002132815}
-  navMeshAgent: {fileID: 195152517545128316}
-  observationServiceProvider: {fileID: 3740444877222987529}
-  provider: {fileID: 3704630309950303712}
-  unit: {fileID: 3254465578691183710}
---- !u!114 &114146839934506344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3610290461812041406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  observationServiceProvider: {fileID: 3740444877222987529}
-  sensorName: Texture2DSensor
 --- !u!195 &195152517545128316
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -295,7 +232,7 @@ MonoBehaviour:
     type: 2}
   unit: {fileID: 3254465578691183710}
   unitData: {fileID: 11400000, guid: 923253321667b434e887be691b47dea1, type: 2}
---- !u!114 &3740444877222987529
+--- !u!114 &7871425984914379380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,10 +241,121 @@ MonoBehaviour:
   m_GameObject: {fileID: 3610290461812041406}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2536d5942d2ac2c4998426bc92686893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - {fileID: 77879915150135956}
+--- !u!1 &7916674236602675019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2495698162696600675}
+  - component: {fileID: 5899691593738601306}
+  - component: {fileID: 1796066640381811506}
+  - component: {fileID: 1209074146708491867}
+  - component: {fileID: 77879915150135956}
+  m_Layer: 0
+  m_Name: Agent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2495698162696600675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.029721022, y: 0.4127903, z: -0.7201495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6048740561362155733}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899691593738601306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 0
+    numStackedVectorObservations: 1
+    vectorActionSize: 0300000003000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 0
+  m_Model: {fileID: 11400000, guid: 56d70db541812e44ea3f9e3894b73b25, type: 3}
+  m_InferenceDevice: 1
+  m_BehaviorType: 0
+  m_BehaviorName: Suicide
+  m_TeamID: 0
+  m_useChildSensors: 0
+--- !u!114 &1796066640381811506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observationServiceProvider: {fileID: 1209074146708491867}
+  sensorName: Texture2DSensor
+--- !u!114 &1209074146708491867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e75dbaf0fd4a999e0d121d5e5a1447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   observationService: {fileID: 11400000, guid: 87ac96796c48549479ef6891462ee4e9, type: 2}
+--- !u!114 &77879915150135956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e01eeac5380094f9f100a3761afd47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 4096
+    resetOnDone: 0
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 3
+  config: {fileID: 11400000, guid: 351050d585b4de048819d417d0829da1, type: 2}
+  inputService: {fileID: 6168960639002132815}
+  navMeshAgent: {fileID: 195152517545128316}
+  observationServiceProvider: {fileID: 1209074146708491867}
+  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+    type: 2}
+  unit: {fileID: 3254465578691183710}
+  unitProvider: {fileID: 3704630309950303712}
 --- !u!1 &8297780213500903645
 GameObject:
   m_ObjectHideFlags: 0

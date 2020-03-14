@@ -337,9 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601b636d70df4186aee04996bf5f313f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialLevel: 0
   objectsOfInterestTracker: {fileID: 11400000, guid: d12ddd9211b820a4fadbfda14ce48eda,
     type: 2}
-  initialLevel: 0
 --- !u!4 &161040336
 Transform:
   m_ObjectHideFlags: 0
@@ -1017,8 +1017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8962adedfa14de488601d90c22a7c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 4, y: 1, z: 4}
+  minScale: {x: 1, y: 1, z: 1}
 --- !u!1 &608719508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,8 +1138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8962adedfa14de488601d90c22a7c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: {x: 6, y: 1, z: 1}
   maxScale: {x: 20, y: 1, z: 1}
+  minScale: {x: 6, y: 1, z: 1}
 --- !u!1 &691971278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626c4c3931b64918b6e81f1c2d4c01cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPointData: {fileID: 11400000, guid: db2fb2565d99bfa408ed29cab18cca5f,
+  enemySpawnPointData: {fileID: 11400000, guid: b8184eef34690184c83d1eeaf5eeabcb,
     type: 2}
   locationProvider: {fileID: 1096023334}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
@@ -2362,8 +2362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8962adedfa14de488601d90c22a7c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: {x: 5, y: 1, z: 5}
   maxScale: {x: 9, y: 1, z: 9}
+  minScale: {x: 5, y: 1, z: 5}
 --- !u!4 &1680667236
 Transform:
   m_ObjectHideFlags: 0
@@ -2722,8 +2722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8962adedfa14de488601d90c22a7c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 7, y: 1, z: 7}
+  minScale: {x: 1, y: 1, z: 1}
 --- !u!1 &1927951744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,6 +2904,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: dynamicObjectsSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
+        type: 2}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: precision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: grayScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f6f7235ca5f7974598508f5d47814cc,
+        type: 2}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2964,28 +2986,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: precision
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: grayScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: config
-      value: 
-      objectReference: {fileID: 11400000, guid: 9f6f7235ca5f7974598508f5d47814cc,
-        type: 2}
-    - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: dynamicObjectsSet
-      value: 
-      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
-        type: 2}
     - target: {fileID: 3352325462267338003, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: resource

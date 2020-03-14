@@ -1,5 +1,3 @@
-using System;
-using Common.Class;
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
@@ -11,17 +9,19 @@ namespace Terrain
 {
     public class DynamicObstacle : MonoBehaviour, IDynamicObjectOfInterest
     {
-        [FormerlySerializedAs("scriptableEventAggregator")] [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
-        
+        private Collider _collider;
+
+        [FormerlySerializedAs("scriptableEventAggregator")] [SerializeField]
+        private EventAggregatorProvider eventAggregatorProvider;
+
         public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
         public Bounds Bounds => _collider.bounds;
-        public Transform DynamicObjectTransform => transform;
-        private Collider _collider;
+        public Transform ObjectTransform => transform;
 
         private void OnEnable()
         {
             _collider = GetComponent<Collider>();
-            
+
             eventAggregatorProvider.ProvideEventAggregator().Publish(new DynamicObstacleSpawnedEvent(this));
         }
 

@@ -1,4 +1,3 @@
-using Elements.Units.Enemies;
 using UnityEngine;
 
 namespace Elements.Units
@@ -6,14 +5,12 @@ namespace Elements.Units
     [CreateAssetMenu(menuName = "Data/EnemySpawnPointData")]
     public class EnemySpawnPointData : ScriptableObject
     {
-        [SerializeField] private Enemy[] enemies;
+        [SerializeField] private GameObject[] enemies;
         [SerializeField] private float spawnInterval;
         [SerializeField] private int totalNumberOfEnemies;
 
-        public Enemy[] Enemies => enemies;
-
+        public GameObject[] Enemies => enemies;
         public float SpawnInterval => spawnInterval;
-
         public int TotalNumberOfEnemies => totalNumberOfEnemies;
     }
 }

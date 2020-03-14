@@ -94,7 +94,7 @@ namespace Elements.Turret
             _targetRefreshTimer += Time.fixedDeltaTime;
 
             var targetPosition =
-                _currentTarget != null ? _currentTarget.DynamicObjectTransform.position : (Vector3?) null;
+                _currentTarget != null ? _currentTarget.ObjectTransform.position : (Vector3?) null;
             if (targetPosition.HasValue) Aim(targetPosition.Value);
 
             genericShootService.IsShooting = ShouldShoot();

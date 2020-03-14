@@ -1,4 +1,3 @@
-using System;
 using Common.Enum;
 using Common.Interface;
 using UnityEngine;
@@ -9,6 +8,6 @@ namespace Terrain
     {
         public AiInterestCategory InterestCategory => AiInterestCategory.Ground;
         public Bounds Bounds => GetComponent<Collider>().bounds;
-        public Transform DynamicObjectTransform => transform;
+        public Transform ObjectTransform => transform;
     }
 }

@@ -13,13 +13,15 @@ namespace ProjectSpecificUtils
 
         private float _timer;
         [SerializeField] private bool automaticUpdateObserver;
+
+        [SerializeField] private bool markCentreWithMagenta;
+
         //interface cannot be serialized, do a dirty cast when using this
         [SerializeField] private MonoBehaviour maybeCanObserve;
         [SerializeField] private float observeFrequency;
-        [SerializeField] private bool startedObserving;
         [SerializeField] [Range(1, 100)] private float scale;
-        [SerializeField] private bool markCentreWithMagenta;
-        
+        [SerializeField] private bool startedObserving;
+
 
         public void Handle(GameStartEvent @event)
         {
@@ -28,16 +30,11 @@ namespace ProjectSpecificUtils
 
         public void Handle(IDynamicObjectSpawnedEvent @event)
         {
-            if (!automaticUpdateObserver)
-            {
-                return;
-            }
+            if (!automaticUpdateObserver) return;
 
-            var canObserverEnvironment = @event.DynamicObject.DynamicObjectTransform.GetComponent<ICanObserveEnvironment>();
-            if (canObserverEnvironment != null)
-            {
-                maybeCanObserve = canObserverEnvironment as MonoBehaviour;
-            }
+            var canObserverEnvironment =
+                @event.DynamicObject.ObjectTransform.GetComponentInChildren<ICanObserveEnvironment>();
+            if (canObserverEnvironment != null) maybeCanObserve = canObserverEnvironment as MonoBehaviour;
         }
 
         private void OnEnable()
@@ -57,42 +54,33 @@ namespace ProjectSpecificUtils
             {
                 var canObserve = GetCanObserveEnvironment();
 
-                if (canObserve == null)
-                {
-                    return;
-                }
+                if (canObserve == null) return;
 
                 _timer += Time.deltaTime;
-                if (_timer < observeFrequency)
-                {
-                    return;
-                }
+                if (_timer < observeFrequency) return;
 
                 _timer = 0f;
 
                 var texture = canObserve.GetObservation();
                 if (markCentreWithMagenta)
                 {
-                    texture.SetPixel(texture.width/2, texture.height/2, Color.magenta);
+                    texture.SetPixel(texture.width / 2, texture.height / 2, Color.magenta);
                     texture.Apply();
                 }
 
-                GUI.DrawTexture(new Rect(Screen.width - texture.width * scale, 0f, texture.width * scale, texture.height * scale), texture);
+                GUI.DrawTexture(
+                    new Rect(Screen.width - texture.width * scale, 0f, texture.width * scale, texture.height * scale),
+                    texture
+                );
             }
         }
 
         [CanBeNull]
         private ICanObserveEnvironment GetCanObserveEnvironment()
         {
-            if (maybeCanObserve == null)
-            {
-                return null;
-            }
+            if (maybeCanObserve == null) return null;
 
-            if (maybeCanObserve is ICanObserveEnvironment canObserveEnvironment)
-            {
-                return canObserveEnvironment;
-            }
+            if (maybeCanObserve is ICanObserveEnvironment canObserveEnvironment) return canObserveEnvironment;
 
             return maybeCanObserve.GetComponent<ICanObserveEnvironment>();
         }

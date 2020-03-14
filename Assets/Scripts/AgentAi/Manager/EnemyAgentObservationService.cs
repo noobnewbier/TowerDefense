@@ -72,7 +72,7 @@ namespace AgentAi.Manager
 
         private void OnEnable()
         {
-            _textureDimension = config.CalculateTextureDimension();
+            _textureDimension = config.GetTextureDimension();
             _eventAggregator = eventAggregatorProvider.ProvideEventAggregator();
 
             _centerOfTexture = new Vector3(_textureDimension / 2f, 0, _textureDimension / 2f);
@@ -159,12 +159,12 @@ namespace AgentAi.Manager
             public Observer(IObjectOfInterest objectOfInterest)
             {
                 Bounds = objectOfInterest.Bounds;
-                DynamicObjectTransform = objectOfInterest.DynamicObjectTransform;
+                ObjectTransform = objectOfInterest.ObjectTransform;
             }
 
             public AiInterestCategory InterestCategory => AiInterestCategory.Observer;
             public Bounds Bounds { get; }
-            public Transform DynamicObjectTransform { get; }
+            public Transform ObjectTransform { get; }
         }
 
         private class Target : IDynamicObjectOfInterest
@@ -172,12 +172,12 @@ namespace AgentAi.Manager
             public Target(IObjectOfInterest objectOfInterest)
             {
                 Bounds = objectOfInterest.Bounds;
-                DynamicObjectTransform = objectOfInterest.DynamicObjectTransform;
+                ObjectTransform = objectOfInterest.ObjectTransform;
             }
 
             public AiInterestCategory InterestCategory => AiInterestCategory.Target;
             public Bounds Bounds { get; }
-            public Transform DynamicObjectTransform { get; }
+            public Transform ObjectTransform { get; }
         }
     }
 }

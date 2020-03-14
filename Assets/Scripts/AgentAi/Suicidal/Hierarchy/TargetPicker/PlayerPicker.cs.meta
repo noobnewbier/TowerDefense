@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 74d7a922a499454b8e72d7e4fc077a47
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - localEventAggregatorProvider: {instanceID: 0}
+  - playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

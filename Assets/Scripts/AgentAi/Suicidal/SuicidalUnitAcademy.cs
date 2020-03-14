@@ -1,5 +1,6 @@
 using AgentAi.Manager;
 using Common.Class;
+using Common.Event;
 using EventManagement;
 using MLAgents;
 using TrainingSpecific.Events;
@@ -7,7 +8,8 @@ using UnityEngine;
 
 namespace AgentAi.Suicidal
 {
-    public class SuicidalUnitAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>
+    public class SuicidalUnitAcademy : Academy, IHandle<AgentDoneEvent>, IHandle<AgentSpawnedEvent>,
+                                       IHandle<WaveEndEvent>
     {
         private int _agentCount;
         private int _doneAgentCount;
@@ -15,11 +17,10 @@ namespace AgentAi.Suicidal
         [Range(0, 5)] [SerializeField] private int initialLevel;
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
 
-
-        //bug here!
         public void Handle(AgentDoneEvent @event)
         {
 #if TRAINING
+            //if all agent is done, loop for a new training stage
             _doneAgentCount++;
 
             if (_doneAgentCount >= _agentCount) ClearField();
@@ -31,6 +32,11 @@ namespace AgentAi.Suicidal
 #if TRAINING
             _agentCount++;
 #endif
+        }
+
+        public void Handle(WaveEndEvent @event)
+        {
+            ClearField();
         }
 
         private void OnEnable()

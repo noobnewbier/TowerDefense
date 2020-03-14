@@ -1,0 +1,7 @@
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- USE demos and Gail
+
+vel config changes:
+- use constant learning rate, attempt to deal with the gradient descent... not sure how well it's gonna work tbh

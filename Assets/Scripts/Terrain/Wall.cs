@@ -8,6 +8,6 @@ namespace Terrain
     {
         public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
         public Bounds Bounds => GetComponent<Collider>().bounds;
-        public Transform DynamicObjectTransform => transform;
+        public Transform ObjectTransform => transform;
     }
 }
