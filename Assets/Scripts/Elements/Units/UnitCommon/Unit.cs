@@ -58,7 +58,7 @@ namespace Elements.Units.UnitCommon
 
         protected void FixedUpdate()
         {
-            // If it is going to die, die
+            // If it is going to die, die, how poetic
             if (UnitDataModificationService.IsDyingNextFrame)
             {
                 Dies();

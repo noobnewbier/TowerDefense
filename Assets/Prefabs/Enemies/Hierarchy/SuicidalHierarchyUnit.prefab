@@ -156,9 +156,7 @@ MonoBehaviour:
   contactWithObstacleTimer: {fileID: 281122238233081419}
   inputService: {fileID: 3732634160666568650}
   localEventAggregatorProvider: {fileID: 7406001238229933483}
-  navMeshAgent: {fileID: 0}
   observationServiceProvider: {fileID: 4794273396059828950}
-  unit: {fileID: 5438757120475259611}
   unitProvider: {fileID: 6140950948403055461}
 --- !u!114 &4794273396059828950
 MonoBehaviour:
@@ -234,11 +232,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 0
     numStackedVectorObservations: 1
-    vectorActionSize: 01000000
+    vectorActionSize: 02000000
     vectorActionDescriptions: []
-    vectorActionSpaceType: 0
+    vectorActionSpaceType: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
@@ -262,6 +260,8 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
+  targetMarkerPrefab: {fileID: 2176771925036827138, guid: 2352ece781c91ae42b98f8d1fd91c069,
+    type: 3}
   config: {fileID: 11400000, guid: d41a2b172fa4a8f43ba0b426bc1f7dd1, type: 2}
   globalEventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
@@ -408,18 +408,6 @@ PrefabInstance:
     - {fileID: 7089011312749665141, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
     - {fileID: 195152517545128316, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
---- !u!114 &5438757120475259611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3254465578691183710, guid: 4f93f73c277a40348b43a4e7a641dd2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7372524507343496837}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 868162c68b6e4729a64581fd409eda5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6140950948403055461 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3704630309950303712, guid: 4f93f73c277a40348b43a4e7a641dd2e,

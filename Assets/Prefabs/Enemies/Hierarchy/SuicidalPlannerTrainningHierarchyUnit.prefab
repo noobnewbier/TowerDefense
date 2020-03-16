@@ -101,11 +101,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5942172665889399846, guid: d252efc4a187af0449db6dfbab501bd5,
-        type: 3}
-      propertyPath: agentParameters.maxStep
-      value: 999999
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3243412902279923983, guid: d252efc4a187af0449db6dfbab501bd5, type: 3}
     - {fileID: 5822216469935019792, guid: d252efc4a187af0449db6dfbab501bd5, type: 3}

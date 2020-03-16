@@ -52,4 +52,14 @@ namespace Common.Event
 
         public IDynamicObjectOfInterest DynamicObject { get; }
     }
+
+    public struct SystemObjectSpawnedEvent : IDynamicObjectSpawnedEvent {
+        public SystemObjectSpawnedEvent(IDynamicObjectOfInterest dynamicObject)
+        {
+            DynamicObject = dynamicObject;
+        }
+
+        public IDynamicObjectOfInterest DynamicObject { get; }
+    }
+
 }

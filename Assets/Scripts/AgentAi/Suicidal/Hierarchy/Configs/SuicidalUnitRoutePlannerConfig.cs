@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.Config
+namespace AgentAi.Suicidal.Hierarchy.Configs
 {
     [CreateAssetMenu(menuName = "AIConfig/RoutePlannerConfig")]
     public class SuicidalUnitRoutePlannerConfig : ScriptableObject

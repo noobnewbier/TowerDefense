@@ -39,7 +39,7 @@ namespace AgentAi.Suicidal.Hierarchy.Navigator
 
         private void FixedUpdate()
         {
-            MoveToDestination();
+            if (_target != null) MoveToDestination();
         }
 
         private void MoveToDestination()

@@ -41,6 +41,9 @@ namespace AgentAi.Suicidal.Hierarchy.Navigator
         public void Handle(NewTargetIssuedEvent @event)
         {
             _currentTarget = @event.Target;
+            
+            //stop requesting decision if there is no target, vice versa
+            agentParameters.onDemandDecision = _currentTarget == null;
         }
 
         //cannot think of an elegant solution for heuristic controller... but this do the trick

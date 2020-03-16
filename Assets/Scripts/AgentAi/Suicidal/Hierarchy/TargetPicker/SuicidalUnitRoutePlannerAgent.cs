@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using AgentAi.Manager;
 using AgentAi.Suicidal.Hierarchy.Config;
+using AgentAi.Suicidal.Hierarchy.Configs;
 using AgentAi.Suicidal.Hierarchy.Event;
 using Common.Enum;
 using Common.Event;
@@ -21,6 +22,7 @@ namespace AgentAi.Suicidal.Hierarchy.TargetPicker
         private TargetMarker _targetMarker;
         private Unit _unit;
 
+        [SerializeField] private GameObject targetMarkerPrefab;
         [SerializeField] private SuicidalUnitRoutePlannerConfig config;
         [SerializeField] private EventAggregatorProvider globalEventAggregatorProvider;
         [SerializeField] private LocalEventAggregatorProvider localEventAggregatorProvider;
@@ -29,7 +31,7 @@ namespace AgentAi.Suicidal.Hierarchy.TargetPicker
 
         public Texture2D GetObservation()
         {
-            return _observeEnvironmentService.CreateObservationAsTexture(_unit, _targetMarker);
+            return _observeEnvironmentService.CreateObservationAsTexture(_unit, null);
         }
 
         public void Handle(EnemyDeadEvent @event)
@@ -64,8 +66,7 @@ namespace AgentAi.Suicidal.Hierarchy.TargetPicker
             _observeEnvironmentService = observationServiceProvider.ProvideService();
             _unit = unitProvider.ProvideUnit();
 
-            _targetMarker =
-                new GameObject("Target Marker").AddComponent<TargetMarker>();
+            _targetMarker = Instantiate(targetMarkerPrefab).GetComponent<TargetMarker>();
             _targetMarker.transform.position = _unit.transform.position;
 
             _globalEventAggregator.Subscribe(this);
@@ -78,6 +79,7 @@ namespace AgentAi.Suicidal.Hierarchy.TargetPicker
         {
             base.AgentOnDone();
             _localEventAggregator.Publish(new SubAgentDoneEvent());
+            _localEventAggregator.Publish(new NewTargetIssuedEvent(null));
 
             _localEventAggregator.Unsubscribe(this);
             _globalEventAggregator.Unsubscribe(this);

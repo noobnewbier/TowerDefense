@@ -1,4 +1,5 @@
 using Common.Interface;
+using JetBrains.Annotations;
 
 namespace AgentAi.Suicidal.Hierarchy.Event
 {
@@ -9,6 +10,7 @@ namespace AgentAi.Suicidal.Hierarchy.Event
             Target = target;
         }
 
-        public IDynamicObjectOfInterest Target { get; }
+        //null indicating there is no target
+        [CanBeNull] public IDynamicObjectOfInterest Target { get; }
     }
 }
