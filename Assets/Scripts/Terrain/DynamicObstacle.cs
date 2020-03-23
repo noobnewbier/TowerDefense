@@ -1,6 +1,7 @@
 using Common.Enum;
 using Common.Event;
 using Common.Interface;
+using Common.Struct;
 using Experimental;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,8 +15,9 @@ namespace Terrain
         [FormerlySerializedAs("scriptableEventAggregator")] [SerializeField]
         private EventAggregatorProvider eventAggregatorProvider;
 
-        public AiInterestCategory InterestCategory => AiInterestCategory.Obstacle;
-        public Bounds Bounds => _collider.bounds;
+        public InterestedInformation InterestedInformation =>
+            new InterestedInformation(InterestCategory.Obstacle, _collider.bounds);
+
         public Transform ObjectTransform => transform;
 
         private void OnEnable()

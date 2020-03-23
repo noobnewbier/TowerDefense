@@ -9,7 +9,6 @@ namespace Statemachine
 {
     public class ProgressState : StateMachineBehaviour, IHandle<PlayerDeadEvent>, IHandle<AllEnemyAgentsDeadEvent>
     {
-        private static readonly int PlayerDies = Animator.StringToHash("PlayerDies");
         private static readonly int TurnFinishes = Animator.StringToHash("TurnFinishes");
         
         private IEventAggregator _eventAggregator;
@@ -17,7 +16,7 @@ namespace Statemachine
 
         public void Handle(PlayerDeadEvent @event)
         {
-            _animator.SetTrigger(PlayerDies);
+            _animator.SetTrigger(TurnFinishes);
         }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,6 +32,11 @@ namespace Statemachine
         public void Handle(AllEnemyAgentsDeadEvent @event)
         {
             _animator.SetTrigger(TurnFinishes);
+        }
+
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            _eventAggregator.Unsubscribe(this);
         }
     }
 }

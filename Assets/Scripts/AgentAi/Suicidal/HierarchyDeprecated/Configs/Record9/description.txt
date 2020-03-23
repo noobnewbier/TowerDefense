@@ -1,0 +1,7 @@
+Distinct color observation
+- NOT Translating, use color to represent where the agent is
+- use linear rate
+
+NOTE:
+1. todo: update after training is finished(did you train the straight line thing?)
+2. consider refactoring such that color can be assigned through scriptable objects

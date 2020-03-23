@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868162c68b6e4729a64581fd409eda5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  category: 6
   unitCollider: {fileID: 8293550211145048740}
   provider: {fileID: 3704630309950303712}
   damageEffect: {fileID: 11400000, guid: 318999a390179b448b4549faebace0b3, type: 2}
@@ -298,7 +299,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 3a5a030c006c7834ab147b6fab48e097, type: 3}
+  m_Model: {fileID: 11400000, guid: 3281bbdedaad8fa4586e8b9a5e6df6e3, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Suicide

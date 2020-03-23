@@ -19,7 +19,6 @@ namespace Elements.Units.Enemies
         [SerializeField] private Effect selfEffectWhenCollide;
         [SerializeField] private Rule[] rules;
 
-        public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
 

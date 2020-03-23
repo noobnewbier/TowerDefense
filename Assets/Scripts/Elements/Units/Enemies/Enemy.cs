@@ -6,6 +6,8 @@ namespace Elements.Units.Enemies
 {
     public abstract class Enemy : Unit
     {
+        protected override InterestCategory Category => InterestCategory.Enemy;
+
         protected override void OnEnable()
         {
             base.OnEnable();

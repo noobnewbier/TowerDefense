@@ -1,4 +1,4 @@
-using Common.Enum;
+using Common.Struct;
 using UnityEngine;
 
 namespace Common.Interface
@@ -6,8 +6,7 @@ namespace Common.Interface
     //Anything that the AI cares
     public interface IObjectOfInterest
     {
-        AiInterestCategory InterestCategory { get; }
-        Bounds Bounds { get; }
+        InterestedInformation InterestedInformation { get; }
         Transform ObjectTransform { get; }
     }
 

@@ -2904,28 +2904,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
-    - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: dynamicObjectsSet
-      value: 
-      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
-        type: 2}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: precision
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: grayScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
-        type: 3}
-      propertyPath: config
-      value: 
-      objectReference: {fileID: 11400000, guid: 9f6f7235ca5f7974598508f5d47814cc,
-        type: 2}
     - target: {fileID: 3352325463867796296, guid: bfc7f86947ab1244f89ccbb57d99a675,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2991,6 +2969,28 @@ PrefabInstance:
       propertyPath: resource
       value: 
       objectReference: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5,
+        type: 2}
+    - target: {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: dynamicObjectsSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c581eb8b8c4edf4f84f6233fca1f69a,
+        type: 2}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: precision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: grayScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352325462564033504, guid: bfc7f86947ab1244f89ccbb57d99a675,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f6f7235ca5f7974598508f5d47814cc,
         type: 2}
     m_RemovedComponents:
     - {fileID: 3352325462235871413, guid: bfc7f86947ab1244f89ccbb57d99a675, type: 3}
@@ -3085,7 +3085,7 @@ PrefabInstance:
     - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: scale
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8387788280282347241, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}

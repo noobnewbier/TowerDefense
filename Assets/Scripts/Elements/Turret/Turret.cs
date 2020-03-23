@@ -33,10 +33,8 @@ namespace Elements.Turret
         private TurretProvider turretProvider;
 
         [SerializeField] private UnitDetector unitDetector;
-
-        public override AiInterestCategory InterestCategory => AiInterestCategory.Turret;
-
         //it does not matter for a turret
+        protected override InterestCategory Category => InterestCategory.Turret;
         public override Bounds Bounds => new Bounds(transform.position, Vector3.one);
 
         public void Handle(ForceResetEvent @event)

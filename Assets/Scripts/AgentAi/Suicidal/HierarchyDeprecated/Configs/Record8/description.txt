@@ -1,0 +1,27 @@
+Greyscale color observation
+- use texture translation
+- use constant learning rate
+
+NOTE: 
+1. Did not train straight line agent, no need for that yet(considering planner is still fked)
+2. First attempt of hierarchy approach. Config as following:
+
+SuicidalPathPlanner:
+    time_horizon: 512
+    epsilon: 0.2
+    learning_rate_schedule: constant
+    batch_size: 2048
+    buffer_size: 8192
+    hidden_units: 128
+    num_layers: 3
+    beta: 1.0e-3
+    max_steps: 5.0e6
+    num_epoch: 5
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.8
+        curiosity:
+            strength: 0.05
+            gamma: 0.8
+            encoding_size: 256

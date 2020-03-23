@@ -62,6 +62,7 @@ namespace Elements.Units.UnitCommon
             if (UnitDataModificationService.IsDyingNextFrame)
             {
                 Dies();
+                return;
             }
 
             UpdateEffects();

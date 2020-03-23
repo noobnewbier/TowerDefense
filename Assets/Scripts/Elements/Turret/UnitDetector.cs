@@ -25,7 +25,7 @@ namespace Elements.Turret
         public IEnumerable<Enemy> VisibleEnemies => InRangeEnemies.Where(e => IsTargetVisible(e.transform));
 
         private IList<Enemy> InRangeEnemies { get; set; }
-        public override AiInterestCategory InterestCategory => AiInterestCategory.TurretRange;
+        protected override InterestCategory Category => InterestCategory.TurretRange;
         public override Bounds Bounds => rangeCollider.bounds;
 
         public void Handle(EnemyDeadEvent @event)

@@ -3,15 +3,10 @@ using UnityEngine;
 
 namespace Common.Class.ObjectDrawer
 {
-    public class BlockDrawer : IDrawObjectWithPriority
+    [CreateAssetMenu(menuName = "Drawer/BlockDrawer")]
+    public class BlockDrawer : Drawer
     {
-        public static readonly BlockDrawer Instance = new BlockDrawer();
-
-        private BlockDrawer()
-        {
-        }
-
-        public void DrawObjectWithPriority
+        public override void DrawObjectWithPriority
         (
             Texture2D texture2D,
             Bounds bounds,

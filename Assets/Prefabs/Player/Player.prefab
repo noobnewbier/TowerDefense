@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b2d40a59f478049a90098361f1a65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interestedInformation: {fileID: 11400000, guid: bffd39d9c7feed2428f460c3efce2764,
+    type: 2}
   unitCollider: {fileID: 1538229937}
   provider: {fileID: 1408436746}
 --- !u!54 &1538229938

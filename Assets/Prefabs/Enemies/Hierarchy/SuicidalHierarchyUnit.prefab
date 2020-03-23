@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  observationServiceProvider: {fileID: 1335417157346014206}
+  observationServiceProvider: {fileID: 4794273396059828950}
   sensorName: Texture2DSensor
 --- !u!114 &1628030686247292996
 MonoBehaviour:
@@ -124,15 +124,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 0
     numStackedVectorObservations: 1
-    vectorActionSize: 01000000
+    vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_Model: {fileID: 11400000, guid: 3a5a030c006c7834ab147b6fab48e097, type: 3}
+  m_InferenceDevice: 1
   m_BehaviorType: 0
-  m_BehaviorName: SuicidalPathPlanner
+  m_BehaviorName: Suicide
   m_TeamID: 0
   m_useChildSensors: 1
 --- !u!114 &5822216469935019792
@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
-    maxStep: 0
+    maxStep: 999999
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
-  config: {fileID: 11400000, guid: 89e0a127e84c15646b62395abc0cd9dd, type: 2}
+  config: {fileID: 11400000, guid: 18c7a14c351f4ce4c896a31b8d4b8317, type: 2}
   contactWithObstacleTimer: {fileID: 281122238233081419}
   inputService: {fileID: 3732634160666568650}
   localEventAggregatorProvider: {fileID: 7406001238229933483}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e75dbaf0fd4a999e0d121d5e5a1447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  observationService: {fileID: 11400000, guid: 9b4e997c2c0d1cb4f97d470cc813a227, type: 2}
+  observationService: {fileID: 11400000, guid: 87ac96796c48549479ef6891462ee4e9, type: 2}
 --- !u!1 &4593542335404811261
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
     vectorActionSize: 02000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_Model: {fileID: 11400000, guid: 147fc687bc8fbc8489b754797e2235a2, type: 3}
+  m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: SuicidalPathPlanner
   m_TeamID: 0
@@ -256,17 +256,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
-    maxStep: 20
+    maxStep: 9999999
     resetOnDone: 0
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
-  targetMarkerPrefab: {fileID: 2176771925036827138, guid: 2352ece781c91ae42b98f8d1fd91c069,
-    type: 3}
-  config: {fileID: 11400000, guid: d41a2b172fa4a8f43ba0b426bc1f7dd1, type: 2}
+  config: {fileID: 11400000, guid: 3006317be62650c4eb1575247818778c, type: 2}
   globalEventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
   localEventAggregatorProvider: {fileID: 7406001238229933483}
   observationServiceProvider: {fileID: 1335417157346014206}
+  targetMarkerPrefab: {fileID: 2176771925036827138, guid: 2352ece781c91ae42b98f8d1fd91c069,
+    type: 3}
   unitProvider: {fileID: 6140950948403055461}
 --- !u!114 &1335417157346014206
 MonoBehaviour:
@@ -320,6 +320,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuicidalHierarchyUnit
       objectReference: {fileID: 0}
+    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
+        type: 3}
+      propertyPath: delegates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
+        type: 3}
+      propertyPath: delegate
+      value: 
+      objectReference: {fileID: 5942172665889399846}
+    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
+        type: 3}
+      propertyPath: delegates.Array.data[0]
+      value: 
+      objectReference: {fileID: 1990227504378427976}
+    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
+        type: 3}
+      propertyPath: delegates.Array.data[1]
+      value: 
+      objectReference: {fileID: 5942172665889399846}
     - target: {fileID: 6048740561362155733, guid: 4f93f73c277a40348b43a4e7a641dd2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -375,26 +395,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
-        type: 3}
-      propertyPath: delegates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
-        type: 3}
-      propertyPath: delegate
-      value: 
-      objectReference: {fileID: 5942172665889399846}
-    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
-        type: 3}
-      propertyPath: delegates.Array.data[0]
-      value: 
-      objectReference: {fileID: 1990227504378427976}
-    - target: {fileID: 7871425984914379380, guid: 4f93f73c277a40348b43a4e7a641dd2e,
-        type: 3}
-      propertyPath: delegates.Array.data[1]
-      value: 
-      objectReference: {fileID: 5942172665889399846}
     - target: {fileID: 4087797971455884191, guid: 4f93f73c277a40348b43a4e7a641dd2e,
         type: 3}
       propertyPath: m_Name

@@ -458,6 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8462197b81ba49fe8061ad4b06fabfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interestedInformation: {fileID: 11400000, guid: 45b9b0341e605384c9fc1f43bac199db,
+    type: 2}
   genericShootService: {fileID: 8884615131391382605}
   rotator: {fileID: 8422049401079906708}
   turretProvider: {fileID: 3473750386440864997}
@@ -671,6 +673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0c46e1471c48bdb2b14bbf86ffe410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interestedInformation: {fileID: 11400000, guid: ac5e387506a3d6b4dbf09a67a4dc3c0f,
+    type: 2}
   bulletSpawnpoint: {fileID: 1520384083734201723}
   provider: {fileID: 3473750386440864997}
   rangeCollider: {fileID: 5809255229030515060}

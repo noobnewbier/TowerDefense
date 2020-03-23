@@ -10,7 +10,6 @@ namespace Elements.Units.Enemies
         private IUnitDataRepository _unitDataRepository;
         private IUnitDataModificationService _unitDataModificationService;
         [SerializeField] private UnitProvider provider;
-        public override AiInterestCategory InterestCategory => AiInterestCategory.Enemy;
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
         protected override void DeathVisualEffect()

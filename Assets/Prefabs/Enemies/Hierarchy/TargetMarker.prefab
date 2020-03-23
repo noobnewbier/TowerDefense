@@ -46,3 +46,5 @@ MonoBehaviour:
   eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
   size: 0
+  interestedInformation: {fileID: 11400000, guid: 5d22642191d5f244c8139b1811a6c1dc,
+    type: 2}

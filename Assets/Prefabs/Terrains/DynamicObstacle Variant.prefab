@@ -30,6 +30,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
+  interestedInformation: {fileID: 11400000, guid: a079b17fb8ff49242947fd9bcfc8825d,
+    type: 2}
 --- !u!1001 &6366859731190157086
 PrefabInstance:
   m_ObjectHideFlags: 0

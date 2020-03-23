@@ -4,16 +4,11 @@ using UnityEngine;
 
 namespace Common.Class.ObjectDrawer
 {
-    public class CircleDrawer : IDrawObjectWithPriority
+    [CreateAssetMenu(menuName = "Drawer/CircleDrawer")]
+    public class CircleDrawer : Drawer
     {
-        public static readonly CircleDrawer Instance = new CircleDrawer();
-
-        private CircleDrawer()
-        {
-        }
-
         //if the texture is too large and is slow(because of SetPixel), use set pixels instead. For now leave it alone
-        public void DrawObjectWithPriority(Texture2D texture2D, Bounds bounds, Color color, int[,] coordinatesWithPriority,
+        public override void DrawObjectWithPriority(Texture2D texture2D, Bounds bounds, Color color, int[,] coordinatesWithPriority,
             int priority, bool shouldWritePriority)
         {
             var radius = bounds.extents.x;

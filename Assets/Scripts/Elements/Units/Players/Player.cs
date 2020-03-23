@@ -14,7 +14,7 @@ namespace Elements.Units.Players
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
 
-        public override AiInterestCategory InterestCategory => AiInterestCategory.Player;
+        protected override InterestCategory Category => InterestCategory.Player;
 
         protected override void OnEnable()
         {
