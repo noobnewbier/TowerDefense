@@ -110,12 +110,12 @@ namespace AgentAi.Record
                 if (agentObservationConfig.UseTranslation)
                     _finalTexture.TranslateTexture(
                         (int) (envInfo.ObserverPosition.x * agentObservationConfig.Precision),
-                        (int) (envInfo.ObserverPosition.x * agentObservationConfig.Precision)
+                        (int) (envInfo.ObserverPosition.y * agentObservationConfig.Precision)
                     );
 
                 if (agentObservationConfig.UseTextureRotation)
                     _finalTexture.RotateTexture(
-                        envInfo.ObserverYEuler,
+                        -envInfo.ObserverYEuler,
                         agentObservationConfig.DrawingConfig.CategoryAndColors[InterestCategory.NullArea]
                     );
                 GUI.DrawTexture(
@@ -127,6 +127,7 @@ namespace AgentAi.Record
                     ),
                     _finalTexture
                 );
+                Debug.Log(envInfo.CumulativeReward);
             }
         }
     }

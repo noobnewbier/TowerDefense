@@ -26,18 +26,23 @@ namespace AgentAi.Record
     [Serializable]
     public class DynamicEnvironmentData
     {
+        [SerializeField] private float cumulativeReward;
         [SerializeField] private List<InterestedInformation> objectsInfo;
         [SerializeField] private Vector2 observerPosition;
         [SerializeField] private float observerYEuler;
 
         public DynamicEnvironmentData(List<InterestedInformation> objectsInfo,
                                       float observerYEuler,
-                                      Vector2 observerPosition)
+                                      Vector2 observerPosition,
+                                      float cumulativeReward)
         {
             this.objectsInfo = objectsInfo;
             this.observerYEuler = observerYEuler;
             this.observerPosition = observerPosition;
+            this.cumulativeReward = cumulativeReward;
         }
+
+        public float CumulativeReward => cumulativeReward;
 
         public Vector2 ObserverPosition => observerPosition;
 

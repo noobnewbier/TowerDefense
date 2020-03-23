@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72481705a2004325a6b583bbb3bfdb6a, type: 3}
   m_Name: EnvironmentRecorder
   m_EditorClassIdentifier: 
-  recordName: test
+  recordFrequency: 10
+  recordName: record-5-2

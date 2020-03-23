@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Common.Compression;
 using Common.Interface;
+using MLAgents;
 using UnityEngine;
 
 namespace AgentAi.Record
@@ -18,15 +18,20 @@ namespace AgentAi.Record
         private string _path;
         private int _pathSuffix;
         private StaticEnvironmentData _staticDynamicEnvironmentInfo;
+        [Range(1, 100)] [SerializeField] private int recordFrequency;
 
         [SerializeField] private string recordName;
-
         public static string BasePath =>
+#if UNITY_EDITOR
             $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}{EnvironmentDirectoryNamePrefix}{Path.DirectorySeparatorChar}";
+#else
+            $"{Application.persistentDataPath}{Path.DirectorySeparatorChar}{EnvironmentDirectoryNamePrefix}{Path.DirectorySeparatorChar}";
+#endif
 
         public void EndRound()
         {
-            WriteData();
+            //only record according to frequency -- I know it's not the best to handle the logic here, but this will have to do
+            if (_currentRound % recordFrequency == 0) WriteData();
         }
 
         private void WriteData()
@@ -36,19 +41,21 @@ namespace AgentAi.Record
             var compressedData = Compression.Zip(
                 JsonUtility.ToJson(new RoundData(_dynamicEnvironmentData, _staticDynamicEnvironmentInfo))
             );
-            
+
             File.WriteAllBytes(path, compressedData);
         }
 
         public void AddCurrentStep(IEnumerable<IDynamicObjectOfInterest> dynamicObjectOfInterests,
-                                   IDynamicObjectOfInterest observer)
+                                   IDynamicObjectOfInterest observer,
+                                   Agent agent)
         {
             var observerObjectTransform = observer.ObjectTransform;
             var position = observerObjectTransform.position;
             var data = new DynamicEnvironmentData(
                 dynamicObjectOfInterests.Select(i => i.InterestedInformation).ToList(),
                 observerObjectTransform.eulerAngles.y,
-                new Vector2(position.x, position.z)
+                new Vector2(position.x, position.z),
+                agent.GetCumulativeReward()
             );
 
             _dynamicEnvironmentData.Add(data);
@@ -81,7 +88,7 @@ namespace AgentAi.Record
             do
             {
                 _pathSuffix++;
-                _path = $"{BasePath}{recordName}-{_pathSuffix}";
+                _path = $"{BasePath}{recordName}-{Nanoid.Nanoid.Generate()}-{_pathSuffix}";
             } while (Directory.Exists(_path));
         }
     }

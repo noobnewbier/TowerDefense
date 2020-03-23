@@ -9,6 +9,7 @@ using Elements.Units.UnitCommon;
 using EventManagement;
 using Experimental;
 using JetBrains.Annotations;
+using MLAgents;
 using UnityEngine;
 using UnityUtils;
 
@@ -17,12 +18,16 @@ namespace AgentAi.Manager
     public interface IObserveEnvironmentService
     {
         EnemyAgentObservationConfig Config { get; }
-        Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target);
+
+        Texture2D CreateObservationAsTexture(Unit observer,
+                                             [CanBeNull] IDynamicObjectOfInterest target,
+                                             [CanBeNull] Agent agent = null);
     }
 
     // Perhaps the main bottleneck... be careful with this
     [CreateAssetMenu(menuName = "ScriptableService/EnemyAgentObservationService")]
-    public class EnemyAgentObservationService : ScriptableObject, IHandle<GameStartEvent>, IObserveEnvironmentService, IHandle<WaveStartEvent>, IHandle<WaveEndEvent>
+    public class EnemyAgentObservationService : ScriptableObject, IHandle<GameStartEvent>, IObserveEnvironmentService,
+                                                IHandle<WaveStartEvent>, IHandle<WaveEndEvent>
     {
         private int[,] _coordinatesWithPriority;
         private EnvironmentDrawConfig _drawingConfig;
@@ -34,9 +39,9 @@ namespace AgentAi.Manager
         [SerializeField] private EnvironmentToTextureService environmentToTextureService;
         [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
         [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
-        [SerializeField] private EnvironmentRecorder environmentRecorder;        
+        [SerializeField] private EnvironmentRecorder environmentRecorder;
         [SerializeField] private bool logEnvironment;
-        
+
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
@@ -46,7 +51,7 @@ namespace AgentAi.Manager
             }
         }
 
-        public Texture2D CreateObservationAsTexture(Unit observer, [CanBeNull] IDynamicObjectOfInterest target)
+        public Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target, Agent agent = null)
         {
             var objectsWithTargetAndObserver = objectsOfInterestTracker.DynamicObjectOfInterests
                 .ReplaceAll(observer, GetObserverRepresentation(observer));
@@ -57,7 +62,7 @@ namespace AgentAi.Manager
 
             //if this is too slow, rotate before writing
             Graphics.CopyTexture(_terrainTexture, _observedTexture);
-            
+
             var dynamicObjectOfInterests = objectsWithTargetAndObserver.ToList();
             environmentToTextureService.DrawObjectsOnTexture(
                 _observedTexture,
@@ -85,7 +90,8 @@ namespace AgentAi.Manager
 
             if (logEnvironment)
             {
-                environmentRecorder.AddCurrentStep(dynamicObjectOfInterests, observer);
+                //must not be null if you want to log that crap
+                environmentRecorder.AddCurrentStep(dynamicObjectOfInterests, observer, agent);
             }
 
             return Instantiate(_observedTexture);

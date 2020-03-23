@@ -44,7 +44,8 @@ namespace AgentAi.Suicidal
         {
             return _observeEnvironmentService.CreateObservationAsTexture(
                 unit,
-                playerInstanceTracker.Player
+                playerInstanceTracker.Player,
+                this
             );
         }
 
