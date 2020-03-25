@@ -10,3 +10,4 @@ vel config changes
 
 RESULTS:
 - somehow learned to avoid obstacles on level 4, but forget how to approach target in a straight line
+- ON SECOND RUN (Record-5-2), it successfully learned obstacle avoidance
