@@ -457,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &534669903
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1752,6 +1752,7 @@ GameObject:
   - component: {fileID: 1096023333}
   - component: {fileID: 1096023332}
   - component: {fileID: 1096023334}
+  - component: {fileID: 1096023335}
   m_Layer: 0
   m_Name: EnemySpwner
   m_TagString: Untagged
@@ -1776,6 +1777,7 @@ MonoBehaviour:
   locationProvider: {fileID: 1096023334}
   spawnPointValidator: {fileID: 11400000, guid: 7414795a6fc61bc45bdb71cf4195b599,
     type: 2}
+  spawnedEnemyOrientationProvider: {fileID: 1096023335}
 --- !u!4 &1096023333
 Transform:
   m_ObjectHideFlags: 0
@@ -1811,6 +1813,20 @@ MonoBehaviour:
   - {fileID: 114731207}
   - {fileID: 143639008}
   - {fileID: 114731207}
+--- !u!114 &1096023335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096023331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e90fdab7c7d435c9ea6a86efd419c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximum: 359
+  minimum: 0
 --- !u!1 &1110102918
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,7 +3026,7 @@ PrefabInstance:
     - target: {fileID: 4793952624822536967, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4793952624822536964, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}

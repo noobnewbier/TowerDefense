@@ -3,6 +3,7 @@ using Common.Event;
 using EventManagement;
 using ScriptableService;
 using UnityEngine;
+using UnityUtils.FloatProvider;
 using UnityUtils.LocationProviders;
 
 namespace Elements.Units.Enemies
@@ -17,6 +18,8 @@ namespace Elements.Units.Enemies
         [SerializeField] private EnemySpawnPointData enemySpawnPointData;
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private SpawnPointValidator spawnPointValidator;
+        [SerializeField] private FloatProvider spawnedEnemyOrientationProvider;
+        
 
         public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
 
@@ -57,7 +60,7 @@ namespace Elements.Units.Enemies
                 Quaternion.identity
             );
             newEnemyGameObject.transform.parent = transform;
-            newEnemyGameObject.transform.Rotate(new Vector2(0f, Random.Range(0f, 360f)));
+            newEnemyGameObject.transform.Rotate(new Vector2(0f, spawnedEnemyOrientationProvider.ProvideFloat()));
 
             while (!spawnPointValidator.IsSpawnPointValid(
                 newEnemyGameObject.transform.position,
