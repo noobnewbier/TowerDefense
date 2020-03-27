@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace TrainingSpecific
 {
-    public class DynamicObstacleHandler : MonoBehaviour, IHandle<HandleDynamicObstacleEvent>
+    public class DynamicObjectHandler : MonoBehaviour, IHandle<HandleDynamicObstacleEvent>
     {
         private static readonly WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
         private IEventAggregator _eventAggregator;
 
-        [SerializeField] private IndividualDynamicObstacleController[] controllers;
+        [SerializeField] private DynamicObjectController.DynamicObjectController[] controllers;
 
         public void Handle(HandleDynamicObstacleEvent @event)
         {
@@ -35,11 +35,11 @@ namespace TrainingSpecific
             //we need to handle one at a frame, otherwise spawnpoint validator could not tell if they are overlapping
             foreach (var controller in controllers)
             {
-                controller.PrepareObjectForTraining();
+                controller.TryPrepareObjectForTrainingIfActive();
                 yield return WaitForFixedUpdate;
             }
 
-            _eventAggregator.Publish(new DynamicObstacleHandledEvent());
+            _eventAggregator.Publish(new DynamicObjectsHandledEvent());
         }
     }
 }

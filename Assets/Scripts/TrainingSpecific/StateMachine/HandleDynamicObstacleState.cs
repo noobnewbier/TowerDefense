@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace TrainingSpecific.StateMachine
 {
-    public class HandleDynamicObstacleState : StateMachineBehaviour, IHandle<DynamicObstacleHandledEvent>
+    public class HandleDynamicObstacleState : StateMachineBehaviour, IHandle<DynamicObjectsHandledEvent>
     {
         private static readonly int HandledDynamicObstacle = Animator.StringToHash("HandledDynamicObstacle");
         private IEventAggregator _eventAggregator;
         private Animator _stateMachine;
 
-        public void Handle(DynamicObstacleHandledEvent @event)
+        public void Handle(DynamicObjectsHandledEvent @event)
         {
             _stateMachine.SetTrigger(HandledDynamicObstacle);
         }
@@ -21,7 +21,8 @@ namespace TrainingSpecific.StateMachine
             _stateMachine = animator;
             _eventAggregator = EventAggregatorHolder.Instance;
             _eventAggregator.Subscribe(this);
-
+            
+            _eventAggregator.Publish(new TurnStartEvent());
             _eventAggregator.Publish(new HandleDynamicObstacleEvent());
         }
 
