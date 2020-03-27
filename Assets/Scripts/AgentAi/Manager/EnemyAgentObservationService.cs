@@ -36,19 +36,26 @@ namespace AgentAi.Manager
         private Texture2D _terrainTexture;
         private int _textureDimension;
         [SerializeField] private EnemyAgentObservationConfig config;
+        [SerializeField] private EnvironmentRecorder environmentRecorder;
         [SerializeField] private EnvironmentToTextureService environmentToTextureService;
         [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
-        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
-        [SerializeField] private EnvironmentRecorder environmentRecorder;
         [SerializeField] private bool logEnvironment;
+        [SerializeField] private ObjectsOfInterestTracker objectsOfInterestTracker;
 
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
-            if (logEnvironment)
-            {
-                environmentRecorder.CreateNewRecord();
-            }
+            if (logEnvironment) environmentRecorder.CreateNewRecord();
+        }
+
+        public void Handle(WaveEndEvent @event)
+        {
+            if (logEnvironment) environmentRecorder.EndRound();
+        }
+
+        public void Handle(WaveStartEvent @event)
+        {
+            if (logEnvironment) environmentRecorder.CreateNewRound(objectsOfInterestTracker.StaticObjectOfInterests);
         }
 
         public Texture2D CreateObservationAsTexture(Unit observer, IDynamicObjectOfInterest target, Agent agent = null)
@@ -89,10 +96,8 @@ namespace AgentAi.Manager
                 );
 
             if (logEnvironment)
-            {
                 //must not be null if you want to log that crap
                 environmentRecorder.AddCurrentStep(dynamicObjectOfInterests, observer, agent);
-            }
 
             return Instantiate(_observedTexture);
         }
@@ -179,16 +184,6 @@ namespace AgentAi.Manager
 
             public InterestedInformation InterestedInformation { get; }
             public Transform ObjectTransform { get; }
-        }
-
-        public void Handle(WaveStartEvent @event)
-        {
-            environmentRecorder.CreateNewRound(objectsOfInterestTracker.StaticObjectOfInterests);
-        }
-
-        public void Handle(WaveEndEvent @event)
-        {
-            environmentRecorder.EndRound();
         }
     }
 }

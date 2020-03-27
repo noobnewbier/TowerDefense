@@ -30,8 +30,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
-  interestedInformation: {fileID: 11400000, guid: a079b17fb8ff49242947fd9bcfc8825d,
-    type: 2}
 --- !u!1001 &6366859731190157086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,6 +102,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7410030228759972071, guid: 2211a7dd4c325f84f9a0a85e197605e5,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e28cbab08a99d5e488120222cbdc36e7,
+        type: 2}
     - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: yPosition

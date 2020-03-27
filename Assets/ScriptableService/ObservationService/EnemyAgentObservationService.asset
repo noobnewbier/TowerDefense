@@ -21,4 +21,4 @@ MonoBehaviour:
     type: 2}
   environmentRecorder: {fileID: 11400000, guid: 9facdab84a3fc4c488574be66e4ef61d,
     type: 2}
-  logEnvironment: 1
+  logEnvironment: 0
