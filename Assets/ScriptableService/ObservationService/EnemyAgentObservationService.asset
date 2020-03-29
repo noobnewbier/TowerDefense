@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e8c13d4aa9440bb0125afbd3870c73, type: 3}
   m_Name: EnemyAgentObservationService
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 57c33dc4c1153f94cb0c66a3a99b8e19, type: 2}
+  config: {fileID: 11400000, guid: 5ba498adb976cd647842af5fffb970c9, type: 2}
+  environmentRecorder: {fileID: 11400000, guid: 9facdab84a3fc4c488574be66e4ef61d,
+    type: 2}
   environmentToTextureService: {fileID: 11400000, guid: d8e476ba9338c3f438cdc394f522ec79,
     type: 2}
   eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
+  logEnvironment: 1
   objectsOfInterestTracker: {fileID: 11400000, guid: d12ddd9211b820a4fadbfda14ce48eda,
     type: 2}
-  environmentRecorder: {fileID: 11400000, guid: 9facdab84a3fc4c488574be66e4ef61d,
-    type: 2}
-  logEnvironment: 0

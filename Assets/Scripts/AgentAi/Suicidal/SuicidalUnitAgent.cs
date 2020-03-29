@@ -158,6 +158,14 @@ namespace AgentAi.Suicidal
 
         private float GetCurrentDistanceFromTarget()
         {
+            return config.UseNavMeshForApproachReward
+                ? CalculateDistanceWithNavMesh()
+                : CalculateDistanceWithManhattanDistance();
+        }
+
+
+        private float CalculateDistanceWithNavMesh()
+        {
             // some default distance to a avoid bumping the reward to infinity when we can't find a path
             const float defaultDistance = 10f;
             var path = new NavMeshPath();
@@ -173,6 +181,11 @@ namespace AgentAi.Suicidal
                 distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
 
             return distance;
+        }
+
+        private float CalculateDistanceWithManhattanDistance()
+        {
+            return Vector3.Distance(playerInstanceTracker.Player.transform.position, transform.position);
         }
 
         private static int PlayerInputToMachineInput(float input)

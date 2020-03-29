@@ -1,0 +1,11 @@
+SUCCESSOR OF RECORD-5-3
+
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- use constant learning rate as an attempt to 
+    mitigate what's happening towards end of training on 5-3 where rewards become extremely unstable.
+- DOES NOT use navmesh agent
+- not using demos
+
+

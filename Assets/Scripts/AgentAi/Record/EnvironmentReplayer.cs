@@ -27,6 +27,7 @@ namespace AgentAi.Record
         [SerializeField] private EnemyAgentObservationConfig agentObservationConfig;
         [SerializeField] private int currentRound;
         [SerializeField] private EnvironmentToTextureService environmentToTextureService;
+        [SerializeField] private bool markCentreWithMagenta;
 
         [SerializeField] private string recordName;
         [Range(1, 10)] [SerializeField] private float scale;
@@ -118,6 +119,12 @@ namespace AgentAi.Record
                         -envInfo.ObserverYEuler,
                         agentObservationConfig.DrawingConfig.CategoryAndColors[InterestCategory.NullArea]
                     );
+                
+                if (markCentreWithMagenta)
+                {
+                    _finalTexture.SetPixel(_finalTexture.width / 2, _finalTexture.height / 2, Color.magenta);
+                    _finalTexture.Apply();
+                }
                 GUI.DrawTexture(
                     new Rect(
                         Screen.width - _finalTexture.width * scale,
