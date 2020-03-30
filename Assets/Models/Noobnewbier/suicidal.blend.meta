@@ -55,6 +55,7 @@ ModelImporter:
     100098: ShieldSupport.002
     100100: ShieldSupport.003
     100102: //RootNode
+    100104: Head
     400000: Eyes
     400002: HorizontalJoint
     400004: HorizontalJoint.001
@@ -107,6 +108,7 @@ ModelImporter:
     400098: ShieldSupport.002
     400100: ShieldSupport.003
     400102: //RootNode
+    400104: Head
     2100000: HeadMaterial
     2100002: BlackMaterial
     2100004: RedMaterial
@@ -158,6 +160,7 @@ ModelImporter:
     2300090: ShieldSupport.002
     2300092: ShieldSupport.003
     2300094: //RootNode
+    2300096: Head
     3300000: Eyes
     3300002: HorizontalJoint
     3300004: HorizontalJoint.001
@@ -206,6 +209,7 @@ ModelImporter:
     3300090: ShieldSupport.002
     3300092: ShieldSupport.003
     3300094: //RootNode
+    3300096: Head
     4300000: Head
     4300002: LegBase
     4300004: HorizontalJoint

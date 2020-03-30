@@ -7,7 +7,7 @@ using Elements.Units.UnitCommon;
 using Rules;
 using UnityEngine;
 
-namespace Elements.Units.Enemies
+namespace Elements.Units.Enemies.Suicidal
 {
     //enemy that touches you and explode, deals damage and destruct itself
     public class SuicidalEnemy : Enemy

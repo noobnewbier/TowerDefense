@@ -7,7 +7,7 @@ using EventManagement.Providers;
 using Experimental;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.HierarchyDeprecated.TargetPicker
+namespace AgentAi.Suicidal.TargetProviders
 {
     public class TargetMarker : MonoBehaviour, IDynamicObjectOfInterest
     {
