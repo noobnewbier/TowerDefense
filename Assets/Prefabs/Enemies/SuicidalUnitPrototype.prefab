@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 3704630309950303712}
   - component: {fileID: 7871425984914379380}
   m_Layer: 11
-  m_Name: SuicidalUnit
+  m_Name: SuicidalUnitPrototype
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1796066640381811506}
   - component: {fileID: 1209074146708491867}
   - component: {fileID: 77879915150135956}
+  - component: {fileID: 1055374335180496570}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -352,10 +353,23 @@ MonoBehaviour:
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   observationServiceProvider: {fileID: 1209074146708491867}
-  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
-    type: 2}
+  targetProvider: {fileID: 1055374335180496570}
   unit: {fileID: 3254465578691183710}
   unitProvider: {fileID: 3704630309950303712}
+--- !u!114 &1055374335180496570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916674236602675019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b474d7985394e9a9da2c7f64c8c5aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+    type: 2}
 --- !u!1 &8297780213500903645
 GameObject:
   m_ObjectHideFlags: 0

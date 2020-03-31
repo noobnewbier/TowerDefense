@@ -14,7 +14,7 @@ namespace AgentAi.Suicidal.TargetProviders
         private IEventAggregator _eventAggregator;
 
         [SerializeField] private EventAggregatorProvider eventAggregatorProvider;
-        [Range(1, 10)] [SerializeField] private float size;
+        [Range(0.001f, 10)] [SerializeField] private float size;
         private Bounds Bounds => new Bounds(transform.position, new Vector3(size, size, size));
 
         public InterestedInformation InterestedInformation =>
