@@ -5,7 +5,25 @@ Greyscale color observation,
 - use texture translation
 - use constant learning rate as an attempt to 
     mitigate what's happening towards end of training on 5-3 where rewards become extremely unstable.
+- use Obstacle Avoidance First Training Scene
 - DOES NOT use navmesh agent
 - not using demos
 
 
+Results:
+- Abysmal performance, only demonstrate tendency on approaching target, without regards on obstacle
+
+
+IMPORTANT:
+---
+Curricula used in 10:
+{
+    "measure" : "reward",
+    "thresholds" : [7.0, 10.0, 12.0],
+    "min_lesson_length": 100,
+    "signal_smoothing" : true, 
+    "parameters" : 
+    {
+        "level" : [0.0, 1.0, 2.0, 3.0]
+    }
+}

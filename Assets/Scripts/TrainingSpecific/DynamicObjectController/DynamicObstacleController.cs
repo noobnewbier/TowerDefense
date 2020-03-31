@@ -14,6 +14,7 @@ namespace TrainingSpecific.DynamicObjectController
         protected override void PrepareObjectForTraining()
         {
             var controlledTransform = controlledGameObject.transform;
+            controlledGameObject.SetActive(true);
             
             do
             {
@@ -25,6 +26,12 @@ namespace TrainingSpecific.DynamicObjectController
                 controlledTransform.rotation,
                 controlledGameObject
             ));
+        }
+
+        protected override void CleanUpObjectForTraining()
+        {
+            base.CleanUpObjectForTraining();
+            controlledGameObject.SetActive(false);
         }
     }
 }

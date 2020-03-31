@@ -1,0 +1,13 @@
+SUCCESSOR OF RECORD-5-3
+
+Aim:
+- Analyze why changing target size in curricula helps / not helps training
+
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- use constant learning rate as an attempt to 
+    mitigate what's happening towards end of training on 5-3 where rewards become extremely unstable.
+
+
+Results:

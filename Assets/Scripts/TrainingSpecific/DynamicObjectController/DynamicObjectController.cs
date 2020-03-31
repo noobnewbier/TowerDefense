@@ -9,17 +9,27 @@ namespace TrainingSpecific.DynamicObjectController
         [FormerlySerializedAs("activityProvider")] [SerializeField]
         private BooleanProvider booleanProvider;
 
-        [FormerlySerializedAs("controllerGameObject")] [FormerlySerializedAs("dynamicObstacle")] [SerializeField] protected GameObject controlledGameObject;
-        
+        [FormerlySerializedAs("controllerGameObject")] [FormerlySerializedAs("dynamicObstacle")] [SerializeField]
+        protected GameObject controlledGameObject;
+
         protected abstract void PrepareObjectForTraining();
+
+        protected virtual void CleanUpObjectForTraining()
+        {
+            //do nothing
+        }
+
         public void TryPrepareObjectForTrainingIfActive()
         {
             var isActive = booleanProvider.ProvideBoolean();
-            controlledGameObject.gameObject.SetActive(isActive);
 
             if (isActive)
             {
                 PrepareObjectForTraining();
+            }
+            else
+            {
+                CleanUpObjectForTraining();
             }
         }
     }
