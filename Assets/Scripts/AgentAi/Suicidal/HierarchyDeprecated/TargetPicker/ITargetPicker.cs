@@ -1,7 +1,7 @@
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using EventManagement;
 
-namespace AgentAi.Suicidal.Hierarchy.TargetPicker
+namespace AgentAi.Suicidal.HierarchyDeprecated.TargetPicker
 {
     public interface ITargetPicker : IHandle<FinishPathingEvent>, IHandle<RequestNewTargetEvent>
     {

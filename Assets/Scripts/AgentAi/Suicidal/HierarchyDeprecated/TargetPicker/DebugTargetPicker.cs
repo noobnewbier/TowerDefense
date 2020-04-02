@@ -1,12 +1,11 @@
 using AgentAi.Manager;
-using AgentAi.Suicidal.Hierarchy.Event;
-using AgentAi.Suicidal.HierarchyDeprecated.TargetPicker;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using Experimental;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.TargetPicker
+namespace AgentAi.Suicidal.HierarchyDeprecated.TargetPicker
 {
     public class DebugTargetPicker : MonoBehaviour, ITargetPicker, ICanObserveEnvironment
     {

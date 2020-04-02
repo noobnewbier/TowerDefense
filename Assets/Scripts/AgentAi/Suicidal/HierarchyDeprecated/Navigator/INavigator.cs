@@ -1,7 +1,7 @@
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using EventManagement;
 
-namespace AgentAi.Suicidal.Hierarchy.Navigator
+namespace AgentAi.Suicidal.HierarchyDeprecated.Navigator
 {
     public interface INavigator : IHandle<NewTargetIssuedEvent>
     {

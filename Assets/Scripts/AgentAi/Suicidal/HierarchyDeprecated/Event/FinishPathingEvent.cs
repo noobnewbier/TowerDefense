@@ -1,4 +1,4 @@
-namespace AgentAi.Suicidal.Hierarchy.Event
+namespace AgentAi.Suicidal.HierarchyDeprecated.Event
 {
     public struct FinishPathingEvent
     {

@@ -1,7 +1,7 @@
 using System;
 using AgentAi.Manager;
-using AgentAi.Suicidal.Hierarchy.Config;
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Configs;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
@@ -14,7 +14,7 @@ using UnityEngine.Serialization;
 using UnityUtils;
 using UnityUtils.Timers;
 
-namespace AgentAi.Suicidal.Hierarchy.Navigator
+namespace AgentAi.Suicidal.HierarchyDeprecated.Navigator
 {
     public class SuicidalWalkStraightLineAgent : Agent, ICanObserveEnvironment, INavigator
     {

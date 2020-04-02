@@ -1,7 +1,7 @@
 using Common.Interface;
 using JetBrains.Annotations;
 
-namespace AgentAi.Suicidal.Hierarchy.Event
+namespace AgentAi.Suicidal.HierarchyDeprecated.Event
 {
     public class NewTargetIssuedEvent
     {

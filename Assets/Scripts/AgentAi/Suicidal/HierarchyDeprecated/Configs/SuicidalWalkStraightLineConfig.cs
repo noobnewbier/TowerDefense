@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.Config
+namespace AgentAi.Suicidal.HierarchyDeprecated.Configs
 {
     [CreateAssetMenu(menuName = "AIConfig/WalkStraightLineConfig")]
     public class SuicidalWalkStraightLineConfig : ScriptableObject

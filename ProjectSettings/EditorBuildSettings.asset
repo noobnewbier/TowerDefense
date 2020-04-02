@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/HierarrchyTrainingScene.unity
     guid: 568d142110eeb5b499d1d42bda4cba33
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ObstacleAvoidanceFirstTrainingScene.unity
     guid: c3994392a87e9d04c959539330aaa43e
+  - enabled: 1
+    path: Assets/Scenes/ObstacleAvoidanceFirstNoTargetSizeChangeTrainingScene.unity
+    guid: 1808c26c049032645ba7536caa71a1d6
   m_configObjects: {}

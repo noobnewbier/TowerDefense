@@ -1,10 +1,10 @@
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using EventManagement;
 using Experimental;
 using TrainingSpecific.Events;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy
+namespace AgentAi.Suicidal.HierarchyDeprecated
 {
     public class AgentStatusTracker : MonoBehaviour, IHandle<SubAgentSpawnedEvent>, IHandle<SubAgentDoneEvent>
     {

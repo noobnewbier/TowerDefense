@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityUtils;
 using UnityUtils.BooleanProviders;
 
-namespace AgentAi.Suicidal.Hierarchy
+namespace AgentAi.Suicidal.HierarchyDeprecated
 {
     public class CollidingWithObstacleChecker : BooleanProvider, ICollisionEnterDelegate, ICollisionExitDelegate
     {

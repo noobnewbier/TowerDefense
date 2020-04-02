@@ -1,5 +1,4 @@
-using AgentAi.Suicidal.Hierarchy.Event;
-using AgentAi.Suicidal.Hierarchy.TargetPicker;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using AgentAi.Suicidal.HierarchyDeprecated.TargetPicker;
 using Common.Constant;
 using Common.Interface;
@@ -8,7 +7,7 @@ using EventManagement;
 using Experimental;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.Navigator
+namespace AgentAi.Suicidal.HierarchyDeprecated.Navigator
 {
     /// <summary>
     ///     Used to train with <see cref="SuicidalUnitRoutePlannerAgent" />

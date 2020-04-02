@@ -1,10 +1,10 @@
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using EventManagement;
 using Experimental;
 using ScriptableService;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.TargetPicker
+namespace AgentAi.Suicidal.HierarchyDeprecated.TargetPicker
 {
     public class PlayerPicker : MonoBehaviour, ITargetPicker
     {

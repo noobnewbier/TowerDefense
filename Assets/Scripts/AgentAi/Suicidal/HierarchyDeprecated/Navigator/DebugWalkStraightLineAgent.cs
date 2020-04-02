@@ -1,5 +1,4 @@
-using AgentAi.Suicidal.Hierarchy.Event;
-using AgentAi.Suicidal.Hierarchy.Navigator;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using Common.Constant;
 using Common.Interface;
 using Elements.Units.UnitCommon;
