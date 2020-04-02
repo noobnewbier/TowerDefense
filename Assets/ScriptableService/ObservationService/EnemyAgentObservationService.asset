@@ -19,6 +19,6 @@ MonoBehaviour:
     type: 2}
   eventAggregatorProvider: {fileID: 11400000, guid: ec19b57b81379e54bb60745ea49cb7c3,
     type: 2}
-  logEnvironment: 1
+  logEnvironment: 0
   objectsOfInterestTracker: {fileID: 11400000, guid: d12ddd9211b820a4fadbfda14ce48eda,
     type: 2}
