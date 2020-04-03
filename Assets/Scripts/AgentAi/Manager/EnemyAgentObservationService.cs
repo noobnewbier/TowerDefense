@@ -45,7 +45,7 @@ namespace AgentAi.Manager
         public void Handle(GameStartEvent @event)
         {
             SetupTextures();
-            if (logEnvironment) environmentRecorder.CreateNewRecord();
+            if (logEnvironment) environmentRecorder.CreateNewRecord(config.ConfigName);
         }
 
         public void Handle(WaveEndEvent @event)

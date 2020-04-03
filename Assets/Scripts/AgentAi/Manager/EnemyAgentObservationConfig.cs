@@ -12,6 +12,10 @@ namespace AgentAi.Manager
         [SerializeField] private bool useTextureRotation;
         [SerializeField] private bool useTranslation;
         [SerializeField] private EnvironmentDrawConfig drawingConfig;
+        [SerializeField] private string configName;
+
+        public string ConfigName => configName;
+
 
         public EnvironmentDrawConfig DrawingConfig => drawingConfig;
         public int MapDimension => mapDimension;

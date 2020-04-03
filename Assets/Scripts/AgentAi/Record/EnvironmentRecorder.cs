@@ -20,7 +20,7 @@ namespace AgentAi.Record
         private StaticEnvironmentData _staticDynamicEnvironmentInfo;
         [Range(1, 100)] [SerializeField] private int recordFrequency;
 
-        [SerializeField] private string recordName;
+        private string recordName;
         public static string BasePath =>
 #if UNITY_EDITOR
             $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}{EnvironmentDirectoryNamePrefix}{Path.DirectorySeparatorChar}";
@@ -70,8 +70,9 @@ namespace AgentAi.Record
             );
         }
 
-        public void CreateNewRecord()
+        public void CreateNewRecord(string newRecordName)
         {
+            recordName = newRecordName;
             InitRecordPath();
             Directory.CreateDirectory(_path);
         }

@@ -1,0 +1,25 @@
+SUCCESSOR OF 5-3
+
+Greyscale color observation, 
+- use texture rotation
+- use texture translation
+- not using demos
+- use ObstacleAvoidanceFirstTrainingInRectScene, as an attempt to test and see if the circular heat map indicates a problem that hinders training.
+
+
+RESULTS:
+
+
+IMPORTANT:
+---
+Curricula used in 5-3:
+{
+    "measure" : "reward",
+    "thresholds" : [7.0, 10.0, 12.0],
+    "min_lesson_length": 100,
+    "signal_smoothing" : true, 
+    "parameters" : 
+    {
+        "level" : [0.0, 1.0, 2.0, 3.0]
+    }
+}

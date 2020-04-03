@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ObstacleAvoidanceFirstTrainingScene.unity
     guid: c3994392a87e9d04c959539330aaa43e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ObstacleAvoidanceFirstNoTargetSizeChangeTrainingScene.unity
     guid: 1808c26c049032645ba7536caa71a1d6
+  - enabled: 1
+    path: Assets/Scenes/ObstacleAvoidanceFirstTrainingInRectScene.unity
+    guid: 328de9e5ab61cc54c8924d400f18a3f6
   m_configObjects: {}

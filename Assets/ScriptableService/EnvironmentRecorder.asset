@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: EnvironmentRecorder
   m_EditorClassIdentifier: 
   recordFrequency: 5
-  recordName: record-11
