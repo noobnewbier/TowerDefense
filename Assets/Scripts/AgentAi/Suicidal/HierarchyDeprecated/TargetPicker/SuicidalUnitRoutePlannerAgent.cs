@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using AgentAi.Manager;
-using AgentAi.Suicidal.Hierarchy.Configs;
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Configs;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using AgentAi.Suicidal.TargetProviders;
 using Common.Enum;
 using Common.Event;

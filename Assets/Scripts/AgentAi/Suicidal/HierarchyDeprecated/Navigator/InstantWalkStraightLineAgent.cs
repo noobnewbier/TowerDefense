@@ -1,4 +1,4 @@
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using AgentAi.Suicidal.HierarchyDeprecated.TargetPicker;
 using Common.Constant;
 using Common.Interface;
@@ -8,12 +8,13 @@ using EventManagement.Providers;
 using Experimental;
 using UnityEngine;
 
-namespace AgentAi.Suicidal.Hierarchy.Navigator
+namespace AgentAi.Suicidal.HierarchyDeprecated.Navigator
 {
     /// <summary>
     ///     Used to train with <see cref="SuicidalUnitRoutePlannerAgent" />
     /// </summary>
     public class InstantWalkStraightLineAgent : MonoBehaviour, INavigator
+    
     {
         private IEventAggregator _localEventAggregator;
         private LayerMask _obstacleLayerMask;

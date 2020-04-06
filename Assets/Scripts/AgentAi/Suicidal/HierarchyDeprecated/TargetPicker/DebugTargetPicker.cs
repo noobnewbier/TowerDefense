@@ -1,5 +1,5 @@
 using AgentAi.Manager;
-using AgentAi.Suicidal.Hierarchy.Event;
+using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using AgentAi.Suicidal.TargetProviders;
 using Elements.Units.UnitCommon;
 using EventManagement;
