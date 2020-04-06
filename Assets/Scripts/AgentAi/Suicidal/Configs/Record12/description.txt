@@ -8,11 +8,12 @@ Greyscale color observation,
 
 
 RESULTS:
-
-
+- Learned both Obstacle Avoidance and Target Approaching, however it is not learning "enough". The result overall is not satisfactory.
+- see heat map for weird plot.
+- Decided to do re-run it, speculating this as the result of randomness. 
 IMPORTANT:
 ---
-Curricula used in 5-3:
+Curricula used in record-12:
 {
     "measure" : "reward",
     "thresholds" : [7.0, 10.0, 12.0],
