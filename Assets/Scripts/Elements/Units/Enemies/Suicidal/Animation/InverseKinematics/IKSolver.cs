@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
 {
@@ -7,36 +9,29 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
     public class IKSolver : MonoBehaviour
     {
         private float[] _angles;
-        [SerializeField] private float distanceThreshold;
-        [SerializeField] private Joint[] joints;
-        [SerializeField] private float learningRate;
-        [SerializeField] private float samplingDistance;
-        [SerializeField] private float undergroundPenalty;
+        [SerializeField] private IKConfig config;
+
+        [SerializeField] private FKCache fkCache;
+
+        [FormerlySerializedAs("ikJoints")] [SerializeField]
+        private Joint[] joints;
+
+        [SerializeField] private Transform rootTransform;
+
 
         private void OnEnable()
         {
             _angles = new float[joints.Length];
         }
 
-        private Vector3 ForwardKinematics(IReadOnlyList<float> angles)
+        private void Start()
         {
-            var prevPoint = joints[0].transform.position;
-            var rotation = Quaternion.identity;
-            for (var i = 1; i < joints.Length; i++)
-            {
-                // Rotates around a new axis
-                rotation *= Quaternion.AngleAxis(angles[i - 1], joints[i - 1].Axis);
-                var nextPoint = prevPoint + rotation * joints[i].StartOffset;
-
-                prevPoint = nextPoint;
-            }
-
-            return prevPoint;
+            fkCache.CreateCache(rootTransform, config, joints);
         }
 
         public void InverseKinematics(Vector3 target)
         {
-            if (CostFromTarget(target, _angles) < distanceThreshold)
+            if (CostFromTarget(target, _angles) < config.DistanceThreshold)
                 return;
 
             for (var i = 0; i < joints.Length; i++)
@@ -44,14 +39,14 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
                 // Gradient descent
                 // Update : Solution -= LearningRate * Gradient
                 var gradient = PartialGradient(target, _angles, i);
-                var newAngle = _angles[i] - learningRate * gradient;
+                var newAngle = _angles[i] - config.LearningRate * gradient;
                 newAngle = Mathf.Clamp(newAngle, joints[i].MinAngle, joints[i].MaxAngle);
                 newAngle = float.IsNaN(newAngle) ? _angles[i] : newAngle;
 
                 _angles[i] = newAngle;
 
                 // Early termination, todo: do we really need this?
-                if (CostFromTarget(target, _angles) < distanceThreshold)
+                if (CostFromTarget(target, _angles) < config.DistanceThreshold)
                     return;
             }
 
@@ -77,23 +72,22 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
             // Gradient : [F(x+SamplingDistance) - F(x)] / h
             var fX = CostFromTarget(target, angles);
 
-            angles[i] += samplingDistance;
+            angles[i] += config.SamplingDistance;
             var fXPlusD = CostFromTarget(target, angles);
 
-            var gradient = (fXPlusD - fX) / samplingDistance;
+            var gradient = (fXPlusD - fX) / config.SamplingDistance;
 
             // Restores
             angles[i] = angle;
 
-            Debug.Log(gradient);
             return gradient;
         }
 
         private float CostFromTarget(Vector3 target, IReadOnlyList<float> angles)
         {
-            var point = ForwardKinematics(angles);
+            var point = IKUtils.ForwardKinematics(angles, joints);
             var distance = Vector3.Distance(point, target);
-            var isUnderGroundPenalty = Mathf.Max(0, -point.y) * undergroundPenalty;
+            var isUnderGroundPenalty = Mathf.Max(0, -point.y) * config.UndergroundPenalty;
             return distance + isUnderGroundPenalty;
         }
     }
