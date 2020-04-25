@@ -487,3 +487,4 @@ Assets/ml-agents/config/summaries/**
 Assets/ml-agents/config/models/**
 VirtualEnvironment/
 EnvironmentRecords/**
+DebugTextures/**
