@@ -32,19 +32,15 @@ namespace AgentAi.Record
         [SerializeField] private string recordName;
         [Range(1, 10)] [SerializeField] private float scale;
         [SerializeField] private int step;
-        private string BasePath => EnvironmentRecorder.BasePath + recordName + Path.DirectorySeparatorChar;
-
+        [SerializeField] private PathExporter pathExporter;
+        [SerializeField] private RecordRepository recordRepository;
 
         [ContextMenu("DisplayCurrentRound")]
         private void DisplayCurrentRound()
         {
             ResetFields();
             _showTexture = true;
-
-            var fileContents = File.ReadAllBytes(BasePath + currentRound + ".rcd");
-
-
-            _currentRoundData = JsonUtility.FromJson<RoundData>(Compression.Unzip(fileContents));
+            _currentRoundData = recordRepository.GetRoundData(recordName, currentRound);
 
             environmentToTextureService.DrawObjectsOnTexture(
                 _terrainTexture,
@@ -58,7 +54,13 @@ namespace AgentAi.Record
             );
         }
 
-
+        [ContextMenu("ExportPath")]
+        private void ExportPath()
+        {
+            var roundData = recordRepository.GetRoundData(recordName, currentRound);
+            pathExporter.ExportPath(roundData);
+        }
+        
         private void ResetFields()
         {
             _drawConfig = agentObservationConfig.DrawingConfig;

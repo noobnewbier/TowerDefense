@@ -2,6 +2,7 @@ using AgentAi.Manager;
 using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using EventManagement.Providers;
 using Experimental;
 using UnityEngine;
 

@@ -5,6 +5,7 @@ using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using Common.Interface;
 using Elements.Units.UnitCommon;
 using EventManagement;
+using EventManagement.Providers;
 using Experimental;
 using JetBrains.Annotations;
 using MLAgents;

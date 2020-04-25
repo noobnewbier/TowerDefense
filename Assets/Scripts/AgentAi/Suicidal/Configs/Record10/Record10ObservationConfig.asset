@@ -17,3 +17,4 @@ MonoBehaviour:
   useTextureRotation: 1
   useTranslation: 1
   drawingConfig: {fileID: 11400000, guid: c72e293a69c22ec4480b480192e96c54, type: 2}
+  configName: record-10

@@ -9,6 +9,7 @@ namespace ProjectSpecificUtils
 {
     public class ObservedTextureDisplayer : MonoBehaviour, IHandle<GameStartEvent>, IHandle<IDynamicObjectSpawnedEvent>
     {
+        private Texture2D _currentTexture;
         private IEventAggregator _eventAggregator;
 
         private float _timer;
@@ -21,6 +22,7 @@ namespace ProjectSpecificUtils
         [SerializeField] private float observeFrequency;
         [SerializeField] [Range(1, 100)] private float scale;
         [SerializeField] private bool startedObserving;
+        [SerializeField] private TextureSavingService textureSavingService;
 
 
         public void Handle(GameStartEvent @event)
@@ -48,6 +50,12 @@ namespace ProjectSpecificUtils
             _eventAggregator.Unsubscribe(this);
         }
 
+        [ContextMenu("SaveDisplayedTexture")]
+        private void SaveDisplayedTexture()
+        {
+            textureSavingService.SaveTexture(_currentTexture, "displayedTexture");
+        }
+
         private void OnGUI()
         {
             if (startedObserving)
@@ -61,16 +69,21 @@ namespace ProjectSpecificUtils
 
                 _timer = 0f;
 
-                var texture = canObserve.GetObservation();
+                _currentTexture = canObserve.GetObservation();
                 if (markCentreWithMagenta)
                 {
-                    texture.SetPixel(texture.width / 2, texture.height / 2, Color.magenta);
-                    texture.Apply();
+                    _currentTexture.SetPixel(_currentTexture.width / 2, _currentTexture.height / 2, Color.magenta);
+                    _currentTexture.Apply();
                 }
 
                 GUI.DrawTexture(
-                    new Rect(Screen.width - texture.width * scale, 0f, texture.width * scale, texture.height * scale),
-                    texture
+                    new Rect(
+                        Screen.width - _currentTexture.width * scale,
+                        0f,
+                        _currentTexture.width * scale,
+                        _currentTexture.height * scale
+                    ),
+                    _currentTexture
                 );
             }
         }

@@ -4,6 +4,7 @@ Greyscale color observation,
 - use texture rotation
 - use texture translation
 - not using demos
+- *use constant learning rate
 - use ObstacleAvoidanceFirstTrainingInRectScene, as an attempt to test and see if the circular heat map indicates a problem that hinders training.
 
 

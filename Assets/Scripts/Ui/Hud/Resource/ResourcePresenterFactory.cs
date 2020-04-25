@@ -1,5 +1,6 @@
 using Experimental;
 using UnityEngine;
+using UnityUtils.ScriptableReference;
 
 namespace Ui.Hud.Resource
 {

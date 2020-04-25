@@ -96,8 +96,14 @@ namespace AgentAi.Suicidal
             var yAction = IsInValidInput(vectorAction[0]) ? 0 : (int) vectorAction[0];
             var xAction = IsInValidInput(vectorAction[1]) ? 0 : (int) vectorAction[1];
 
-            inputService.UpdateVertical(MachineInputToAction(yAction));
-            inputService.UpdateHorizontal(MachineInputToAction(xAction));
+            if (!config.UseContinuousOutput)
+            {
+                yAction = MachineInputToAction(yAction);
+                xAction = MachineInputToAction(xAction);
+            }
+
+            inputService.UpdateVertical(yAction);
+            inputService.UpdateHorizontal(xAction);
             PunishRoaming();
             EncourageApproachingTarget();
         }

@@ -12,7 +12,9 @@ namespace AgentAi.Suicidal
         [SerializeField] private float selfDestructionReward;
         [SerializeField] private bool useVectorRotation;
         [SerializeField] private bool useNavMeshForApproachReward = true;
+        [SerializeField] private bool useContinuousOutput;
 
+        public bool UseContinuousOutput => useContinuousOutput;
         public bool UseNavMeshForApproachReward => useNavMeshForApproachReward;
         public float RoamingPunishment => roamingPunishment;
         public bool UseVectorRotation => useVectorRotation;

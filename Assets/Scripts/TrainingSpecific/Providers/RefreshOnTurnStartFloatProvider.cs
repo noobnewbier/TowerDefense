@@ -1,4 +1,5 @@
 using EventManagement;
+using EventManagement.Providers;
 using Experimental;
 using TrainingSpecific.Events;
 using UnityEngine;

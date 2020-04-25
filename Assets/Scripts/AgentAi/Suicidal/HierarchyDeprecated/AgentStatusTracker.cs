@@ -1,5 +1,6 @@
 using AgentAi.Suicidal.HierarchyDeprecated.Event;
 using EventManagement;
+using EventManagement.Providers;
 using Experimental;
 using TrainingSpecific.Events;
 using UnityEngine;

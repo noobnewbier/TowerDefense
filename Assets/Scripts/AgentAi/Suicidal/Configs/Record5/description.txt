@@ -11,7 +11,7 @@ vel config changes
 RESULTS:
 - somehow learned to avoid obstacles on level 4, but forget how to approach target in a straight line
 - ON SECOND RUN (Record-5-2), it successfully learned obstacle avoidance
-- We used the same config for the third run(Record-5-3), with a different curriculum where we never trained with straightline only until stage 4, see ObstacleAvoidanceFirstTrainingScene, result is similar to second run
+- We used the same config for the third run(Record-5-3), with a different curriculum where we never trained with straight line only until stage 4, see ObstacleAvoidanceFirstTrainingScene, result is similar to second run
     Performing slightly worse comparing with 5-2, demonstrate a slightly higher tendency on circling obstacle 
 
 
@@ -28,3 +28,6 @@ Curricula used in 5-3:
         "level" : [0.0, 1.0, 2.0, 3.0]
     }
 }
+
+
+Decided to compare stability with obstacle first training, run each 5 times, each with 2m episodes. Compare average performance.

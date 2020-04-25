@@ -11,7 +11,10 @@ Greyscale color observation,
 
 
 Results:
+- "decent" performance, slightly worse comparing to 5-3.
+- need to retest with linear learning because you were a moron, it's known as record-11-2
 
+- with linear learning rate it is significantly worst.
 
 
 IMPORTANT

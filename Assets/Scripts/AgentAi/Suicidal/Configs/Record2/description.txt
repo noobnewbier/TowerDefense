@@ -2,3 +2,8 @@ Similarity color observation,
 - use texture rotation
 - use texture translation
 - not using demos
+
+
+RESULTS:
+1. on first run you accidentally fked it up by not restarting with correct lesson
+2. real run is known as record-2-1(Sob)

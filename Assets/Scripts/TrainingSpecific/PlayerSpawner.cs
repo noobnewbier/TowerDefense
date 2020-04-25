@@ -18,7 +18,6 @@ namespace TrainingSpecific
         // need to be length of threshold in curriculum + 1
         [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private LocationProvider spawnPoint;
-
         [SerializeField] private SpawnPointValidator spawnPointValidator;
 
         public void Handle(SpawnPlayerEvent @event)

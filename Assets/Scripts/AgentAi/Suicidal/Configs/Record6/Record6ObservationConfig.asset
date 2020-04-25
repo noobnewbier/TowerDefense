@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a6c3deffb84554bb69c98c7c552f20, type: 3}
   m_Name: Record6ObservationConfig
   m_EditorClassIdentifier: 
-  grayScale: 1
   mapDimension: 50
   precision: 1
   useTextureRotation: 1
   useTranslation: 1
+  drawingConfig: {fileID: 0}
+  configName: record-6

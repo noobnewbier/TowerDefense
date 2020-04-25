@@ -1,4 +1,4 @@
-using Experimental;
+using UnityUtils.ScriptableReference;
 
 namespace Ui.Hud.Resource
 {
@@ -9,8 +9,8 @@ namespace Ui.Hud.Resource
 
     public class ResourcePresenter : IResourcePresenter
     {
-        private readonly IResourceView _view;
         private readonly RuntimeFloat _resourceFloat;
+        private readonly IResourceView _view;
 
         public ResourcePresenter(IResourceView view, RuntimeFloat resourceFloat)
         {

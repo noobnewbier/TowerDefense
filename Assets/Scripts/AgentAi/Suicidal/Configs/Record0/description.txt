@@ -1,5 +1,6 @@
 Similarity color observation, 
 - use vector rotation
+- use explicit branch size
 - not using demos
 
 Stuck at stage 0

@@ -2,6 +2,8 @@ using Common.Enum;
 using Common.Event;
 using Common.Interface;
 using Common.Struct;
+using EventManagement;
+using EventManagement.Providers;
 using Experimental;
 using UnityEngine;
 using UnityEngine.Serialization;
