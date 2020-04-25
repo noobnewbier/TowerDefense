@@ -1,3 +1,4 @@
+using System;
 using System.IO.Abstractions;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -86,6 +87,14 @@ namespace MLAgents
         /// Closes Demonstration store.
         /// </summary>
         void OnApplicationQuit()
+        {
+            if (Application.isEditor && record)
+            {
+                Close();
+            }
+        }
+
+        private void OnDestroy()
         {
             if (Application.isEditor && record)
             {

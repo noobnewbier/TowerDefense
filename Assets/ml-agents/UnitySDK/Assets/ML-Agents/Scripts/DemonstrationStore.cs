@@ -111,8 +111,6 @@ namespace MLAgents
         /// </summary>
         public void Close()
         {
-            EndEpisode();
-            m_MetaData.meanReward = m_CumulativeReward / m_MetaData.numberEpisodes;
             WriteMetadata();
             m_Writer.Close();
         }
@@ -123,6 +121,7 @@ namespace MLAgents
         void EndEpisode()
         {
             m_MetaData.numberEpisodes += 1;
+            m_MetaData.meanReward = m_CumulativeReward / m_MetaData.numberEpisodes;
         }
 
         /// <summary>
