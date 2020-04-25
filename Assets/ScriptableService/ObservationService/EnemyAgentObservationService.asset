@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e8c13d4aa9440bb0125afbd3870c73, type: 3}
   m_Name: EnemyAgentObservationService
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 42cf775fbfded5945bf69f95d2fe1a50, type: 2}
+  config: {fileID: 11400000, guid: 199a0dc40e03ba24ab89a36aa1a52ce1, type: 2}
   environmentRecorder: {fileID: 11400000, guid: 9facdab84a3fc4c488574be66e4ef61d,
     type: 2}
   environmentToTextureService: {fileID: 11400000, guid: d8e476ba9338c3f438cdc394f522ec79,

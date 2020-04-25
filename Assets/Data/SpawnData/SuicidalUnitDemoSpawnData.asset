@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SuicidalUnitDemoSpawnData
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 3835543145750154928, guid: f59920fa513dbe5418dcf94b8f1e8274, type: 3}
+  - {fileID: 3029494369729719376, guid: f59920fa513dbe5418dcf94b8f1e8274, type: 3}
   spawnInterval: 0
   totalNumberOfEnemies: 1

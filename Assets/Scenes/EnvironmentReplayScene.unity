@@ -292,15 +292,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6b34f22209483aa6a29d8679ef229c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentObservationConfig: {fileID: 11400000, guid: 57c33dc4c1153f94cb0c66a3a99b8e19,
+  agentObservationConfig: {fileID: 11400000, guid: 68bde4f3fd22e1043a6c516289558e65,
     type: 2}
   currentRound: 0
   environmentToTextureService: {fileID: 11400000, guid: d8e476ba9338c3f438cdc394f522ec79,
     type: 2}
-  markCentreWithMagenta: 1
-  recordName: record-5-3-0whb-tJQ5r-WHFmadj4gc-0
+  markCentreWithMagenta: 0
+  recordName: record-11-2-r1-failed
   scale: 4
   step: 0
+  pathExporter: {fileID: 11400000, guid: de9a43dac45c9874ab30010a5225604c, type: 2}
+  recordRepository: {fileID: 11400000, guid: c02271f4a4005134ab42732f241a595c, type: 2}
 --- !u!4 &1278035824
 Transform:
   m_ObjectHideFlags: 0

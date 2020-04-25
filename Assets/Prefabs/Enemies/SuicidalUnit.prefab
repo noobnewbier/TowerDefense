@@ -303,7 +303,7 @@ MonoBehaviour:
   m_BehaviorType: 0
   m_BehaviorName: Suicide
   m_TeamID: 0
-  m_useChildSensors: 0
+  m_useChildSensors: 1
 --- !u!114 &1796066640381811506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 3
-  config: {fileID: 11400000, guid: 1b10bf3f6231b42428275fa3fc8debf2, type: 2}
+  config: {fileID: 11400000, guid: 32707846aff4606488158635f9985918, type: 2}
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   observationServiceProvider: {fileID: 1209074146708491867}
