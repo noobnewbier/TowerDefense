@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147fa030fce149aabeb2fa62c9376fc7, type: 3}
+  m_Name: PathExporter
+  m_EditorClassIdentifier: 
+  agentObservationConfig: {fileID: 11400000, guid: 57c33dc4c1153f94cb0c66a3a99b8e19,
+    type: 2}
+  drawConfig: {fileID: 11400000, guid: 7b6355718292f5d43ba5684fb7f24d59, type: 2}
+  environmentToTextureService: {fileID: 11400000, guid: d8e476ba9338c3f438cdc394f522ec79,
+    type: 2}
+  pathColor: {r: 1, g: 0, b: 0, a: 1}
+  startingPointColor: {r: 1, g: 1, b: 1, a: 1}
+  textureSavingService: {fileID: 11400000, guid: 7fdee9ff07144b149a5edfa46d21ac01,
+    type: 2}
