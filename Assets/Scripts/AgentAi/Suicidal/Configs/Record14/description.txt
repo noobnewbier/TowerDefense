@@ -1,0 +1,4 @@
+SUCCESSOR OF 5-3
+- attempt to use GAIL for better convergence with our new curriculum
+
+RESULTS:

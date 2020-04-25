@@ -1,0 +1,8 @@
+Similarity color observation, 
+- use vector rotation
+- use cont output
+- not using demos
+
+Stuck at stage 0
+
+I think it's bad because of result of cont output

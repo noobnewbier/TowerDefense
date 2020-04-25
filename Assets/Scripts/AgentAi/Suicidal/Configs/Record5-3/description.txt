@@ -1,0 +1,20 @@
+This is literally record-5-3, we just made a copy of it for better logging.
+
+Essentially this use ObstacleAvoidanceFirstTrainingScene. AND out performing record-5 significantly
+
+IMPORTANT:
+---
+Curricula used in 5-3:
+{
+    "measure" : "reward",
+    "thresholds" : [7.0, 10.0, 12.0],
+    "min_lesson_length": 100,
+    "signal_smoothing" : true, 
+    "parameters" : 
+    {
+        "level" : [0.0, 1.0, 2.0, 3.0]
+    }
+}
+
+
+Decided to compare stability with obstacle first training, run each 5 times, each with 2m episodes. Compare average performance.
