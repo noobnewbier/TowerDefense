@@ -1,0 +1,6 @@
+SUCCESSOR OF 5-3
+- attempt to solve circling behaviours, by skipping the initial settings
+- curricula = SuicideObstacleStartWithFinalSettings
+
+RESULTS:
+- performs significantly better than record5-3.
