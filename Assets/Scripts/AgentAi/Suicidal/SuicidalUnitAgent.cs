@@ -20,7 +20,7 @@ using UnityUtils;
 namespace AgentAi.Suicidal
 {
     //todo: consider refactoring, it feels like this is doing too much. Consider outsourcing reward calculation
-    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, ICanObserveEnvironment, ICollisionStayDelegate
+    public class SuicidalUnitAgent : Agent, IHandle<EnemyDeadEvent>, IHandle<UnitHealthChangedEvent>, ICanObserveEnvironment, ICollisionStayDelegate
     {
         private IEventAggregator _eventAggregator;
         private IObserveEnvironmentService _observeEnvironmentService;
@@ -31,9 +31,7 @@ namespace AgentAi.Suicidal
         [SerializeField] private AiMovementInputService inputService;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private ObservationServiceProvider observationServiceProvider;
-
         [SerializeField] private PlayerInstanceTracker playerInstanceTracker;
-
         [SerializeField] private SuicidalEnemy unit;
 
         [FormerlySerializedAs("provider")] [SerializeField]
@@ -239,6 +237,13 @@ namespace AgentAi.Suicidal
             PositiveAction = 1,
             NegativeAction = -1,
             NoAction = 0
+        }
+
+        public void Handle(UnitHealthChangedEvent @event)
+        {
+            if (@event.UnitChanged != unit) return;
+            
+            AddReward(config.DamagePunishment);
         }
     }
 }
