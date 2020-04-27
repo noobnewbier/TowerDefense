@@ -3,7 +3,7 @@ SUCCESSOR OF RECORD-5-3
 - attempt to fix circling behaviour by having 25% chance obstacles not appearing
 
 RESULTS:
-
+- still have some circling behaviour, generally speaking worst then 5-3(in terms of both training metrics and standard testing scene) but still decent when eye-balling.
 
 IMPORTANT:
 ---

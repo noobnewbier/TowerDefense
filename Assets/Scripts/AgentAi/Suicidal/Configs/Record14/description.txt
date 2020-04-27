@@ -2,3 +2,4 @@ SUCCESSOR OF 5-3
 - attempt to use GAIL for better convergence with our new curriculum
 
 RESULTS:
+- in general okay, worst comparing with 5-3 in both metrics and testing scenes 
