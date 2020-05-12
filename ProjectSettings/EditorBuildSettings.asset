@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ObstacleAvoidanceStartWithFinalSettingsScene.unity
     guid: 12761b9641d42f4488bed7e96cc8e1c1
+  - enabled: 0
+    path: Assets/Scenes/FinalWithTurretsLevelScene.unity
+    guid: 3bb21791a053d044385327e17bdc85c2
   m_configObjects: {}

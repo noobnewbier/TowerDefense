@@ -15,7 +15,7 @@ namespace Effects
         {
             base.FirstEffectApply(modificationService, dataRepository, effectSource);
 
-            modificationService.ModifyHealth((int) modifier.ModifyValue(dataRepository.Health), effectSource);
+            modificationService.ModifyHealth(modifier.ModifyValue(dataRepository.Health), effectSource);
         }
         
         /// <summary>

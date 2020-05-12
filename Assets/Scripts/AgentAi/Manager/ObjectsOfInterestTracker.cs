@@ -20,7 +20,7 @@ namespace AgentAi.Manager
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public IEnumerable<IStaticObjectOfInterest> StaticObjectOfInterests =>
-            FindObjectsOfType(typeof(MonoBehaviour)).OfType<IStaticObjectOfInterest>();
+            FindObjectsOfType<Transform>().SelectMany(t => t.GetComponents<IStaticObjectOfInterest>());
 
         public IEnumerable<IDynamicObjectOfInterest> DynamicObjectOfInterests =>
             new List<IDynamicObjectOfInterest>(dynamicObjectsSet.Items);

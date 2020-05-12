@@ -5,7 +5,7 @@ using Common.Class;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
-using Elements.Units.Enemies.Suicidal;
+using Elements.Units.Enemies;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using MLAgents;
@@ -63,9 +63,9 @@ namespace AgentAi.Suicidal
 
         public void Handle(UnitHealthChangedEvent @event)
         {
-            if (@event.UnitChanged != unit) return;
+            if (@event.UnitChanged != unit || @event.EffectSource == EffectSource.System) return;
 
-            AddReward(config.DamagePunishment);
+            AddReward(config.PerDamagePunishment * -@event.Amount);
         }
 
         //cannot think of an elegant solution for heuristic controller... but this do the trick
@@ -112,6 +112,8 @@ namespace AgentAi.Suicidal
             inputService.UpdateHorizontal(xAction);
             PunishRoaming();
             EncourageApproachingTarget();
+            
+            Debug.Log(GetCumulativeReward());
         }
 
         public override void CollectObservations()
@@ -134,6 +136,7 @@ namespace AgentAi.Suicidal
                     AddReward(config.KilledPunishment);
                     break;
                 case EffectSource.System:
+                case EffectSource.Environment:
 //                    AddReward(-1f);
                     break;
                 case EffectSource.SelfDestruction:

@@ -10,11 +10,11 @@ namespace Elements.Units.UnitCommon
     public class UnitData : ScriptableObject
     {
         [SerializeField] private Fact[] facts;
-        [SerializeField] private int health;
+        [SerializeField] private float health;
         [SerializeField] private float maxBackwardSpeed;
 
         [SerializeField] private float maxForwardSpeed;
-        [SerializeField] private int maxHealth;
+        [SerializeField] private float maxHealth;
         [SerializeField] private float rotationSpeed;
 
         public float MaxBackwardSpeed
@@ -33,12 +33,12 @@ namespace Elements.Units.UnitCommon
 
         public IEnumerable<Fact> Facts => facts;
 
-        public int Health
+        public float Health
         {
             get => health;
             set => health = value;
         }
 
-        public int MaxHealth => maxHealth;
+        public float MaxHealth => maxHealth;
     }
 }

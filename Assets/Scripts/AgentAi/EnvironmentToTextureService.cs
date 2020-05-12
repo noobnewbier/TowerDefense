@@ -31,24 +31,15 @@ namespace AgentAi
             foreach (var objectOfInterest in interestedObjects)
             {
                 var rescaledBounds = RescaleBoundsToTexture(objectOfInterest.Bounds, precision, centerOfTexture);
-                try
-                {
-                    categoryAndDrawer[objectOfInterest.Category].DrawObjectWithPriority(
-                        texture2D,
-                        rescaledBounds,
-                        categoryAndColor[objectOfInterest.Category],
-                        coordinatesWithPriority,
-                        categoryAndPriority[objectOfInterest.Category],
-                        shouldWritePriority
-                    );
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    Debug.Log(e);
-                    Debug.Log(
-                        $"{objectOfInterest} is going out of predefined area, Rescaled Bounds: {objectOfInterest.Bounds}"
-                    );
-                }
+
+                categoryAndDrawer[objectOfInterest.Category].DrawObjectWithPriority(
+                    texture2D,
+                    rescaledBounds,
+                    categoryAndColor[objectOfInterest.Category],
+                    coordinatesWithPriority,
+                    categoryAndPriority[objectOfInterest.Category],
+                    shouldWritePriority
+                );
             }
 
             //not very sure if we need this or not

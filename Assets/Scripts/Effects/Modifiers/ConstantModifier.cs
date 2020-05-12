@@ -22,7 +22,7 @@ namespace Effects.Modifiers
         ///     shall the need arise re-write the hierarchy so Modifier no longer inherit from SO,
         ///     instead having a ModifierProvider that is a SO but provides a POCO of Modifier
         /// </summary>
-        public static ConstantModifier CreateInstantHealthEffect(int amount)
+        public static ConstantModifier CreateInstantHealthEffect(float amount)
         {
             var toReturn = CreateInstance<ConstantModifier>();
             toReturn.amount = amount;

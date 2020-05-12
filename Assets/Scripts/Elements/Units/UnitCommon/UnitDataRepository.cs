@@ -5,7 +5,7 @@ namespace Elements.Units.UnitCommon
 {
     public interface IUnitDataRepository
     {
-        int Health { get; }
+        float Health { get; }
         float MaxForwardSpeed { get; }
         IEnumerable<Fact> Facts { get; }
         float MaxBackwardSpeed { get; }
@@ -22,7 +22,7 @@ namespace Elements.Units.UnitCommon
             _unitData = unitData;
         }
 
-        public int Health => _unitData.Health;
+        public float Health => _unitData.Health;
         public float MaxForwardSpeed => _unitData.MaxForwardSpeed;
         public float MaxBackwardSpeed => _unitData.MaxBackwardSpeed;
         public float RotationSpeed => _unitData.RotationSpeed;

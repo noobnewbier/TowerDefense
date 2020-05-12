@@ -1,0 +1,4 @@
+SUCCESSOR OF 16
+- Final training, added turrets, without GAIL(real run is 17-2
+
+RESULTS:  

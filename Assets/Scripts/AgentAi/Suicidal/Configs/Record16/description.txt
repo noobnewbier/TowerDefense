@@ -2,3 +2,4 @@ SUCCESSOR OF 15
 - added GAIL
 
 RESULTS:  
+-not great changes, arguably slightly worst with GAIL

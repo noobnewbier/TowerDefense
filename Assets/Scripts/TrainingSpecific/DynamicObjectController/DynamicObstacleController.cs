@@ -1,5 +1,6 @@
 using ScriptableService;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityUtils.LocationProviders;
 using UnityUtils.ScaleProviders;
 
@@ -10,6 +11,9 @@ namespace TrainingSpecific.DynamicObjectController
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private SpawnPointValidator spawnPointValidator;
+
+        [FormerlySerializedAs("controllerGameObject")] [FormerlySerializedAs("dynamicObstacle")] [SerializeField]
+        protected GameObject controlledGameObject;
 
         protected override void PrepareObjectForTraining()
         {

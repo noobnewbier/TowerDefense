@@ -1,4 +1,4 @@
-using Common.Interface;
+using System;
 using UnityEngine;
 
 namespace Common.Class.ObjectDrawer
@@ -6,8 +6,7 @@ namespace Common.Class.ObjectDrawer
     [CreateAssetMenu(menuName = "Drawer/BlockDrawer")]
     public class BlockDrawer : Drawer
     {
-        public override void DrawObjectWithPriority
-        (
+        public override void DrawObjectWithPriority(
             Texture2D texture2D,
             Bounds bounds,
             Color color,
@@ -24,13 +23,20 @@ namespace Common.Class.ObjectDrawer
 
             for (var y = (int) bounds.min.z; y < bounds.max.z; y++)
             for (var x = (int) bounds.min.x; x < bounds.max.x; x++)
-            {
-                if (coordinatesWithPriority[x, y] > priority) continue;
+                try
+                {
+                    if (coordinatesWithPriority[x, y] > priority) continue;
 
-                if (shouldWritePriority) coordinatesWithPriority[x, y] = priority;
+                    if (shouldWritePriority) coordinatesWithPriority[x, y] = priority;
 
-                texture2D.SetPixel(x, y, color);
-            }
+                    texture2D.SetPixel(x, y, color);
+                }
+                catch (IndexOutOfRangeException)
+                {
+#if UNITY_EDITOR
+                    Debug.Log($"Out of bounds when drawing: {bounds}");
+#endif
+                }
         }
     }
 }

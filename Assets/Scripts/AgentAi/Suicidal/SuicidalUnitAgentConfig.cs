@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AgentAi.Suicidal
 {
@@ -6,7 +7,7 @@ namespace AgentAi.Suicidal
     public class SuicidalUnitAgentConfig : ScriptableObject
     {
         [SerializeField] private float contactWithObstaclePunishment;
-        [SerializeField] private float damagePunishment = 0.05f;
+        [FormerlySerializedAs("damagePunishment")] [SerializeField] private float perDamagePunishment = -0.05f;
         [SerializeField] private float killedPunishment;
         [SerializeField] private float maxApproachReward;
         [SerializeField] private float roamingPunishment;
@@ -15,7 +16,7 @@ namespace AgentAi.Suicidal
         [SerializeField] private bool useNavMeshForApproachReward = true;
         [SerializeField] private bool useVectorRotation;
 
-        public float DamagePunishment => damagePunishment;
+        public float PerDamagePunishment => perDamagePunishment;
         public bool UseContinuousOutput => useContinuousOutput;
         public bool UseNavMeshForApproachReward => useNavMeshForApproachReward;
         public float RoamingPunishment => roamingPunishment;
