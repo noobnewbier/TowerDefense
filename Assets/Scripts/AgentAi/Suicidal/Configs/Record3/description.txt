@@ -2,3 +2,6 @@ Distinct color observation,
 - use texture rotation
 - use texture translation
 - not using demos
+
+RESULTS:
+- basically does not move at all
