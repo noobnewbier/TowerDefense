@@ -64,7 +64,6 @@ namespace AgentAi.Suicidal
         public void Handle(UnitHealthChangedEvent @event)
         {
             if (@event.UnitChanged != unit || @event.EffectSource == EffectSource.System) return;
-
             AddReward(config.PerDamagePunishment * -@event.Amount);
         }
 
@@ -112,8 +111,6 @@ namespace AgentAi.Suicidal
             inputService.UpdateHorizontal(xAction);
             PunishRoaming();
             EncourageApproachingTarget();
-            
-            Debug.Log(GetCumulativeReward());
         }
 
         public override void CollectObservations()
