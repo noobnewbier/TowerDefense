@@ -4,7 +4,7 @@ namespace TrainingSpecific.Events
 {
     public struct ForceResetEvent
     {
-        public readonly IDynamicObjectOfInterest DynamicObjectOfInterest;
+        public IDynamicObjectOfInterest DynamicObjectOfInterest { get; }
 
         public ForceResetEvent(IDynamicObjectOfInterest dynamicObjectOfInterest)
         {

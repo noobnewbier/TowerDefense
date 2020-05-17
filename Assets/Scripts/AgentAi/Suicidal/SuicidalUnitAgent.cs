@@ -63,7 +63,9 @@ namespace AgentAi.Suicidal
 
         public void Handle(UnitHealthChangedEvent @event)
         {
-            if (@event.UnitChanged != unit || @event.EffectSource == EffectSource.System) return;
+            if (@event.UnitChanged != unit || @event.EffectSource == EffectSource.System ||
+                @event.EffectSource == EffectSource.SelfDestruction) return;
+
             AddReward(config.PerDamagePunishment * -@event.Amount);
         }
 
@@ -170,9 +172,9 @@ namespace AgentAi.Suicidal
 
         private float GetCurrentDistanceFromTarget()
         {
-            return config.UseNavMeshForApproachReward
-                ? CalculateDistanceWithNavMesh()
-                : CalculateDistanceWithManhattanDistance();
+            return config.UseNavMeshForApproachReward ?
+                CalculateDistanceWithNavMesh() :
+                CalculateDistanceWithManhattanDistance();
         }
 
 

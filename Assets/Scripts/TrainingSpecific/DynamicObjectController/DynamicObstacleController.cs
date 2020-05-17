@@ -11,6 +11,7 @@ namespace TrainingSpecific.DynamicObjectController
         [SerializeField] private LocationProvider locationProvider;
         [SerializeField] private ScaleProvider scaleProvider;
         [SerializeField] private SpawnPointValidator spawnPointValidator;
+        [SerializeField] private bool ignoreSpawnPointCollision;
 
         [FormerlySerializedAs("controllerGameObject")] [FormerlySerializedAs("dynamicObstacle")] [SerializeField]
         protected GameObject controlledGameObject;
@@ -19,17 +20,30 @@ namespace TrainingSpecific.DynamicObjectController
         {
             var controlledTransform = controlledGameObject.transform;
             controlledGameObject.SetActive(true);
-            
-            do
+
+            //I like how your code is getting increasingly dirtier, but you just DGAF anymore
+            if (ignoreSpawnPointCollision)
             {
-                controlledTransform.position = locationProvider.ProvideLocation();
-                controlledTransform.localScale = scaleProvider.ProvideScale();
-            } while (!spawnPointValidator.IsSpawnPointValid(
-                controlledTransform.position,
-                controlledTransform.localScale / 2f,
-                controlledTransform.rotation,
-                controlledGameObject
-            ));
+                ConfigureObstacle(controlledTransform);
+            }
+            else
+            {
+                do
+                {
+                    ConfigureObstacle(controlledTransform);
+                } while (!spawnPointValidator.IsSpawnPointValid(
+                    controlledTransform.position,
+                    controlledTransform.localScale / 2f,
+                    controlledTransform.rotation,
+                    controlledGameObject
+                ));
+            }
+        }
+
+        private void ConfigureObstacle(Transform obstacleTransform)
+        {
+            obstacleTransform.position = locationProvider.ProvideLocation();
+            obstacleTransform.localScale = scaleProvider.ProvideScale();
         }
 
         protected override void CleanUpObjectForTraining()
