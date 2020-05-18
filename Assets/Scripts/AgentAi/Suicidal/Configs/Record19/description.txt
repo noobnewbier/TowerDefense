@@ -1,0 +1,5 @@
+SUCCESSOR OF 15
+- attempt to yield more stable results with a smaller starting arena
+- curricula = ObstacleAvoidanceStartWithFinalSettingsButSmallerArena
+
+RESULTS:
