@@ -349,7 +349,7 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 3
-  config: {fileID: 11400000, guid: d768488185acccb4d9da64ba41f67665, type: 2}
+  config: {fileID: 11400000, guid: e28c3113d5c06fd44be9825c024629e3, type: 2}
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   observationServiceProvider: {fileID: 1209074146708491867}

@@ -35,7 +35,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/FinalWithTurretsLevelScene.unity
     guid: 3bb21791a053d044385327e17bdc85c2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ObstacleAvoidanceStartWithFinalSettingsButSmallerArenaScene.unity
     guid: a2238c04fe301554dabbe7c17ed7e929
+  - enabled: 1
+    path: Assets/Scenes/FixedTrainingScene.unity
+    guid: c8ff63ff2cb2cfc429fb20ed95d363cf
   m_configObjects: {}

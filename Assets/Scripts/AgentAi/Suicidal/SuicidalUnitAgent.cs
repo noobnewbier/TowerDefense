@@ -145,8 +145,6 @@ namespace AgentAi.Suicidal
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            Debug.Log("fa" + GetCumulativeReward());
             Done();
         }
 
