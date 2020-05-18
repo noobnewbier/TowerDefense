@@ -15,4 +15,4 @@ MonoBehaviour:
   learningRate: 30
   samplingDistance: 2
   undergroundPenalty: 10
-  distanceThreshold: 0.05
+  distanceThreshold: 0.06

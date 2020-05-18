@@ -214,7 +214,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3704630309950303712
 MonoBehaviour:
@@ -275,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7916674236602675019}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.029721022, y: 0.4127903, z: -0.7201495}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6048740561362155733}
@@ -299,7 +299,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 11400000, guid: 87c4398b29ede854aa26cb1a7799f668, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Suicide
@@ -349,11 +349,12 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 3
-  config: {fileID: 11400000, guid: 09a2c125fdc88454bb8dd99def297f2c, type: 2}
+  config: {fileID: 11400000, guid: d768488185acccb4d9da64ba41f67665, type: 2}
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   observationServiceProvider: {fileID: 1209074146708491867}
-  targetProvider: {fileID: 1055374335180496570}
+  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+    type: 2}
   unit: {fileID: 3254465578691183710}
   unitProvider: {fileID: 3704630309950303712}
 --- !u!114 &1055374335180496570

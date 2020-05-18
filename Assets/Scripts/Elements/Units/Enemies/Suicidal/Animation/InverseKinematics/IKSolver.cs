@@ -47,7 +47,12 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
 
                 // Early termination, todo: do we really need this?
                 if (CostFromTarget(target, _angles) < config.DistanceThreshold)
+                {
+                    Debug.Log("early termination");
                     return;
+                }
+                
+                Debug.Log(CostFromTarget(target, _angles));
             }
 
             RotateJoints();

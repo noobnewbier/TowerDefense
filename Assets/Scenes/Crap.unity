@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &34423943 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400080, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 727954745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &95553004
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +232,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &104449035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 727954745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &104449036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104449035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dda2171d3ec4e81814b90174a4bb2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 0, y: 1, z: 0}
+  maxAngle: 30
+  minAngle: -30
+  previousJoint: {fileID: 0}
 --- !u!1 &166725941
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +684,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a66c6fb5c14bae44e93f6620427c185b, type: 3}
+--- !u!1 &1167755620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100012, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 727954745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1167755621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167755620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dda2171d3ec4e81814b90174a4bb2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 1, y: 0, z: 0}
+  maxAngle: 100
+  minAngle: -100
+  previousJoint: {fileID: 104449036}
+--- !u!1 &1268118339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100048, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 727954745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1268118340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268118339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dda2171d3ec4e81814b90174a4bb2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 1, y: 0, z: 0}
+  maxAngle: 100
+  minAngle: -100
+  previousJoint: {fileID: 1167755621}
 --- !u!1 &1453890421
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +883,53 @@ MonoBehaviour:
   isInitialized: 1
   threshold: 0.1
   timer: 0
+--- !u!1 &2125789098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125789099}
+  - component: {fileID: 2125789100}
+  m_Layer: 0
+  m_Name: EndEffector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2125789099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125789098}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.005, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 34423943}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2125789100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125789098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dda2171d3ec4e81814b90174a4bb2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 0, y: 0, z: 0}
+  maxAngle: 0
+  minAngle: 0
+  previousJoint: {fileID: 1268118340}
 --- !u!1001 &7358026474476348885
 PrefabInstance:
   m_ObjectHideFlags: 0
