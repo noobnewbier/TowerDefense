@@ -5,7 +5,7 @@ using Common.Class;
 using Common.Constant;
 using Common.Enum;
 using Common.Event;
-using Elements.Units.Enemies;
+using Elements.Units.Enemies.Suicidal;
 using Elements.Units.UnitCommon;
 using EventManagement;
 using MLAgents;
