@@ -50,8 +50,6 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
                 {
                     return;
                 }
-                
-                Debug.Log(CostFromTarget(target, _angles));
             }
 
             RotateJoints();
