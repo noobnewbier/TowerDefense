@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  sphereCollider: {fileID: 2560798837432837165}
   occupiedSpaceCollider: {fileID: 2560798838740964793}
+  rangeCollider: {fileID: 2560798837432837165}
 --- !u!135 &2560798837432837165
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 2560798838740964790}
   - component: {fileID: 2560798838740964793}
   - component: {fileID: 2560798838740964788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CenterIndicator
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
