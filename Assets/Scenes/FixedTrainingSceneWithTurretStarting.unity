@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -600,12 +600,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
-        type: 3}
-      propertyPath: yPosition
-      value: 
-      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
-        type: 2}
     - target: {fileID: 5762165638312904112, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -622,6 +616,12 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
+        type: 3}
+      propertyPath: yPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2211a7dd4c325f84f9a0a85e197605e5, type: 3}
 --- !u!1 &351865670 stripped
@@ -801,7 +801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &534669903
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1242,12 +1242,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 10.3
       objectReference: {fileID: 0}
-    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
-        type: 3}
-      propertyPath: yPosition
-      value: 
-      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
-        type: 2}
     - target: {fileID: 5762165638312904112, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1264,6 +1258,12 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
+        type: 3}
+      propertyPath: yPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2211a7dd4c325f84f9a0a85e197605e5, type: 3}
 --- !u!1 &1060149232 stripped
@@ -1537,7 +1537,7 @@ PrefabInstance:
     - target: {fileID: 4793952624822536967, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4793952624822536964, guid: 68a561bd5018b4746ac20829c30deefc,
         type: 3}
@@ -2223,12 +2223,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
-        type: 3}
-      propertyPath: yPosition
-      value: 
-      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
-        type: 2}
     - target: {fileID: 5762165638312904112, guid: 2211a7dd4c325f84f9a0a85e197605e5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2245,6 +2239,12 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7052741763635705784, guid: 2211a7dd4c325f84f9a0a85e197605e5,
+        type: 3}
+      propertyPath: yPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 61ea68c544ad95e42ada236cd4d15348,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2211a7dd4c325f84f9a0a85e197605e5, type: 3}
 --- !u!1 &1987649844 stripped

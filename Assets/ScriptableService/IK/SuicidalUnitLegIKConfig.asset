@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbf4953f3de45a7910bb19b2aae0db6, type: 3}
   m_Name: SuicidalUnitLegIKConfig
   m_EditorClassIdentifier: 
-  learningRate: 30
-  samplingDistance: 2
+  learningRate: 0.5
+  samplingDistance: 1
   undergroundPenalty: 10
-  distanceThreshold: 0.06
+  distanceThreshold: 0.01
+  iteration: 250

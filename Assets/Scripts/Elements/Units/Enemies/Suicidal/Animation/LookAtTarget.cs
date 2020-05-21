@@ -12,10 +12,11 @@ namespace Elements.Units.Enemies.Suicidal.Animation
         {
             var targetPosition = targetProvider.Target.ObjectTransform.position;
             var selfTransform = transform;
-            targetPosition.y = selfTransform.position.y;
+            var selfPosition = selfTransform.position;
+            targetPosition.y = selfPosition.y;
 
             var targetRotation = Quaternion.LookRotation(
-                targetPosition,
+                targetPosition - selfPosition,
                 selfTransform.up
             );
 

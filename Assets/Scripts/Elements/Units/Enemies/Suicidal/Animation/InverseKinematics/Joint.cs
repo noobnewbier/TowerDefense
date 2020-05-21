@@ -26,7 +26,7 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
         {
             if (minAngle > maxAngle)
             {
-                Debug.Log(gameObject.name + "'s RandomFloatProvider could not have minAngle greater than maxAngle");
+                Debug.Log(gameObject.name + "'s Joint could not have minAngle greater than maxAngle");
                 minAngle = maxAngle;
             }
         }

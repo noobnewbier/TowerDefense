@@ -1,16 +1,17 @@
 using Elements.Units.Enemies.Suicidal.Animation.InverseKinematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Elements.Units.Enemies.Suicidal.Animation
 {
     public class MoveLegToTarget : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        [SerializeField] private IKSolver ikSolver;
+        [FormerlySerializedAs("ikSolver")] [SerializeField] private IKSolver gradientDescentIKSolver;
 
         private void Update()
         {
-            ikSolver.InverseKinematics(target.transform.position);
+            gradientDescentIKSolver.InverseKinematics(target.transform.position);
         }
     }
 }

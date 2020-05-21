@@ -1,4 +1,4 @@
 Final training With Turrets(?)
-- Use with FixedTrainingSceneWithTurretStartingScene and FixedTrainingSceneWithTurretStarting Curriculum
+- Use with FixedTrainingSceneWithTurretStarting and FixedTrainingSceneWithTurretStarting Curriculum
 
-RESULTS:  
+RESULTS:  kind of work, but not really, too much circling and avoiding turrets too aggressively

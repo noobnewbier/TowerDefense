@@ -145,6 +145,7 @@ namespace AgentAi.Suicidal
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             Done();
         }
 

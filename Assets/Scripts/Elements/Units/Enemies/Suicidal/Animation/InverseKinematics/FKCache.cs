@@ -8,22 +8,31 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
     [CreateAssetMenu(menuName = "ScriptableService/FKCache")]
     public class FKCache : ScriptableObject
     {
-        public Dictionary<Vector3, List<float[]>> Cache { get; private set; }
+        public Dictionary<Vector3, List<float[]>> EndEffectorPositionAndAngles { get; private set; }
 
         private static string BasePath =>
             $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}FKCache{Path.DirectorySeparatorChar}";
 
         private void OnEnable()
         {
-            Cache = new Dictionary<Vector3, List<float[]>>();
+            EndEffectorPositionAndAngles = new Dictionary<Vector3, List<float[]>>();
         }
 
-        public void CreateCache(Transform rootTransform, IKConfig config, Joint[] joints)
+        public void CreateCache(Transform rootTransform, GraidentDescentIKConfig config, Joint[] joints)
         {
-            CreateCacheForJoints(config, joints, new float[joints.Length], 1, rootTransform);
+            CreateCacheForJoints(
+                config,
+                joints,
+                new float[joints.Length],
+                1,
+                rootTransform
+            );
         }
 
-        private void CreateCacheForJoints(IKConfig config,
+        /// <summary>
+        /// haven't test this crap yet... should be tested with high learning rate etc to see if it's correct
+        /// </summary>
+        private void CreateCacheForJoints(GraidentDescentIKConfig config,
                                           IReadOnlyList<Joint> joints,
                                           float[] angles,
                                           int index,
@@ -39,11 +48,13 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
                 }
                 else
                 {
-                    var location = IKUtils.ForwardKinematics(angles, joints);
-                    var cachedList = Cache.ContainsKey(location) ? Cache[location] : new List<float[]>();
+                    var location = rootTransform.InverseTransformPoint(IKUtils.ForwardKinematics(angles, joints));
+                    var cachedList = EndEffectorPositionAndAngles.ContainsKey(location) ?
+                        EndEffectorPositionAndAngles[location] :
+                        new List<float[]>();
                     cachedList.Add(angles);
-                    
-                    Cache[location] = cachedList;
+
+                    EndEffectorPositionAndAngles[location] = cachedList;
                 }
             }
         }
@@ -53,7 +64,7 @@ namespace Elements.Units.Enemies.Suicidal.Animation.InverseKinematics
         {
             Directory.CreateDirectory(BasePath);
 
-            var json = JsonConvert.SerializeObject(Cache);
+            var json = JsonConvert.SerializeObject(EndEffectorPositionAndAngles);
             File.WriteAllText(BasePath + name + ".json", json);
         }
     }
