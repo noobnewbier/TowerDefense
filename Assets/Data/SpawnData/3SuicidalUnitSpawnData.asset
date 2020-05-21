@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6c7d1fee2fd4d3e8234a832f77eb137, type: 3}
-  m_Name: SuicidalUnitNoAISpawnData
+  m_Name: 3SuicidalUnitSpawnData
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 8383158631538633659, guid: e5a57ac6dbaf1ef41b1f79a58d85663b, type: 3}
+  - {fileID: 3610290461812041406, guid: 4f93f73c277a40348b43a4e7a641dd2e, type: 3}
   spawnInterval: 0
   totalNumberOfEnemies: 1

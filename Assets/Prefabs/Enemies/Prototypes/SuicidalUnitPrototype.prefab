@@ -299,7 +299,7 @@ MonoBehaviour:
     vectorActionSize: 0300000003000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 11400000, guid: e63a84a635fc2a14bb24b0320a52b5f1, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Suicide
@@ -349,7 +349,7 @@ MonoBehaviour:
     resetOnDone: 0
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 3
-  config: {fileID: 11400000, guid: e28c3113d5c06fd44be9825c024629e3, type: 2}
+  config: {fileID: 11400000, guid: c1b5b9ef9cfa0f845b6c6f26c01f8262, type: 2}
   inputService: {fileID: 6168960639002132815}
   navMeshAgent: {fileID: 195152517545128316}
   observationServiceProvider: {fileID: 1209074146708491867}

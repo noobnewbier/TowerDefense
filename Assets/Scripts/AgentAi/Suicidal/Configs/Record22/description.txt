@@ -1,0 +1,6 @@
+Successor of 21
+- Used with FixedTrainingSceneWithTurretStartingAndMultipleUnits Curr and FixedTrainingSceneWithTurretStartingAndMultipleUnitsScene
+- Introduced allies
+- Increased gamma from 0.8 to 0.9
+
+RESULTS:  

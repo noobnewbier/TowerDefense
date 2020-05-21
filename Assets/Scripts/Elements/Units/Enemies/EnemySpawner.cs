@@ -1,5 +1,6 @@
 using Common.Class;
 using Common.Event;
+using Elements.Units.Enemies.Provider;
 using EventManagement;
 using ScriptableService;
 using UnityEngine;
@@ -8,26 +9,30 @@ using UnityUtils.LocationProviders;
 
 namespace Elements.Units.Enemies
 {
-    public class EnemySpawner : MonoBehaviour, IHandle<WaveStartEvent>
+    public class EnemySpawner : MonoBehaviour, IHandle<WaveStartEvent>, IHandle<WaveEndEvent>
     {
         private IEventAggregator _eventAggregator;
         private int _spawnedEnemiesCount;
         private bool _startedAttack;
         private float _timer;
 
-        [SerializeField] private EnemySpawnPointData enemySpawnPointData;
+        [SerializeField] private EnemySpawnPointDataProvider enemySpawnPointDataProvider;
         [SerializeField] private LocationProvider locationProvider;
-        [SerializeField] private SpawnPointValidator spawnPointValidator;
         [SerializeField] private FloatProvider spawnedEnemyOrientationProvider;
-        
+        [SerializeField] private SpawnPointValidator spawnPointValidator;
 
-        public int TotalEnemyCount => enemySpawnPointData.TotalNumberOfEnemies;
+
+        public int TotalEnemyCount => enemySpawnPointDataProvider.ProvideData().TotalNumberOfEnemies;
+
+        public void Handle(WaveEndEvent @event)
+        {
+            _startedAttack = false;
+            _spawnedEnemiesCount = 0; //reset this crap so it will do it again
+        }
 
         public void Handle(WaveStartEvent @event)
         {
             _startedAttack = true;
-
-            _spawnedEnemiesCount = 0; //reset this crap so it will do it again
         }
 
         private void OnEnable()
@@ -38,13 +43,11 @@ namespace Elements.Units.Enemies
 
         private void Update()
         {
-            if (!_startedAttack || _spawnedEnemiesCount >= enemySpawnPointData.TotalNumberOfEnemies)
-            {
-                return;
-            }
+            if (!_startedAttack ||
+                _spawnedEnemiesCount >= enemySpawnPointDataProvider.ProvideData().TotalNumberOfEnemies) return;
 
             _timer += Time.deltaTime;
-            if (_timer >= enemySpawnPointData.SpawnInterval)
+            if (_timer >= enemySpawnPointDataProvider.ProvideData().SpawnInterval)
             {
                 _timer = 0f;
 
@@ -55,7 +58,10 @@ namespace Elements.Units.Enemies
         private void SpawnEnemy()
         {
             var newEnemyGameObject = Instantiate(
-                enemySpawnPointData.Enemies[Random.Range(0, enemySpawnPointData.Enemies.Length)].gameObject,
+                enemySpawnPointDataProvider.ProvideData().Enemies[Random.Range(
+                    0,
+                    enemySpawnPointDataProvider.ProvideData().Enemies.Length
+                )].gameObject,
                 locationProvider.ProvideLocation(),
                 Quaternion.identity
             );
