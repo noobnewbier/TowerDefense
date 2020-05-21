@@ -806,6 +806,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100038, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
@@ -974,15 +990,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 100072, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 100088, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 100038, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -1007,10 +1015,6 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 100028, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 100032, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -1071,10 +1075,6 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 100082, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 100084, guid: 37e7b57a81cd79f4c90ec9d72aea1a2e, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -2723,7 +2723,7 @@ MonoBehaviour:
   animatedTransform: {fileID: 727954746}
   easingFactor: 1
   hasForwardInput: {fileID: 2025173953}
-  jumpMagnitude: 0.05
+  jumpMagnitude: 0.1
   timer: {fileID: 2025173955}
 --- !u!114 &2025173955
 MonoBehaviour:
@@ -2738,7 +2738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInitialized: 1
-  threshold: 0.1
+  threshold: 0.25
   timer: 0
 --- !u!1 &2062343632 stripped
 GameObject:

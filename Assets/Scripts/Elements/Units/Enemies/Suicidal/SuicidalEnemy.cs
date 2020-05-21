@@ -30,6 +30,13 @@ namespace Elements.Units.Enemies.Suicidal
             _unitDataModificationService = provider.ProvideUnitDataService();
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            RealRotation = transform.rotation;
+        }
+
         protected override void DeathVisualEffect()
         {
             // do nothing for now
@@ -44,5 +51,8 @@ namespace Elements.Units.Enemies.Suicidal
                 ApplyEffect(selfEffectWhenCollide, EffectSource.SelfDestruction);
             }
         }
+        
+        //todo: hack 1
+        public Quaternion RealRotation { get; set; }
     }
 }

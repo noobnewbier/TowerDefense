@@ -50,7 +50,7 @@ namespace Movement.Handler
         private void MoveHorizontal(float inputValue)
         {
             var newRotation = Quaternion.AngleAxis(
-                rigidBodyToMove.rotation.eulerAngles.y + _repository.RotationSpeed * inputValue,
+                rigidBodyToMove.rotation.eulerAngles.y + _repository.RotationSpeed * inputValue * Time.fixedDeltaTime,
                 Vector3.up
             );
             rigidBodyToMove.MoveRotation(newRotation);
