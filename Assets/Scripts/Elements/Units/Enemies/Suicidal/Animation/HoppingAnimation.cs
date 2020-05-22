@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityUtils;
 using UnityUtils.Timers;
@@ -28,7 +29,7 @@ namespace Elements.Units.Enemies.Suicidal.Animation
             if (animatedTransform == null) return;
 
             if (hasForwardInput.ProvideBoolean() ||
-                !FloatUtil.NearlyEqual(animatedTransform.position.y, _initialHeight, 0.1f))
+                !(Math.Abs(animatedTransform.position.y - _initialHeight) < 0.005))
             {
                 var t = Mathf.Abs(Mathf.Sin(timer.NormalizedTime * easingFactor));
                 var smoothedY = Mathf.Lerp(_initialHeight, _initialHeight + jumpMagnitude, t);
