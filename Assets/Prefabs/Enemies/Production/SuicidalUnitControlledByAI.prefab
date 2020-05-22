@@ -117,6 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868162c68b6e4729a64581fd409eda5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &3642406722898868977 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2972037557498494054, guid: 97ead511960296c4db86ffbd76078691,
+    type: 3}
+  m_PrefabInstance: {fileID: 1995835657514157719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &175389421234671073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1863850652392573814, guid: 97ead511960296c4db86ffbd76078691,
@@ -204,7 +210,7 @@ PrefabInstance:
         type: 3}
       propertyPath: navMeshAgent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3642406722898868977}
     - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
         type: 3}
       propertyPath: inputService

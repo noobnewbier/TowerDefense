@@ -26,7 +26,7 @@ namespace Elements.Units.Enemies.Suicidal.Animation
         private void Update()
         {
             if (hasForwardInput.ProvideBoolean() ||
-                !FloatUtil.NearlyEqual(animatedTransform.position.y, _initialHeight))
+                !FloatUtil.NearlyEqual(animatedTransform.position.y, _initialHeight, 0.1f))
             {
                 var t = Mathf.Abs(Mathf.Sin(timer.NormalizedTime * easingFactor));
                 var smoothedY = Mathf.Lerp(_initialHeight, _initialHeight + jumpMagnitude, t);
