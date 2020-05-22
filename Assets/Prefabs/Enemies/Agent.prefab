@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4323423108627702948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8394937779563820940}
+  - component: {fileID: 575797815803742389}
+  - component: {fileID: 5678658943311368413}
+  - component: {fileID: 5108543954205492660}
+  - component: {fileID: 6284457110103202171}
+  - component: {fileID: 6379136060587709781}
+  m_Layer: 0
+  m_Name: Agent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8394937779563820940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &575797815803742389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 0
+    numStackedVectorObservations: 1
+    vectorActionSize: 0300000003000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 0
+  m_Model: {fileID: 11400000, guid: e63a84a635fc2a14bb24b0320a52b5f1, type: 3}
+  m_InferenceDevice: 1
+  m_BehaviorType: 0
+  m_BehaviorName: Suicide
+  m_TeamID: 0
+  m_useChildSensors: 1
+--- !u!114 &5678658943311368413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8de6901378b433fbc9399318b7a6ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observationServiceProvider: {fileID: 5108543954205492660}
+  sensorName: Texture2DSensor
+--- !u!114 &5108543954205492660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e75dbaf0fd4a999e0d121d5e5a1447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observationService: {fileID: 11400000, guid: 87ac96796c48549479ef6891462ee4e9, type: 2}
+--- !u!114 &6284457110103202171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e01eeac5380094f9f100a3761afd47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 4096
+    resetOnDone: 0
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 3
+  config: {fileID: 11400000, guid: c1b5b9ef9cfa0f845b6c6f26c01f8262, type: 2}
+  inputService: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  observationServiceProvider: {fileID: 5108543954205492660}
+  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+    type: 2}
+  unit: {fileID: 0}
+  unitProvider: {fileID: 0}
+--- !u!114 &6379136060587709781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323423108627702948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b474d7985394e9a9da2c7f64c8c5aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInstanceTracker: {fileID: 11400000, guid: 7016f20be024f8c4ca3a35e04c073c03,
+    type: 2}

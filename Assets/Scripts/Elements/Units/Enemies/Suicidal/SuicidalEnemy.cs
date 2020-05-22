@@ -12,6 +12,8 @@ namespace Elements.Units.Enemies.Suicidal
     //enemy that touches you and explode, deals damage and destruct itself
     public class SuicidalEnemy : Enemy
     {
+        public override float YEuler => RealRotation.eulerAngles.y;
+
         private IUnitDataRepository _unitDataRepository;
         private IUnitDataModificationService _unitDataModificationService;
         [SerializeField] private UnitProvider provider;

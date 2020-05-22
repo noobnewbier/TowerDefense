@@ -91,7 +91,7 @@ namespace AgentAi.Manager
 
             if (config.UseTextureRotation)
                 _observedTexture.RotateTexture(
-                    -observer.transform.rotation.eulerAngles.y,
+                    -observer.YEuler,
                     _drawingConfig.CategoryAndColors[InterestCategory.NullArea]
                 );
 
