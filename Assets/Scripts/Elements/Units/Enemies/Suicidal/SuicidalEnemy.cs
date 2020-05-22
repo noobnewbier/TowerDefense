@@ -12,17 +12,25 @@ namespace Elements.Units.Enemies.Suicidal
     //enemy that touches you and explode, deals damage and destruct itself
     public class SuicidalEnemy : Enemy
     {
-        public override float YEuler => RealRotation.eulerAngles.y;
+        private IUnitDataModificationService _unitDataModificationService;
 
         private IUnitDataRepository _unitDataRepository;
-        private IUnitDataModificationService _unitDataModificationService;
-        [SerializeField] private UnitProvider provider;
         [SerializeField] private Effect damageEffect;
-        [SerializeField] private Effect selfEffectWhenCollide;
+        [SerializeField] private UnitProvider provider;
         [SerializeField] private Rule[] rules;
+        [SerializeField] private Effect selfEffectWhenCollide;
+
+        public override float YEuler
+        {
+            get => RealRotation.eulerAngles.y;
+            set => RealRotation = Quaternion.Euler(RealRotation.eulerAngles.x, value, RealRotation.eulerAngles.z);
+        }
 
         protected override IUnitDataRepository UnitDataRepository => _unitDataRepository;
         protected override IUnitDataModificationService UnitDataModificationService => _unitDataModificationService;
+
+        //todo: hack 1
+        public Quaternion RealRotation { get; set; }
 
         protected override void Awake()
         {
@@ -53,8 +61,5 @@ namespace Elements.Units.Enemies.Suicidal
                 ApplyEffect(selfEffectWhenCollide, EffectSource.SelfDestruction);
             }
         }
-        
-        //todo: hack 1
-        public Quaternion RealRotation { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace Elements.Units.Enemies.Suicidal.Animation
 
         private void Update()
         {
+            if (animatedTransform == null) return;
+
             if (hasForwardInput.ProvideBoolean() ||
                 !FloatUtil.NearlyEqual(animatedTransform.position.y, _initialHeight, 0.1f))
             {

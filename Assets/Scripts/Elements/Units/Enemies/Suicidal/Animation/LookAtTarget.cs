@@ -7,9 +7,10 @@ namespace Elements.Units.Enemies.Suicidal.Animation
     {
         [Range(0, 5)] [SerializeField] private float speed;
         [SerializeField] private TargetProvider targetProvider;
-        
         private void Update()
         {
+            if (targetProvider.Target == null) return;
+
             var targetPosition = targetProvider.Target.ObjectTransform.position;
             var selfTransform = transform;
             var selfPosition = selfTransform.position;

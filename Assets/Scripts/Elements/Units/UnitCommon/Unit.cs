@@ -28,7 +28,17 @@ namespace Elements.Units.UnitCommon
         public override Bounds Bounds => unitCollider.bounds;
         protected abstract IUnitDataRepository UnitDataRepository { get; }
         protected abstract IUnitDataModificationService UnitDataModificationService { get; }
-        public virtual float YEuler => transform.rotation.eulerAngles.y;
+
+        public virtual float YEuler
+        {
+            get => transform.rotation.eulerAngles.y;
+            set
+            {
+                var rotation = transform.rotation;
+                rotation = Quaternion.Euler(rotation.eulerAngles.x, value, rotation.eulerAngles.z);
+                transform.rotation = rotation;
+            }
+        } 
 
         public IEnumerable<Fact> Facts => UnitDataRepository.Facts;
 

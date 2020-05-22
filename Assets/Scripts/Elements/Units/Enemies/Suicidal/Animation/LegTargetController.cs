@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,6 +37,8 @@ namespace Elements.Units.Enemies.Suicidal.Animation
 
         private void Update()
         {
+            if (unitTransform == null) return;
+
             var selfPosition = transform.position;
             var unitPosition = unitTransform.position;
             var tooClose = Vector3.Distance(selfPosition, unitPosition) <
@@ -60,6 +63,8 @@ namespace Elements.Units.Enemies.Suicidal.Animation
             yield return new WaitUntil(
                 () =>
                 {
+                    if (unitTransform == null) return true; //break out of coroutine when unit is destroyed
+                    
                     var originalPos = transform.position;
                     originalPos.y = _initialHeight;
                     var targetPos = _initialOffset + unitTransform.position;

@@ -1,6 +1,7 @@
 using Common.Class;
 using Common.Event;
 using Elements.Units.Enemies.Provider;
+using Elements.Units.UnitCommon;
 using EventManagement;
 using ScriptableService;
 using UnityEngine;
@@ -66,7 +67,7 @@ namespace Elements.Units.Enemies
                 Quaternion.identity
             );
             newEnemyGameObject.transform.parent = transform;
-            newEnemyGameObject.transform.Rotate(new Vector2(0f, spawnedEnemyOrientationProvider.ProvideFloat()));
+            newEnemyGameObject.GetComponentInChildren<Unit>().YEuler = spawnedEnemyOrientationProvider.ProvideFloat();
 
             while (!spawnPointValidator.IsSpawnPointValid(
                 newEnemyGameObject.transform.position,
