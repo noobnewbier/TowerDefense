@@ -188,12 +188,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 8293550211145048740}
-  provider: {fileID: 3704630309950303712}
   damageEffect: {fileID: 11400000, guid: 318999a390179b448b4549faebace0b3, type: 2}
-  selfEffectWhenCollide: {fileID: 11400000, guid: edc9282f3500f7b43b2b5a55ba860957,
-    type: 2}
+  provider: {fileID: 3704630309950303712}
   rules:
   - {fileID: 11400000, guid: a04c3488d73b51948a7ddb6212b74584, type: 2}
+  selfEffectWhenCollide: {fileID: 11400000, guid: edc9282f3500f7b43b2b5a55ba860957,
+    type: 2}
 --- !u!195 &195152517545128316
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -428,6 +428,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agent
       objectReference: {fileID: 0}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: inputService
+      value: 
+      objectReference: {fileID: 6168960639002132815}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 195152517545128316}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: 3254465578691183710}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: unitProvider
+      value: 
+      objectReference: {fileID: 3704630309950303712}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 39b65441168329847952081e05efc5b6,
+        type: 2}
     - target: {fileID: 8394937779563820940, guid: 03573505409c5f147aa73596a9b4038f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,26 +509,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+    - target: {fileID: 575797815803742389, guid: 03573505409c5f147aa73596a9b4038f,
         type: 3}
-      propertyPath: inputService
+      propertyPath: m_Model
       value: 
-      objectReference: {fileID: 6168960639002132815}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: navMeshAgent
-      value: 
-      objectReference: {fileID: 195152517545128316}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: unit
-      value: 
-      objectReference: {fileID: 3254465578691183710}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: unitProvider
-      value: 
-      objectReference: {fileID: 3704630309950303712}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03573505409c5f147aa73596a9b4038f, type: 3}
 --- !u!4 &2495698162696600675 stripped

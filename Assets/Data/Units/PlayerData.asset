@@ -18,4 +18,4 @@ MonoBehaviour:
   maxBackwardSpeed: 2
   maxForwardSpeed: 7
   maxHealth: 100
-  rotationSpeed: 2
+  rotationSpeed: 100

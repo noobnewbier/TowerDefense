@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 6328124802047398594}
   m_Layer: 11
   m_Name: SuicidalEnemyModel
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4963,12 +4963,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 6328124802047398593}
-  provider: {fileID: 6328124802047398595}
   damageEffect: {fileID: 11400000, guid: 318999a390179b448b4549faebace0b3, type: 2}
-  selfEffectWhenCollide: {fileID: 11400000, guid: edc9282f3500f7b43b2b5a55ba860957,
-    type: 2}
+  provider: {fileID: 6328124802047398595}
   rules:
   - {fileID: 11400000, guid: a04c3488d73b51948a7ddb6212b74584, type: 2}
+  selfEffectWhenCollide: {fileID: 11400000, guid: edc9282f3500f7b43b2b5a55ba860957,
+    type: 2}
 --- !u!1 &6328124802047301006
 GameObject:
   m_ObjectHideFlags: 0

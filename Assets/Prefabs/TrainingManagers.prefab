@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ded67127114f0f95e4d35220d3db03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: {fileID: 0}
+  resource: {fileID: 11400000, guid: 13aa2dc35de15cf47a11f741989d76c5, type: 2}
   resourceGainPerTick: 0.0005
 --- !u!1 &3352325463039265202
 GameObject:
