@@ -8,7 +8,6 @@ using Common.Enum;
 using Common.Event;
 using Elements.Turret.Rotation;
 using Elements.Turret.Upgrade;
-using Elements.Units.UnitCommon;
 using EventManagement;
 using Rules;
 using TrainingSpecific.Events;
@@ -22,7 +21,7 @@ namespace Elements.Turret
     {
         private const float UpdateTargetInterval = 0.5f;
 
-        private Unit _currentTarget;
+        private TargetInformation? _currentTargetInfo;
         private PooledMonoBehaviour _pooledBullet;
         private ITurretRepository _repository;
         private float _targetRefreshTimer;
@@ -84,15 +83,20 @@ namespace Elements.Turret
 
             if (_targetRefreshTimer > UpdateTargetInterval)
             {
-                _currentTarget = _repository.TargetingStrategy.ChooseTarget(transform, unitDetector.VisibleEnemies);
+                _currentTargetInfo = _repository.TargetingStrategy.ChooseTarget(
+                    transform,
+                    unitDetector.VisibleTargetsInfo
+                );
                 _targetRefreshTimer = 0f;
             }
 
             _targetRefreshTimer += Time.fixedDeltaTime;
 
-            var targetPosition =
-                _currentTarget != null ? _currentTarget.ObjectTransform.position : (Vector3?) null;
-            if (targetPosition.HasValue) Aim(targetPosition.Value);
+            if (_currentTargetInfo?.Enemy != null)
+            {
+                var targetPosition = _currentTargetInfo.Value.Collider.bounds.center;
+                Aim(targetPosition);
+            }
 
             genericShootService.IsShooting = ShouldShoot();
         }
@@ -126,7 +130,7 @@ namespace Elements.Turret
         //Shoot as long as we have enemies - Kill On Sight Comrade
         private bool ShouldShoot()
         {
-            return unitDetector.VisibleEnemies.Any();
+            return unitDetector.VisibleTargetsInfo.Any();
         }
 
         //cannot shoot during destruct or construct animation

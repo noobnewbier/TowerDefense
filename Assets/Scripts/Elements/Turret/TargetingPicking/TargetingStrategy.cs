@@ -9,6 +9,6 @@ namespace Elements.Turret.TargetingPicking
     {
         //return null if list is empty?
         [CanBeNull]
-        public abstract Unit ChooseTarget(Transform turretTransform, IEnumerable<Unit> enemies);
+        public abstract TargetInformation? ChooseTarget(Transform turretTransform, IEnumerable<TargetInformation> targetInfo);
     }
 }

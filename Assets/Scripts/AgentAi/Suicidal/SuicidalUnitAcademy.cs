@@ -1,6 +1,10 @@
+using System.Diagnostics;
+using System.Linq;
 using AgentAi.Manager;
 using Common.Class;
+using Common.Constant;
 using Common.Event;
+using Elements.Units.Players;
 using EventManagement;
 using MLAgents;
 using TrainingSpecific.Events;
@@ -68,8 +72,23 @@ namespace AgentAi.Suicidal
         {
             _agentCount = 0;
             _doneAgentCount = 0;
+            ClearFieldForGameplay();
+            ClearFieldForTraining();
+        }
 
+        [Conditional(GameConfig.TrainingMode)]
+        private void ClearFieldForTraining()
+        {
             foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests)
+                _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
+        }
+
+        [Conditional(GameConfig.GameplayMode)]
+        private void ClearFieldForGameplay()
+        {
+            foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests.Where(
+                d => d.GetType() != typeof(Player)
+            ))
                 _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
         }
 

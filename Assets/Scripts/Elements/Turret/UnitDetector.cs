@@ -18,19 +18,21 @@ namespace Elements.Turret
     {
         private int _layerMaskToIgnore;
         private ITurretRepository _repository;
+
         [SerializeField] private Transform bulletSpawnpoint;
         [SerializeField] private TurretProvider provider;
         [SerializeField] private SphereCollider rangeCollider;
 
-        public IEnumerable<Enemy> VisibleEnemies => InRangeEnemies.Where(e => IsTargetVisible(e.transform));
+        public IEnumerable<TargetInformation> VisibleTargetsInfo =>
+            InRangeEnemies.Where(IsTargetVisible);
 
-        private IList<Enemy> InRangeEnemies { get; set; }
+        private List<TargetInformation> InRangeEnemies { get; set; }
         protected override InterestCategory Category => InterestCategory.TurretRange;
         public override Bounds Bounds => rangeCollider.bounds;
 
         public void Handle(EnemyDeadEvent @event)
         {
-            InRangeEnemies.Remove(@event.Enemy);
+            InRangeEnemies.RemoveAll(i => i.Enemy == @event.Enemy);
         }
 
         protected override void OnEnable()
@@ -39,33 +41,36 @@ namespace Elements.Turret
 
             _repository = provider.GetRepository();
             _layerMaskToIgnore = ~((1 << LayerMask.NameToLayer(LayerNames.Turret)) |
-                                 (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker)));
-            InRangeEnemies = new List<Enemy>();
+                                   (1 << LayerMask.NameToLayer(LayerNames.PlayerDamageTaker)));
+            InRangeEnemies = new List<TargetInformation>();
             rangeCollider.radius = _repository.DetectionRange;
             rangeCollider.isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy)) InRangeEnemies.Add(other.gameObject.GetComponent<Enemy>());
+            if (other.CompareTag(ObjectTags.Enemy))
+                InRangeEnemies.Add(new TargetInformation(other.gameObject.GetComponent<Enemy>(), other));
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(ObjectTags.Enemy)) InRangeEnemies.Remove(other.GetComponent<Enemy>());
+            if (other.CompareTag(ObjectTags.Enemy))
+                InRangeEnemies.RemoveAll(i => i.Enemy == other.GetComponent<Enemy>());
         }
 
-        private bool IsTargetVisible(Transform targetTransform)
+        private bool IsTargetVisible(TargetInformation targetInformation)
         {
             var bulletSpawnpointPosition = bulletSpawnpoint.position;
-            var targetPosition = targetTransform.position;
+            var targetPosition = targetInformation.Collider.bounds.center;
+
             return Physics.Raycast(
                        bulletSpawnpointPosition,
                        targetPosition - bulletSpawnpointPosition,
                        out var hit,
                        Vector3.Distance(targetPosition, bulletSpawnpointPosition),
                        _layerMaskToIgnore
-                   ) && hit.collider.CompareTag(ObjectTags.Enemy);
+                   ) && hit.collider.gameObject.layer == LayerMask.NameToLayer(LayerNames.AiDamageTaker);
         }
     }
 }
