@@ -1,0 +1,9 @@
+Successor of ... TBH I FORGOT
+- Doesn't see other agents
+- See all turrets
+- See targets
+- NO GAIL
+- LOWERED GAMMA
+- Use with FinalTrainingScene(I fell in love with my naming convention) and FinalTraining Curriculum
+
+RESULTS:  
