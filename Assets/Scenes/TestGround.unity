@@ -882,10 +882,6 @@ PrefabInstance:
       propertyPath: isShootingState
       value: 
       objectReference: {fileID: 690182177}
-    - target: {fileID: 2108124184, guid: e924d8ccae252b843b4b1a4315cc5177, type: 3}
-      propertyPath: parallelToGroundStrength
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5443937810178721935, guid: e924d8ccae252b843b4b1a4315cc5177,
         type: 3}
       propertyPath: m_LocalRotation.x

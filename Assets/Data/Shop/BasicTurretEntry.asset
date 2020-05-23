@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284fa039b029497b843e517039219e33, type: 3}
+  m_Script: {fileID: 11500000, guid: f24336d1a6be48e7bfbf3043285f115a, type: 3}
   m_Name: BasicTurretEntry
   m_EditorClassIdentifier: 
-  turretPrefab: {fileID: 2392737558376094949, guid: 84a3fab7296e8004e8028ea7c92d80e3,
-    type: 3}
-  price: 10
+  rulesToUpgrade: []
+  turretProvider: {fileID: 0}
