@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fe0c8a36504141ad9bda682c5793ed, type: 3}
+  m_Name: GreyscaleWithTurretsNoAlliesAndTurretsInterestColorConfig
+  m_EditorClassIdentifier: 
+  categoryAndConfig:
+  - category: 1
+    color: {r: 0, g: 0, b: 0, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 2
+    color: {r: 0, g: 0, b: 0, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 3
+    color: {r: 1, g: 1, b: 1, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 4
+    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 5
+    color: {r: 1, g: 1, b: 1, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 9
+    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 0
+    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 6
+    color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 8
+    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    drawer: {fileID: 11400000, guid: c10839dd814e3e346826570265fb05dc, type: 2}
+  - category: 7
+    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    drawer: {fileID: 11400000, guid: 6d0ac4fc2e5f473438ff459e0cc3463f, type: 2}
+  grayScale: 1

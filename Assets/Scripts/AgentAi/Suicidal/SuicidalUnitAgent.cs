@@ -109,6 +109,12 @@ namespace AgentAi.Suicidal
                 xAction = MachineInputToAction(xAction);
             }
 
+            if (playerInstanceTracker.Player == null)
+            {
+                //if there is no player, no reward/punishment needs to be given
+                return;
+            }
+
             inputService.UpdateVertical(yAction);
             inputService.UpdateHorizontal(xAction);
             PunishRoaming();

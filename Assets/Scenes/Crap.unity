@@ -345,50 +345,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1863850652531891629, guid: 97ead511960296c4db86ffbd76078691,
+    - target: {fileID: 1865889522464133629, guid: 97ead511960296c4db86ffbd76078691,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.50745
+      propertyPath: upliftAmount
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1863850652531891629, guid: 97ead511960296c4db86ffbd76078691,
+    - target: {fileID: 1865889522976413886, guid: 97ead511960296c4db86ffbd76078691,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.50745
+      propertyPath: upliftAmount
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1863850652531891629, guid: 97ead511960296c4db86ffbd76078691,
+    - target: {fileID: 1865889523664181381, guid: 97ead511960296c4db86ffbd76078691,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.50745
+      propertyPath: upliftAmount
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
+    - target: {fileID: 1865889524530901710, guid: 97ead511960296c4db86ffbd76078691,
         type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.50745
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.50745
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863850653107452246, guid: 97ead511960296c4db86ffbd76078691,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.50745
+      propertyPath: upliftAmount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97ead511960296c4db86ffbd76078691, type: 3}
