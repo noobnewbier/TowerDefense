@@ -4,6 +4,8 @@ using AgentAi.Manager;
 using Common.Class;
 using Common.Constant;
 using Common.Event;
+using Elements.Turret;
+using Elements.Units.Enemies;
 using Elements.Units.Players;
 using EventManagement;
 using MLAgents;
@@ -87,7 +89,7 @@ namespace AgentAi.Suicidal
         private void ClearFieldForGameplay()
         {
             foreach (var objectOfInterest in objectsOfInterestTracker.DynamicObjectOfInterests.Where(
-                d => d.GetType() != typeof(Player)
+                d => d.GetType() == typeof(Enemy) 
             ))
                 _eventAggregator.Publish(new ForceResetEvent(objectOfInterest));
         }

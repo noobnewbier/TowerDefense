@@ -11,13 +11,15 @@ namespace Effects
         public override bool CanStack => true;
         public override int Duration => 0;
 
-        public override void FirstEffectApply(IUnitDataModificationService modificationService, IUnitDataRepository dataRepository, EffectSource effectSource)
+        public override void FirstEffectApply(IUnitDataModificationService modificationService,
+                                              IUnitDataRepository dataRepository,
+                                              EffectSource effectSource)
         {
             base.FirstEffectApply(modificationService, dataRepository, effectSource);
 
             modificationService.ModifyHealth(modifier.ModifyValue(dataRepository.Health), effectSource);
         }
-        
+
         /// <summary>
         /// dirty, as you don't want to rewrite the hierarchy(well it doesn't take that long, but still)
         /// shall the need arise re-write the hierarchy so Effect no longer inherit from SO,
@@ -25,7 +27,7 @@ namespace Effects
         /// </summary>
         public static HealthInstantEffect CreateInstantHealthEffect(Modifier modifier)
         {
-            var toReturn = ScriptableObject.CreateInstance<HealthInstantEffect>();
+            var toReturn = CreateInstance<HealthInstantEffect>();
             toReturn.modifier = modifier;
 
             return toReturn;

@@ -219,7 +219,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 5443937810178721935}
   inputSource: {fileID: 2108124183}
   inverseRandomFactor: 0.85
-  isShootingState: {fileID: 0}
+  isShootingState: {fileID: 8399380170322657863}
   parallelToGroundStrength: 1
   provider: {fileID: 1519255946}
   timer: {fileID: 4317019756293318575}

@@ -12,6 +12,8 @@ namespace Elements.Units.Enemies.Suicidal
     //enemy that touches you and explode, deals damage and destruct itself
     public class SuicidalEnemy : Enemy
     {
+        //todo: hack 2 -- without this you can potentially explode more than 1 times, as suicidal enemy have many sub colliders(I think)
+        private bool _isExploded;
         private IUnitDataModificationService _unitDataModificationService;
 
         private IUnitDataRepository _unitDataRepository;
@@ -55,11 +57,16 @@ namespace Elements.Units.Enemies.Suicidal
         private void OnCollisionEnter(Collision other)
         {
             var effectTaker = other.gameObject.GetComponent<IEffectTaker>();
-            if (effectTaker != null && rules.All(r => r.AdhereToRule(effectTaker)))
-            {
-                EventAggregator.Publish(new ApplyEffectEvent(damageEffect, effectTaker, EffectSource.Ai));
-                ApplyEffect(selfEffectWhenCollide, EffectSource.SelfDestruction);
-            }
+            if (!_isExploded && effectTaker != null && rules.All(r => r.AdhereToRule(effectTaker)))
+                Explode(effectTaker);
+        }
+
+        private void Explode(IEffectTaker effectTaker)
+        {
+            _isExploded = true;
+
+            EventAggregator.Publish(new ApplyEffectEvent(damageEffect, effectTaker, EffectSource.Ai));
+            ApplyEffect(selfEffectWhenCollide, EffectSource.SelfDestruction);
         }
     }
 }

@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalTrainingScene.unity
     guid: e32dc84cc444ce748bd21f4b7c24fc1d
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: fbb68a31620001340ab9a0a64c283327
   m_configObjects: {}
