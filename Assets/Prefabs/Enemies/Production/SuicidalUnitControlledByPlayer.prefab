@@ -383,11 +383,6 @@ PrefabInstance:
       propertyPath: farThresholdToMoveTargets
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 16117645155173300, guid: c2fc4f6825fc06b4588e87ffca06e794,
-        type: 3}
-      propertyPath: overshootAmount
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fc4f6825fc06b4588e87ffca06e794, type: 3}
 --- !u!4 &1865889522976413873 stripped
@@ -478,11 +473,6 @@ PrefabInstance:
       propertyPath: farThresholdToMoveTargets
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 16117645155173300, guid: c2fc4f6825fc06b4588e87ffca06e794,
-        type: 3}
-      propertyPath: overshootAmount
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fc4f6825fc06b4588e87ffca06e794, type: 3}
 --- !u!4 &1865889522464133618 stripped
@@ -563,11 +553,6 @@ PrefabInstance:
       propertyPath: unitTransform
       value: 
       objectReference: {fileID: 1863850652531891629}
-    - target: {fileID: 16117645155173300, guid: c2fc4f6825fc06b4588e87ffca06e794,
-        type: 3}
-      propertyPath: overshootAmount
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fc4f6825fc06b4588e87ffca06e794, type: 3}
 --- !u!4 &1865889524530901697 stripped
@@ -657,11 +642,6 @@ PrefabInstance:
         type: 3}
       propertyPath: farThresholdToMoveTargets
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 16117645155173300, guid: c2fc4f6825fc06b4588e87ffca06e794,
-        type: 3}
-      propertyPath: overshootAmount
-      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fc4f6825fc06b4588e87ffca06e794, type: 3}

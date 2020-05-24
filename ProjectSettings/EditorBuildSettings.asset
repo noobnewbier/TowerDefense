@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/OccasionalObstacleFirstTrainingScene.unity
     guid: df5ebbd217a7f7643b241354de28a5db
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ObstacleAvoidanceStartWithFinalSettingsScene.unity
     guid: 12761b9641d42f4488bed7e96cc8e1c1
   - enabled: 0
@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LoseScene.unity
     guid: fbb68a31620001340ab9a0a64c283327
+  - enabled: 1
+    path: Assets/Scenes/ObstacleAvoidanceStartWithFinalSettingsSceneWithSmallObstacles.unity
+    guid: 68cdd81ea6a8b2243932cfd765a6885c
   m_configObjects: {}

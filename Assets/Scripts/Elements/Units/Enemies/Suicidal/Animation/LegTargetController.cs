@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +23,7 @@ namespace Elements.Units.Enemies.Suicidal.Animation
         [SerializeField] private ThresholdTimer timer;
         [SerializeField] private Transform unitTransform;
 
-        [Range(0.05f, 5f)] [SerializeField] private float upliftAmount;
+        [Range(0.0f, 5f)] [SerializeField] private float upliftAmount;
 
 
         private void OnEnable()

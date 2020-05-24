@@ -65,7 +65,7 @@ MonoBehaviour:
   smoothingFactor: 2
   timer: {fileID: 16117645155173301}
   unitTransform: {fileID: 0}
-  upliftAmount: 1
+  upliftAmount: 0.25
 --- !u!114 &16117645155173301
 MonoBehaviour:
   m_ObjectHideFlags: 0

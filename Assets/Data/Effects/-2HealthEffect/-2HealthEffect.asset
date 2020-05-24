@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbf4953f3de45a7910bb19b2aae0db6, type: 3}
-  m_Name: SuicidalUnitLegIKConfig
+  m_Script: {fileID: 11500000, guid: 8e7e485e83b248d2a21dd8441fdaa309, type: 3}
+  m_Name: -2HealthEffect
   m_EditorClassIdentifier: 
-  learningRate: 0.5
-  samplingDistance: 1
-  undergroundPenalty: 10
-  distanceThreshold: 0.05
-  iteration: 250
+  modifier: {fileID: 11400000, guid: 352dfda8db631084d872a9adb70e77b7, type: 2}

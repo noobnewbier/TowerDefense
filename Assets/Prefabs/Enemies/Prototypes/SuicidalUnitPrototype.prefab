@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714430858}
-  - component: {fileID: 1714430860}
   - component: {fileID: 6168960639002132815}
+  - component: {fileID: 8938269808519381305}
   m_Layer: 11
   m_Name: MovementHandler
   m_TagString: Untagged
@@ -32,21 +32,6 @@ Transform:
   m_Father: {fileID: 6048740561362155733}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1714430860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714430857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531501f2fee94d58bff39593d7e33080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputSource: {fileID: 6168960639002132815}
-  provider: {fileID: 3704630309950303712}
-  rigidBodyToMove: {fileID: 7352862185661551323}
 --- !u!114 &6168960639002132815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e15f8158cf842128dacb962effec6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8938269808519381305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714430857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea5657bfb06748aa8efffed4a2efa9ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputSource: {fileID: 6168960639002132815}
+  provider: {fileID: 3704630309950303712}
+  rigidBodyToMove: {fileID: 7352862185661551323}
 --- !u!1 &3610290461812041406
 GameObject:
   m_ObjectHideFlags: 0

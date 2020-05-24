@@ -11,6 +11,7 @@ namespace Movement.Handler
         private Transform _rigidBodyTransform;
         //we record our own forward vector as we are never actually rotating the transform
         private Vector3 _initialForward;
+        private Quaternion _initialRotation;
         private SuicidalEnemy _suicidalEnemy;
         [SerializeField] private UnitProvider provider;
         [SerializeField] private Rigidbody rigidBodyToMove;
@@ -21,6 +22,7 @@ namespace Movement.Handler
             _repository = provider.ProvideUnitDataRepository();
             _rigidBodyTransform = rigidBodyToMove.transform;
             _initialForward = _rigidBodyTransform.forward;
+            _initialRotation = _rigidBodyTransform.rotation;
             //todo: hack 1
             _suicidalEnemy = (SuicidalEnemy) provider.ProvideUnit();
         }
@@ -44,6 +46,9 @@ namespace Movement.Handler
 
             MoveVertical(vertical);
             MoveHorizontal(horizontal);
+
+            //todo: hack 2 -- no idea why the thing is rotating but this should fix it
+            _rigidBodyTransform.rotation = _initialRotation;
         }
 
         private void MoveVertical(float inputValue)
