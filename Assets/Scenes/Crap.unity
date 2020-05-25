@@ -345,6 +345,125 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1863850653317267917, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863850653317267889, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: threshold
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863850653317267888, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: jumpMagnitude
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889523664181381, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: overshootAmount
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889523664181381, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: farThresholdToMoveTargets
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889523664181381, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: minimumProportionToInitialOffsetBeforeMoving
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889523664181380, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: threshold
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889524530901711, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: threshold
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889524530901710, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: overshootAmount
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889524530901710, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: farThresholdToMoveTargets
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889524530901710, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: minimumProportionToInitialOffsetBeforeMoving
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522464133629, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: overshootAmount
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522464133629, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: farThresholdToMoveTargets
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522464133629, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: minimumProportionToInitialOffsetBeforeMoving
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522464133628, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: threshold
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522976413887, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: threshold
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522976413886, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: overshootAmount
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522976413886, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: farThresholdToMoveTargets
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865889522976413886, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: minimumProportionToInitialOffsetBeforeMoving
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863850652532016946, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: c5f8ad153cf17504eabdb432c62989d9,
+        type: 2}
+    - target: {fileID: 1863850652532016933, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: c5f8ad153cf17504eabdb432c62989d9,
+        type: 2}
+    - target: {fileID: 1863850652532016942, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: c5f8ad153cf17504eabdb432c62989d9,
+        type: 2}
+    - target: {fileID: 1863850652532016940, guid: 97ead511960296c4db86ffbd76078691,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: c5f8ad153cf17504eabdb432c62989d9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97ead511960296c4db86ffbd76078691, type: 3}
 --- !u!1001 &342785704

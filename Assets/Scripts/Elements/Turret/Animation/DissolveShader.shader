@@ -23,7 +23,6 @@ Shader "Noobnewbier/Dissolve" {
         fixed4 _Color;
         sampler2D _MainTex;
         sampler2D _DissolveGuide;
-        sampler2D _BumpMap;
         sampler2D _DissolveRamp;
         fixed4 _DissolveColor;
         float _DissolveSize;

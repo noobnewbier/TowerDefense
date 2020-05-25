@@ -152,32 +152,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agent
       objectReference: {fileID: 0}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: unit
-      value: 
-      objectReference: {fileID: 175389421380403604}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: unitProvider
-      value: 
-      objectReference: {fileID: 175389421380403605}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: navMeshAgent
-      value: 
-      objectReference: {fileID: 3642406722898868977}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: inputService
-      value: 
-      objectReference: {fileID: 1131762832017830826}
-    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
-        type: 3}
-      propertyPath: config
-      value: 
-      objectReference: {fileID: 11400000, guid: 09a2c125fdc88454bb8dd99def297f2c,
-        type: 2}
     - target: {fileID: 8394937779563820940, guid: 03573505409c5f147aa73596a9b4038f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -239,5 +213,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0b4dce82c7496fb44bd5051949029f21,
         type: 3}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: 175389421380403604}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: unitProvider
+      value: 
+      objectReference: {fileID: 175389421380403605}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 3642406722898868977}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: inputService
+      value: 
+      objectReference: {fileID: 1131762832017830826}
+    - target: {fileID: 6284457110103202171, guid: 03573505409c5f147aa73596a9b4038f,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 05e9de02bde6ce743a7c753e3a946552,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03573505409c5f147aa73596a9b4038f, type: 3}
