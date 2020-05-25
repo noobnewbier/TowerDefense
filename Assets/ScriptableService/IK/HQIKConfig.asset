@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HQIKConfig
   m_EditorClassIdentifier: 
   learningRate: 0.25
-  samplingDistance: 2
+  samplingDistance: 2.75
   undergroundPenalty: 10
   distanceThreshold: 0.05
   iteration: 500
