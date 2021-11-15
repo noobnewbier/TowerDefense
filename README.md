@@ -7,4 +7,4 @@ The project is not meant for production but rather as an experiment various appr
 
 This is not meant for commercial use, and it barely works but feel free to experiment with it.
 
-![Some 3D models I created for the game, rendered in blender](./ReadMe/project-towerdefense-rendered.png)
+![](./ReadMe/project-towerdefense-rendered.png)_Some 3D models I created for the game, rendered in blender_
