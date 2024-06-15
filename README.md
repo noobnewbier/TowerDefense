@@ -8,3 +8,5 @@ The project is not meant for production but rather as an experiment various appr
 This is not meant for commercial use, and it barely works but feel free to experiment with it.
 
 ![](./ReadMe/project-towerdefense-rendered.png)_Some 3D models I created for the game, rendered in blender_
+
+![image](https://github.com/noobnewbier/TowerDefense/assets/30047989/d0c4b643-a70c-4cc9-bfac-3834523657b4)_Screenshot of the final product_
